@@ -1,3 +1,83 @@
-export default function CTASection(props) {
-  return <section>CTASection</section>
+'use client'
+
+import Link from 'next/link'
+import Image from 'next/image'
+import { motion } from 'framer-motion'
+import { cn } from '@/lib/utils'
+
+export default function CTASection({
+  headline,
+  subheadline,
+  cta,
+  background,
+  template = 'luxury-agent',
+}) {
+  const isLuxury = template === 'luxury-agent'
+
+  return (
+    <section className="relative overflow-hidden py-24 lg:py-32">
+      {background?.image ? (
+        <>
+          <Image
+            src={background.image}
+            alt=""
+            fill
+            className="object-cover"
+          />
+          <div className="absolute inset-0 bg-black/65" />
+        </>
+      ) : (
+        <div
+          className={cn(
+            'absolute inset-0',
+            background?.color ?? (isLuxury ? 'bg-[#0D0D0D]' : 'bg-template-accent'),
+          )}
+        />
+      )}
+
+      <div className="relative max-w-3xl mx-auto px-6 lg:px-8 text-center">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+        >
+          {isLuxury && (
+            <div className="w-14 h-px bg-template-accent mx-auto mb-8" />
+          )}
+
+          <h2
+            className={cn(
+              'font-normal leading-tight mb-6',
+              isLuxury
+                ? 'font-heading text-4xl lg:text-5xl text-white'
+                : 'text-3xl lg:text-4xl text-white',
+            )}
+          >
+            {headline}
+          </h2>
+
+          {subheadline && (
+            <p className="text-white/55 text-lg max-w-xl mx-auto mb-10 leading-relaxed font-sans">
+              {subheadline}
+            </p>
+          )}
+
+          {cta && (
+            <Link
+              href={cta.href}
+              className={cn(
+                'inline-block px-10 py-4 text-[11px] tracking-[0.2em] uppercase font-medium transition-all duration-200',
+                isLuxury
+                  ? 'bg-template-accent text-[#0A0A0A] hover:opacity-90'
+                  : 'bg-white text-template-accent hover:bg-white/90 rounded-md',
+              )}
+            >
+              {cta.label}
+            </Link>
+          )}
+        </motion.div>
+      </div>
+    </section>
+  )
 }
