@@ -128,3 +128,90 @@
     @apply font-sans;
   }
 }
+
+/* ─── Template Design Tokens ──────────────────────────────────────────────── */
+/* Each template overrides these via a class on <html> or <body>.             */
+/* Swap template by changing: luxury-agent | modern-team | local-expert       */
+
+/* Template: Luxury Agent — Dark variant (default) */
+.luxury-agent {
+  --template-bg: #0A0A0A;
+  --template-fg: #FFFFFF;
+  --template-accent: #C9A96E;
+  --template-accent-fg: #0A0A0A;
+  --template-surface: #1A1A1A;
+  --template-border: #2A2A2A;
+  --template-font-heading: 'Playfair Display', Georgia, serif;
+  --template-font-body: 'Inter', system-ui, sans-serif;
+}
+
+/* Template: Luxury Agent — Light variant */
+.luxury-agent-light {
+  --template-bg: #FAFAF8;
+  --template-fg: #1A1A1A;
+  --template-accent: #C9A96E;
+  --template-accent-fg: #FFFFFF;
+  --template-surface: #FFFFFF;
+  --template-border: #E5E5E3;
+  --template-font-heading: 'Playfair Display', Georgia, serif;
+  --template-font-body: 'Inter', system-ui, sans-serif;
+}
+
+/* Template: Modern Team — Light variant (default) */
+.modern-team {
+  --template-bg: #FFFFFF;
+  --template-fg: #111827;
+  --template-accent: #1D4ED8;
+  --template-accent-fg: #FFFFFF;
+  --template-surface: #F9FAFB;
+  --template-border: #E5E7EB;
+  --template-font-heading: 'Inter', system-ui, sans-serif;
+  --template-font-body: 'DM Sans', system-ui, sans-serif;
+}
+
+/* Template: Modern Team — Warm variant */
+.modern-team-warm {
+  --template-bg: #FFFBF7;
+  --template-fg: #1C1917;
+  --template-accent: #C2410C;
+  --template-accent-fg: #FFFFFF;
+  --template-surface: #FEF9F5;
+  --template-border: #E7E5E4;
+  --template-font-heading: 'Inter', system-ui, sans-serif;
+  --template-font-body: 'DM Sans', system-ui, sans-serif;
+}
+
+/* Template: Local Expert — Warm variant (default) */
+.local-expert {
+  --template-bg: #FEFCE8;
+  --template-fg: #1C1917;
+  --template-accent: #854D0E;
+  --template-accent-fg: #FFFFFF;
+  --template-surface: #FEFDF0;
+  --template-border: #E7E5E4;
+  --template-font-heading: 'Nunito', system-ui, sans-serif;
+  --template-font-body: 'Plus Jakarta Sans', system-ui, sans-serif;
+}
+
+/* Template: Local Expert — Fresh variant */
+.local-expert-fresh {
+  --template-bg: #F0FDF4;
+  --template-fg: #14532D;
+  --template-accent: #16A34A;
+  --template-accent-fg: #FFFFFF;
+  --template-surface: #F7FFF9;
+  --template-border: #D1FAE5;
+  --template-font-heading: 'Nunito', system-ui, sans-serif;
+  --template-font-body: 'Plus Jakarta Sans', system-ui, sans-serif;
+}
+
+/* Expose template tokens as Tailwind utilities */
+@theme inline {
+  --color-template-bg: var(--template-bg);
+  --color-template-fg: var(--template-fg);
+  --color-template-accent: var(--template-accent);
+  --color-template-accent-fg: var(--template-accent-fg);
+  --color-template-surface: var(--template-surface);
+  --color-template-border: var(--template-border);
+  --font-heading: var(--template-font-heading, var(--font-sans));
+}
