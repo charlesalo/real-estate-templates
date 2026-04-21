@@ -7,6 +7,7 @@ import CTASection from '@/components/sections/CTASection'
 import MortgageCalculator from '@/components/lead-tools/MortgageCalculator'
 import PropertyMap from '@/components/real-estate/PropertyMap'
 import ListingActions from '@/components/real-estate/ListingActions'
+import ModalTrigger from '@/components/ui/ModalTrigger'
 
 export async function generateStaticParams() {
   return ALL_AGENT_LISTINGS.map(l => ({ id: l.id }))
