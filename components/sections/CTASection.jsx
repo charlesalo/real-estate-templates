@@ -1,8 +1,9 @@
 'use client'
 
+import { useRef } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { motion } from 'framer-motion'
+import { motion, useScroll, useTransform } from 'framer-motion'
 import { cn } from '@/lib/utils'
 
 export default function CTASection({
@@ -13,18 +14,22 @@ export default function CTASection({
   template = 'luxury-agent',
 }) {
   const isLuxury = template === 'luxury-agent'
+  const ref = useRef(null)
+  const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] })
+  const bgY = useTransform(scrollYProgress, [0, 1], [-150, 150])
 
   return (
-    <section className="relative overflow-hidden py-24 lg:py-32">
+    <section ref={ref} className="relative overflow-hidden py-24 lg:py-32">
       {background?.image ? (
         <>
-          <Image
-            src={background.image}
-            alt=""
-            fill
-            className="object-cover"
-          />
-          <div className="absolute inset-0 bg-black/65" />
+          <div className="absolute inset-0 overflow-hidden">
+            <div style={{ position: 'absolute', inset: 0, transform: 'scale(1.55)', transformOrigin: 'center' }}>
+              <motion.div style={{ y: bgY }} className="absolute inset-0">
+                <Image src={background.image} alt="" fill className="object-cover" />
+              </motion.div>
+            </div>
+          </div>
+          <div className="absolute inset-0 bg-black/60" />
         </>
       ) : (
         <div
@@ -64,17 +69,32 @@ export default function CTASection({
           )}
 
           {cta && (
-            <Link
-              href={cta.href}
-              className={cn(
-                'inline-block px-10 py-4 text-[11px] tracking-[0.2em] uppercase font-medium transition-all duration-200',
-                isLuxury
-                  ? 'bg-template-accent text-[#0A0A0A] hover:opacity-90'
-                  : 'bg-white text-template-accent hover:bg-white/90 rounded-md',
-              )}
-            >
-              {cta.label}
-            </Link>
+            cta.modal ? (
+              <button
+                type="button"
+                onClick={() => window.dispatchEvent(new CustomEvent('contact:open'))}
+                className={cn(
+                  'inline-block px-10 py-4 text-[11px] tracking-[0.2em] uppercase font-medium transition-all duration-200',
+                  isLuxury
+                    ? 'bg-template-accent text-[#0A0A0A] hover:opacity-90'
+                    : 'bg-white text-template-accent hover:bg-white/90 rounded-md',
+                )}
+              >
+                {cta.label}
+              </button>
+            ) : (
+              <Link
+                href={cta.href}
+                className={cn(
+                  'inline-block px-10 py-4 text-[11px] tracking-[0.2em] uppercase font-medium transition-all duration-200',
+                  isLuxury
+                    ? 'bg-template-accent text-[#0A0A0A] hover:opacity-90'
+                    : 'bg-white text-template-accent hover:bg-white/90 rounded-md',
+                )}
+              >
+                {cta.label}
+              </Link>
+            )
           )}
         </motion.div>
       </div>

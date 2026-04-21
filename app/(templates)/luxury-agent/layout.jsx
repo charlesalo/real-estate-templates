@@ -1,6 +1,8 @@
 import { Playfair_Display, Inter } from 'next/font/google'
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
+import ContactModal from '@/components/layout/ContactModal'
+import GoogleOneTap from '@/components/auth/GoogleOneTap'
 
 const playfair = Playfair_Display({
   subsets: ['latin'],
@@ -18,10 +20,16 @@ const inter = Inter({
 const AGENT = {
   name: 'Victoria Sinclair',
   title: 'Luxury Real Estate Specialist',
+  dre: 'CA DRE# 01234567',
   phone: '(310) 555-0194',
   email: 'victoria@victoriasinclair.com',
   address: '432 N Beverly Drive, Beverly Hills, CA 90210',
-  tagline: 'Luxury real estate with unparalleled discretion.',
+  tagline: 'All information is deemed reliable but not guaranteed and should be independently reviewed and verified.',
+  brokerage: {
+    name: 'Coldwell Banker Realty',
+    dre: 'CA DRE# 00616212',
+  },
+  managingBroker: 'Jane A. Mitchell',
   socialLinks: {
     instagram: '#',
     facebook: '#',
@@ -29,20 +37,50 @@ const AGENT = {
   },
 }
 
+// Links shown inline in the desktop header
 const NAV_LINKS = [
-  { label: 'About', href: '/luxury-agent/about' },
-  { label: 'Listings', href: '/luxury-agent/listings' },
+  {
+    label: 'Properties',
+    children: [
+      { label: 'Featured Listings', href: '/luxury-agent/featured-listings' },
+      { label: 'Past Transactions', href: '/luxury-agent/past-transactions' },
+    ],
+  },
+  { label: 'Home Search', href: '/luxury-agent/listings' },
   { label: 'Neighborhoods', href: '/luxury-agent/neighborhoods' },
-  { label: 'Blog', href: '/luxury-agent/blog' },
+  { label: 'Home Valuation', href: '/luxury-agent/home-valuation' },
+  { label: "Let's Connect", modal: true },
+  { phone: AGENT.phone },
+]
+
+// All links shown in the side menu
+const MENU_LINKS = [
+  { label: 'Home', href: '/luxury-agent' },
+  { label: 'About Victoria', href: '/luxury-agent/about' },
+  {
+    label: 'Properties',
+    children: [
+      { label: 'Featured Listings', href: '/luxury-agent/featured-listings' },
+      { label: 'Past Transactions', href: '/luxury-agent/past-transactions' },
+    ],
+  },
+  { label: 'Home Search', href: '/luxury-agent/listings' },
+  { label: 'Home Valuation', href: '/luxury-agent/home-valuation' },
+  { label: 'Neighborhoods', href: '/luxury-agent/neighborhoods' },
+  { label: 'Testimonials', href: '/luxury-agent/testimonials' },
+  { label: 'Luxury Real Estate Journal', href: '/luxury-agent/blog' },
+  { label: "Let's Connect", href: '/luxury-agent/contact' },
 ]
 
 const FOOTER_LINKS = [
   { label: 'Home', href: '/luxury-agent' },
-  { label: 'About', href: '/luxury-agent/about' },
-  { label: 'Listings', href: '/luxury-agent/listings' },
+  { label: 'About Victoria', href: '/luxury-agent/about' },
+  { label: 'Featured Listings', href: '/luxury-agent/featured-listings' },
+  { label: 'Home Search', href: '/luxury-agent/listings' },
+  { label: 'Past Transactions', href: '/luxury-agent/past-transactions' },
   { label: 'Neighborhoods', href: '/luxury-agent/neighborhoods' },
   { label: 'Home Valuation', href: '/luxury-agent/home-valuation' },
-  { label: 'Contact', href: '/luxury-agent/contact' },
+  { label: "Let's Connect", modal: true },
 ]
 
 export const metadata = {
@@ -71,19 +109,32 @@ export default function LuxuryAgentLayout({ children }) {
         template="luxury-agent"
         logo={{ text: AGENT.name }}
         links={NAV_LINKS}
+        menuLinks={MENU_LINKS}
         cta={{ label: 'Schedule a Showing', href: '/luxury-agent/contact' }}
+        agentPhone={AGENT.phone}
+        agentEmail={AGENT.email}
+        socialLinks={AGENT.socialLinks}
       />
+      <GoogleOneTap clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID} />
       <main>{children}</main>
+      <ContactModal
+        agentName={AGENT.name}
+        agentDre={AGENT.dre}
+        phone={AGENT.phone}
+        email={AGENT.email}
+        address={AGENT.address}
+        socialLinks={AGENT.socialLinks}
+      />
       <Footer
         template="luxury-agent"
         agentName={AGENT.name}
+        agentDre={AGENT.dre}
         tagline={AGENT.tagline}
         phone={AGENT.phone}
         email={AGENT.email}
         address={AGENT.address}
         socialLinks={AGENT.socialLinks}
         links={FOOTER_LINKS}
-        disclaimer="Victoria Sinclair is a licensed real estate agent in the state of California. DRE# 01234567. All information deemed reliable but not guaranteed. Equal Housing Opportunity."
       />
     </div>
   )

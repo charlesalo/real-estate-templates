@@ -1,9 +1,10 @@
 import { cn } from '@/lib/utils'
 
 const STATUS_STYLES = {
-  Active: 'bg-emerald-500/90 text-white',
-  Pending: 'bg-amber-500/90 text-white',
-  Sold: 'bg-rose-600/90 text-white',
+  Active:  'bg-[#C9A96E] text-[#0A0A0A]',
+  Pending: 'bg-[#C9A96E]/70 text-[#0A0A0A]',
+  Sold:    'bg-[#C9A96E]/55 text-[#0A0A0A]',
+  Closed:  'bg-[#C9A96E]/55 text-[#0A0A0A]',
 }
 
 export default function StatusBadge({ status = 'Active' }) {

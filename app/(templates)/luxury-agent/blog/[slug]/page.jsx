@@ -56,6 +56,106 @@ const POSTS = {
       },
     ],
   },
+  'buying-luxury-home-los-angeles': {
+    title: 'The Insider\'s Guide to Buying a Luxury Home in Los Angeles',
+    category: 'Buyer\'s Guide',
+    date: 'October 3, 2024',
+    author: 'Victoria Sinclair',
+    heroImage: 'https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=1200&q=80',
+    excerpt: 'From off-market deals to navigating multiple offers, everything you need to know before making a seven-figure purchase.',
+    content: [
+      {
+        type: 'lead',
+        text: 'Buying a luxury home in Los Angeles is one of the most significant financial and lifestyle decisions you\'ll ever make. The process is markedly different from a standard transaction — and knowing the terrain before you start can mean the difference between landing your dream property and watching it go to someone else.',
+      },
+      {
+        type: 'h2',
+        text: 'Start with Relationships, Not Searches',
+      },
+      {
+        type: 'paragraph',
+        text: 'The most desirable properties in Beverly Hills, Bel Air, and Holmby Hills rarely appear on Zillow or even the MLS. They move through networks — agent to agent, often before any formal listing. Your first priority should be establishing a relationship with an agent who has deep roots in your target neighborhood and a reputation for being trusted with off-market inventory.',
+      },
+      {
+        type: 'paragraph',
+        text: 'This means having direct conversations about your criteria — not just beds, baths, and budget, but lifestyle priorities: privacy, views, flat lot vs. hillside, proximity to schools or the city. The more specific and genuine that conversation is, the more effectively your agent can activate their network on your behalf.',
+      },
+      {
+        type: 'h2',
+        text: 'Get Financing in Order Before You Fall in Love',
+      },
+      {
+        type: 'paragraph',
+        text: 'At the $4M+ price point, sellers and their agents scrutinize buyer qualifications carefully. A proof of funds letter or pre-approval from a private bank or jumbo lender is table stakes. In competitive situations, all-cash offers or minimal contingency structures are frequently the deciding factor — even over slightly higher prices.',
+      },
+      {
+        type: 'paragraph',
+        text: 'Work with a lender who specializes in high-net-worth clients. Standard mortgage processes don\'t always accommodate complex income structures, multiple properties, or international assets. Getting this right early avoids delays and signals credibility to the seller.',
+      },
+      {
+        type: 'h2',
+        text: 'Navigating Multiple Offers',
+      },
+      {
+        type: 'paragraph',
+        text: 'When a well-positioned property hits the market in LA, multiple offers within the first week are common. Your offer strategy should be crafted in close consultation with your agent — price, contingency terms, deposit amount, and closing timeline all carry weight. In some cases, a personal letter from buyer to seller has made a meaningful difference.',
+      },
+      {
+        type: 'paragraph',
+        text: 'The key is to be decisive without being reckless. Know your walk-away number before you enter the process, and trust your agent\'s read of the seller\'s motivations. A fast, clean offer at the right price often outperforms a higher offer encumbered with conditions.',
+      },
+    ],
+  },
+  'bel-air-vs-holmby-hills': {
+    title: 'Bel Air vs. Holmby Hills: Which Neighborhood Is Right for You?',
+    category: 'Neighborhood Guide',
+    date: 'September 18, 2024',
+    author: 'Victoria Sinclair',
+    heroImage: 'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=1200&q=80',
+    excerpt: 'Two of Los Angeles\'s most prestigious addresses, compared across price, privacy, lifestyle, and architecture.',
+    content: [
+      {
+        type: 'lead',
+        text: 'Bel Air and Holmby Hills are two of the most coveted addresses in the world. Both occupy the westside\'s most privileged terrain, both command extraordinary prices, and both attract buyers for whom privacy and prestige are non-negotiable. Yet they offer distinctly different living experiences.',
+      },
+      {
+        type: 'h2',
+        text: 'Scale and Exclusivity',
+      },
+      {
+        type: 'paragraph',
+        text: 'Holmby Hills is the smaller and arguably more exclusive of the two. With fewer than 200 parcels, properties here rarely come to market — and when they do, they move quickly among a very short list of qualified buyers. The lots are larger on average, the estates more grand, and the sense of seclusion more absolute.',
+      },
+      {
+        type: 'paragraph',
+        text: 'Bel Air, by contrast, is considerably larger — spanning gated enclaves, hillside compounds, and flatter estates along its lower reaches. This variety means more opportunity for buyers at different price points, while still delivering the prestige of one of LA\'s most recognizable addresses.',
+      },
+      {
+        type: 'h2',
+        text: 'Architecture and Character',
+      },
+      {
+        type: 'paragraph',
+        text: 'Holmby Hills tends toward grand traditional estates — Georgians, French Normandy, and Mediterranean Revival homes built on sprawling flat lots with mature trees, formal gardens, and motor courts. The neighborhood has a timeless, old-money character that resonates with buyers seeking permanence over trend.',
+      },
+      {
+        type: 'paragraph',
+        text: 'Bel Air offers greater architectural diversity. The hillside areas showcase dramatic contemporary builds with canyon and city views, while the lower streets feature a mix of traditional and updated transitional homes. For buyers drawn to modern design and indoor-outdoor living, the upper reaches of Bel Air present some of the most compelling options in the city.',
+      },
+      {
+        type: 'h2',
+        text: 'The Bottom Line',
+      },
+      {
+        type: 'paragraph',
+        text: 'If absolute exclusivity, flat land, and a legacy address are your priorities — and if you\'re prepared for a patient search and premium pricing — Holmby Hills is unmatched. If you want the range of architectural options, more frequent availability, and the flexibility of hillside or flat living, Bel Air delivers exceptional value at the top of the market.',
+      },
+      {
+        type: 'paragraph',
+        text: 'Both neighborhoods reward buyers who approach the process with knowledge and patience. Working with an agent who has closed transactions in both areas is essential — the nuances of each street, each parcel, and each micro-market matter enormously at this level.',
+      },
+    ],
+  },
 }
 
 export async function generateMetadata({ params }) {
@@ -150,10 +250,10 @@ export default async function BlogPostPage({ params }) {
 
       <CTASection
         template="luxury-agent"
-        background={{ color: 'bg-[#0D0D0D]' }}
-        headline="Questions About the Market?"
-        subheadline="Victoria is available for a confidential conversation about market conditions in your area."
-        cta={{ label: 'Schedule a Call', href: '/luxury-agent/contact' }}
+        background={{ image: '/images/luxury-agent/work-with-me.jpg' }}
+        headline="Ready to Work Together?"
+        subheadline="Whether buying, selling, or simply exploring, Victoria is available to guide you."
+        cta={{ label: 'Schedule a Consultation', modal: true }}
       />
     </div>
   )

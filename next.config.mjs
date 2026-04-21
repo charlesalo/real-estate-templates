@@ -7,6 +7,10 @@ const nextConfig = {
         hostname: 'images.unsplash.com',
       },
       {
+        protocol: 'https',
+        hostname: 'plus.unsplash.com',
+      },
+      {
         // SimplyRETS listing photos
         protocol: 'https',
         hostname: 'cdn.simplyrets.com',
@@ -15,6 +19,15 @@ const nextConfig = {
         // Common MLS photo CDNs
         protocol: 'https',
         hostname: '**.mlsmatrix.com',
+      },
+      {
+        // SimplyRETS demo photo CDNs (CloudFront + S3)
+        protocol: 'https',
+        hostname: '**.cloudfront.net',
+      },
+      {
+        protocol: 'https',
+        hostname: '**.amazonaws.com',
       },
     ],
   },

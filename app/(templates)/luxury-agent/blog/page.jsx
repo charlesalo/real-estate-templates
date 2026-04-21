@@ -1,5 +1,8 @@
 import Image from 'next/image'
 import Link from 'next/link'
+import ParallaxBanner from '@/components/sections/ParallaxBanner'
+import CTASection from '@/components/sections/CTASection'
+import LeadCaptureSection from '@/components/sections/LeadCaptureSection'
 
 export const metadata = {
   title: 'Blog',
@@ -36,14 +39,16 @@ const POSTS = [
 export default function BlogPage() {
   return (
     <div className="min-h-screen bg-[#0A0A0A] pt-20">
-      <div className="border-b border-white/10 py-12 px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
-          <p className="text-[10px] tracking-[0.5em] uppercase text-[#C9A96E] mb-3 font-sans">Insights</p>
-          <h1 className="font-heading text-4xl lg:text-5xl font-normal text-white">Market Reports &amp; News</h1>
-        </div>
-      </div>
+      <ParallaxBanner src="/images/luxury-agent/xtra12.jpg" priority>
+        <p className="text-[10px] tracking-[0.5em] uppercase text-[#C9A96E] mb-4 font-sans">Los Angeles Real Estate Market Insights</p>
+        <h1 className="font-heading text-4xl lg:text-5xl font-normal text-white mb-5">Luxury Real Estate Journal</h1>
+        <div className="w-12 h-px bg-[#C9A96E] mb-5" />
+        <p className="text-white/45 font-sans text-base max-w-xl leading-relaxed">
+          Curated insights on high-end properties, design trends, and the evolving Los Angeles luxury market.
+        </p>
+      </ParallaxBanner>
 
-      <div className="max-w-7xl mx-auto px-6 lg:px-8 py-16 lg:py-24">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8 py-20 lg:py-28">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {POSTS.map(post => (
             <Link key={post.slug} href={`/luxury-agent/blog/${post.slug}`} className="group block">
@@ -69,6 +74,16 @@ export default function BlogPage() {
           ))}
         </div>
       </div>
+
+      <LeadCaptureSection bottomGap />
+
+      <CTASection
+        template="luxury-agent"
+        background={{ image: '/images/luxury-agent/work-with-me.jpg' }}
+        headline="Ready to Work Together?"
+        subheadline="Whether buying, selling, or simply exploring, Victoria is available to guide you."
+        cta={{ label: 'Let\'s Connect', modal: true }}
+      />
     </div>
   )
 }

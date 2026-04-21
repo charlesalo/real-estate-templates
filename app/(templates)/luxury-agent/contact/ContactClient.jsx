@@ -1,11 +1,35 @@
 'use client'
 
 import { useState } from 'react'
+import Image from 'next/image'
+import ParallaxBanner from '@/components/sections/ParallaxBanner'
+import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
-import { Phone, Mail, MapPin, CheckCircle } from 'lucide-react'
+import { CheckCircle } from 'lucide-react'
+
+const GALLERY_MENU = [
+  {
+    label: 'Home Search',
+    eyebrow: 'Browse Listings',
+    href: '/luxury-agent/listings',
+    image: '/images/luxury-agent/GSM/GSM 1.png',
+  },
+  {
+    label: 'Home Valuation',
+    eyebrow: 'What\'s Your Home Worth',
+    href: '/luxury-agent/home-valuation',
+    image: '/images/luxury-agent/GSM/GSM 2.jpg',
+  },
+  {
+    label: 'About Victoria',
+    eyebrow: 'Your Trusted Advisor',
+    href: '/luxury-agent/about',
+    image: '/images/luxury-agent/GSM/GSM 3.png',
+  },
+]
 
 const schema = z.object({
   fullName: z.string().min(2, 'Required'),
@@ -38,49 +62,35 @@ export default function ContactClient() {
   return (
     <div className="min-h-screen bg-[#0A0A0A] pt-20">
       {/* Header */}
-      <div className="border-b border-white/10 py-12 px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
-          <p className="text-[10px] tracking-[0.5em] uppercase text-[#C9A96E] mb-3 font-sans">Contact</p>
-          <h1 className="font-heading text-4xl lg:text-5xl font-normal text-white">Get in Touch</h1>
-        </div>
-      </div>
+      <ParallaxBanner src="/images/luxury-agent/xtra13.jpg" priority>
+        <p className="text-[10px] tracking-[0.5em] uppercase text-[#C9A96E] mb-4 font-sans">Ready to Make Your Move?</p>
+        <h1 className="font-heading text-4xl lg:text-5xl font-normal text-white mb-5">Let&apos;s Connect</h1>
+        <div className="w-12 h-px bg-[#C9A96E] mb-5" />
+        <p className="text-white/45 font-sans text-base max-w-xl leading-relaxed">
+          Schedule a consultation to buy or sell your home with confidence.
+        </p>
+      </ParallaxBanner>
 
-      <div className="max-w-7xl mx-auto px-6 lg:px-8 py-16 lg:py-24">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8 py-20 lg:py-28">
         <div className="grid lg:grid-cols-5 gap-16 lg:gap-24">
 
-          {/* Contact info */}
-          <div className="lg:col-span-2 space-y-10">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7 }}
-            >
-              <p className="text-white/55 text-base leading-relaxed mb-10">
-                Whether you&apos;re looking to buy, sell, or simply want to know what your home is worth,
-                Victoria is available for a confidential conversation at your convenience.
-              </p>
-
-              <div className="space-y-5">
-                {[
-                  { icon: Phone, label: 'Phone', value: '(310) 555-0194', href: 'tel:3105550194' },
-                  { icon: Mail, label: 'Email', value: 'victoria@victoriasinclair.com', href: 'mailto:victoria@victoriasinclair.com' },
-                  { icon: MapPin, label: 'Office', value: '432 N Beverly Drive\nBeverly Hills, CA 90210', href: null },
-                ].map((item, i) => (
-                  <div key={i} className="flex items-start gap-4">
-                    <item.icon size={16} className="text-[#C9A96E] mt-0.5 flex-shrink-0" />
-                    <div>
-                      <p className="text-[10px] tracking-[0.2em] uppercase text-white/30 font-sans mb-1">{item.label}</p>
-                      {item.href ? (
-                        <a href={item.href} className="text-sm text-white/60 hover:text-white transition-colors">{item.value}</a>
-                      ) : (
-                        <p className="text-sm text-white/60 whitespace-pre-line">{item.value}</p>
-                      )}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </motion.div>
-          </div>
+          {/* Agent photo */}
+          <motion.div
+            className="lg:col-span-2 hidden lg:block"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7 }}
+          >
+            <div className="relative w-full h-full min-h-[480px]">
+              <Image
+                src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=900&q=80"
+                alt="Victoria Sinclair"
+                fill
+                className="object-cover object-top"
+                sizes="(max-width: 1024px) 0vw, 40vw"
+              />
+            </div>
+          </motion.div>
 
           {/* Form */}
           <div className="lg:col-span-3">
@@ -156,6 +166,54 @@ export default function ContactClient() {
               </motion.form>
             )}
           </div>
+        </div>
+      </div>
+
+      {/* Gallery menu */}
+      <div className="border-t border-white/[0.07]">
+        <div className="grid grid-cols-1 md:grid-cols-3">
+          {GALLERY_MENU.map((item, i) => (
+            <motion.div
+              key={item.href}
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true, margin: '-60px' }}
+              transition={{ duration: 0.7, delay: i * 0.1 }}
+            >
+              <Link
+                href={item.href}
+                className="group relative block overflow-hidden aspect-[4/3]"
+              >
+                <Image
+                  src={item.image}
+                  alt={item.label}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 33vw"
+                  className="object-cover transition-transform duration-700 group-hover:scale-[1.05]"
+                />
+                {/* Dark overlay — lightens slightly on hover */}
+                <div className="absolute inset-0 bg-black/55 group-hover:bg-black/40 transition-colors duration-500" />
+
+                {/* Content */}
+                <div className="absolute inset-0 flex flex-col justify-end p-8 lg:p-10">
+                  <p className="text-[9px] tracking-[0.45em] uppercase text-[#C9A96E] font-sans mb-2">
+                    {item.eyebrow}
+                  </p>
+                  <h3 className="font-heading text-2xl lg:text-3xl font-normal text-white leading-tight mb-4">
+                    {item.label}
+                  </h3>
+                  <span className="text-[10px] tracking-[0.3em] uppercase text-white/50 group-hover:text-[#C9A96E] transition-colors font-sans">
+                    Explore →
+                  </span>
+                </div>
+
+                {/* Right border divider between items */}
+                {i < GALLERY_MENU.length - 1 && (
+                  <div className="absolute top-0 right-0 bottom-0 w-px bg-white/[0.07]" />
+                )}
+              </Link>
+            </motion.div>
+          ))}
         </div>
       </div>
     </div>

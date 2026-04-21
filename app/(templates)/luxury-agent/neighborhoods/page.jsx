@@ -1,5 +1,9 @@
 import Image from 'next/image'
 import Link from 'next/link'
+import { ChevronRight } from 'lucide-react'
+import ParallaxBanner from '@/components/sections/ParallaxBanner'
+import ModalTrigger from '@/components/ui/ModalTrigger'
+import CTASection from '@/components/sections/CTASection'
 
 export const metadata = {
   title: 'Neighborhoods',
@@ -11,7 +15,7 @@ const HOODS = [
     slug: 'beverly-hills',
     name: 'Beverly Hills',
     tagline: 'The world\'s most storied address.',
-    image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80',
+    image: 'https://plus.unsplash.com/premium_photo-1725408106567-a77bd9beff7c?w=800&q=80&auto=format&fit=crop',
     stats: 'Median $4.2M · 47 active listings',
   },
   {
@@ -40,14 +44,16 @@ const HOODS = [
 export default function NeighborhoodsPage() {
   return (
     <div className="min-h-screen bg-[#0A0A0A] pt-20">
-      <div className="border-b border-white/10 py-12 px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
-          <p className="text-[10px] tracking-[0.5em] uppercase text-[#C9A96E] mb-3 font-sans">Explore</p>
-          <h1 className="font-heading text-4xl lg:text-5xl font-normal text-white">Neighborhood Guides</h1>
-        </div>
-      </div>
+      <ParallaxBanner src="https://images.unsplash.com/photo-1456693906521-44e96e49e85f?q=80&w=2070&auto=format&fit=crop" objectPosition="object-bottom" priority>
+        <p className="text-[10px] tracking-[0.5em] uppercase text-[#C9A96E] mb-4 font-sans">Explore Los Angeles</p>
+        <h1 className="font-heading text-4xl lg:text-5xl font-normal text-white mb-5">Neighborhoods</h1>
+        <div className="w-12 h-px bg-[#C9A96E] mb-5" />
+        <p className="text-white/45 font-sans text-base max-w-xl leading-relaxed">
+          From iconic estates to hidden gems—discover communities that define elevated living.
+        </p>
+      </ParallaxBanner>
 
-      <div className="max-w-7xl mx-auto px-6 lg:px-8 py-16 lg:py-24">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8 py-20 lg:py-28">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
           {HOODS.map(hood => (
             <Link key={hood.slug} href={`/luxury-agent/neighborhoods/${hood.slug}`} className="group block relative overflow-hidden aspect-[16/9]">
@@ -68,6 +74,34 @@ export default function NeighborhoodsPage() {
           ))}
         </div>
       </div>
+
+      {/* ── Neighborhood callout ─────────────────────────────── */}
+      <div className="max-w-7xl mx-auto px-6 lg:px-8 pb-20 lg:pb-28">
+        <div className="border border-white/[0.07] bg-[#0D0D0D] px-8 py-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+          <div>
+            <p className="text-[10px] tracking-[0.4em] uppercase text-[#C9A96E] mb-2 font-sans">
+              Find Your Perfect Address
+            </p>
+            <h2 className="font-heading text-2xl lg:text-3xl text-white font-normal">
+              Not Sure Which Neighborhood Is Right for You?
+            </h2>
+            <p className="text-white/40 text-sm mt-1 font-sans">
+              Victoria's insider knowledge of LA's most prestigious communities can help you find the perfect fit.
+            </p>
+          </div>
+          <ModalTrigger className="flex-shrink-0 flex items-center gap-2 px-7 py-3.5 text-[11px] tracking-[0.2em] uppercase border border-white/25 text-white/70 hover:border-white hover:text-white transition-all font-sans whitespace-nowrap">
+            Schedule a Consultation <ChevronRight size={14} />
+          </ModalTrigger>
+        </div>
+      </div>
+
+      <CTASection
+        template="luxury-agent"
+        background={{ image: '/images/luxury-agent/work-with-me.jpg' }}
+        headline="Ready to Work Together?"
+        subheadline="Whether buying, selling, or simply exploring, Victoria is available to guide you."
+        cta={{ label: "Let's Connect", modal: true }}
+      />
     </div>
   )
 }

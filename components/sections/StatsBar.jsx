@@ -38,7 +38,7 @@ export default function StatsBar({ stats = [], template = 'luxury-agent' }) {
   return (
     <section
       className={cn(
-        'py-14 border-y',
+        'py-20 lg:py-28 border-y',
         isLuxury
           ? 'bg-[#0D0D0D] border-white/[0.07]'
           : 'bg-template-surface border-template-border',

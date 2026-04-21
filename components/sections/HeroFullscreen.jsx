@@ -16,6 +16,8 @@ export default function HeroFullscreen({
   ctaSecondary,
   overlayOpacity = 0.45,
   template = 'luxury-agent',
+  agentName,
+  agentDre,
 }) {
   const ref = useRef(null)
   const { scrollYProgress } = useScroll({
@@ -39,7 +41,7 @@ export default function HeroFullscreen({
             playsInline
             className="absolute inset-0 w-full h-full object-cover"
           >
-            <source src={backgroundVideo} type="video/mp4" />
+            <source src={backgroundVideo} type={backgroundVideo.endsWith('.mov') ? 'video/quicktime' : 'video/mp4'} />
           </video>
         ) : backgroundImage ? (
           // eslint-disable-next-line @next/next/no-img-element
@@ -59,87 +61,107 @@ export default function HeroFullscreen({
       {/* Content */}
       <motion.div
         style={{ opacity: contentOpacity }}
-        className="relative h-full flex items-center"
+        className="relative h-full flex flex-col"
       >
-        <div className="max-w-7xl mx-auto px-6 lg:px-8 w-full">
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1], delay: 0.15 }}
-            className="max-w-4xl"
-          >
-            {eyebrow && (
-              <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.3 }}
-                className="text-[10px] tracking-[0.5em] uppercase text-template-accent mb-7 font-sans"
-              >
-                {eyebrow}
-              </motion.p>
-            )}
-
-            <motion.h1
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, delay: 0.45, ease: [0.22, 1, 0.36, 1] }}
-              className={cn(
-                'font-normal text-white leading-[1.04] tracking-tight mb-8',
-                isLuxury
-                  ? 'font-heading text-5xl md:text-6xl lg:text-7xl xl:text-[80px]'
-                  : 'text-4xl md:text-5xl lg:text-6xl',
-              )}
-            >
-              {headline}
-            </motion.h1>
-
-            {subheadline && (
-              <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.65 }}
-                className="text-lg text-white/55 max-w-lg mb-12 leading-relaxed font-sans"
-              >
-                {subheadline}
-              </motion.p>
-            )}
-
+        {/* Headline — vertically centered */}
+        <div className="flex-1 flex items-center">
+          <div className="max-w-7xl mx-auto px-6 lg:px-8 w-full">
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.8 }}
-              className="flex flex-wrap gap-4"
+              transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1], delay: 0.15 }}
+              className="max-w-4xl"
             >
-              {ctaPrimary && (
-                <Link
-                  href={ctaPrimary.href}
-                  className={cn(
-                    'px-9 py-4 text-[11px] tracking-[0.2em] uppercase font-medium transition-opacity duration-200 hover:opacity-85',
-                    isLuxury
-                      ? 'bg-template-accent text-[#0A0A0A]'
-                      : 'bg-white text-black',
-                  )}
+              {eyebrow && (
+                <motion.p
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: 0.3 }}
+                  className="text-[10px] tracking-[0.5em] uppercase text-template-accent mb-7 font-sans"
                 >
-                  {ctaPrimary.label}
-                </Link>
+                  {eyebrow}
+                </motion.p>
               )}
-              {ctaSecondary && (
-                <Link
-                  href={ctaSecondary.href}
-                  className="px-9 py-4 text-[11px] tracking-[0.2em] uppercase font-medium text-white border border-white/35 hover:border-white/70 hover:bg-white/5 transition-all duration-200"
+
+              <motion.h1
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 1, delay: 0.45, ease: [0.22, 1, 0.36, 1] }}
+                className={cn(
+                  'font-normal text-white leading-[1.04] tracking-tight mb-8',
+                  isLuxury
+                    ? 'font-heading text-5xl md:text-6xl lg:text-7xl xl:text-[80px]'
+                    : 'text-4xl md:text-5xl lg:text-6xl',
+                )}
+              >
+                {headline}
+              </motion.h1>
+
+              {subheadline && (
+                <motion.p
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: 0.65 }}
+                  className="text-lg text-white/55 max-w-lg mb-12 leading-relaxed font-sans"
                 >
-                  {ctaSecondary.label}
-                </Link>
+                  {subheadline}
+                </motion.p>
               )}
+
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.8 }}
+                className="flex flex-wrap gap-4"
+              >
+                {ctaPrimary && (
+                  ctaPrimary.modal ? (
+                    <button type="button" onClick={() => window.dispatchEvent(new CustomEvent('contact:open'))}
+                      className={cn('px-9 py-4 text-[11px] tracking-[0.2em] uppercase font-medium transition-opacity duration-200 hover:opacity-85', isLuxury ? 'bg-template-accent text-[#0A0A0A]' : 'bg-white text-black')}>
+                      {ctaPrimary.label}
+                    </button>
+                  ) : (
+                    <Link href={ctaPrimary.href}
+                      className={cn('px-9 py-4 text-[11px] tracking-[0.2em] uppercase font-medium transition-opacity duration-200 hover:opacity-85', isLuxury ? 'bg-template-accent text-[#0A0A0A]' : 'bg-white text-black')}>
+                      {ctaPrimary.label}
+                    </Link>
+                  )
+                )}
+                {ctaSecondary && (
+                  ctaSecondary.modal ? (
+                    <button type="button" onClick={() => window.dispatchEvent(new CustomEvent('contact:open'))}
+                      className="px-9 py-4 text-[11px] tracking-[0.2em] uppercase font-medium text-white border border-white/35 hover:border-white/70 hover:bg-white/5 transition-all duration-200">
+                      {ctaSecondary.label}
+                    </button>
+                  ) : (
+                    <Link href={ctaSecondary.href}
+                      className="px-9 py-4 text-[11px] tracking-[0.2em] uppercase font-medium text-white border border-white/35 hover:border-white/70 hover:bg-white/5 transition-all duration-200">
+                      {ctaSecondary.label}
+                    </Link>
+                  )
+                )}
+              </motion.div>
             </motion.div>
-          </motion.div>
+          </div>
         </div>
+
+        {/* Agent DRE compliance — aligned to grid, bottom */}
+        {(agentName || agentDre) && (
+          <div className="max-w-7xl mx-auto px-6 lg:px-8 w-full pb-10">
+            <p className="text-[9px] tracking-[0.35em] uppercase text-white/25 font-sans">
+              {agentName}{agentName && agentDre ? '  ·  ' : ''}{agentDre}
+            </p>
+          </div>
+        )}
       </motion.div>
 
       {/* Scroll indicator */}
-      <motion.div
+      <motion.button
+        type="button"
+        onClick={() => ref.current?.nextElementSibling?.scrollIntoView({ behavior: 'smooth' })}
         style={{ opacity: contentOpacity }}
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1.5"
+        className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1.5 cursor-pointer"
+        aria-label="Scroll down"
       >
         <motion.div
           animate={{ y: [0, 7, 0] }}
@@ -147,7 +169,7 @@ export default function HeroFullscreen({
         >
           <ChevronDown size={22} className="text-white/35" strokeWidth={1.5} />
         </motion.div>
-      </motion.div>
+      </motion.button>
     </section>
   )
 }
