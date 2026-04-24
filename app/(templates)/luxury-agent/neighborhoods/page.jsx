@@ -2,7 +2,6 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { ChevronRight } from 'lucide-react'
 import ParallaxBanner from '@/components/sections/ParallaxBanner'
-import ModalTrigger from '@/components/ui/ModalTrigger'
 import CTASection from '@/components/sections/CTASection'
 
 export const metadata = {
@@ -80,18 +79,18 @@ export default function NeighborhoodsPage() {
         <div className="border border-white/[0.07] bg-[#0D0D0D] px-8 py-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
           <div>
             <p className="text-[10px] tracking-[0.4em] uppercase text-[#C9A96E] mb-2 font-sans">
-              Find Your Perfect Address
+              Start Your Search
             </p>
             <h2 className="font-heading text-2xl lg:text-3xl text-white font-normal">
-              Not Sure Which Neighborhood Is Right for You?
+              Ready to Find Your Dream Home?
             </h2>
             <p className="text-white/40 text-sm mt-1 font-sans">
-              Victoria's insider knowledge of LA's most prestigious communities can help you find the perfect fit.
+              Browse every available listing across LA's most coveted neighborhoods and discover the home you've been waiting for.
             </p>
           </div>
-          <ModalTrigger className="flex-shrink-0 flex items-center gap-2 px-7 py-3.5 text-[11px] tracking-[0.2em] uppercase border border-white/25 text-white/70 hover:border-white hover:text-white transition-all font-sans whitespace-nowrap">
-            Schedule a Consultation <ChevronRight size={14} />
-          </ModalTrigger>
+          <Link href="/luxury-agent/listings" className="flex-shrink-0 flex items-center gap-2 px-7 py-3.5 text-[11px] tracking-[0.2em] uppercase border border-white/25 text-white/70 hover:border-white hover:text-white transition-all font-sans whitespace-nowrap">
+            Search All Homes <ChevronRight size={14} />
+          </Link>
         </div>
       </div>
 
