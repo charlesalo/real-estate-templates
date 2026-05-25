@@ -2,13 +2,13 @@
 
 import { useState } from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
   Bed, Bath, Maximize2, X, ChevronLeft, ChevronRight,
   MapPin, ExternalLink,
 } from 'lucide-react'
 import { formatPrice } from './PriceTag'
-import ModernTeamPropertyCard from './ModernTeamPropertyCard'
 import PropertyMap from './ModernTeamPropertyMap'
 import ScheduleTourModal from '@/components/ui/ModernTeamScheduleTourModal'
 
@@ -495,18 +495,60 @@ export default function ModernTeamPropertyDetail({
           </div>
         </div>
 
-        {/* Similar listings */}
-        {similarListings.length > 0 && (
-          <div className="mt-20 pt-12 border-t border-[#D5DBE9]">
-            <h2 className="text-2xl font-bold text-[#111827] font-sans mb-8">Similar Properties</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+      </div>
+
+      {/* Similar listings — full-width EEF1F7 section, matches Featured Listings detail page */}
+      {similarListings.length > 0 && (
+        <section className="bg-[#EEF1F7] border-t border-[#D5DBE9] py-16 lg:py-20 -mx-6 lg:-mx-8 px-6 lg:px-8">
+          <div className="max-w-7xl mx-auto">
+            <p className="text-xs tracking-[0.35em] uppercase text-[#4B6090] mb-3 font-sans">You May Also Like</p>
+            <h2 className="text-2xl font-bold text-[#111827] mb-10" style={{ fontFamily: 'var(--font-inter, system-ui)' }}>
+              Similar Properties
+            </h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {similarListings.slice(0, 3).map(l => (
-                <ModernTeamPropertyCard key={l.id ?? l.mlsId} {...l} />
+                <Link
+                  key={l.mlsId ?? l.id}
+                  href={`/modern-team/listings/${l.mlsId ?? l.id}`}
+                  className="bg-white border border-[#E5E7EB] rounded-xl overflow-hidden hover:shadow-lg hover:shadow-[#1A2D5A]/6 transition-shadow duration-300 group block"
+                >
+                  <div className="relative aspect-[4/3] overflow-hidden bg-[#EEF1F7]">
+                    {l.image && (
+                      <Image
+                        src={l.image}
+                        alt={l.address ?? 'Property'}
+                        fill
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                        className="object-cover transition-transform duration-500 group-hover:scale-105"
+                      />
+                    )}
+                    <div className="absolute top-3 left-3 px-2.5 py-1 bg-[#1A2D5A]/85 backdrop-blur-sm text-white text-[10px] font-semibold rounded-md tracking-wide uppercase font-sans">
+                      {l.status ?? 'Active'}
+                    </div>
+                  </div>
+                  <div className="p-5">
+                    <p className="text-lg font-bold text-[#1A2D5A] mb-1" style={{ fontFamily: 'var(--font-inter, system-ui)' }}>
+                      {formatPrice(l.price)}
+                    </p>
+                    <p className="text-sm font-medium text-[#111827] leading-snug">{l.address}</p>
+                    {l.city && (
+                      <div className="flex items-center gap-1 text-xs text-[#6B7280] font-sans mt-0.5 mb-3">
+                        <MapPin size={11} className="flex-shrink-0 text-[#4B6090]" />
+                        {[l.city, l.state].filter(Boolean).join(', ')}
+                      </div>
+                    )}
+                    <div className="flex items-center gap-4 text-xs text-[#4B5563] font-sans pt-3 border-t border-[#EEF1F7]">
+                      {l.beds  != null && <span className="flex items-center gap-1.5"><Bed       size={12} className="text-[#4B6090]" />{l.beds} bd</span>}
+                      {l.baths != null && <span className="flex items-center gap-1.5"><Bath      size={12} className="text-[#4B6090]" />{l.baths} ba</span>}
+                      {l.sqft  != null && <span className="flex items-center gap-1.5"><Maximize2 size={12} className="text-[#4B6090]" />{l.sqft.toLocaleString()} sf</span>}
+                    </div>
+                  </div>
+                </Link>
               ))}
             </div>
           </div>
-        )}
-      </div>
+        </section>
+      )}
     </div>
   )
 }
