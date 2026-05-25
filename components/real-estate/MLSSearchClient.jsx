@@ -536,10 +536,10 @@ export default function MLSSearchClient({
             <div className="flex items-center gap-2">
               {/* Grid / List toggle */}
               <div className={cn('flex items-center border', isLuxury ? 'border-white/10' : 'border-template-border rounded')}>
-                <button onClick={() => setView('grid')} className={cn('p-2 transition-colors', view === 'grid' ? isLuxury ? 'text-[#C9A96E] bg-white/5' : 'text-template-accent bg-template-surface' : isLuxury ? 'text-white/30 hover:text-white' : 'text-template-fg/40')}>
+                <button onClick={() => setView('grid')} className={cn('p-2 transition-colors cursor-pointer', view === 'grid' ? isLuxury ? 'text-[#C9A96E] bg-white/5' : 'text-template-accent bg-template-surface' : isLuxury ? 'text-white/30 hover:text-white' : 'text-template-fg/40')}>
                   <LayoutGrid size={14} />
                 </button>
-                <button onClick={() => setView('list')} className={cn('p-2 transition-colors', view === 'list' ? isLuxury ? 'text-[#C9A96E] bg-white/5' : 'text-template-accent bg-template-surface' : isLuxury ? 'text-white/30 hover:text-white' : 'text-template-fg/40')}>
+                <button onClick={() => setView('list')} className={cn('p-2 transition-colors cursor-pointer', view === 'list' ? isLuxury ? 'text-[#C9A96E] bg-white/5' : 'text-template-accent bg-template-surface' : isLuxury ? 'text-white/30 hover:text-white' : 'text-template-fg/40')}>
                   <List size={14} />
                 </button>
               </div>

@@ -543,13 +543,13 @@ export default function ModernTeamSearchClient({
               <div className="flex items-center border border-[#D5DBE9] rounded-lg overflow-hidden">
                 <button
                   onClick={() => setView('grid')}
-                  className={`p-2 transition-colors ${view === 'grid' ? 'text-[#1A2D5A] bg-[#EEF1F7]' : 'text-[#9CA3AF] hover:text-[#1A2D5A]'}`}
+                  className={`p-2 transition-colors cursor-pointer ${view === 'grid' ? 'text-[#1A2D5A] bg-[#EEF1F7]' : 'text-[#9CA3AF] hover:text-[#1A2D5A]'}`}
                 >
                   <LayoutGrid size={14} />
                 </button>
                 <button
                   onClick={() => setView('list')}
-                  className={`p-2 transition-colors ${view === 'list' ? 'text-[#1A2D5A] bg-[#EEF1F7]' : 'text-[#9CA3AF] hover:text-[#1A2D5A]'}`}
+                  className={`p-2 transition-colors cursor-pointer ${view === 'list' ? 'text-[#1A2D5A] bg-[#EEF1F7]' : 'text-[#9CA3AF] hover:text-[#1A2D5A]'}`}
                 >
                   <List size={14} />
                 </button>
