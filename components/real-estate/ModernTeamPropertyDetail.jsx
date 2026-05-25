@@ -10,7 +10,7 @@ import {
 import { formatPrice } from './PriceTag'
 import ModernTeamPropertyCard from './ModernTeamPropertyCard'
 import PropertyMap from './PropertyMap'
-import ScheduleTourModal from '@/components/ui/ScheduleTourModal'
+import ScheduleTourModal from '@/components/ui/ModernTeamScheduleTourModal'
 
 function splitFeatures(str) {
   if (!str) return []
