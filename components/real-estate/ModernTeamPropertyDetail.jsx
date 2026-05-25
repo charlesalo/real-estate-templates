@@ -316,7 +316,7 @@ export default function ModernTeamPropertyDetail({
 
             {/* Key stats bar */}
             {keyStats.length > 0 && (
-              <div className="flex flex-wrap items-center border-y border-[#D5DBE9] py-5 mb-2 gap-y-3">
+              <div className="flex flex-wrap items-center border-t border-[#D5DBE9] py-5 gap-y-3">
                 {keyStats.map((stat, i) => (
                   <div key={i} className={`flex items-center gap-2 px-4 ${i > 0 ? 'border-l border-[#D5DBE9]' : 'pl-0'}`}>
                     {stat.icon && <span className="text-[#1A2D5A]">{stat.icon}</span>}
