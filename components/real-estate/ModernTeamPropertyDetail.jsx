@@ -153,7 +153,7 @@ function AgentCard({ agentName, agentBrokerage, agentPhoto, propertyImage, prope
 function Section({ title, children }) {
   return (
     <div className="pt-10 pb-4 border-t border-[#D5DBE9]">
-      <h2 className="text-base font-bold text-[#1A2D5A] tracking-wide mb-6 uppercase font-sans">{title}</h2>
+      <h2 className="text-2xl font-bold text-[#111827] mb-6" style={{ fontFamily: 'var(--font-inter, system-ui)' }}>{title}</h2>
       {children}
     </div>
   )
