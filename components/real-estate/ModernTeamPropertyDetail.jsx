@@ -152,8 +152,8 @@ function AgentCard({ agentName, agentBrokerage, agentPhoto, propertyImage, prope
 // ── Section wrapper ────────────────────────────────────────────────────────
 function Section({ title, children }) {
   return (
-    <div className="pt-8 border-t border-[#D5DBE9]">
-      <h2 className="text-base font-bold text-[#1A2D5A] tracking-wide mb-5 uppercase font-sans">{title}</h2>
+    <div className="pt-10 pb-4 border-t border-[#D5DBE9]">
+      <h2 className="text-base font-bold text-[#1A2D5A] tracking-wide mb-6 uppercase font-sans">{title}</h2>
       {children}
     </div>
   )
@@ -316,7 +316,7 @@ export default function ModernTeamPropertyDetail({
 
             {/* Key stats bar */}
             {keyStats.length > 0 && (
-              <div className="flex flex-wrap items-center border-t border-[#D5DBE9] py-5 gap-y-3">
+              <div className="flex flex-wrap items-center border-t border-[#D5DBE9] py-6 gap-y-3">
                 {keyStats.map((stat, i) => (
                   <div key={i} className={`flex items-center gap-2 px-4 ${i > 0 ? 'border-l border-[#D5DBE9]' : 'pl-0'}`}>
                     {stat.icon && <span className="text-[#1A2D5A]">{stat.icon}</span>}
