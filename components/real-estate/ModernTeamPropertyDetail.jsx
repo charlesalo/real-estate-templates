@@ -276,7 +276,7 @@ export default function ModernTeamPropertyDetail({
         <Gallery photos={photos} />
       </div>
 
-      <div className="max-w-7xl mx-auto px-6 lg:px-8 py-10">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8 pt-10 pb-16 lg:pb-24">
         <div className="grid lg:grid-cols-3 gap-12">
 
           {/* ── Left: main content ── */}
