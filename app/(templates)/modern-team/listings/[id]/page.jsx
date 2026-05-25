@@ -1,5 +1,5 @@
 import { notFound } from 'next/navigation'
-import PropertyDetail from '@/components/real-estate/PropertyDetail'
+import ModernTeamPropertyDetail from '@/components/real-estate/ModernTeamPropertyDetail'
 import { getListingById, getFeaturedListings } from '@/lib/simplyrets'
 
 // Light, neutral interior photos — suitable for the modern-team aesthetic
@@ -81,10 +81,9 @@ export default async function PropertyDetailPage({ params }) {
 
   return (
     <div className="pt-20">
-      <PropertyDetail
+      <ModernTeamPropertyDetail
         listing={listing}
         similarListings={similar}
-        template="modern-team"
         agentName={AGENT.name}
         agentBrokerage={AGENT.brokerage}
         agentPhoto={AGENT.photo}
