@@ -547,10 +547,10 @@ export default function MLSSearchClient({
               <button
                 onClick={() => setShowMap(v => !v)}
                 className={cn(
-                  'hidden lg:flex items-center gap-1.5 px-3 py-1.5 text-[11px] tracking-[0.1em] uppercase border transition-all font-sans',
-                  showMap
-                    ? isLuxury ? 'border-[#C9A96E] text-[#C9A96E]' : 'border-template-accent text-template-accent'
-                    : isLuxury ? 'border-white/20 text-white/40 hover:border-white/40 hover:text-white' : 'border-template-border text-template-fg/40',
+                  'hidden lg:flex items-center gap-1.5 px-3 py-1.5 text-[11px] tracking-[0.1em] uppercase border transition-all font-sans cursor-pointer',
+                  isLuxury
+                    ? 'border-white/20 text-white/40 hover:border-white/40 hover:text-white'
+                    : 'border-template-border text-template-fg/40 hover:border-template-accent/40 hover:text-template-fg',
                 )}
               >
                 <MapIcon size={13} />

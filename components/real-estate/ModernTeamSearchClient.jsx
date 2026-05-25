@@ -557,11 +557,7 @@ export default function ModernTeamSearchClient({
               {/* Map toggle */}
               <button
                 onClick={() => setShowMap(v => !v)}
-                className={`hidden lg:flex items-center gap-1.5 px-3 py-1.5 text-[11px] tracking-[0.1em] uppercase border rounded-lg transition-all font-sans ${
-                  showMap
-                    ? 'border-[#1A2D5A] text-[#1A2D5A] bg-[#EEF1F7]'
-                    : 'border-[#D5DBE9] text-[#6B7280] hover:border-[#1A2D5A]/40 hover:text-[#1A2D5A]'
-                }`}
+                className="hidden lg:flex items-center gap-1.5 px-3 py-1.5 text-[11px] tracking-[0.1em] uppercase border border-[#D5DBE9] text-[#6B7280] rounded-lg transition-all font-sans cursor-pointer hover:border-[#1A2D5A]/40 hover:text-[#1A2D5A]"
               >
                 <MapIcon size={13} />
                 {showMap ? 'Hide Map' : 'Show Map'}
