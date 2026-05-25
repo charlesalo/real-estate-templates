@@ -110,15 +110,15 @@ function ContactSidebar({ agentName, agentBrokerage, agentPhoto, agentPhone, age
             {!isSoldOrClosed && (
               <button
                 onClick={() => setTourOpen(true)}
-                className="w-full py-4 bg-[#111827] text-white text-[13px] font-semibold rounded-xl hover:bg-[#1A2D5A] transition-colors cursor-pointer"
+                className="w-full py-4 bg-[#1A2D5A] text-white text-xs font-semibold tracking-[0.2em] uppercase rounded-lg hover:bg-[#243870] transition-colors duration-200 cursor-pointer"
               >
-                Request a tour
+                Request a Tour
               </button>
             )}
             <button
               type="button"
               onClick={() => window.dispatchEvent(new CustomEvent('contact:open'))}
-              className="w-full py-3.5 border border-[#E5E7EB] text-[#111827] text-[13px] font-semibold rounded-xl hover:border-[#1A2D5A]/40 hover:text-[#1A2D5A] transition-all cursor-pointer"
+              className="w-full py-4 border border-[#1A2D5A] text-[#1A2D5A] text-xs font-semibold tracking-[0.2em] uppercase rounded-lg hover:bg-[#1A2D5A] hover:text-white transition-colors duration-200 cursor-pointer"
             >
               Contact Us
             </button>
