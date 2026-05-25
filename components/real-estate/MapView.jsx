@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { MapPin } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import 'mapbox-gl/dist/mapbox-gl.css'
 
 // Dynamically import mapbox-gl only on client to avoid SSR errors
 let mapboxgl = null
@@ -27,7 +28,6 @@ export default function MapView({
 
     import('mapbox-gl').then(mod => {
       mapboxgl = mod.default
-      import('mapbox-gl/dist/mapbox-gl.css')
       mapboxgl.accessToken = token
 
       if (!containerRef.current || mapRef.current) return
@@ -66,15 +66,21 @@ export default function MapView({
       const { lat, lng } = listing.geo ?? {}
       if (!lat || !lng) return
 
+      const markerBg   = isLuxury ? '#C9A96E' : '#1A2D5A'
+      const markerText = isLuxury ? '#0A0A0A' : '#FFFFFF'
+      const popupBg    = isLuxury ? '#0D0D0D' : '#1A2D5A'
+      const popupText  = isLuxury ? '#FFFFFF' : '#FFFFFF'
+      const popupMuted = isLuxury ? 'rgba(255,255,255,0.5)' : 'rgba(255,255,255,0.65)'
+
       const el = document.createElement('div')
       el.className = 'mapbox-marker'
       el.style.cssText = `
-        background: #C9A96E;
-        color: #0A0A0A;
+        background: ${markerBg};
+        color: ${markerText};
         font-size: 11px;
         font-weight: 600;
         padding: 4px 8px;
-        border-radius: 2px;
+        border-radius: 4px;
         white-space: nowrap;
         cursor: pointer;
         box-shadow: 0 2px 8px rgba(0,0,0,0.3);
@@ -85,10 +91,10 @@ export default function MapView({
 
       const popup = new mapboxgl.Popup({ offset: 12, closeButton: false })
         .setHTML(`
-          <div style="font-family:system-ui;padding:4px">
-            <div style="font-size:14px;font-weight:600;margin-bottom:2px">$${listing.price?.toLocaleString()}</div>
-            <div style="font-size:12px;color:#666">${listing.address ?? ''}</div>
-            <div style="font-size:11px;color:#999;margin-top:4px">${listing.beds ?? '—'} bd · ${listing.baths ?? '—'} ba · ${listing.sqft?.toLocaleString() ?? '—'} sqft</div>
+          <div style="font-family:system-ui;padding:4px;background:${popupBg};border-radius:6px;min-width:160px">
+            <div style="font-size:14px;font-weight:700;color:${popupText};margin-bottom:3px">$${listing.price?.toLocaleString()}</div>
+            <div style="font-size:12px;color:${popupMuted}">${listing.address ?? ''}</div>
+            <div style="font-size:11px;color:${popupMuted};margin-top:4px">${listing.beds ?? '—'} bd · ${listing.baths ?? '—'} ba · ${listing.sqft?.toLocaleString() ?? '—'} sqft</div>
           </div>
         `)
 
