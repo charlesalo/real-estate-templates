@@ -23,6 +23,6 @@ export function middleware(request) {
 }
 
 export const config = {
-  // Run on all routes except Next.js internals and static files
-  matcher: ['/((?!_next/static|_next/image|favicon.ico).*)'],
+  // Exclude Next.js internals AND all public static assets (images, videos, fonts, icons)
+  matcher: ['/((?!_next/static|_next/image|favicon.ico|images/|videos/|fonts/|icons/|.*\\.(?:png|jpg|jpeg|gif|webp|svg|ico|mp4|webm|woff|woff2|ttf|otf|pdf)).*)'],
 }
