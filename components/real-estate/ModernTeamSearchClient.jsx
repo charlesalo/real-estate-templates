@@ -331,7 +331,6 @@ export default function ModernTeamSearchClient({
   const [showDrawer, setShowDrawer] = useState(false)
   // tracks the q value that was last submitted, so the second row only
   // appears when the user has typed something new (not on page refresh)
-  const [appliedQ,   setAppliedQ]   = useState(initialFilters.q ?? '')
 
   // When X-Total-Count is available use it for pagination.
   // For demo accounts that omit it, estimate from current page + hasMore.
@@ -369,7 +368,6 @@ export default function ModernTeamSearchClient({
   }, [router])
 
   const apply = useCallback((f) => {
-    setAppliedQ(f.q ?? '')
     setFilters(f)
     setPage(1)
     fetchListings(f, 1)
@@ -411,7 +409,7 @@ export default function ModernTeamSearchClient({
         <div className="px-4 lg:px-6 py-3">
 
           {/* Main filter row */}
-          <div className={`flex items-stretch border border-[#D5DBE9] ${filters.q ? 'rounded-t-xl' : 'rounded-xl'} overflow-hidden`}>
+          <div className="flex items-stretch border border-[#D5DBE9] rounded-xl overflow-hidden">
 
             {/* Search */}
             <div className="flex items-center gap-2 px-4 py-3 flex-1 min-w-[160px] border-r border-[#D5DBE9]">
@@ -484,7 +482,7 @@ export default function ModernTeamSearchClient({
             {/* All Filters */}
             <button
               onClick={() => setShowDrawer(true)}
-              className={`flex items-center gap-1.5 px-4 py-3 text-sm text-[#4B6090] hover:text-[#1A2D5A] transition-colors font-sans ${!filters.q ? 'border-r border-[#D5DBE9]' : ''}`}
+              className="flex items-center gap-1.5 px-4 py-3 text-sm text-[#4B6090] hover:text-[#1A2D5A] transition-colors font-sans border-r border-[#D5DBE9]"
             >
               <SlidersHorizontal size={14} />
               <span className="text-[11px] tracking-[0.1em] uppercase">Filters</span>
@@ -495,34 +493,14 @@ export default function ModernTeamSearchClient({
               )}
             </button>
 
-            {/* SEARCH — visible only when search field is empty */}
-            {!filters.q && (
-              <button
-                onClick={() => apply(filters)}
-                className="px-6 py-3 text-[11px] tracking-[0.15em] uppercase font-semibold bg-[#1A2D5A] text-white hover:bg-[#243870] transition-colors font-sans flex-shrink-0"
-              >
-                Search
-              </button>
-            )}
+            {/* SEARCH — always visible */}
+            <button
+              onClick={() => apply(filters)}
+              className="px-6 py-3 text-[11px] tracking-[0.15em] uppercase font-semibold bg-[#1A2D5A] text-white hover:bg-[#243870] transition-colors font-sans flex-shrink-0"
+            >
+              Search
+            </button>
           </div>
-
-          {/* Second row — appears only when typed query hasn't been applied yet */}
-          {filters.q && filters.q !== appliedQ && (
-            <div className="flex items-center gap-2 border border-t-0 border-[#D5DBE9] rounded-b-xl px-4 py-2.5">
-              <button
-                onClick={() => apply({ ...filters, q: '' })}
-                className="p-1.5 text-[#9CA3AF] hover:text-[#111827] transition-colors rounded-md hover:bg-[#EEF1F7] flex-shrink-0"
-              >
-                <X size={14} />
-              </button>
-              <button
-                onClick={() => apply(filters)}
-                className="px-6 py-2 text-[11px] tracking-[0.15em] uppercase font-semibold bg-[#1A2D5A] text-white rounded-lg hover:bg-[#243870] transition-colors font-sans"
-              >
-                Search
-              </button>
-            </div>
-          )}
 
           {/* Active filter tags */}
           {activeTags.length > 0 && (
