@@ -193,15 +193,12 @@ export default function ModernTeamScheduleTourModal({
                           <button
                             key={value}
                             onClick={() => setTourType(value)}
-                            className={`flex items-center gap-2 px-4 py-2.5 rounded-lg border text-sm font-medium font-sans transition-all cursor-pointer ${
+                            className={`px-5 py-2.5 rounded-lg border text-xs font-semibold tracking-[0.15em] uppercase font-sans transition-all cursor-pointer ${
                               tourType === value
-                                ? 'border-[#1A2D5A] bg-[#EEF1F7] text-[#1A2D5A]'
-                                : 'border-[#D5DBE9] text-[#6B7280] hover:border-[#1A2D5A]/40 hover:text-[#1A2D5A]'
+                                ? 'border-[#1A2D5A] bg-[#1A2D5A] text-white'
+                                : 'border-[#D5DBE9] text-[#374151] hover:border-[#1A2D5A]/50 hover:bg-[#EEF1F7] hover:text-[#1A2D5A]'
                             }`}
                           >
-                            <span className={`w-3.5 h-3.5 rounded-full border-2 flex-shrink-0 transition-all ${
-                              tourType === value ? 'border-[#1A2D5A] bg-[#1A2D5A]' : 'border-[#D5DBE9]'
-                            }`} />
                             {label}
                           </button>
                         ))}
