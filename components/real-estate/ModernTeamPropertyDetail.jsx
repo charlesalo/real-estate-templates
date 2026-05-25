@@ -9,7 +9,7 @@ import {
 } from 'lucide-react'
 import { formatPrice } from './PriceTag'
 import ModernTeamPropertyCard from './ModernTeamPropertyCard'
-import PropertyMap from './PropertyMap'
+import PropertyMap from './ModernTeamPropertyMap'
 import ScheduleTourModal from '@/components/ui/ModernTeamScheduleTourModal'
 
 function splitFeatures(str) {
