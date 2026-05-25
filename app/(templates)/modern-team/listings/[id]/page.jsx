@@ -36,10 +36,11 @@ export async function generateMetadata({ params }) {
 }
 
 const AGENT = {
-  name:  'The Hargrove Group',
-  photo: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&q=80',
-  phone: '(713) 555-0182',
-  email: 'hello@hargrovegroup.com',
+  name:      'The Hargrove Group',
+  brokerage: 'Realty Associates of Texas',
+  photo:     '/images/modern-team/The Hargrove Group Placeholder.png',
+  phone:     '(713) 555-0182',
+  email:     'hello@hargrovegroup.com',
 }
 
 export default async function PropertyDetailPage({ params }) {
@@ -79,12 +80,17 @@ export default async function PropertyDetailPage({ params }) {
   } catch {}
 
   return (
-    <PropertyDetail
-      listing={listing}
-      similar={similar}
-      agent={AGENT}
-      template="modern-team"
-      backHref="/modern-team/listings"
-    />
+    <div className="pt-20">
+      <PropertyDetail
+        listing={listing}
+        similarListings={similar}
+        template="modern-team"
+        agentName={AGENT.name}
+        agentBrokerage={AGENT.brokerage}
+        agentPhoto={AGENT.photo}
+        agentPhone={AGENT.phone}
+        agentEmail={AGENT.email}
+      />
+    </div>
   )
 }

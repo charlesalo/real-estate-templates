@@ -83,13 +83,64 @@ function Gallery({ photos = [], template }) {
 }
 
 // ── Agent sidebar ──────────────────────────────────────────────────────────
-function ContactSidebar({ agentName, agentPhoto, agentPhone, agentEmail, template, propertyImage, propertyAddress, propertyPrice, propertyStatus }) {
+function ContactSidebar({ agentName, agentBrokerage, agentPhoto, agentPhone, agentEmail, template, propertyImage, propertyAddress, propertyPrice, propertyStatus }) {
   const [tourOpen, setTourOpen] = useState(false)
   const isLuxury = template === 'luxury-agent'
+  const isSoldOrClosed = ['Sold', 'Closed'].includes(propertyStatus)
 
+  if (!isLuxury) {
+    return (
+      <>
+        <div className="sticky top-24 bg-white border border-[#E5E7EB] rounded-2xl p-6 shadow-sm">
+          {/* Team logo + name */}
+          <div className="flex items-center gap-4 mb-6">
+            {agentPhoto && (
+              <div className="relative w-16 h-16 rounded-full overflow-hidden flex-shrink-0 border border-[#E5E7EB]">
+                <Image src={agentPhoto} alt={agentName ?? 'Team'} fill className="object-cover" />
+              </div>
+            )}
+            <div>
+              <p className="text-[#111827] text-[17px] font-bold leading-snug">{agentName ?? 'Contact Agent'}</p>
+              {agentBrokerage && <p className="text-[#9CA3AF] text-sm mt-0.5">{agentBrokerage}</p>}
+            </div>
+          </div>
+
+          {/* Actions */}
+          <div className="space-y-3">
+            {!isSoldOrClosed && (
+              <button
+                onClick={() => setTourOpen(true)}
+                className="w-full py-4 bg-[#111827] text-white text-[13px] font-semibold rounded-xl hover:bg-[#1A2D5A] transition-colors cursor-pointer"
+              >
+                Request a tour
+              </button>
+            )}
+            <button
+              type="button"
+              onClick={() => window.dispatchEvent(new CustomEvent('contact:open'))}
+              className="w-full py-3.5 border border-[#E5E7EB] text-[#111827] text-[13px] font-semibold rounded-xl hover:border-[#1A2D5A]/40 hover:text-[#1A2D5A] transition-all cursor-pointer"
+            >
+              Contact Us
+            </button>
+          </div>
+        </div>
+
+        <ScheduleTourModal
+          open={tourOpen}
+          onClose={() => setTourOpen(false)}
+          propertyImage={propertyImage}
+          propertyAddress={propertyAddress}
+          propertyPrice={propertyPrice}
+          propertyStatus={propertyStatus}
+        />
+      </>
+    )
+  }
+
+  // Luxury Agent layout
   return (
     <>
-      <div className={cn('sticky top-24 border p-6', isLuxury ? 'bg-[#0D0D0D] border-white/[0.08]' : 'bg-template-surface border-template-border rounded-xl')}>
+      <div className="sticky top-24 border p-6 bg-[#0D0D0D] border-white/[0.08]">
         {/* Agent info */}
         <p className="text-[9px] tracking-[0.4em] uppercase text-[#C9A96E] font-sans mb-1">Listing Agent</p>
         <div className="flex items-center gap-3 mb-6 pb-6 border-b border-white/[0.08]">
@@ -99,7 +150,7 @@ function ContactSidebar({ agentName, agentPhoto, agentPhone, agentEmail, templat
             </div>
           )}
           <div className="flex-1 min-w-0">
-            <p className={cn('font-heading text-base font-normal truncate', isLuxury ? 'text-white' : 'text-template-fg')}>
+            <p className="font-heading text-base font-normal truncate text-white">
               {agentName ?? 'Contact Agent'}
             </p>
             <div className="flex items-center gap-3 mt-1.5">
@@ -121,10 +172,10 @@ function ContactSidebar({ agentName, agentPhoto, agentPhone, agentEmail, templat
 
         {/* Actions */}
         <div className="space-y-3">
-          {!['Sold', 'Closed'].includes(propertyStatus) && (
+          {!isSoldOrClosed && (
             <button
               onClick={() => setTourOpen(true)}
-              className="w-full py-4 bg-[#C9A96E] text-[#0A0A0A] text-[11px] tracking-[0.2em] uppercase font-semibold font-sans hover:bg-[#b8935a] transition-colors"
+              className="w-full py-4 bg-[#C9A96E] text-[#0A0A0A] text-[11px] tracking-[0.2em] uppercase font-semibold font-sans hover:bg-[#b8935a] transition-colors cursor-pointer"
             >
               Request a Tour
             </button>
@@ -132,7 +183,7 @@ function ContactSidebar({ agentName, agentPhoto, agentPhone, agentEmail, templat
           <button
             type="button"
             onClick={() => window.dispatchEvent(new CustomEvent('contact:open'))}
-            className="w-full py-3.5 border border-white/15 text-white/50 text-[11px] tracking-[0.2em] uppercase font-sans hover:border-white/40 hover:text-white transition-all"
+            className="w-full py-3.5 border border-white/15 text-white/50 text-[11px] tracking-[0.2em] uppercase font-sans hover:border-white/40 hover:text-white transition-all cursor-pointer"
           >
             Contact Agent
           </button>
@@ -192,7 +243,7 @@ function FeaturePills({ items }) {
 }
 
 // ── Main component ─────────────────────────────────────────────────────────
-export default function PropertyDetail({ listing, similarListings = [], template = 'luxury-agent', agentName, agentPhoto, agentPhone, agentEmail }) {
+export default function PropertyDetail({ listing, similarListings = [], template = 'luxury-agent', agentName, agentBrokerage, agentPhoto, agentPhone, agentEmail }) {
   const isLuxury = template === 'luxury-agent'
   if (!listing) return null
 
@@ -447,6 +498,7 @@ export default function PropertyDetail({ listing, similarListings = [], template
             <ContactSidebar
               template={template}
               agentName={agentName}
+              agentBrokerage={agentBrokerage}
               agentPhoto={agentPhoto}
               agentPhone={agentPhone}
               agentEmail={agentEmail}
