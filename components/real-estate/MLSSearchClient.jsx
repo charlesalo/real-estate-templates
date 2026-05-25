@@ -420,22 +420,12 @@ export default function MLSSearchClient({
               )}
             </div>
 
-            {/* Status pills — desktop */}
-            <div className={cn('hidden lg:flex items-center gap-1 px-3 py-2.5', isLuxury ? 'border-r border-white/10' : 'border-r border-template-border')}>
-              {STATUSES.map(s => (
-                <button
-                  key={s.value}
-                  onClick={() => apply({ ...filters, status: filters.status === s.value ? '' : s.value })}
-                  className={cn(
-                    'px-3 py-1 text-[10px] tracking-[0.1em] uppercase font-medium transition-all',
-                    filters.status === s.value
-                      ? isLuxury ? 'bg-[#C9A96E] text-[#0A0A0A]' : 'bg-template-accent text-template-accent-fg'
-                      : isLuxury ? 'text-white/40 border border-transparent hover:border-white/20 hover:text-white' : 'text-template-fg/50 hover:text-template-fg',
-                  )}
-                >
-                  {s.label}
-                </button>
-              ))}
+            {/* Status dropdown */}
+            <div className={cn('px-4 py-3', isLuxury ? 'border-r border-white/10' : 'border-r border-template-border')}>
+              <select value={filters.status} onChange={e => apply({ ...filters, status: e.target.value })} className={selCls}>
+                <option value="">All Status</option>
+                {STATUSES.map(s => <option key={s.value} value={s.value}>{s.label}</option>)}
+              </select>
             </div>
 
             {/* Price — desktop */}

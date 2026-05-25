@@ -431,19 +431,12 @@ export default function ModernTeamSearchClient({
               )}
             </div>
 
-            {/* Status pills */}
-            <div className="hidden lg:flex items-center gap-1 px-3 border-r border-[#D5DBE9]">
-              {STATUSES.map(s => (
-                <button
-                  key={s.value}
-                  onClick={() => apply({ ...filters, status: filters.status === s.value ? '' : s.value })}
-                  className={`px-3 py-1.5 text-[10px] tracking-[0.1em] uppercase font-medium rounded-full transition-all font-sans ${
-                    filters.status === s.value ? 'bg-[#1A2D5A] text-white' : 'text-[#4B6090] hover:bg-[#EEF1F7] hover:text-[#1A2D5A]'
-                  }`}
-                >
-                  {s.label}
-                </button>
-              ))}
+            {/* Status dropdown */}
+            <div className="px-4 py-3 border-r border-[#D5DBE9]">
+              <select value={filters.status} onChange={e => apply({ ...filters, status: e.target.value })} className={selCls}>
+                <option value="">All Status</option>
+                {STATUSES.map(s => <option key={s.value} value={s.value}>{s.label}</option>)}
+              </select>
             </div>
 
             {/* Min Price */}
