@@ -76,6 +76,10 @@ export default function ModernTeamNavbar({
   const [menuOpen,  setMenuOpen]  = useState(false)
   const pathname = usePathname()
 
+  // Pages with a light background (no dark hero) need the solid navbar from the start
+  const forceSolid = /\/modern-team\/listings\/.+/.test(pathname)
+  const solid = scrolled || forceSolid
+
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 72)
     window.addEventListener('scroll', onScroll, { passive: true })
@@ -85,7 +89,7 @@ export default function ModernTeamNavbar({
 
   const linkCls = cn(
     'text-sm font-medium transition-colors duration-200',
-    scrolled ? 'text-[#374151] hover:text-[#1A2D5A]' : 'text-white/90 hover:text-white',
+    solid ? 'text-[#374151] hover:text-[#1A2D5A]' : 'text-white/90 hover:text-white',
   )
 
   return (
@@ -93,7 +97,7 @@ export default function ModernTeamNavbar({
       <header
         className={cn(
           'fixed top-0 left-0 right-0 z-50 transition-all duration-400',
-          scrolled
+          solid
             ? 'bg-white/96 backdrop-blur-md border-b border-[#E5E7EB] shadow-sm'
             : 'bg-transparent',
         )}
@@ -107,14 +111,14 @@ export default function ModernTeamNavbar({
                 src="/images/modern-team/The Hargrove Group Light Logo.png"
                 alt="The Hargrove Group"
                 fill
-                className={cn('object-contain object-left transition-opacity duration-300', scrolled ? 'opacity-0' : 'opacity-100')}
+                className={cn('object-contain object-left transition-opacity duration-300', solid ? 'opacity-0' : 'opacity-100')}
                 priority
               />
               <Image
                 src="/images/modern-team/The Hargrove Group Dark Logo.png"
                 alt="The Hargrove Group"
                 fill
-                className={cn('object-contain object-left transition-opacity duration-300', scrolled ? 'opacity-100' : 'opacity-0')}
+                className={cn('object-contain object-left transition-opacity duration-300', solid ? 'opacity-100' : 'opacity-0')}
                 priority
               />
             </Link>
@@ -123,14 +127,14 @@ export default function ModernTeamNavbar({
             <nav className="hidden lg:flex items-center gap-6 ml-auto">
               {links.map((link, i) => {
                 if (link.phone) return null // phone shown in top bar when scrolled
-                if (link.children?.length) return <Dropdown key={i} link={link} scrolled={scrolled} />
+                if (link.children?.length) return <Dropdown key={i} link={link} scrolled={solid} />
                 if (link.modal) return (
                   <button
                     key={i}
                     onClick={() => window.dispatchEvent(new CustomEvent('contact:open'))}
                     className={cn(
                       linkCls,
-                      `relative after:absolute after:bottom-[-3px] after:left-0 after:h-[2px] after:w-0 after:transition-all after:duration-200 hover:after:w-full ${scrolled ? 'after:bg-[#1A2D5A]' : 'after:bg-white'}`,
+                      `relative after:absolute after:bottom-[-3px] after:left-0 after:h-[2px] after:w-0 after:transition-all after:duration-200 hover:after:w-full ${solid ? 'after:bg-[#1A2D5A]' : 'after:bg-white'}`,
                     )}
                   >
                     {link.label}
@@ -142,7 +146,7 @@ export default function ModernTeamNavbar({
                     href={link.href}
                     className={cn(
                       linkCls,
-                      `relative after:absolute after:bottom-[-3px] after:left-0 after:h-[2px] after:w-0 after:transition-all after:duration-200 hover:after:w-full ${scrolled ? 'after:bg-[#1A2D5A]' : 'after:bg-white'}`,
+                      `relative after:absolute after:bottom-[-3px] after:left-0 after:h-[2px] after:w-0 after:transition-all after:duration-200 hover:after:w-full ${solid ? 'after:bg-[#1A2D5A]' : 'after:bg-white'}`,
                       pathname === link.href && 'after:w-full',
                     )}
                   >
@@ -158,7 +162,7 @@ export default function ModernTeamNavbar({
               aria-label="Open menu"
               className={cn(
                 'ml-auto lg:ml-6 flex flex-col items-center justify-center gap-[5px] hover:gap-[2px] w-9 h-9 transition-all duration-200',
-                scrolled ? 'text-[#1A2D5A]' : 'text-white',
+                solid ? 'text-[#1A2D5A]' : 'text-white',
               )}
             >
               <span className="block h-[2px] w-6 bg-current rounded-full" />
