@@ -128,6 +128,7 @@ export default function WorkSlider() {
                   src={item.img}
                   alt={item.name}
                   fill
+                  sizes="(max-width: 700px) 100vw, 50vw"
                   className="object-cover transition-transform duration-500 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-black/0 group-hover:bg-black/55 transition-colors duration-300 flex items-center justify-center">

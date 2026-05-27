@@ -46,13 +46,15 @@ export default function ContactClient() {
   })
 
   const onSubmit = async (data) => {
-    await fetch('/api/contact', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data),
-    })
-    console.log('Contact form:', data)
-    setSent(true)
+    try {
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ access_key: process.env.NEXT_PUBLIC_WEB3FORMS_KEY, ...data }),
+      })
+      const json = await res.json()
+      if (json.success) setSent(true)
+    } catch {}
   }
 
   const inputClass = 'w-full text-sm px-4 py-3 outline-none border border-white/10 bg-transparent text-white placeholder:text-white/25 focus:border-[#C9A96E] transition-colors'

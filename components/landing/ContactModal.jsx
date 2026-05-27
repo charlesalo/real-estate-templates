@@ -193,7 +193,7 @@ export default function ContactModal({ isOpen, onClose }) {
             {/* Submit */}
             <button
               type="submit"
-              className="w-full py-3.5 rounded-lg bg-[#c4a882] text-[#111111] text-sm font-bold uppercase tracking-widest hover:bg-[#b8976e] transition-colors duration-200"
+              className="w-full py-3.5 rounded-lg bg-[#c4a882] text-[#111111] text-sm font-semibold hover:bg-[#b8976e] transition-colors duration-200"
             >
               Get Started Now
             </button>

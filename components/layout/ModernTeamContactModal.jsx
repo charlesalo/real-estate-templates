@@ -60,12 +60,15 @@ export default function ModernTeamContactModal({
   const close = () => { setOpen(false); setTimeout(() => { setSent(false); reset() }, 400) }
 
   const onSubmit = async (data) => {
-    await fetch('/api/contact', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data),
-    }).catch(() => {})
-    setSent(true)
+    try {
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ access_key: process.env.NEXT_PUBLIC_WEB3FORMS_KEY, ...data }),
+      })
+      const json = await res.json()
+      if (json.success) setSent(true)
+    } catch {}
   }
 
   const inputCls =

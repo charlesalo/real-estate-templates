@@ -10,7 +10,7 @@ import { X, Phone, Mail, MapPin, CheckCircle } from 'lucide-react'
 
 const schema = z.object({
   fullName: z.string().min(2, 'Required'),
-  email:    z.string().email('Invalid email'),
+  email:    z.string().email({ message: 'Invalid email' }),
   phone:    z.string().optional(),
   message:  z.string().min(10, 'Please write at least a brief message'),
 })
@@ -64,12 +64,15 @@ export default function ContactModal({
   const close = () => { setOpen(false); setTimeout(() => { setSent(false); reset() }, 400) }
 
   const onSubmit = async (data) => {
-    await fetch('/api/contact', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data),
-    }).catch(() => {})
-    setSent(true)
+    try {
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ access_key: process.env.NEXT_PUBLIC_WEB3FORMS_KEY, ...data }),
+      })
+      const json = await res.json()
+      if (json.success) setSent(true)
+    } catch {}
   }
 
   const inputCls = 'w-full bg-transparent border-b border-white/20 text-white text-sm py-3 outline-none placeholder:text-white/25 focus:border-[#C9A96E] transition-colors'

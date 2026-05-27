@@ -34,13 +34,16 @@ export default function LeadCaptureSection({
     if (Object.keys(errs).length) { setErrors(errs); return }
     setErrors({})
     setLoading(true)
-    await fetch('/api/contact', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ ...form, interest: 'Off-Market Listings' }),
-    }).catch(() => {})
+    try {
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ access_key: process.env.NEXT_PUBLIC_WEB3FORMS_KEY, ...form, interest: 'Off-Market Listings' }),
+      })
+      const json = await res.json()
+      if (json.success) setSent(true)
+    } catch {}
     setLoading(false)
-    setSent(true)
   }
 
   const inputCls = (field) =>

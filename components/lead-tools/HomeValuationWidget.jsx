@@ -15,7 +15,8 @@ const leadSchema = z.object({
   consent: z.boolean().refine(v => v === true, 'You must agree to continue'),
 })
 
-export default function HomeValuationWidget({ agentName = 'Victoria Sinclair', googleMapsKey }) {
+export default function HomeValuationWidget({ agentName = 'Victoria Sinclair', googleMapsKey, theme = 'dark' }) {
+  const isLight = theme === 'light'
   const inputRef = useRef(null)
   const autocompleteRef = useRef(null)
   const [selectedPlace, setSelectedPlace] = useState(null)
@@ -80,8 +81,31 @@ export default function HomeValuationWidget({ agentName = 'Victoria Sinclair', g
 
   return (
     <>
-      {/* PAC dropdown dark-theme override */}
-      <style>{`
+      <style>{isLight ? `
+        .pac-container {
+          background: #fff;
+          border: 1px solid #D5DBE9;
+          border-top: none;
+          border-radius: 0 0 8px 8px;
+          box-shadow: 0 12px 32px rgba(15,30,62,0.12);
+          font-family: var(--font-inter), system-ui, sans-serif;
+        }
+        .pac-item {
+          background: #fff;
+          border-top: 1px solid #F3F4F6;
+          color: #4B5563;
+          padding: 10px 16px;
+          cursor: pointer;
+          font-size: 13px;
+        }
+        .pac-item:hover, .pac-item-selected {
+          background: #EEF1F7;
+          color: #1A2D5A;
+        }
+        .pac-item-query { color: #111827; font-size: 13px; }
+        .pac-matched { color: #1A2D5A; font-weight: 600; }
+        .pac-icon { display: none; }
+      ` : `
         .pac-container {
           background: #0D0D0D;
           border: 1px solid rgba(255,255,255,0.08);
@@ -119,7 +143,7 @@ export default function HomeValuationWidget({ agentName = 'Victoria Sinclair', g
       <div className="w-full max-w-2xl mx-auto">
         <div className="flex bg-white">
           <div className="flex flex-1 items-center px-5 gap-3 min-w-0">
-            <MapPin size={15} className="text-[#C9A96E] flex-shrink-0" />
+            <MapPin size={15} className={isLight ? 'text-[#4B6090] flex-shrink-0' : 'text-[#C9A96E] flex-shrink-0'} />
             <input
               ref={inputRef}
               type="text"
@@ -135,19 +159,22 @@ export default function HomeValuationWidget({ agentName = 'Victoria Sinclair', g
           <button
             onClick={handleGetValue}
             disabled={!selectedPlace || phase === 'loading'}
-            className="flex-shrink-0 px-6 lg:px-8 py-[18px] bg-[#C9A96E] text-[#0A0A0A] text-[10px] lg:text-[11px] tracking-[0.2em] uppercase font-semibold font-sans transition-colors hover:bg-[#b8935a] disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-[#C9A96E]"
+            className={isLight
+              ? 'flex-shrink-0 px-6 lg:px-8 py-[18px] bg-[#1A2D5A] text-white text-[10px] lg:text-[11px] tracking-[0.2em] uppercase font-semibold font-sans transition-colors hover:bg-[#243870] disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-[#1A2D5A]'
+              : 'flex-shrink-0 px-6 lg:px-8 py-[18px] bg-[#C9A96E] text-[#0A0A0A] text-[10px] lg:text-[11px] tracking-[0.2em] uppercase font-semibold font-sans transition-colors hover:bg-[#b8935a] disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-[#C9A96E]'
+            }
           >
             Get Free Valuation
           </button>
         </div>
 
         {/* Loading bar */}
-        <div className="h-[2px] bg-white/10 overflow-hidden">
+        <div className={isLight ? 'h-[2px] bg-[#D5DBE9] overflow-hidden' : 'h-[2px] bg-white/10 overflow-hidden'}>
           <AnimatePresence>
             {phase === 'loading' && (
               <motion.div
                 key="bar"
-                className="h-full bg-[#C9A96E]"
+                className={isLight ? 'h-full bg-[#1A2D5A]' : 'h-full bg-[#C9A96E]'}
                 initial={{ width: '0%' }}
                 animate={{ width: '100%' }}
                 exit={{ opacity: 0 }}
@@ -181,16 +208,22 @@ export default function HomeValuationWidget({ agentName = 'Victoria Sinclair', g
               transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
             >
               <div
-                className="relative w-full max-w-4xl bg-[#0D0D0D] border border-white/[0.08] overflow-hidden max-h-[90vh] overflow-y-auto"
+                className={isLight
+                  ? 'relative w-full max-w-4xl bg-white rounded-2xl shadow-2xl overflow-hidden max-h-[90vh] overflow-y-auto'
+                  : 'relative w-full max-w-4xl bg-[#0D0D0D] border border-white/[0.08] overflow-hidden max-h-[90vh] overflow-y-auto'
+                }
                 onClick={e => e.stopPropagation()}
               >
                 {/* Close button */}
                 <button
                   onClick={handleClose}
-                  className="absolute top-4 right-4 z-10 flex items-center justify-center w-8 h-8 text-white/30 hover:text-white transition-colors"
+                  className={isLight
+                    ? 'absolute top-4 right-4 z-10 w-8 h-8 flex items-center justify-center rounded-full bg-[#F3F4F6] hover:bg-[#E5E7EB] text-[#6B7280] hover:text-[#111827] transition-all'
+                    : 'absolute top-4 right-4 z-10 flex items-center justify-center w-8 h-8 text-white/30 hover:text-white transition-colors'
+                  }
                   aria-label="Close"
                 >
-                  <X size={18} strokeWidth={1.5} />
+                  <X size={isLight ? 16 : 18} strokeWidth={isLight ? 2 : 1.5} />
                 </button>
 
                 <div className="grid lg:grid-cols-2">
@@ -203,44 +236,50 @@ export default function HomeValuationWidget({ agentName = 'Victoria Sinclair', g
                         animate={{ opacity: 1, y: 0 }}
                         className="flex flex-col items-center justify-center min-h-[420px] text-center"
                       >
-                        <CheckCircle size={52} className="text-[#C9A96E] mb-6" strokeWidth={1} />
-                        <h3 className="font-heading text-2xl lg:text-3xl font-normal text-white mb-3">
+                        <CheckCircle size={52} className={isLight ? 'text-[#1A2D5A] mb-5' : 'text-[#C9A96E] mb-6'} strokeWidth={1.25} />
+                        <h3 className={isLight ? 'text-2xl font-bold text-[#111827] mb-2' : 'font-heading text-2xl lg:text-3xl font-normal text-white mb-3'}>
                           You're All Set
                         </h3>
-                        <p className="text-white/45 text-sm font-sans leading-relaxed max-w-xs">
+                        <p className={isLight ? 'text-[#6B7280] text-sm font-sans leading-relaxed max-w-xs' : 'text-white/45 text-sm font-sans leading-relaxed max-w-xs'}>
                           {agentName} will reach out within 24 hours with your personalized home valuation report.
                         </p>
                       </motion.div>
                     ) : (
                       <>
-                        <p className="text-[10px] tracking-[0.45em] uppercase text-[#C9A96E] font-sans mb-3">
+                        <p className={isLight ? 'text-[10px] tracking-[0.4em] uppercase text-[#4B6090] font-sans mb-2' : 'text-[10px] tracking-[0.45em] uppercase text-[#C9A96E] font-sans mb-3'}>
                           Free Home Valuation
                         </p>
-                        <h2 className="font-heading text-2xl lg:text-3xl font-normal text-white mb-2">
+                        <h2 className={isLight ? 'text-2xl font-bold text-[#111827] mb-2' : 'font-heading text-2xl lg:text-3xl font-normal text-white mb-2'}>
                           Unlock Your Home's Value
                         </h2>
-                        <p className="text-white/40 text-sm font-sans mb-8 leading-relaxed">
+                        <p className={isLight ? 'text-[#6B7280] text-sm font-sans mb-6 leading-relaxed' : 'text-white/40 text-sm font-sans mb-8 leading-relaxed'}>
                           Complete the form and {agentName} will prepare your personalized valuation report.
                         </p>
 
                         {/* Address confirmation */}
-                        <div className="flex items-start gap-3 p-3.5 border border-white/[0.07] bg-white/[0.02] mb-7">
-                          <MapPin size={13} className="text-[#C9A96E] mt-0.5 flex-shrink-0" />
-                          <span className="text-white/60 text-sm font-sans leading-snug">
+                        <div className={isLight
+                          ? 'flex items-start gap-3 px-4 py-3 bg-[#EEF1F7] rounded-lg mb-6'
+                          : 'flex items-start gap-3 p-3.5 border border-white/[0.07] bg-white/[0.02] mb-7'
+                        }>
+                          <MapPin size={13} className={isLight ? 'text-[#4B6090] mt-0.5 flex-shrink-0' : 'text-[#C9A96E] mt-0.5 flex-shrink-0'} />
+                          <span className={isLight ? 'text-[#1A2D5A] text-sm font-sans leading-snug font-medium' : 'text-white/60 text-sm font-sans leading-snug'}>
                             {selectedPlace?.formatted_address}
                           </span>
                         </div>
 
-                        <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+                        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
                           <div>
                             <input
                               {...register('fullName')}
                               type="text"
                               placeholder="Full Name"
-                              className="w-full bg-transparent border-b border-white/10 focus:border-[#C9A96E] py-3 text-white text-sm placeholder:text-white/25 outline-none transition-colors font-sans"
+                              className={isLight
+                                ? 'w-full bg-transparent border border-[#D5DBE9] text-[#111827] text-sm px-4 py-3 rounded-lg outline-none placeholder:text-[#9CA3AF] focus:border-[#1A2D5A] transition-colors font-sans'
+                                : 'w-full bg-transparent border-b border-white/10 focus:border-[#C9A96E] py-3 text-white text-sm placeholder:text-white/25 outline-none transition-colors font-sans'
+                              }
                             />
                             {errors.fullName && (
-                              <p className="text-red-400 text-xs mt-1">{errors.fullName.message}</p>
+                              <p className="text-red-500 text-xs mt-1">{errors.fullName.message}</p>
                             )}
                           </div>
                           <div>
@@ -248,10 +287,13 @@ export default function HomeValuationWidget({ agentName = 'Victoria Sinclair', g
                               {...register('email')}
                               type="email"
                               placeholder="Email Address"
-                              className="w-full bg-transparent border-b border-white/10 focus:border-[#C9A96E] py-3 text-white text-sm placeholder:text-white/25 outline-none transition-colors font-sans"
+                              className={isLight
+                                ? 'w-full bg-transparent border border-[#D5DBE9] text-[#111827] text-sm px-4 py-3 rounded-lg outline-none placeholder:text-[#9CA3AF] focus:border-[#1A2D5A] transition-colors font-sans'
+                                : 'w-full bg-transparent border-b border-white/10 focus:border-[#C9A96E] py-3 text-white text-sm placeholder:text-white/25 outline-none transition-colors font-sans'
+                              }
                             />
                             {errors.email && (
-                              <p className="text-red-400 text-xs mt-1">{errors.email.message}</p>
+                              <p className="text-red-500 text-xs mt-1">{errors.email.message}</p>
                             )}
                           </div>
                           <div>
@@ -259,10 +301,13 @@ export default function HomeValuationWidget({ agentName = 'Victoria Sinclair', g
                               {...register('phone')}
                               type="tel"
                               placeholder="Phone Number"
-                              className="w-full bg-transparent border-b border-white/10 focus:border-[#C9A96E] py-3 text-white text-sm placeholder:text-white/25 outline-none transition-colors font-sans"
+                              className={isLight
+                                ? 'w-full bg-transparent border border-[#D5DBE9] text-[#111827] text-sm px-4 py-3 rounded-lg outline-none placeholder:text-[#9CA3AF] focus:border-[#1A2D5A] transition-colors font-sans'
+                                : 'w-full bg-transparent border-b border-white/10 focus:border-[#C9A96E] py-3 text-white text-sm placeholder:text-white/25 outline-none transition-colors font-sans'
+                              }
                             />
                             {errors.phone && (
-                              <p className="text-red-400 text-xs mt-1">{errors.phone.message}</p>
+                              <p className="text-red-500 text-xs mt-1">{errors.phone.message}</p>
                             )}
                           </div>
 
@@ -270,19 +315,25 @@ export default function HomeValuationWidget({ agentName = 'Victoria Sinclair', g
                             <input
                               {...register('consent')}
                               type="checkbox"
-                              className="mt-0.5 flex-shrink-0 accent-[#C9A96E]"
+                              className={isLight ? 'mt-0.5 w-4 h-4 flex-shrink-0 accent-[#1A2D5A]' : 'mt-0.5 flex-shrink-0 accent-[#C9A96E]'}
                             />
-                            <span className="text-[11px] text-white/30 font-sans leading-relaxed group-hover:text-white/50 transition-colors">
+                            <span className={isLight
+                              ? 'text-[11px] text-[#9CA3AF] font-sans leading-relaxed group-hover:text-[#6B7280] transition-colors'
+                              : 'text-[11px] text-white/30 font-sans leading-relaxed group-hover:text-white/50 transition-colors'
+                            }>
                               I agree to be contacted by {agentName} regarding my home valuation request.
                             </span>
                           </label>
                           {errors.consent && (
-                            <p className="text-red-400 text-xs -mt-2">{errors.consent.message}</p>
+                            <p className="text-red-500 text-xs -mt-2">{errors.consent.message}</p>
                           )}
 
                           <button
                             type="submit"
-                            className="w-full bg-[#C9A96E] text-[#0A0A0A] py-4 text-[11px] tracking-[0.2em] uppercase font-semibold font-sans hover:bg-[#b8935a] transition-colors mt-2"
+                            className={isLight
+                              ? 'w-full py-3.5 bg-[#1A2D5A] text-white text-[11px] tracking-[0.25em] uppercase font-bold rounded-lg hover:bg-[#243870] transition-colors mt-2'
+                              : 'w-full bg-[#C9A96E] text-[#0A0A0A] py-4 text-[11px] tracking-[0.2em] uppercase font-semibold font-sans hover:bg-[#b8935a] transition-colors mt-2'
+                            }
                           >
                             Unlock Your Free Valuation
                           </button>
@@ -292,12 +343,15 @@ export default function HomeValuationWidget({ agentName = 'Victoria Sinclair', g
                   </div>
 
                   {/* ── Right: map + agent info ── */}
-                  <div className="flex flex-col bg-[#111] border-t lg:border-t-0 lg:border-l border-white/[0.06]">
-                    <div className="px-8 py-6 border-b border-white/[0.07]">
-                      <p className="text-[9px] tracking-[0.4em] uppercase text-[#C9A96E] font-sans mb-1">
-                        Your Agent
+                  <div className={isLight
+                    ? 'flex flex-col bg-[#F4F6FB] border-t lg:border-t-0 lg:border-l border-[#D5DBE9]'
+                    : 'flex flex-col bg-[#111] border-t lg:border-t-0 lg:border-l border-white/[0.06]'
+                  }>
+                    <div className={isLight ? 'px-8 py-6 border-b border-[#D5DBE9]' : 'px-8 py-6 border-b border-white/[0.07]'}>
+                      <p className={isLight ? 'text-[9px] tracking-[0.4em] uppercase text-[#4B6090] font-sans mb-1' : 'text-[9px] tracking-[0.4em] uppercase text-[#C9A96E] font-sans mb-1'}>
+                        Prepared By
                       </p>
-                      <p className="font-heading text-xl text-white">{agentName}</p>
+                      <p className={isLight ? 'text-lg font-bold text-[#111827]' : 'font-heading text-xl text-white'}>{agentName}</p>
                     </div>
 
                     <div className="flex-1 min-h-[260px] lg:min-h-0 relative overflow-hidden">
@@ -309,20 +363,20 @@ export default function HomeValuationWidget({ agentName = 'Victoria Sinclair', g
                           onError={() => setMapError(true)}
                         />
                       ) : (
-                        <div className="absolute inset-0 flex items-center justify-center">
+                        <div className={isLight ? 'absolute inset-0 flex items-center justify-center bg-[#F3F4F6]' : 'absolute inset-0 flex items-center justify-center'}>
                           <div className="text-center">
-                            <MapPin size={36} className="text-[#C9A96E]/25 mx-auto mb-3" strokeWidth={1} />
-                            <p className="text-white/15 text-xs font-sans tracking-wider uppercase">Map preview</p>
+                            <MapPin size={36} className={isLight ? 'text-[#D5DBE9] mx-auto mb-3' : 'text-[#C9A96E]/25 mx-auto mb-3'} strokeWidth={1} />
+                            <p className={isLight ? 'text-[#9CA3AF] text-xs font-sans tracking-wider uppercase' : 'text-white/15 text-xs font-sans tracking-wider uppercase'}>Map preview</p>
                           </div>
                         </div>
                       )}
                     </div>
 
-                    <div className="px-8 py-5 border-t border-white/[0.07]">
-                      <p className="text-[9px] tracking-[0.35em] uppercase text-white/20 font-sans mb-1.5">
+                    <div className={isLight ? 'px-8 py-5 border-t border-[#D5DBE9]' : 'px-8 py-5 border-t border-white/[0.07]'}>
+                      <p className={isLight ? 'text-[9px] tracking-[0.35em] uppercase text-[#9CA3AF] font-sans mb-1.5' : 'text-[9px] tracking-[0.35em] uppercase text-white/20 font-sans mb-1.5'}>
                         Property Address
                       </p>
-                      <p className="text-white/55 text-sm font-sans leading-snug">
+                      <p className={isLight ? 'text-[#4B5563] text-sm font-sans leading-snug' : 'text-white/55 text-sm font-sans leading-snug'}>
                         {selectedPlace?.formatted_address}
                       </p>
                     </div>

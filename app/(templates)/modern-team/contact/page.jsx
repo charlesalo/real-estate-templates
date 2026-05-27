@@ -57,12 +57,15 @@ export default function ContactPage() {
   })
 
   const onSubmit = async (data) => {
-    await fetch('/api/contact', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data),
-    }).catch(() => {})
-    setSent(true)
+    try {
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ access_key: process.env.NEXT_PUBLIC_WEB3FORMS_KEY, ...data }),
+      })
+      const json = await res.json()
+      if (json.success) setSent(true)
+    } catch {}
   }
 
   const inputCls = 'w-full px-4 py-3 text-sm border border-[#D5DBE9] rounded-lg bg-white text-[#111827] placeholder:text-[#9CA3AF] outline-none focus:border-[#1A2D5A] transition-colors'

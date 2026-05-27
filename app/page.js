@@ -3,6 +3,8 @@ import Image from 'next/image'
 import WorkSlider from '@/components/landing/WorkSlider'
 import Navbar from '@/components/landing/Navbar'
 import CTASection from '@/components/landing/CTASection'
+import OpenContactButton from '@/components/landing/OpenContactButton'
+import HowItWorksSteps from '@/components/landing/HowItWorksSteps'
 
 // ─── Data ────────────────────────────────────────────────────────────────────
 
@@ -15,7 +17,7 @@ const TEMPLATES = [
     description:
       'A premium single-agent site designed to attract high-net-worth buyers and sellers. Cinematic hero video, curated listings, and a refined aesthetic that commands attention.',
     features: ['Cinematic Hero Video', 'Curated Listings', 'Property Detail Pages', 'Lead Capture', 'Minimalist Aesthetic'],
-    preview: '/images/landing-page/luxury-agent-full-page-preview.png',
+    preview: '/images/landing-page/luxury-agent-full-page-preview.webp',
     accent: '#2C1810',
   },
   {
@@ -26,7 +28,7 @@ const TEMPLATES = [
     description:
       'A full-featured team site with MLS-powered home search, neighborhood guides, blog, home valuation, agent profiles, testimonials, and past transactions. Built for growth.',
     features: ['MLS Home Search', 'Neighborhood Guides', 'Agent Profiles', 'Home Valuation', 'Blog', 'Testimonials'],
-    preview: '/images/landing-page/modern-team-full-page-preview.png',
+    preview: '/images/landing-page/modern-team-full-page-preview.webp',
     accent: '#0F1E3E',
   },
 ]
@@ -50,43 +52,58 @@ const ADVANTAGES = [
   },
 ]
 
-const STEPS = [
-  { num: '01', title: 'Pick a template', body: 'Browse Modern Team or Luxury Agent. Preview the live demo and pick the one that fits your brand.' },
-  { num: '02', title: 'We customize it', body: 'Your logo, colors, headshots, bios, and listings. We connect your MLS feed and configure lead routing.' },
-  { num: '03', title: 'We launch it', body: 'Your site goes live on your domain — fast, SEO-ready, and built to convert from day one.' },
-]
 
 const PRICING = [
   {
-    name: 'Template Only',
-    price: '$497',
-    note: 'One-time',
-    description: 'Buy the template and deploy it with your own developer or tech-savvy team member.',
+    name: 'Starter',
+    price: '$1,500',
+    monthly: '$200/mo',
+    note: 'Setup fee',
+    description: 'A professional custom site for solo agents — fast to launch, built to convert.',
     features: [
-      'Full source code ownership',
-      'Modern Team or Luxury Agent',
-      'MLS-ready architecture',
-      'Documentation included',
-      'No recurring platform fees',
-    ],
-    cta: 'Get the Template',
-    highlight: false,
-  },
-  {
-    name: 'Template + Setup',
-    price: '$1,197',
-    note: 'One-time',
-    description: 'We handle everything — customization, MLS connection, branding, and launch.',
-    features: [
-      'Everything in Template Only',
-      'Brand customization (logo, colors, copy)',
+      'Custom-coded 5-page website',
       'MLS / IDX integration',
-      'Lead capture & CRM setup',
-      'Domain & deployment',
+      'Lead capture & contact forms',
+      'Brand customization (logo, colors, copy)',
+      'Home valuation widget',
       '30-day post-launch support',
     ],
     cta: 'Get Started',
-    highlight: true,
+    highlight: false,
+  },
+  {
+    name: 'Growth',
+    price: '$2,500',
+    monthly: '$300/mo',
+    note: 'Setup fee',
+    description: 'For agents and small teams ready to add IDX search, CRM routing, and content pages.',
+    features: [
+      'Everything in Starter',
+      'Team profiles & agent pages',
+      'Advanced IDX property search',
+      'CRM setup & lead routing',
+      'Neighborhood & community guides',
+      'Blog & listing alert pages',
+    ],
+    cta: 'Get Started',
+    highlight: false,
+  },
+  {
+    name: 'Pro',
+    price: '$4,000',
+    monthly: '$500/mo',
+    note: 'Setup fee',
+    description: 'Flagship build for brokerages and top producers who need a fully tailored web presence.',
+    features: [
+      'Everything in Growth',
+      'Brokerage or multi-agent roster',
+      'Fully custom pages & features',
+      'Priority builds & support',
+      'Performance & analytics setup',
+      'Ongoing retainer development',
+    ],
+    cta: 'Get Started',
+    highlight: false,
   },
 ]
 
@@ -107,14 +124,14 @@ export default function HomePage() {
           loop
           playsInline
           className="absolute inset-0 w-full h-full object-cover"
-          src="/images/landing-page/background-video.mp4"
+          src="/images/landing-page/background-video-v2.mp4"
         />
         {/* Dark overlay */}
         <div className="absolute inset-0 bg-[#111111]/75" />
         {/* Bottom fade into next section */}
         <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#111111] to-transparent" />
 
-        <div className="relative z-10 max-w-6xl mx-auto px-6 pt-24 pb-20 w-full">
+        <div className="relative z-10 max-w-6xl mx-auto px-6 pt-16 pb-16 md:pt-24 md:pb-24 w-full">
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/15 text-xs text-white/50 mb-8">
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
             Accepting new clients — USA nationwide
@@ -140,12 +157,10 @@ export default function HomePage() {
             >
               Browse Templates
             </a>
-            <a
-              href="mailto:info@chavbuilds.com"
+            <OpenContactButton
+              label="Get in Touch"
               className="px-6 py-3 rounded-md border border-white/20 text-sm font-medium text-white/60 hover:text-white hover:border-white/40 transition-colors duration-200 min-w-[180px] text-center"
-            >
-              Get in Touch
-            </a>
+            />
           </div>
         </div>
       </section>
@@ -175,7 +190,7 @@ export default function HomePage() {
       {/* ── Templates ── */}
       <div id="templates">
         {/* Section header */}
-        <div className="max-w-6xl mx-auto px-6 pt-24 pb-0">
+        <div className="max-w-6xl mx-auto px-6 pt-16 md:pt-24 pb-0">
           <p className="text-xs text-[#555555] uppercase tracking-widest mb-3">Templates</p>
           <h2
             className="text-4xl sm:text-5xl font-bold text-[#e2e2e2]"
@@ -194,14 +209,14 @@ export default function HomePage() {
             key={t.slug}
             className={i > 0 ? 'border-t border-[#2a2a2a]' : ''}
           >
-            <div className={`max-w-7xl mx-auto px-6 py-20 flex flex-col gap-12 items-start ${i % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'}`}>
+            <div className={`max-w-7xl mx-auto px-6 py-16 md:py-24 flex flex-col gap-12 items-start ${i % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'}`}>
 
               {/* ── Hoverable image ── */}
               <div className="w-full lg:w-1/2 shrink-0">
                 <Link href={`/${t.slug}`} className="block">
                   <div className="template-preview-container">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src={t.preview} alt={`${t.name} template preview`} />
+                    <img src={t.preview} alt={`${t.name} template preview`} loading="lazy" decoding="async" />
                     <div className="template-preview-overlay">
                       <span className="px-6 py-2.5 rounded-md bg-[#c4a882] text-[#111111] text-sm font-semibold">
                         View Live Template →
@@ -224,15 +239,6 @@ export default function HomePage() {
                 <p className="text-[#c4a882] font-medium mb-4">{t.tagline}</p>
                 <p className="text-[#8a8a8a] leading-relaxed mb-8">{t.description}</p>
 
-                <ul className="space-y-3 mb-10">
-                  {t.features.map((f) => (
-                    <li key={f} className="flex items-center gap-3 text-sm text-[#8a8a8a]">
-                      <span className="w-1.5 h-1.5 rounded-full bg-[#c4a882] shrink-0" />
-                      {f}
-                    </li>
-                  ))}
-                </ul>
-
                 <div className="flex flex-wrap items-center gap-4">
                   <Link
                     href={`/${t.slug}`}
@@ -240,12 +246,6 @@ export default function HomePage() {
                   >
                     View Live Template
                   </Link>
-                  <a
-                    href="#pricing"
-                    className="text-sm text-[#8a8a8a] hover:text-[#e2e2e2] transition-colors"
-                  >
-                    Starting at $497 →
-                  </a>
                 </div>
               </div>
 
@@ -256,7 +256,7 @@ export default function HomePage() {
 
       {/* ── Why Chavbuilds ── */}
       <section className="border-y border-[#2a2a2a] bg-[#0d0d0d]">
-        <div className="max-w-6xl mx-auto px-6 py-24">
+        <div className="max-w-6xl mx-auto px-6 py-16 md:py-24">
           <div className="mb-14">
             <p className="text-xs text-[#555555] uppercase tracking-widest mb-3">Why Chavbuilds</p>
             <h2
@@ -266,6 +266,9 @@ export default function HomePage() {
               Not a theme. Not a plugin. <br className="hidden sm:block" />
               <span className="text-[#c4a882]">Built from scratch.</span>
             </h2>
+            <p className="mt-5 text-sm sm:text-base text-[#8a8a8a] leading-relaxed max-w-2xl">
+              Every site I deliver is fully custom-coded — no WordPress, no page builders, no platform fees. Just clean, fast, tailored code that you own outright.
+            </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -281,7 +284,7 @@ export default function HomePage() {
       </section>
 
       {/* ── Past Work ── */}
-      <section id="work" className="max-w-6xl mx-auto px-6 py-28">
+      <section id="work" className="max-w-6xl mx-auto px-6 py-16 md:py-24">
         <div className="mb-10">
           <p className="text-xs text-[#555555] uppercase tracking-widest mb-3">Past Work</p>
           <h2
@@ -296,39 +299,27 @@ export default function HomePage() {
 
       {/* ── Pricing ── */}
       <section id="pricing" className="border-y border-[#2a2a2a] bg-[#0d0d0d]">
-        <div className="max-w-4xl mx-auto px-6 py-28">
+        <div className="max-w-6xl mx-auto px-6 py-16 md:py-24">
           <div className="text-center mb-14">
             <p className="text-xs text-[#555555] uppercase tracking-widest mb-3">Pricing</p>
             <h2
               className="text-3xl sm:text-4xl font-bold text-[#e2e2e2]"
               style={{ fontFamily: 'var(--font-playfair), Georgia, serif' }}
             >
-              Simple, one-time pricing
+              Transparent, project-based pricing
             </h2>
-            <p className="mt-3 text-[#8a8a8a]">No subscriptions. No platform fees. Pay once, own it forever.</p>
+            <p className="mt-3 text-[#8a8a8a]">One-time setup fee to build and launch. Monthly retainer covers hosting, support, and updates.</p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {PRICING.map(({ name, price, note, description, features, cta, highlight }) => (
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {PRICING.map(({ name, price, monthly, note, description, features, cta }) => (
               <div
                 key={name}
-                className={`rounded-xl border p-8 flex flex-col ${
-                  highlight
-                    ? 'border-[#c4a882]/60 bg-[#1c1c1c] relative'
-                    : 'border-[#2a2a2a] bg-[#1c1c1c]'
-                }`}
+                className="rounded-xl border border-[#2a2a2a] bg-[#1c1c1c] p-8 flex flex-col"
               >
-                {highlight && (
-                  <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-                    <span className="text-xs font-semibold px-3 py-1 rounded-full bg-[#c4a882] text-[#111111]">
-                      Most Popular
-                    </span>
-                  </div>
-                )}
-
                 <div className="mb-6">
                   <p className="text-xs text-[#555555] uppercase tracking-widest mb-2">{name}</p>
-                  <div className="flex items-end gap-2 mb-3">
+                  <div className="flex items-end gap-2 mb-1">
                     <span
                       className="text-4xl font-bold text-[#e2e2e2]"
                       style={{ fontFamily: 'var(--font-playfair), Georgia, serif' }}
@@ -337,6 +328,7 @@ export default function HomePage() {
                     </span>
                     <span className="text-sm text-[#555555] pb-1">{note}</span>
                   </div>
+                  <p className="text-xs text-[#c4a882] mb-3">+ {monthly} retainer</p>
                   <p className="text-sm text-[#8a8a8a]">{description}</p>
                 </div>
 
@@ -349,28 +341,22 @@ export default function HomePage() {
                   ))}
                 </ul>
 
-                <a
-                  href="mailto:charlesalo@chavbuilds.com"
-                  className={`block text-center py-3 rounded-md text-sm font-semibold transition-colors duration-200 ${
-                    highlight
-                      ? 'bg-[#c4a882] text-[#111111] hover:bg-[#b8976e]'
-                      : 'border border-[#2a2a2a] text-[#8a8a8a] hover:text-[#e2e2e2] hover:border-[#555555]'
-                  }`}
-                >
-                  {cta}
-                </a>
+                <OpenContactButton
+                  label={cta}
+                  className="block w-full text-center py-3 rounded-md text-sm font-semibold transition-colors duration-200 bg-[#c4a882] text-[#111111] hover:bg-[#b8976e]"
+                />
               </div>
             ))}
           </div>
 
           <p className="text-center text-xs text-[#555555] mt-8">
-            Need something custom? <a href="mailto:charlesalo@chavbuilds.com" className="text-[#8a8a8a] hover:text-[#c4a882] transition-colors">Email us</a> — all projects are scoped individually.
+            Need something custom? <OpenContactButton label="Email us" className="text-[#8a8a8a] hover:text-[#c4a882] transition-colors underline-offset-2 hover:underline" /> — all projects are scoped individually.
           </p>
         </div>
       </section>
 
       {/* ── How It Works ── */}
-      <section id="how-it-works" className="max-w-6xl mx-auto px-6 py-28">
+      <section id="how-it-works" className="max-w-6xl mx-auto px-6 py-16 md:py-24">
         <div className="mb-14">
           <p className="text-xs text-[#555555] uppercase tracking-widest mb-3">How It Works</p>
           <h2
@@ -382,21 +368,7 @@ export default function HomePage() {
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
-          <div className="hidden md:block absolute top-8 left-[16.5%] right-[16.5%] h-px bg-gradient-to-r from-[#2a2a2a] via-[#c4a882]/30 to-[#2a2a2a]" />
-          {STEPS.map(({ num, title, body }) => (
-            <div key={num} className="relative">
-              <div
-                className="w-14 h-14 rounded-full border border-[#2a2a2a] bg-[#1c1c1c] flex items-center justify-center mb-5 text-sm font-bold text-[#c4a882]"
-                style={{ fontFamily: 'var(--font-playfair), Georgia, serif' }}
-              >
-                {num}
-              </div>
-              <h3 className="font-semibold text-[#e2e2e2] mb-2">{title}</h3>
-              <p className="text-sm text-[#8a8a8a] leading-relaxed">{body}</p>
-            </div>
-          ))}
-        </div>
+        <HowItWorksSteps />
       </section>
 
       {/* ── Final CTA ── */}
