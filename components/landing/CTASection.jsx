@@ -49,7 +49,7 @@ export default function CTASection() {
           Let&apos;s build your site.
         </h2>
         <p className="text-white/55 mb-10 max-w-md mx-auto">
-          Tell us about your brand, your market, and your goals. We&apos;ll take it from there.
+          Tell me about your brand, your market, and your goals. I&apos;ll take it from there.
         </p>
         <CTAButton />
       </div>

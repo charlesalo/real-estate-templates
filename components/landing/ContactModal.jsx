@@ -61,7 +61,7 @@ export default function ContactModal({ isOpen, onClose }) {
               Let&apos;s build your site.
             </h2>
             <p className="text-sm text-[#8a8a8a] mt-2">
-              or email us at{' '}
+              or email me at{' '}
               <a href="mailto:charlesalo@chavbuilds.com" className="text-[#c4a882] hover:underline">
                 charlesalo@chavbuilds.com
               </a>
@@ -181,7 +181,7 @@ export default function ContactModal({ isOpen, onClose }) {
             {/* Message */}
             <div>
               <label className="block text-xs text-[#8a8a8a] mb-1.5">
-                Anything else we should know? <span className="text-[#555555]">(optional)</span>
+                Anything else I should know? <span className="text-[#555555]">(optional)</span>
               </label>
               <textarea
                 name="message"

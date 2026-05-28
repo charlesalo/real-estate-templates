@@ -153,7 +153,7 @@ export default function WorkSlider() {
         <button
           onClick={() => setPage((p) => Math.max(0, p - 1))}
           disabled={page === 0}
-          className="w-10 h-10 rounded-full border border-[#2a2a2a] bg-[#1c1c1c] text-[#8a8a8a] hover:text-[#e2e2e2] hover:border-[#555555] transition-colors duration-200 disabled:opacity-30 disabled:cursor-not-allowed flex items-center justify-center text-sm"
+          className="w-10 h-10 rounded-full bg-[#c4a882] text-[#111111] hover:bg-[#b8976e] transition-colors duration-200 disabled:opacity-30 disabled:cursor-not-allowed flex items-center justify-center text-sm"
           aria-label="Previous"
         >
           ←
@@ -177,27 +177,28 @@ export default function WorkSlider() {
         <button
           onClick={() => setPage((p) => Math.min(totalPages - 1, p + 1))}
           disabled={page === totalPages - 1}
-          className="w-10 h-10 rounded-full border border-[#2a2a2a] bg-[#1c1c1c] text-[#8a8a8a] hover:text-[#e2e2e2] hover:border-[#555555] transition-colors duration-200 disabled:opacity-30 disabled:cursor-not-allowed flex items-center justify-center text-sm"
+          className="w-10 h-10 rounded-full bg-[#c4a882] text-[#111111] hover:bg-[#b8976e] transition-colors duration-200 disabled:opacity-30 disabled:cursor-not-allowed flex items-center justify-center text-sm"
           aria-label="Next"
         >
           →
         </button>
       </div>
 
-      {/* Attribution bar */}
-      <div className="mt-10 pt-8 border-t border-[#2a2a2a] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-        <p className="text-sm text-[#8a8a8a]">
-          A few highlights from{' '}
-          <strong className="text-[#e2e2e2] font-semibold">500+ website builds and revisions</strong>{' '}
-          <span className="text-[#555555]">(200+ drafts, 300+ revisions)</span> delivered while
-          contracting at Luxury Presence.
-        </p>
-        <a
-          href="mailto:charlesalo@chavbuilds.com"
-          className="shrink-0 px-5 py-2.5 rounded-md border border-[#2a2a2a] text-sm font-medium text-[#e2e2e2] hover:border-[#555555] transition-colors duration-200 whitespace-nowrap"
+      {/* CTA block */}
+      <div className="mt-12 rounded-xl border border-[#2a2a2a] bg-[#1c1c1c] px-8 py-7 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+        <div>
+          <p className="text-xs text-[#555555] uppercase tracking-widest mb-2">Get in Touch</p>
+          <h2 className="text-3xl sm:text-4xl font-bold text-[#e2e2e2] mb-2" style={{ fontFamily: 'var(--font-playfair), Georgia, serif' }}>Want a site like these?</h2>
+          <p className="text-sm text-[#8a8a8a] max-w-xl">
+            A few highlights from 500+ website builds and revisions (200+ drafts, 300+ revisions) delivered while contracting at Luxury Presence.
+          </p>
+        </div>
+        <button
+          onClick={() => window.dispatchEvent(new Event('open-contact-modal'))}
+          className="shrink-0 px-6 py-3 rounded-md bg-[#c4a882] text-[#111111] text-sm font-semibold hover:bg-[#b8976e] transition-colors duration-200 whitespace-nowrap"
         >
-          Want a site like these? Let&apos;s Talk
-        </a>
+          Build My Site
+        </button>
       </div>
     </div>
   );

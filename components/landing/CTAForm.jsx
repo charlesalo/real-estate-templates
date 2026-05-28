@@ -87,7 +87,7 @@ export default function CTAForm() {
           className="text-2xl font-bold text-[#e2e2e2] mb-2"
           style={{ fontFamily: 'var(--font-playfair), Georgia, serif' }}
         >
-          We&apos;ll be in touch soon.
+          I&apos;ll be in touch soon.
         </h3>
         <p className="text-[#8a8a8a] text-sm">Thanks for reaching out — expect a reply within 1 business day.</p>
       </div>
@@ -178,7 +178,7 @@ export default function CTAForm() {
       </Field>
 
       {status === 'error' && (
-        <p className="text-sm text-red-400 text-center">Something went wrong. Please email us directly.</p>
+        <p className="text-sm text-red-400 text-center">Something went wrong. Please email me directly.</p>
       )}
 
       <button

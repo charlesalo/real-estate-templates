@@ -181,24 +181,6 @@ export default function ModernTeamSideMenu({
               </ul>
             </nav>
 
-            {/* ── Quick CTA ────────────────────────────────────── */}
-            <div className="px-7 pb-6">
-              <Link
-                href="/modern-team/home-valuation"
-                onClick={onClose}
-                className="block w-full text-center py-3.5 bg-[#1A2D5A] text-white text-sm font-semibold rounded-xl hover:bg-[#243870] transition-colors mb-3"
-              >
-                Free Home Valuation
-              </Link>
-              <Link
-                href="/modern-team/listings"
-                onClick={onClose}
-                className="block w-full text-center py-3.5 border-2 border-[#D5DBE9] text-[#374151] text-sm font-semibold rounded-xl hover:border-[#1A2D5A] hover:text-[#1A2D5A] transition-all"
-              >
-                Search Houston Homes
-              </Link>
-            </div>
-
             {/* ── Contact & social ─────────────────────────────── */}
             <div className="px-7 py-6 border-t border-[#E5E7EB] flex-shrink-0">
               <div className="space-y-3 mb-5">

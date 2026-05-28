@@ -3,12 +3,26 @@
 import { useEffect, useRef, useState } from 'react'
 
 const STEPS = [
-  { num: '01', title: 'Pick a template', body: 'Browse Modern Team or Luxury Agent. Preview the live demo and pick the one that fits your brand.' },
-  { num: '02', title: 'We customize it', body: 'Your logo, colors, headshots, bios, and listings. We connect your MLS feed and configure lead routing.' },
-  { num: '03', title: 'We launch it', body: 'Your site goes live on your domain — fast, SEO-ready, and built to convert from day one.' },
+  {
+    num: '01',
+    timeline: 'Day 1',
+    title: 'Pick a template',
+    body: 'Browse Modern Team or Luxury Agent. Preview the live demo and pick the one that fits your brand. Send me your logo, colors, headshots, and bios — that\'s all I need to get started.',
+  },
+  {
+    num: '02',
+    timeline: 'Days 2–7',
+    title: 'I customize it',
+    body: 'I build out every page with your branding, connect your MLS feed, configure lead routing, and wire up your domain. No back-and-forth required — just the assets upfront.',
+  },
+  {
+    num: '03',
+    timeline: 'Day 8–10',
+    title: 'I launch it',
+    body: 'Your site goes live — indexed on Google, lead forms active, and SEO metadata in place so search engines can find you from day one. I handle DNS, hosting, and a final walkthrough.',
+  },
 ]
 
-// Duration of each connector fill in ms — connector 1 starts at 0, connector 2 starts after this delay
 const FILL_DURATION = 700
 const FILL_GAP = 100
 
@@ -29,7 +43,7 @@ export default function HowItWorksSteps() {
 
   return (
     <div ref={ref} className="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
-      {STEPS.map(({ num, title, body }, i) => (
+      {STEPS.map(({ num, timeline, title, body }, i) => (
         <div key={num} className="relative">
           {/* Circle */}
           <div
@@ -39,7 +53,7 @@ export default function HowItWorksSteps() {
             {num}
           </div>
 
-          {/* Animated connector — extends from right of circle through gap to next column */}
+          {/* Animated connector */}
           {i < STEPS.length - 1 && (
             <div
               className="hidden md:block absolute h-px bg-[#2a2a2a] overflow-hidden"
@@ -59,7 +73,9 @@ export default function HowItWorksSteps() {
           )}
 
           <h3 className="font-semibold text-[#e2e2e2] mb-2">{title}</h3>
-          <p className="text-sm text-[#8a8a8a] leading-relaxed">{body}</p>
+          <p className="text-sm text-[#8a8a8a] leading-relaxed">
+            <span className="text-[#c4a882]/80 font-medium">{timeline}</span><span className="text-[#8a8a8a]"> — </span>{body}
+          </p>
         </div>
       ))}
     </div>

@@ -59,6 +59,8 @@ const MENU_LINKS = [
       { label: 'Past Transactions', href: '/modern-team/past-transactions' },
     ],
   },
+  { label: 'Home Search', href: '/modern-team/listings' },
+  { label: 'Home Valuation', href: '/modern-team/home-valuation' },
   { label: 'Neighborhoods', href: '/modern-team/neighborhoods' },
   { label: 'Testimonials', href: '/modern-team/testimonials' },
   { label: 'Houston Market Blog', href: '/modern-team/blog' },

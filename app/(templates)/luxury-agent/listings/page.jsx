@@ -15,17 +15,18 @@ export default async function ListingsPage({ searchParams }) {
   try {
     const offset = params.page ? (parseInt(params.page) - 1) * 12 : 0
     const { listings, totalCount } = await getListings({
-      q: params.q,
-      status: params.status,
-      minprice: params.minprice,
-      maxprice: params.maxprice,
-      minbeds: params.minbeds,
-      minbaths: params.minbaths,
-      type: params.type,
-      minarea: params.minarea,
-      sort: params.sort,
-      limit: 12,
+      q:         params.q,
+      status:    params.status,
+      minprice:  params.minprice,
+      maxprice:  params.maxprice,
+      minbeds:   params.minbeds,
+      minbaths:  params.minbaths,
+      type:      params.type,
+      minarea:   params.minarea,
+      sort:      params.sort,
+      limit:     12,
       offset,
+      liveCount: true,
     })
     initialListings = listings
     initialTotal = totalCount

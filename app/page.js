@@ -68,7 +68,7 @@ const PRICING = [
       'Home valuation widget',
       '30-day post-launch support',
     ],
-    cta: 'Get Started',
+    cta: 'Start My Project',
     highlight: false,
   },
   {
@@ -85,7 +85,7 @@ const PRICING = [
       'Neighborhood & community guides',
       'Blog & listing alert pages',
     ],
-    cta: 'Get Started',
+    cta: 'Start My Project',
     highlight: false,
   },
   {
@@ -102,7 +102,7 @@ const PRICING = [
       'Performance & analytics setup',
       'Ongoing retainer development',
     ],
-    cta: 'Get Started',
+    cta: 'Start My Project',
     highlight: false,
   },
 ]
@@ -129,9 +129,9 @@ export default function HomePage() {
         {/* Dark overlay */}
         <div className="absolute inset-0 bg-[#111111]/75" />
         {/* Bottom fade into next section */}
-        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#111111] to-transparent" />
+        <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-t from-[#0d0d0d] to-transparent" />
 
-        <div className="relative z-10 max-w-6xl mx-auto px-6 pt-16 pb-16 md:pt-24 md:pb-24 w-full">
+        <div className="relative z-10 max-w-7xl mx-auto px-6 pt-16 pb-16 md:pt-24 md:pb-24 w-full">
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/15 text-xs text-white/50 mb-8">
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
             Accepting new clients — USA nationwide
@@ -146,8 +146,8 @@ export default function HomePage() {
           </h1>
 
           <p className="text-lg text-white/55 max-w-xl leading-relaxed mb-10">
-            Custom-coded sites for agents and teams across the USA — MLS-connected,
-            conversion-optimized, and fast enough to actually rank on Google.
+            I build fully custom real estate websites for agents and teams across the USA — MLS-connected,
+            conversion-optimized, and fast enough to actually rank on Google. You work directly with me, start to finish.
           </p>
 
           <div className="flex flex-wrap gap-4">
@@ -165,35 +165,77 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── Stats bar ── */}
-      <div className="border-y border-[#2a2a2a] bg-[#0d0d0d]">
-        <div className="max-w-6xl mx-auto px-6 py-8 grid grid-cols-2 md:grid-cols-4 gap-8">
-          {[
-            { value: '500+', label: 'Real estate sites built' },
-            { value: 'USA', label: 'Agents & teams nationwide' },
-            { value: 'MLS', label: 'Live data integration' },
-            { value: '100%', label: 'Custom-coded, no themes' },
-          ].map(({ value, label }) => (
-            <div key={label}>
-              <div
-                className="text-3xl font-bold text-[#c4a882] mb-1"
-                style={{ fontFamily: 'var(--font-playfair), Georgia, serif' }}
-              >
-                {value}
-              </div>
-              <div className="text-xs text-[#555555] uppercase tracking-widest">{label}</div>
+      {/* ── About the Builder ── */}
+      <section id="about" className="border-b border-[#2a2a2a] bg-[#0d0d0d]">
+        <div className="max-w-7xl mx-auto px-6 py-16 md:py-24 flex flex-col lg:flex-row gap-12 lg:gap-20 items-center">
+
+          {/* Image */}
+          <div className="w-full lg:w-5/12 shrink-0">
+            <div className="relative w-full aspect-[4/5] rounded-2xl overflow-hidden">
+              <Image
+                src="/images/landing-page/chav-coffee.jpg"
+                alt="Charles Alo, founder of Chavbuilds"
+                fill
+                className="object-cover object-top"
+                sizes="(max-width: 1024px) 100vw, 42vw"
+              />
             </div>
-          ))}
+          </div>
+
+          {/* Copy */}
+          <div className="w-full lg:w-7/12">
+            <p className="text-xs text-[#555555] uppercase tracking-widest mb-4">Behind the Build</p>
+            <h2
+              className="text-3xl sm:text-4xl font-bold text-[#e2e2e2] leading-tight mb-6"
+              style={{ fontFamily: 'var(--font-playfair), Georgia, serif' }}
+            >
+              Hi, I'm Charles.<br />
+              I've built over 500 real estate websites.<br />
+              <span className="text-[#c4a882]">Yours will be next.</span>
+            </h2>
+
+            <div className="space-y-4 text-[#8a8a8a] leading-relaxed mb-10">
+              <p>
+                Before starting Chavbuilds, I spent years as a contractor for Luxury Presence — one of the most
+                respected real estate web platforms in the industry, trusted by over 30% of the Wall Street Journal's
+                top agents. I built and refined over 500 real estate websites during that time, working across every
+                market segment from solo luxury agents to large brokerages.
+              </p>
+              <p>
+                What I learned from that experience: most agents are paying platform fees for websites they don't
+                own, built on templates they can't fully customize, supported by teams they never directly talk to.
+              </p>
+              <p>
+                Chavbuilds is the alternative. You work directly with me — no account managers, no handoffs, no
+                surprises. Every site is custom-coded, fully yours, and built by someone who has done this hundreds
+                of times in the exact industry you work in.
+              </p>
+            </div>
+
+            <div className="flex flex-wrap gap-4">
+              <OpenContactButton
+                label="Start a Project"
+                className="px-6 py-3 rounded-md bg-[#c4a882] text-[#111111] text-sm font-semibold hover:bg-[#b8976e] transition-colors duration-200"
+              />
+              <a
+                href="#work"
+                className="px-6 py-3 rounded-md border border-white/20 text-sm font-medium text-white/60 hover:text-white hover:border-white/40 transition-colors duration-200"
+              >
+                See My Work
+              </a>
+            </div>
+          </div>
+
         </div>
-      </div>
+      </section>
 
       {/* ── Templates ── */}
       <div id="templates">
         {/* Section header */}
-        <div className="max-w-6xl mx-auto px-6 pt-16 md:pt-24 pb-0">
+        <div className="max-w-7xl mx-auto px-6 pt-16 md:pt-24 pb-0">
           <p className="text-xs text-[#555555] uppercase tracking-widest mb-3">Templates</p>
           <h2
-            className="text-4xl sm:text-5xl font-bold text-[#e2e2e2]"
+            className="text-3xl sm:text-4xl font-bold text-[#e2e2e2]"
             style={{ fontFamily: 'var(--font-playfair), Georgia, serif' }}
           >
             Pick your starting point
@@ -231,7 +273,7 @@ export default function HomePage() {
               <div className="w-full lg:w-1/2 lg:max-w-lg">
                 <p className="text-xs text-[#555555] uppercase tracking-widest mb-3">{t.badge}</p>
                 <h2
-                  className="text-4xl sm:text-5xl font-bold text-[#e2e2e2] leading-tight mb-4"
+                  className="text-3xl sm:text-4xl font-bold text-[#e2e2e2] leading-tight mb-4"
                   style={{ fontFamily: 'var(--font-playfair), Georgia, serif' }}
                 >
                   {t.name}
@@ -256,7 +298,7 @@ export default function HomePage() {
 
       {/* ── Why Chavbuilds ── */}
       <section className="border-y border-[#2a2a2a] bg-[#0d0d0d]">
-        <div className="max-w-6xl mx-auto px-6 py-16 md:py-24">
+        <div className="max-w-7xl mx-auto px-6 py-16 md:py-24">
           <div className="mb-14">
             <p className="text-xs text-[#555555] uppercase tracking-widest mb-3">Why Chavbuilds</p>
             <h2
@@ -284,7 +326,7 @@ export default function HomePage() {
       </section>
 
       {/* ── Past Work ── */}
-      <section id="work" className="max-w-6xl mx-auto px-6 py-16 md:py-24">
+      <section id="work" className="max-w-7xl mx-auto px-6 py-16 md:py-24">
         <div className="mb-10">
           <p className="text-xs text-[#555555] uppercase tracking-widest mb-3">Past Work</p>
           <h2
@@ -299,7 +341,7 @@ export default function HomePage() {
 
       {/* ── Pricing ── */}
       <section id="pricing" className="border-y border-[#2a2a2a] bg-[#0d0d0d]">
-        <div className="max-w-6xl mx-auto px-6 py-16 md:py-24">
+        <div className="max-w-7xl mx-auto px-6 py-16 md:py-24">
           <div className="text-center mb-14">
             <p className="text-xs text-[#555555] uppercase tracking-widest mb-3">Pricing</p>
             <h2
@@ -350,13 +392,13 @@ export default function HomePage() {
           </div>
 
           <p className="text-center text-xs text-[#555555] mt-8">
-            Need something custom? <OpenContactButton label="Email us" className="text-[#8a8a8a] hover:text-[#c4a882] transition-colors underline-offset-2 hover:underline" /> — all projects are scoped individually.
+            Need something custom? <OpenContactButton label="Email me" className="text-[#8a8a8a] hover:text-[#c4a882] transition-colors underline-offset-2 hover:underline" /> — all projects are scoped individually.
           </p>
         </div>
       </section>
 
       {/* ── How It Works ── */}
-      <section id="how-it-works" className="max-w-6xl mx-auto px-6 py-16 md:py-24">
+      <section id="how-it-works" className="max-w-7xl mx-auto px-6 py-16 md:py-24">
         <div className="mb-14">
           <p className="text-xs text-[#555555] uppercase tracking-widest mb-3">How It Works</p>
           <h2
@@ -364,7 +406,7 @@ export default function HomePage() {
             style={{ fontFamily: 'var(--font-playfair), Georgia, serif' }}
           >
             From template to live site <br className="hidden sm:block" />
-            <span className="text-[#c4a882]">in a matter of days.</span>
+            <span className="text-[#c4a882]">in under 2 weeks.</span>
           </h2>
         </div>
 
@@ -376,7 +418,7 @@ export default function HomePage() {
 
       {/* ── Footer ── */}
       <footer className="border-t border-[#2a2a2a]">
-        <div className="max-w-6xl mx-auto px-6 py-12">
+        <div className="max-w-7xl mx-auto px-6 py-12">
           <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8 mb-10">
             <div>
               <Image
@@ -402,9 +444,9 @@ export default function HomePage() {
               <div>
                 <p className="text-xs text-[#555555] uppercase tracking-widest mb-3">Company</p>
                 <div className="flex flex-col gap-2">
-                  <a href="#work" className="text-[#8a8a8a] hover:text-[#e2e2e2] transition-colors">Our Work</a>
+                  <a href="#work" className="text-[#8a8a8a] hover:text-[#e2e2e2] transition-colors">My Work</a>
                   <a href="#pricing" className="text-[#8a8a8a] hover:text-[#e2e2e2] transition-colors">Pricing</a>
-                  <a href="mailto:charlesalo@chavbuilds.com" className="text-[#8a8a8a] hover:text-[#e2e2e2] transition-colors">Contact</a>
+                  <OpenContactButton label="Contact" className="text-[#8a8a8a] hover:text-[#e2e2e2] transition-colors text-left" />
                 </div>
               </div>
             </div>

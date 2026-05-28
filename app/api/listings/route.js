@@ -19,8 +19,8 @@ export async function GET(request) {
   }
 
   try {
-    const { listings, totalCount } = await getListings(filters)
-    return NextResponse.json({ listings, totalCount })
+    const { listings, totalCount, hasMore } = await getListings(filters)
+    return NextResponse.json({ listings, totalCount, hasMore })
   } catch (err) {
     return NextResponse.json({ error: err.message }, { status: 500 })
   }
