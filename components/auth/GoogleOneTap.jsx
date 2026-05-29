@@ -15,12 +15,32 @@ export default function GoogleOneTap({ clientId, onSuccess }) {
     const payload = decodeJwt(response.credential)
     if (!payload) return
 
-    // Send to API for server-side verification + lead capture
-    await fetch('/api/auth/google', {
+    // Server-side token verification
+    const authRes = await fetch('/api/auth/google', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ credential: response.credential }),
-    }).catch(() => {})
+    }).catch(() => null)
+
+    if (!authRes?.ok) return
+
+    // Notify agent from the browser (server-side fetch is blocked by Cloudflare on web3forms)
+    const web3Key = process.env.NEXT_PUBLIC_WEB3FORMS_KEY
+    if (web3Key) {
+      fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          access_key: web3Key,
+          subject: `New Lead via Google Sign-In: ${payload.name}`,
+          name: payload.name,
+          email: payload.email,
+          message: `A new lead signed in with Google 1-tap.\n\nName: ${payload.name}\nEmail: ${payload.email}\nPage: ${window.location.href}`,
+          from_name: 'Website Lead Capture',
+          botcheck: false,
+        }),
+      }).catch(() => {})
+    }
 
     onSuccess?.({ name: payload.name, email: payload.email, picture: payload.picture })
   }, [onSuccess])
