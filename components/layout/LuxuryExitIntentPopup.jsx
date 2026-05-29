@@ -12,6 +12,7 @@ export default function LuxuryExitIntentPopup({ agentName = 'Victoria Sinclair' 
   const [email, setEmail] = useState('')
   const [agreed, setAgreed] = useState(false)
   const [status, setStatus] = useState('idle') // idle | sending | sent | error
+  const [errorMsg, setErrorMsg] = useState('')
 
   useEffect(() => {
     if (sessionStorage.getItem(SESSION_KEY)) return
@@ -61,12 +62,14 @@ export default function LuxuryExitIntentPopup({ agentName = 'Victoria Sinclair' 
     e.preventDefault()
     if (!email || !agreed) return
     setStatus('sending')
+    setErrorMsg('')
     try {
       const res = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          access_key: process.env.NEXT_PUBLIC_WEB3FORMS_KEY,
+          access_key: process.env.NEXT_PUBLIC_WEB3FORMS_KEY ?? '',
+          name: 'Listing Alert Opt-in',
           email,
           subject: `Exit Intent — Listing Alerts | ${agentName}`,
           message: `New listing alert opt-in from ${email}`,
@@ -77,9 +80,11 @@ export default function LuxuryExitIntentPopup({ agentName = 'Victoria Sinclair' 
         setStatus('sent')
         sessionStorage.setItem(SESSION_KEY, '1')
       } else {
+        setErrorMsg(json.message || 'Submission failed.')
         setStatus('error')
       }
-    } catch {
+    } catch (err) {
+      setErrorMsg('Network error. Please try again.')
       setStatus('error')
     }
   }
@@ -185,6 +190,7 @@ export default function LuxuryExitIntentPopup({ agentName = 'Victoria Sinclair' 
                         onChange={(e) => setEmail(e.target.value)}
                         placeholder="Email"
                         className="w-full bg-transparent border-b border-white/20 text-white text-sm py-3 outline-none placeholder:text-white/30 focus:border-[#C9A96E] transition-colors font-sans"
+                        style={{ WebkitBoxShadow: '0 0 0 30px #111111 inset', WebkitTextFillColor: 'white' }}
                       />
                     </div>
 
@@ -204,7 +210,7 @@ export default function LuxuryExitIntentPopup({ agentName = 'Victoria Sinclair' 
                     </div>
 
                     {status === 'error' && (
-                      <p className="text-red-400 text-xs font-sans">Something went wrong. Please try again.</p>
+                      <p className="text-red-400 text-xs font-sans">{errorMsg || 'Something went wrong. Please try again.'}</p>
                     )}
 
                     {/* Submit */}

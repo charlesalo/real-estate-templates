@@ -1,9 +1,17 @@
 import { notFound } from 'next/navigation'
 import Image from 'next/image'
+import Link from 'next/link'
 import PropertyCard from '@/components/real-estate/PropertyCard'
 import CTASection from '@/components/sections/CTASection'
 import ModalTrigger from '@/components/ui/ModalTrigger'
+import LuxuryNeighborhoodAmenities from '@/components/sections/LuxuryNeighborhoodAmenities'
+import LuxuryNeighborhoodDemographics from '@/components/sections/LuxuryNeighborhoodDemographics'
+import LuxuryNeighborhoodSchools from '@/components/sections/LuxuryNeighborhoodSchools'
 import { getListings } from '@/lib/simplyrets'
+import { getWalkScore } from '@/lib/walkscore'
+import { getNearbyPlaces } from '@/lib/places'
+import { getCensusData } from '@/lib/census'
+import { getSchools } from '@/lib/schooldigger'
 
 // Demo neighborhood data — Phase 2 hardcoded per brief
 // Phase 3 upgrade: pull from Sanity CMS
@@ -32,6 +40,8 @@ const NEIGHBORHOODS = {
       'Dedicated Beverly Hills Police Department',
     ],
     filterCity: 'Beverly Hills',
+    zipCode: '90210',
+    lat: 34.0736, lng: -118.4004,
   },
   'bel-air': {
     name: 'Bel Air',
@@ -57,6 +67,8 @@ const NEIGHBORHOODS = {
       'Home to some of LA\'s most storied architectural landmarks',
     ],
     filterCity: 'Los Angeles',
+    zipCode: '90077',
+    lat: 34.0956, lng: -118.4523,
   },
   'holmby-hills': {
     name: 'Holmby Hills',
@@ -82,6 +94,8 @@ const NEIGHBORHOODS = {
       'Quiet, tree-lined streets with exceptional security',
     ],
     filterCity: 'Los Angeles',
+    zipCode: '90024',
+    lat: 34.0730, lng: -118.4232,
   },
   'pacific-palisades': {
     name: 'Pacific Palisades',
@@ -107,6 +121,8 @@ const NEIGHBORHOODS = {
       'Strong community character and low transient traffic',
     ],
     filterCity: 'Pacific Palisades',
+    zipCode: '90272',
+    lat: 34.0452, lng: -118.5269,
   },
 }
 
@@ -125,9 +141,25 @@ export default async function NeighborhoodPage({ params }) {
   const hood = NEIGHBORHOODS[slug]
   if (!hood) notFound()
 
+  const otherHoods = Object.entries(NEIGHBORHOODS)
+    .filter(([s]) => s !== slug)
+    .slice(0, 3)
+    .map(([s, h]) => ({ slug: s, ...h }))
+
+  const [walkResult, placesResult, censusResult, schoolsResult] = await Promise.allSettled([
+    getWalkScore(hood.lat, hood.lng, `${hood.name}, Los Angeles, CA`),
+    getNearbyPlaces(hood.lat, hood.lng),
+    getCensusData(hood.zipCode),
+    getSchools(hood.zipCode, 'CA'),
+  ])
+  const walkData   = walkResult.status    === 'fulfilled' ? walkResult.value    : null
+  const placesData = placesResult.status  === 'fulfilled' ? placesResult.value  : null
+  const demo       = censusResult.status  === 'fulfilled' ? censusResult.value  : null
+  const schools    = schoolsResult.status === 'fulfilled' ? (schoolsResult.value ?? []) : []
+
   let listings = []
   try {
-    const raw = await getListings({ cities: [hood.filterCity], limit: 6 })
+    const { listings: raw } = await getListings({ cities: [hood.filterCity], limit: 6 })
     listings = raw.map(l => ({
       id: l.mlsId,
       mlsId: l.mlsId,
@@ -180,19 +212,6 @@ export default async function NeighborhoodPage({ params }) {
               </ul>
             </div>
 
-            {/* Listings */}
-            {listings.length > 0 && (
-              <div>
-                <h2 className="font-heading text-2xl font-normal text-white mb-8">
-                  Properties in {hood.name}
-                </h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  {listings.map(l => (
-                    <PropertyCard key={l.id} {...l} template="luxury-agent" variant="featured" />
-                  ))}
-                </div>
-              </div>
-            )}
           </div>
 
           {/* Stats sidebar */}
@@ -216,6 +235,117 @@ export default async function NeighborhoodPage({ params }) {
           </div>
         </div>
       </div>
+
+      {/* Properties grid */}
+      {listings.length > 0 && (
+        <section className="bg-[#0A0A0A] border-t border-white/10 py-16 lg:py-24">
+          <div className="max-w-7xl mx-auto px-6 lg:px-8">
+
+            <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
+              <div>
+                <p className="text-[9px] tracking-[0.45em] uppercase text-[#C9A96E] mb-3 font-sans">MLS Listings</p>
+                <h2 className="font-heading text-2xl lg:text-3xl font-normal text-white mb-3">
+                  Properties in {hood.name}
+                </h2>
+                <div className="w-8 h-px bg-[#C9A96E]" />
+              </div>
+              <Link
+                href={`/luxury-agent/listings?q=${encodeURIComponent(hood.name)}`}
+                className="shrink-0 px-8 py-3 border border-[#C9A96E] text-[#C9A96E] text-[10px] tracking-[0.25em] uppercase font-sans hover:bg-[#C9A96E] hover:text-[#0A0A0A] transition-all"
+              >
+                View All Listings
+              </Link>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {listings.map(l => (
+                <PropertyCard key={l.id} {...l} template="luxury-agent" variant="default" />
+              ))}
+            </div>
+
+          </div>
+        </section>
+      )}
+
+      <LuxuryNeighborhoodAmenities
+        neighborhoodName={hood.name}
+        walkData={walkData}
+        placesData={placesData}
+      />
+
+      <LuxuryNeighborhoodDemographics
+        neighborhoodName={hood.name}
+        demo={demo}
+      />
+
+      {schools.length > 0 && (
+        <LuxuryNeighborhoodSchools
+          neighborhoodName={hood.name}
+          schools={schools}
+        />
+      )}
+
+      {/* Explore Other Neighborhoods */}
+      <section className="bg-[#0D0D0D] border-t border-white/10 py-16 lg:py-24">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+
+          <p className="text-[9px] tracking-[0.45em] uppercase text-[#C9A96E] mb-3 font-sans">Keep Exploring</p>
+          <h2 className="font-heading text-2xl lg:text-3xl font-normal text-white mb-3">
+            Explore Other Neighborhoods
+          </h2>
+          <div className="w-8 h-px bg-[#C9A96E] mb-12" />
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {otherHoods.map(h => (
+              <Link
+                key={h.slug}
+                href={`/luxury-agent/neighborhoods/${h.slug}`}
+                className="group relative aspect-[3/4] overflow-hidden block"
+              >
+                <Image
+                  src={h.heroImage}
+                  alt={h.name}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 33vw"
+                  className="object-cover transition-transform duration-700 group-hover:scale-[1.04]"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-black/10 group-hover:from-black/95 transition-all duration-500" />
+                <div className="absolute bottom-0 left-0 right-0 p-7">
+                  <p className="text-[9px] tracking-[0.4em] uppercase text-[#C9A96E] font-sans mb-3">Neighborhood</p>
+                  <h3 className="font-heading text-2xl font-normal text-white leading-tight mb-3">{h.name}</h3>
+                  <div className="w-6 h-px bg-[#C9A96E] mb-4" />
+                  <p className="text-white/45 text-xs font-sans leading-relaxed line-clamp-2 mb-6">{h.tagline}</p>
+                  <div className="flex items-end justify-between">
+                    <div className="flex items-center gap-5">
+                      <div>
+                        <p className="text-[9px] text-white/30 uppercase tracking-widest font-sans mb-1">Median Price</p>
+                        <p className="text-sm font-sans font-medium text-white">{h.stats[0].value}</p>
+                      </div>
+                      <div className="border-l border-white/10 pl-5">
+                        <p className="text-[9px] text-white/30 uppercase tracking-widest font-sans mb-1">Listings</p>
+                        <p className="text-sm font-sans font-medium text-white">{h.stats[1].value}</p>
+                      </div>
+                    </div>
+                    <span className="text-[10px] tracking-[0.15em] uppercase text-white/30 group-hover:text-[#C9A96E] transition-colors font-sans inline-flex items-center gap-1.5">
+                      Explore <span className="inline-block group-hover:translate-x-1 transition-transform duration-300">→</span>
+                    </span>
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </div>
+
+          <div className="mt-12 text-center">
+            <Link
+              href="/luxury-agent/neighborhoods"
+              className="inline-flex items-center gap-3 px-10 py-4 border border-[#C9A96E] text-[#C9A96E] text-[10px] tracking-[0.3em] uppercase font-sans hover:bg-[#C9A96E] hover:text-[#0A0A0A] transition-all duration-300"
+            >
+              View All Neighborhoods
+            </Link>
+          </div>
+
+        </div>
+      </section>
 
       <CTASection
         template="luxury-agent"
