@@ -267,7 +267,7 @@ export default function LuxuryAgentHome() {
       </section>
 
       {/* 7 — Home Valuation */}
-      <HomeValuationCompact />
+      <HomeValuationCompact googleMapsKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_KEY ?? ''} />
 
       {/* 8 — From the Journal */}
       <section className="bg-[#0A0A0A] py-20 lg:py-28">

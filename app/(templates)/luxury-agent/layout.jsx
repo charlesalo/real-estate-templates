@@ -2,6 +2,7 @@ import { Playfair_Display, Inter } from 'next/font/google'
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
 import ContactModal from '@/components/layout/ContactModal'
+import LuxuryExitIntentPopup from '@/components/layout/LuxuryExitIntentPopup'
 import GoogleOneTap from '@/components/auth/GoogleOneTap'
 
 const playfair = Playfair_Display({
@@ -117,6 +118,7 @@ export default function LuxuryAgentLayout({ children }) {
       />
       <GoogleOneTap clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID} />
       <main>{children}</main>
+      <LuxuryExitIntentPopup agentName={AGENT.name} />
       <ContactModal
         agentName={AGENT.name}
         agentDre={AGENT.dre}

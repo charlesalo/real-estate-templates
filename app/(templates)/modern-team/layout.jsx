@@ -2,6 +2,7 @@ import { Inter, DM_Sans } from 'next/font/google'
 import ModernTeamNavbar from '@/components/layout/ModernTeamNavbar'
 import ModernTeamFooter from '@/components/layout/ModernTeamFooter'
 import ContactModal from '@/components/layout/ModernTeamContactModal'
+import ModernTeamExitIntentPopup from '@/components/layout/ModernTeamExitIntentPopup'
 import GoogleOneTap from '@/components/auth/GoogleOneTap'
 
 const inter = Inter({
@@ -102,6 +103,7 @@ export default function ModernTeamLayout({ children }) {
       />
       <GoogleOneTap clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID} />
       <main>{children}</main>
+      <ModernTeamExitIntentPopup teamName={TEAM.name} />
       <ContactModal
         agentName={TEAM.name}
         agentDre={TEAM.license}
