@@ -13,7 +13,7 @@ const TEMPLATES = [
     name: 'Luxury Agent',
     slug: 'luxury-agent',
     badge: 'Solo Agent Template',
-    tagline: 'For the agent whose listings start in the millions.',
+    tagline: 'Elevated presence for the luxury market.',
     description:
       'A premium single-agent site built for top producers in high-end markets. Rooted in a fashion-house aesthetic, every design decision communicates exclusivity, discretion, and authority — with parallax motion and a cinematic video hero to match. Features a custom neighborhood showcase, filterable closed-deal portfolio, multi-step home valuation tool, exit-intent lead capture, and a contact modal accessible from every page.',
     features: ['Cinematic Hero Video', 'MLS Home Search', 'Home Valuation Widget', 'Exit Intent Lead Capture', 'Editorial Blog / Journal', '10-Page Build'],
