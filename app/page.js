@@ -13,10 +13,10 @@ const TEMPLATES = [
     name: 'Luxury Agent',
     slug: 'luxury-agent',
     badge: 'Solo Agent Template',
-    tagline: 'Elevated presence for the luxury market.',
+    tagline: 'For the agent whose listings start in the millions.',
     description:
-      'A premium single-agent site designed to attract high-net-worth buyers and sellers. Cinematic hero video, curated listings, and a refined aesthetic that commands attention.',
-    features: ['Cinematic Hero Video', 'Curated Listings', 'Property Detail Pages', 'Lead Capture', 'Minimalist Aesthetic'],
+      'A premium single-agent site built for top producers in high-end markets. Rooted in a fashion-house aesthetic, every design decision communicates exclusivity, discretion, and authority — with parallax motion and a cinematic video hero to match. Features a custom neighborhood showcase, filterable closed-deal portfolio, multi-step home valuation tool, exit-intent lead capture, and a contact modal accessible from every page.',
+    features: ['Cinematic Hero Video', 'MLS Home Search', 'Home Valuation Widget', 'Exit Intent Lead Capture', 'Editorial Blog / Journal', '10-Page Build'],
     preview: '/images/landing-page/luxury-agent-full-page-preview.webp',
     accent: '#2C1810',
   },
@@ -26,7 +26,7 @@ const TEMPLATES = [
     badge: 'Team Template',
     tagline: 'For real estate teams that mean business.',
     description:
-      'A full-featured team site with MLS-powered home search, neighborhood guides, blog, home valuation, agent profiles, testimonials, and past transactions. Built for growth.',
+      'A full-featured team site built for husband-wife duos, agent groups, and boutique teams of 2–6. Where the Luxury Agent template whispers exclusivity, this one projects warmth, credibility, and local authority. Features a search-focused video hero, individual agent profiles, filterable sold portfolio, neighborhood guides, testimonials slider, exit-intent lead capture, and a contact modal accessible from every page.',
     features: ['MLS Home Search', 'Neighborhood Guides', 'Agent Profiles', 'Home Valuation', 'Blog', 'Testimonials'],
     preview: '/images/landing-page/modern-team-full-page-preview.webp',
     accent: '#0F1E3E',
@@ -270,7 +270,7 @@ export default function HomePage() {
               </div>
 
               {/* ── Info ── */}
-              <div className="w-full lg:w-1/2 lg:max-w-lg">
+              <div className="w-full lg:flex-1">
                 <p className="text-xs text-[#555555] uppercase tracking-widest mb-3">{t.badge}</p>
                 <h2
                   className="text-3xl sm:text-4xl font-bold text-[#e2e2e2] leading-tight mb-4"
@@ -333,7 +333,7 @@ export default function HomePage() {
             className="text-3xl sm:text-4xl font-bold text-[#e2e2e2]"
             style={{ fontFamily: 'var(--font-playfair), Georgia, serif' }}
           >
-            500+ websites. Here are a few.
+            Built to perform. Proven to <span className="text-[#c4a882]">convert.</span>
           </h2>
         </div>
         <WorkSlider />
@@ -348,7 +348,7 @@ export default function HomePage() {
               className="text-3xl sm:text-4xl font-bold text-[#e2e2e2]"
               style={{ fontFamily: 'var(--font-playfair), Georgia, serif' }}
             >
-              Transparent, project-based pricing
+              Transparent, <span className="text-[#c4a882]">straightforward</span> pricing
             </h2>
             <p className="mt-3 text-[#8a8a8a]">One-time setup fee to build and launch. Monthly retainer covers hosting, support, and updates.</p>
           </div>
