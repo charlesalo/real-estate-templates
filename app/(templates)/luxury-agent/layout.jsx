@@ -91,6 +91,10 @@ export const metadata = {
   },
   description:
     'Beverly Hills luxury real estate. Extraordinary homes for extraordinary lives. DRE# 01234567.',
+  icons: {
+    icon: '/images/luxury-agent/Victoria Sinclair Favicon.png',
+    apple: '/images/luxury-agent/Victoria Sinclair Favicon.png',
+  },
 }
 
 export default function LuxuryAgentLayout({ children }) {
