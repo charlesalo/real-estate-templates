@@ -23,10 +23,6 @@ export const metadata = {
   },
   description:
     'Your guide to living in, working in, and loving New York — curated by Nadia Osei, Licensed Associate RE Salesperson with Compass Real Estate.',
-  icons: {
-    icon: '/images/local-expert/nadia-favicon.png',
-    apple: '/images/local-expert/nadia-favicon.png',
-  },
 }
 
 export default function LocalExpertLayout({ children }) {
@@ -37,7 +33,7 @@ export default function LocalExpertLayout({ children }) {
         '--font-heading': `var(${gelasio.variable}), Georgia, serif`,
         '--font-body': `var(${plusJakarta.variable}), system-ui, sans-serif`,
         '--le-bg': '#F8F3EB',
-        '--le-fg': '#1B3B2B',
+        '--le-fg': '#2C1E11',
         '--le-accent': '#8B9E8B',
         '--le-accent-warm': '#C4A882',
         '--le-border': '#E5E0D8',
@@ -45,7 +41,7 @@ export default function LocalExpertLayout({ children }) {
         '--le-dark': '#1B3B2B',
         fontFamily: `var(${plusJakarta.variable}), system-ui, sans-serif`,
         backgroundColor: '#F8F3EB',
-        color: '#1B3B2B',
+        color: '#2C1E11',
         minHeight: '100vh',
       }}
     >

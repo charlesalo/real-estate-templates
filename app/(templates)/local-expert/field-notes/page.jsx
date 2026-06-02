@@ -11,7 +11,7 @@ const CATEGORY_COLORS = {
   Bookstore: 'bg-[#8B9E8B]/20 text-[#4A6741]',
   Park: 'bg-[#8B9E8B]/20 text-[#4A6741]',
   Food: 'bg-[#C4A882]/20 text-[#7A6040]',
-  Culture: 'bg-[#1B3B2B]/8 text-[#1B3B2B]',
+  Culture: 'bg-[#1B3B2B]/8 text-[#2C1E11]',
   Market: 'bg-[#C4A882]/20 text-[#7A6040]',
 }
 
@@ -26,7 +26,7 @@ export default function FieldNotesPage() {
         >
           Nadia&apos;s Field Notes
         </h1>
-        <p className="text-[15px] text-[#1B3B2B]/50 max-w-xl mb-12">
+        <p className="text-[15px] text-[#2C1E11]/50 max-w-xl mb-12">
           Forty-four notebooks. Fourteen years. The places that make a New York address feel like home.
           None of this is sponsored. All of it is walked.
         </p>
@@ -38,7 +38,7 @@ export default function FieldNotesPage() {
                 <Image src={note.image} alt={note.name} fill className="object-cover" />
               </div>
               <div className="p-5">
-                <span className={`inline-block text-[9px] font-semibold uppercase tracking-wider px-2.5 py-1 rounded-full mb-3 ${CATEGORY_COLORS[note.category] ?? 'bg-[#E5E0D8] text-[#1B3B2B]/50'}`}>
+                <span className={`inline-block text-[9px] font-semibold uppercase tracking-wider px-2.5 py-1 rounded-full mb-3 ${CATEGORY_COLORS[note.category] ?? 'bg-[#E5E0D8] text-[#2C1E11]/50'}`}>
                   {note.category}
                 </span>
                 <h2
@@ -47,9 +47,9 @@ export default function FieldNotesPage() {
                 >
                   {note.name}
                 </h2>
-                <p className="text-[11px] text-[#1B3B2B]/40 mb-3">{note.location} · {note.address}</p>
-                <p className="text-[15px] text-[#1B3B2B]/60 leading-relaxed">{note.blurb}</p>
-                <p className="text-[10px] text-[#1B3B2B]/30 mt-3">{note.walkMinutes} min walk from the West Village</p>
+                <p className="text-[11px] text-[#2C1E11]/40 mb-3">{note.location} · {note.address}</p>
+                <p className="text-[15px] text-[#2C1E11]/60 leading-relaxed">{note.blurb}</p>
+                <p className="text-[10px] text-[#2C1E11]/30 mt-3">{note.walkMinutes} min walk from the West Village</p>
               </div>
             </article>
           ))}

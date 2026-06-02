@@ -58,7 +58,7 @@ export default function MarketReportForm() {
                 className={cn(
                   'px-3.5 py-2 text-[11px] font-medium rounded-full border transition-all duration-150',
                   selected === n
-                    ? 'bg-[#F8F3EB] text-[#1B3B2B] border-[#F8F3EB]'
+                    ? 'bg-[#F8F3EB] text-[#2C1E11] border-[#F8F3EB]'
                     : 'bg-transparent text-[#F8F3EB]/60 border-[#F8F3EB]/15 hover:border-[#F8F3EB]/35 hover:text-[#F8F3EB]/80',
                 )}
               >
@@ -69,7 +69,7 @@ export default function MarketReportForm() {
           <button
             disabled={!selected}
             onClick={() => setStep(2)}
-            className="mt-5 flex items-center gap-2 px-5 py-2.5 text-[12px] font-bold rounded-full bg-[#8B9E8B] text-[#1B3B2B] disabled:opacity-30 hover:bg-[#9aad9a] transition-colors"
+            className="mt-5 flex items-center gap-2 px-5 py-2.5 text-[12px] font-bold rounded-full bg-[#8B9E8B] text-[#2C1E11] disabled:opacity-30 hover:bg-[#9aad9a] transition-colors"
           >
             Continue <ArrowRight size={13} />
           </button>
@@ -99,7 +99,7 @@ export default function MarketReportForm() {
             </button>
             <button
               type="submit"
-              className="flex-1 py-2.5 text-[12px] font-bold rounded-full bg-[#8B9E8B] text-[#1B3B2B] hover:bg-[#9aad9a] transition-colors"
+              className="flex-1 py-2.5 text-[12px] font-bold rounded-full bg-[#8B9E8B] text-[#2C1E11] hover:bg-[#9aad9a] transition-colors"
             >
               Send My Report
             </button>

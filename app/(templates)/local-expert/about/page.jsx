@@ -33,7 +33,7 @@ export default function AboutPage() {
               >
                 Fourteen years<br />in New York.
               </h1>
-              <p className="text-[17px] text-[#1B3B2B]/60 leading-relaxed max-w-lg">
+              <p className="text-[17px] text-[#2C1E11]/60 leading-relaxed max-w-lg">
                 I moved here for a job that didn&apos;t pan out. I stayed because no city on earth
                 has this particular pull. Now I help other people figure out their version of New York —
                 which block, which building, which life.
@@ -64,7 +64,7 @@ export default function AboutPage() {
                 >
                   {stat.prefix ?? ''}{stat.numericValue}{stat.suffix ?? ''}
                 </div>
-                <div className="text-[11px] uppercase tracking-wider text-[#1B3B2B]/40 mt-1">{stat.label}</div>
+                <div className="text-[11px] uppercase tracking-wider text-[#2C1E11]/40 mt-1">{stat.label}</div>
               </div>
             ))}
           </div>
@@ -76,11 +76,11 @@ export default function AboutPage() {
         <div className="max-w-3xl mx-auto px-5 lg:px-8">
           <div className="space-y-6">
             {AGENT.bio.map((para, i) => (
-              <p key={i} className="text-[15px] text-[#1B3B2B]/65 leading-relaxed">
+              <p key={i} className="text-[15px] text-[#2C1E11]/65 leading-relaxed">
                 {para}
               </p>
             ))}
-            <p className="text-[15px] text-[#1B3B2B]/65 leading-relaxed">
+            <p className="text-[15px] text-[#2C1E11]/65 leading-relaxed">
               The areas I focus on — West Village, Tribeca, Brooklyn Heights, DUMBO, Park Slope,
               and the Upper East Side — are neighborhoods I know the way you know a friend&apos;s face.
               I know which buildings have good boards and which ones stall on approvals. I know where the
@@ -90,12 +90,12 @@ export default function AboutPage() {
 
           {/* Credentials */}
           <div className="mt-12 p-6 rounded-2xl border border-[#E5E0D8]">
-            <p className="text-[11px] uppercase tracking-wider text-[#1B3B2B]/30 mb-4">Credentials</p>
+            <p className="text-[11px] uppercase tracking-wider text-[#2C1E11]/30 mb-4">Credentials</p>
             <div className="space-y-2">
-              <p className="text-[14px] text-[#1B3B2B]">{AGENT.title}</p>
-              <p className="text-[13px] text-[#1B3B2B]/50">{AGENT.license}</p>
-              <p className="text-[13px] text-[#1B3B2B]/50">{AGENT.brokerage} · {AGENT.brokerageLicense}</p>
-              <p className="text-[13px] text-[#1B3B2B]/40">{AGENT.brokerageAddress}</p>
+              <p className="text-[14px] text-[#2C1E11]">{AGENT.title}</p>
+              <p className="text-[13px] text-[#2C1E11]/50">{AGENT.license}</p>
+              <p className="text-[13px] text-[#2C1E11]/50">{AGENT.brokerage} · {AGENT.brokerageLicense}</p>
+              <p className="text-[13px] text-[#2C1E11]/40">{AGENT.brokerageAddress}</p>
             </div>
           </div>
         </div>
@@ -121,7 +121,7 @@ export default function AboutPage() {
                 </div>
                 <div className="pb-2">
                   <p className="text-[11px] font-bold tracking-wider text-[#8B9E8B] mb-1">{item.year}</p>
-                  <p className="text-[15px] text-[#1B3B2B]/65 leading-relaxed">{item.event}</p>
+                  <p className="text-[15px] text-[#2C1E11]/65 leading-relaxed">{item.event}</p>
                 </div>
               </div>
             ))}
@@ -156,7 +156,7 @@ export default function AboutPage() {
           >
             Let&apos;s talk about your next block.
           </h2>
-          <p className="text-[15px] text-[#1B3B2B]/50 mb-8">
+          <p className="text-[15px] text-[#2C1E11]/50 mb-8">
             No pressure. Just a conversation about what you&apos;re looking for.
           </p>
           <Link

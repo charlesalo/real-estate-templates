@@ -74,9 +74,9 @@ export default function NeighborhoodMap({ neighborhoods }) {
         className: 'le-popup',
       }).setHTML(`
         <div style="padding: 10px 14px; min-width: 160px;">
-          <div style="font-size: 13px; font-weight: 700; color: #1B3B2B; margin-bottom: 2px;">${n.name}</div>
-          <div style="font-size: 11px; color: #1B3B2B; opacity: 0.5;">${n.borough}</div>
-          <div style="font-size: 11px; color: #1B3B2B; margin-top: 6px;">${n.activeListings} active · from ${n.medianPrice}</div>
+          <div style="font-size: 13px; font-weight: 700; color: #2C1E11; margin-bottom: 2px;">${n.name}</div>
+          <div style="font-size: 11px; color: #2C1E11; opacity: 0.5;">${n.borough}</div>
+          <div style="font-size: 11px; color: #2C1E11; margin-top: 6px;">${n.activeListings} active · from ${n.medianPrice}</div>
         </div>
       `)
 
@@ -163,13 +163,13 @@ function SidePanel({ neighborhoods, active, setActive }) {
                     <div className="w-2 h-2 rounded-full bg-[#1B3B2B] flex-shrink-0 mt-1.5" />
                   )}
                 </div>
-                <p className="text-[11px] text-[#1B3B2B]/50 mt-1 leading-snug line-clamp-2">
+                <p className="text-[11px] text-[#2C1E11]/50 mt-1 leading-snug line-clamp-2">
                   {n.tagline}
                 </p>
                 <div className="flex items-center gap-3 mt-2">
-                  <span className="text-[10px] text-[#1B3B2B]/50">From {n.medianPrice}</span>
-                  <span className="text-[#1B3B2B]/20">·</span>
-                  <span className="text-[10px] text-[#1B3B2B]/50">{n.activeListings} listings</span>
+                  <span className="text-[10px] text-[#2C1E11]/50">From {n.medianPrice}</span>
+                  <span className="text-[#2C1E11]/20">·</span>
+                  <span className="text-[10px] text-[#2C1E11]/50">{n.activeListings} listings</span>
                 </div>
               </div>
             </div>
@@ -177,12 +177,12 @@ function SidePanel({ neighborhoods, active, setActive }) {
             {/* Expanded detail when active */}
             {isActive && (
               <div className="px-5 pb-4 bg-[#1B3B2B]/5">
-                <p className="text-[12px] text-[#1B3B2B]/60 leading-relaxed mb-3">
+                <p className="text-[12px] text-[#2C1E11]/60 leading-relaxed mb-3">
                   {n.description.slice(0, 120)}…
                 </p>
                 <Link
                   href={`/local-expert/neighborhoods/${n.slug}`}
-                  className="inline-flex items-center gap-1 text-[11px] font-semibold text-[#1B3B2B] hover:opacity-70 transition-opacity"
+                  className="inline-flex items-center gap-1 text-[11px] font-semibold text-[#2C1E11] hover:opacity-70 transition-opacity"
                   onClick={(e) => e.stopPropagation()}
                 >
                   Open the {n.name} guide <ArrowRight size={11} />
@@ -201,8 +201,8 @@ function NoTokenFallback({ neighborhoods, active, setActive }) {
     <div className="flex flex-col lg:flex-row gap-0 rounded-2xl overflow-hidden border border-[#E5E0D8] shadow-sm" style={{ minHeight: 520 }}>
       {/* Static map placeholder */}
       <div className="lg:w-[58%] h-[300px] lg:h-auto bg-[#E5E0D8] flex flex-col items-center justify-center gap-3">
-        <MapPin size={28} className="text-[#1B3B2B]/30" />
-        <p className="text-[12px] text-[#1B3B2B]/40 text-center px-8">
+        <MapPin size={28} className="text-[#2C1E11]/30" />
+        <p className="text-[12px] text-[#2C1E11]/40 text-center px-8">
           Add <code className="font-mono">NEXT_PUBLIC_MAPBOX_TOKEN</code> to .env.local to enable the interactive map.
         </p>
       </div>

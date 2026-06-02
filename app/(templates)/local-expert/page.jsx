@@ -63,7 +63,7 @@ export default function LocalExpertHome() {
               </h1>
 
               {/* Subheadline */}
-              <p className="text-[17px] text-[#1B3B2B]/60 leading-relaxed mb-8">
+              <p className="text-[17px] text-[#2C1E11]/60 leading-relaxed mb-8">
                 Your master guide to the neighborhoods, culture, and homes of New York —
                 curated, walked, and written by a local broker who has called this city
                 home for fourteen years.
@@ -82,7 +82,7 @@ export default function LocalExpertHome() {
                     >
                       {stat.value}
                     </div>
-                    <div className="text-[10px] text-[#1B3B2B]/40 uppercase tracking-wider mt-1">
+                    <div className="text-[10px] text-[#2C1E11]/40 uppercase tracking-wider mt-1">
                       {stat.label}
                     </div>
                   </div>
@@ -171,13 +171,13 @@ export default function LocalExpertHome() {
             </h2>
             <Link
               href="/local-expert/neighborhoods"
-              className="hidden md:flex items-center gap-1.5 text-[12px] font-semibold text-[#1B3B2B]/50 hover:text-[#1B3B2B] transition-colors whitespace-nowrap"
+              className="hidden md:flex items-center gap-1.5 text-[12px] font-semibold text-[#2C1E11]/50 hover:text-[#2C1E11] transition-colors whitespace-nowrap"
             >
               All 38 neighborhoods <ArrowRight size={13} />
             </Link>
           </div>
 
-          <p className="text-[15px] text-[#1B3B2B]/50 max-w-xl mb-10">
+          <p className="text-[15px] text-[#2C1E11]/50 max-w-xl mb-10">
             Have a block in mind or look at the map. Click it for the market, the schools, the corner
             bakery — the things Zillow won&apos;t tell you.
           </p>
@@ -186,7 +186,7 @@ export default function LocalExpertHome() {
 
           <Link
             href="/local-expert/neighborhoods"
-            className="flex md:hidden items-center gap-1.5 text-[12px] font-semibold text-[#1B3B2B]/50 hover:text-[#1B3B2B] transition-colors mt-6"
+            className="flex md:hidden items-center gap-1.5 text-[12px] font-semibold text-[#2C1E11]/50 hover:text-[#2C1E11] transition-colors mt-6"
           >
             All 38 neighborhoods <ArrowRight size={13} />
           </Link>
@@ -208,14 +208,14 @@ export default function LocalExpertHome() {
               >
                 Nadia&apos;s Field Notes
               </h2>
-              <p className="text-[15px] text-[#1B3B2B]/50 leading-relaxed mt-4">
+              <p className="text-[15px] text-[#2C1E11]/50 leading-relaxed mt-4">
                 Forty-four notebooks. Fourteen years. The cafes, parks, bookstores, and quiet bars
                 that make a New York address feel like home. None of this is sponsored. All of it
                 is walked.
               </p>
               <Link
                 href="/local-expert/field-notes"
-                className="inline-flex items-center gap-1.5 mt-5 text-[12px] font-semibold text-[#1B3B2B] hover:opacity-60 transition-opacity"
+                className="inline-flex items-center gap-1.5 mt-5 text-[12px] font-semibold text-[#2C1E11] hover:opacity-60 transition-opacity"
               >
                 Browse all notes <ArrowRight size={13} />
               </Link>
@@ -266,13 +266,13 @@ export default function LocalExpertHome() {
             </div>
             <Link
               href="/local-expert/listings"
-              className="hidden md:flex items-center gap-1.5 text-[12px] font-semibold text-[#1B3B2B]/50 hover:text-[#1B3B2B] transition-colors whitespace-nowrap"
+              className="hidden md:flex items-center gap-1.5 text-[12px] font-semibold text-[#2C1E11]/50 hover:text-[#2C1E11] transition-colors whitespace-nowrap"
             >
               View all 37 active listings <ArrowRight size={13} />
             </Link>
           </div>
 
-          <p className="text-[14px] text-[#1B3B2B]/40 mb-10 max-w-lg">
+          <p className="text-[14px] text-[#2C1E11]/40 mb-10 max-w-lg">
             Homes in neighborhoods I know block by block. Not just listed here — actually considered.
           </p>
 
@@ -283,7 +283,7 @@ export default function LocalExpertHome() {
           </div>
 
           {/* Compliance footer */}
-          <p className="text-[10px] text-[#1B3B2B]/30 mt-8 leading-relaxed">
+          <p className="text-[10px] text-[#2C1E11]/30 mt-8 leading-relaxed">
             All listing information is deemed reliable but not guaranteed and should be independently reviewed
             and verified. All properties are subject to prior sale or withdrawal. Equal Housing Opportunity.
             Compass is a licensed real estate broker. NY Lic# 109802832.
@@ -291,7 +291,7 @@ export default function LocalExpertHome() {
 
           <Link
             href="/local-expert/listings"
-            className="flex md:hidden items-center gap-1.5 text-[12px] font-semibold text-[#1B3B2B]/50 hover:text-[#1B3B2B] transition-colors mt-6"
+            className="flex md:hidden items-center gap-1.5 text-[12px] font-semibold text-[#2C1E11]/50 hover:text-[#2C1E11] transition-colors mt-6"
           >
             View all 37 active listings <ArrowRight size={13} />
           </Link>
@@ -360,7 +360,7 @@ export default function LocalExpertHome() {
                   {AGENT.name}
                 </p>
                 <p className="text-[10px] text-[#24180F]/50 mt-0.5">{AGENT.title}</p>
-                <p className="text-[10px] text-[#1B3B2B]/40 mt-0.5">{AGENT.brokerage}</p>
+                <p className="text-[10px] text-[#2C1E11]/40 mt-0.5">{AGENT.brokerage}</p>
               </div>
             </div>
 
@@ -377,7 +377,7 @@ export default function LocalExpertHome() {
 
               <div className="space-y-5">
                 {AGENT.bio.map((para, i) => (
-                  <p key={i} className="text-[15px] text-[#1B3B2B]/65 leading-relaxed">
+                  <p key={i} className="text-[15px] text-[#2C1E11]/65 leading-relaxed">
                     {para}
                   </p>
                 ))}
@@ -392,7 +392,7 @@ export default function LocalExpertHome() {
                 </Link>
                 <Link
                   href="/local-expert/about"
-                  className="px-6 py-3 text-[13px] font-bold rounded-full border border-[#1B3B2B]/20 text-[#1B3B2B] hover:bg-[#1B3B2B]/5 transition-colors"
+                  className="px-6 py-3 text-[13px] font-bold rounded-full border border-[#1B3B2B]/20 text-[#2C1E11] hover:bg-[#1B3B2B]/5 transition-colors"
                 >
                   Read my story
                 </Link>
@@ -408,8 +408,8 @@ export default function LocalExpertHome() {
                     &ldquo;{TESTIMONIAL.quote}&rdquo;
                   </p>
                   <footer className="mt-4">
-                    <p className="text-[12px] font-semibold text-[#1B3B2B]">{TESTIMONIAL.author}</p>
-                    <p className="text-[11px] text-[#1B3B2B]/40">{TESTIMONIAL.location}</p>
+                    <p className="text-[12px] font-semibold text-[#2C1E11]">{TESTIMONIAL.author}</p>
+                    <p className="text-[11px] text-[#2C1E11]/40">{TESTIMONIAL.location}</p>
                   </footer>
                 </blockquote>
               </div>
@@ -433,7 +433,7 @@ export default function LocalExpertHome() {
             </div>
             <Link
               href="/local-expert/blog"
-              className="text-[12px] font-semibold text-[#1B3B2B]/40 hover:text-[#1B3B2B] transition-colors"
+              className="text-[12px] font-semibold text-[#2C1E11]/40 hover:text-[#2C1E11] transition-colors"
             >
               All articles →
             </Link>
@@ -458,10 +458,10 @@ export default function LocalExpertHome() {
                   >
                     {post.title}
                   </h3>
-                  <p className="text-[12px] text-[#1B3B2B]/50 mt-2 leading-relaxed line-clamp-2">
+                  <p className="text-[12px] text-[#2C1E11]/50 mt-2 leading-relaxed line-clamp-2">
                     {post.excerpt}
                   </p>
-                  <p className="text-[10px] text-[#1B3B2B]/30 mt-3">{post.readMinutes} min read</p>
+                  <p className="text-[10px] text-[#2C1E11]/30 mt-3">{post.readMinutes} min read</p>
                 </Link>
               </article>
             ))}
@@ -482,7 +482,7 @@ export default function LocalExpertHome() {
           >
             The right home in New York is a feeling.<br />Let&apos;s find yours.
           </h2>
-          <p className="text-[15px] text-[#1B3B2B]/50 mb-8 max-w-md mx-auto leading-relaxed">
+          <p className="text-[15px] text-[#2C1E11]/50 mb-8 max-w-md mx-auto leading-relaxed">
             Not sure where to start? Tell me what you&apos;re looking for — or what you&apos;re running from.
             I know this city. I&apos;ll help.
           </p>
@@ -513,7 +513,7 @@ function ListingCard({ listing }) {
             className="object-cover transition-transform duration-500 group-hover:scale-105"
           />
           <div className="absolute top-3 left-3">
-            <span className="text-[9px] font-semibold uppercase tracking-wider px-2.5 py-1 rounded-full bg-white/90 text-[#1B3B2B]">
+            <span className="text-[9px] font-semibold uppercase tracking-wider px-2.5 py-1 rounded-full bg-white/90 text-[#2C1E11]">
               {listing.type}
             </span>
           </div>
@@ -527,23 +527,23 @@ function ListingCard({ listing }) {
           >
             {formatPrice(listing.price)}
           </div>
-          <p className="text-[13px] font-semibold text-[#1B3B2B]">{listing.address}</p>
-          <p className="text-[11px] text-[#1B3B2B]/45 mt-0.5">{listing.neighborhood}, {listing.city}</p>
+          <p className="text-[13px] font-semibold text-[#2C1E11]">{listing.address}</p>
+          <p className="text-[11px] text-[#2C1E11]/45 mt-0.5">{listing.neighborhood}, {listing.city}</p>
 
           <div className="flex items-center gap-4 mt-3 pt-3 border-t border-[#E5E0D8]">
-            <span className="flex items-center gap-1 text-[11px] text-[#1B3B2B]/50">
+            <span className="flex items-center gap-1 text-[11px] text-[#2C1E11]/50">
               <Bed size={12} /> {listing.beds} bd
             </span>
-            <span className="flex items-center gap-1 text-[11px] text-[#1B3B2B]/50">
+            <span className="flex items-center gap-1 text-[11px] text-[#2C1E11]/50">
               <Bath size={12} /> {listing.baths} ba
             </span>
-            <span className="flex items-center gap-1 text-[11px] text-[#1B3B2B]/50">
+            <span className="flex items-center gap-1 text-[11px] text-[#2C1E11]/50">
               <Square size={12} /> {listing.sqft.toLocaleString()} sf
             </span>
           </div>
 
           {/* NY Compliance */}
-          <p className="text-[9px] text-[#1B3B2B]/25 mt-2.5 leading-snug">
+          <p className="text-[9px] text-[#2C1E11]/25 mt-2.5 leading-snug">
             Listing Provided Courtesy of {listing.listingBrokerage} · {listing.mlsId}
           </p>
         </div>

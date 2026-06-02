@@ -25,8 +25,8 @@ export default function LocalExpertNavbar({ agentName, phone, onContactOpen }) {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
-  const textCls = solid ? 'text-[#1B3B2B]' : 'text-[#1B3B2B]'
-  const mutedCls = solid ? 'text-[#1B3B2B]/60 hover:text-[#1B3B2B]' : 'text-[#1B3B2B]/70 hover:text-[#1B3B2B]'
+  const textCls = solid ? 'text-[#2C1E11]' : 'text-[#2C1E11]'
+  const mutedCls = solid ? 'text-[#2C1E11]/60 hover:text-[#2C1E11]' : 'text-[#2C1E11]/70 hover:text-[#2C1E11]'
 
   const NAV_LINKS = [
     { label: 'Neighborhoods', href: `${BASE}/neighborhoods` },
@@ -72,7 +72,7 @@ export default function LocalExpertNavbar({ agentName, phone, onContactOpen }) {
                   priority
                 />
                 <span
-                  className="inline-block lg:hidden min-[1200px]:inline-block text-[12px] font-medium tracking-[0.28em] uppercase"
+                  className="inline-block lg:hidden min-[1200px]:!inline-block text-[12px] font-medium tracking-[0.28em] uppercase"
                   style={{ color: '#24180F' }}
                 >
                   NY LOCAL
@@ -89,7 +89,7 @@ export default function LocalExpertNavbar({ agentName, phone, onContactOpen }) {
                   className={cn(
                     'text-[12px] tracking-wide transition-colors duration-200',
                     pathname.startsWith(link.href) && link.href !== BASE
-                      ? 'text-[#1B3B2B] font-semibold'
+                      ? 'text-[#2C1E11] font-semibold'
                       : mutedCls,
                   )}
                 >
@@ -167,7 +167,7 @@ export default function LocalExpertNavbar({ agentName, phone, onContactOpen }) {
                 </div>
                 <button
                   onClick={() => setMenuOpen(false)}
-                  className="text-[#1B3B2B]/60 hover:text-[#1B3B2B] transition-colors"
+                  className="text-[#2C1E11]/60 hover:text-[#2C1E11] transition-colors"
                 >
                   <X size={20} strokeWidth={1.5} />
                 </button>
@@ -180,7 +180,7 @@ export default function LocalExpertNavbar({ agentName, phone, onContactOpen }) {
                       key={link.href}
                       href={link.href}
                       onClick={() => setMenuOpen(false)}
-                      className="flex items-center justify-between py-3 border-b border-[#1B3B2B]/8 text-[15px] text-[#1B3B2B] hover:text-[#1B3B2B]/60 transition-colors"
+                      className="flex items-center justify-between py-3 border-b border-[#1B3B2B]/8 text-[15px] text-[#2C1E11] hover:text-[#2C1E11]/60 transition-colors"
                       style={{ fontFamily: 'var(--font-plus-jakarta, system-ui)' }}
                     >
                       {link.label}
@@ -200,7 +200,7 @@ export default function LocalExpertNavbar({ agentName, phone, onContactOpen }) {
                 {phone && (
                   <a
                     href={`tel:${phone}`}
-                    className="flex items-center justify-center gap-2 mt-3 text-[12px] text-[#1B3B2B]/50"
+                    className="flex items-center justify-center gap-2 mt-3 text-[12px] text-[#2C1E11]/50"
                   >
                     <Phone size={11} /> {phone}
                   </a>

@@ -103,7 +103,7 @@ export default function NeighborhoodDetailPage({ params }) {
                       <span className="flex items-center gap-1"><Bath size={10} /> {listing.baths}</span>
                       <span className="flex items-center gap-1"><Square size={10} /> {listing.sqft.toLocaleString()}</span>
                     </div>
-                    <p className="text-[8.5px] text-[#1B3B2B]/25 mt-2">Listing Provided Courtesy of {listing.listingBrokerage}</p>
+                    <p className="text-[8.5px] text-[#2C1E11]/25 mt-2">Listing Provided Courtesy of {listing.listingBrokerage}</p>
                   </div>
                 </Link>
               ))}
@@ -116,12 +116,12 @@ export default function NeighborhoodDetailPage({ params }) {
       <section className="py-[64px] border-t border-[#E5E0D8]" style={{ backgroundColor: '#F8F3EB' }}>
         <div className="max-w-7xl mx-auto px-5 lg:px-8 flex justify-between">
           {prev ? (
-            <Link href={`/local-expert/neighborhoods/${prev.slug}`} className="group flex items-center gap-2 text-[13px] text-[#1B3B2B]/50 hover:text-[#1B3B2B] transition-colors">
+            <Link href={`/local-expert/neighborhoods/${prev.slug}`} className="group flex items-center gap-2 text-[13px] text-[#2C1E11]/50 hover:text-[#2C1E11] transition-colors">
               <ArrowLeft size={14} /> <span>{prev.name}</span>
             </Link>
           ) : <div />}
           {next ? (
-            <Link href={`/local-expert/neighborhoods/${next.slug}`} className="group flex items-center gap-2 text-[13px] text-[#1B3B2B]/50 hover:text-[#1B3B2B] transition-colors">
+            <Link href={`/local-expert/neighborhoods/${next.slug}`} className="group flex items-center gap-2 text-[13px] text-[#2C1E11]/50 hover:text-[#2C1E11] transition-colors">
               <span>{next.name}</span> <ArrowRight size={14} />
             </Link>
           ) : <div />}

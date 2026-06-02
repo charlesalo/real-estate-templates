@@ -34,7 +34,7 @@ export default function PropertyDetailPage({ params }) {
 
         <Link
           href="/local-expert/listings"
-          className="inline-flex items-center gap-1.5 text-[12px] text-[#1B3B2B]/45 hover:text-[#1B3B2B] transition-colors mb-8"
+          className="inline-flex items-center gap-1.5 text-[12px] text-[#2C1E11]/45 hover:text-[#2C1E11] transition-colors mb-8"
         >
           <ArrowLeft size={13} /> Back to listings
         </Link>
@@ -54,7 +54,7 @@ export default function PropertyDetailPage({ params }) {
             </div>
 
             <div className="flex gap-2 mb-4">
-              <span className="px-3 py-1 text-[10px] font-bold uppercase tracking-wider rounded-full border border-[#E5E0D8] text-[#1B3B2B]/60">{listing.type}</span>
+              <span className="px-3 py-1 text-[10px] font-bold uppercase tracking-wider rounded-full border border-[#E5E0D8] text-[#2C1E11]/60">{listing.type}</span>
               <span className="px-3 py-1 text-[10px] font-bold uppercase tracking-wider rounded-full bg-[#8B9E8B]/20 text-[#24180F]">{listing.status}</span>
             </div>
 
@@ -62,14 +62,14 @@ export default function PropertyDetailPage({ params }) {
               {formatPrice(listing.price)}
             </div>
 
-            <div className="flex items-start gap-1.5 text-[15px] text-[#1B3B2B] mb-1">
-              <MapPin size={15} className="mt-0.5 text-[#1B3B2B]/40 flex-shrink-0" />
+            <div className="flex items-start gap-1.5 text-[15px] text-[#2C1E11] mb-1">
+              <MapPin size={15} className="mt-0.5 text-[#2C1E11]/40 flex-shrink-0" />
               <span>{listing.address}, {listing.neighborhood}, {listing.city}, {listing.state} {listing.zip}</span>
             </div>
 
             <div className="flex flex-wrap items-center gap-5 py-5 my-5 border-y border-[#E5E0D8]">
-              <span className="flex items-center gap-1.5 text-[15px] text-[#1B3B2B]/70"><Bed size={16} className="text-[#1B3B2B]/40" /> <strong>{listing.beds}</strong> Bedrooms</span>
-              <span className="flex items-center gap-1.5 text-[15px] text-[#1B3B2B]/70"><Bath size={16} className="text-[#1B3B2B]/40" /> <strong>{listing.baths}</strong> Bathrooms</span>
+              <span className="flex items-center gap-1.5 text-[15px] text-[#2C1E11]/70"><Bed size={16} className="text-[#2C1E11]/40" /> <strong>{listing.beds}</strong> Bedrooms</span>
+              <span className="flex items-center gap-1.5 text-[15px] text-[#2C1E11]/70"><Bath size={16} className="text-[#2C1E11]/40" /> <strong>{listing.baths}</strong> Bathrooms</span>
               <span className="flex items-center gap-1.5 text-[15px] text-[#24180F]/70"><Square size={16} className="text-[#24180F]/40" /> <strong>{listing.sqft.toLocaleString()}</strong> sq ft</span>
             </div>
 
@@ -86,7 +86,7 @@ export default function PropertyDetailPage({ params }) {
             </div>
 
             <div className="p-4 rounded-xl border border-[#E5E0D8] bg-[#F4F0EA]">
-              <p className="text-[10px] text-[#1B3B2B]/35 leading-relaxed">
+              <p className="text-[10px] text-[#2C1E11]/35 leading-relaxed">
                 Listing Provided Courtesy of {listing.listingBrokerage}. MLS ID: {listing.mlsId}.
                 All information is deemed reliable but not guaranteed and should be independently reviewed and verified.
                 All properties are subject to prior sale or withdrawal. Equal Housing Opportunity. Compass Real Estate LLC, NY Lic# 109802832.

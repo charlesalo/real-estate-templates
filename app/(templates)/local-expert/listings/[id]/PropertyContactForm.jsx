@@ -32,7 +32,7 @@ export default function PropertyContactForm({ listing, agent }) {
             {agent.name}
           </p>
           <p className="text-[10px] text-[#24180F]/40">{agent.brokerage}</p>
-          <a href={`tel:${agent.phone}`} className="flex items-center gap-1 text-[11px] text-[#1B3B2B]/50 hover:text-[#1B3B2B] transition-colors mt-0.5">
+          <a href={`tel:${agent.phone}`} className="flex items-center gap-1 text-[11px] text-[#2C1E11]/50 hover:text-[#2C1E11] transition-colors mt-0.5">
             <Phone size={10} /> {agent.phone}
           </a>
         </div>
@@ -50,7 +50,7 @@ export default function PropertyContactForm({ listing, agent }) {
           </div>
         ) : (
           <form onSubmit={handleSubmit} className="space-y-3">
-            <p className="text-[13px] font-semibold text-[#1B3B2B] mb-4">
+            <p className="text-[13px] font-semibold text-[#2C1E11] mb-4">
               Interested in this property?
             </p>
             <input
@@ -59,7 +59,7 @@ export default function PropertyContactForm({ listing, agent }) {
               value={form.name}
               onChange={handleChange}
               placeholder="Your name *"
-              className="w-full px-3 py-2.5 text-[12px] border border-[#E5E0D8] rounded-lg text-[#1B3B2B] placeholder-[#1B3B2B]/30 focus:outline-none focus:border-[#1B3B2B]/30 transition-colors"
+              className="w-full px-3 py-2.5 text-[12px] border border-[#E5E0D8] rounded-lg text-[#2C1E11] placeholder-[#2C1E11]/30 focus:outline-none focus:border-[#1B3B2B]/30 transition-colors"
             />
             <input
               name="email"
@@ -68,7 +68,7 @@ export default function PropertyContactForm({ listing, agent }) {
               value={form.email}
               onChange={handleChange}
               placeholder="Email *"
-              className="w-full px-3 py-2.5 text-[12px] border border-[#E5E0D8] rounded-lg text-[#1B3B2B] placeholder-[#1B3B2B]/30 focus:outline-none focus:border-[#1B3B2B]/30 transition-colors"
+              className="w-full px-3 py-2.5 text-[12px] border border-[#E5E0D8] rounded-lg text-[#2C1E11] placeholder-[#2C1E11]/30 focus:outline-none focus:border-[#1B3B2B]/30 transition-colors"
             />
             <input
               name="phone"
@@ -76,7 +76,7 @@ export default function PropertyContactForm({ listing, agent }) {
               value={form.phone}
               onChange={handleChange}
               placeholder="Phone"
-              className="w-full px-3 py-2.5 text-[12px] border border-[#E5E0D8] rounded-lg text-[#1B3B2B] placeholder-[#1B3B2B]/30 focus:outline-none focus:border-[#1B3B2B]/30 transition-colors"
+              className="w-full px-3 py-2.5 text-[12px] border border-[#E5E0D8] rounded-lg text-[#2C1E11] placeholder-[#2C1E11]/30 focus:outline-none focus:border-[#1B3B2B]/30 transition-colors"
             />
             <textarea
               name="message"
@@ -84,7 +84,7 @@ export default function PropertyContactForm({ listing, agent }) {
               value={form.message}
               onChange={handleChange}
               defaultValue={`I'm interested in ${listing.address}. Please send more information.`}
-              className="w-full px-3 py-2.5 text-[12px] border border-[#E5E0D8] rounded-lg text-[#1B3B2B] placeholder-[#1B3B2B]/30 focus:outline-none focus:border-[#1B3B2B]/30 transition-colors resize-none"
+              className="w-full px-3 py-2.5 text-[12px] border border-[#E5E0D8] rounded-lg text-[#2C1E11] placeholder-[#2C1E11]/30 focus:outline-none focus:border-[#1B3B2B]/30 transition-colors resize-none"
             />
             {/* NYS First Point of Contact */}
             <label className="flex items-start gap-2 cursor-pointer">
@@ -96,7 +96,7 @@ export default function PropertyContactForm({ listing, agent }) {
                 onChange={handleChange}
                 className="mt-0.5 h-3 w-3 flex-shrink-0 accent-[#1B3B2B]"
               />
-              <span className="text-[9.5px] text-[#1B3B2B]/35 leading-relaxed">
+              <span className="text-[9.5px] text-[#2C1E11]/35 leading-relaxed">
                 I acknowledge receipt of the NYS Disclosure Form for Buyers and Sellers (First Point of Contact — required by NYS DOS). *
               </span>
             </label>

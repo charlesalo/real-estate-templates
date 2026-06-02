@@ -19,7 +19,7 @@ export default function NeighborhoodsPage() {
         >
           The Neighborhood Grid
         </h1>
-        <p className="text-[15px] text-[#1B3B2B]/50 max-w-xl mb-12">
+        <p className="text-[15px] text-[#2C1E11]/50 max-w-xl mb-12">
           Every neighborhood has a personality. These are the six I know well enough to tell you which block to live on.
         </p>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -29,7 +29,7 @@ export default function NeighborhoodsPage() {
                 <div className="relative aspect-[16/10] overflow-hidden">
                   <Image src={n.image} alt={n.name} fill className="object-cover transition-transform duration-500 group-hover:scale-105" />
                   <div className="absolute top-3 left-3">
-                    <span className="text-[9px] font-semibold uppercase tracking-wider px-2.5 py-1 rounded-full bg-white/90 text-[#1B3B2B]">{n.borough}</span>
+                    <span className="text-[9px] font-semibold uppercase tracking-wider px-2.5 py-1 rounded-full bg-white/90 text-[#2C1E11]">{n.borough}</span>
                   </div>
                 </div>
                 <div className="p-5">
@@ -37,10 +37,10 @@ export default function NeighborhoodsPage() {
                   <p className="text-[12px] text-[#24180F]/50 leading-snug mb-4">{n.tagline}</p>
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-4">
-                      <span className="text-[11px] text-[#1B3B2B]/40">From {n.medianPrice}</span>
-                      <span className="text-[11px] text-[#1B3B2B]/40">{n.activeListings} listings</span>
+                      <span className="text-[11px] text-[#2C1E11]/40">From {n.medianPrice}</span>
+                      <span className="text-[11px] text-[#2C1E11]/40">{n.activeListings} listings</span>
                     </div>
-                    <ArrowRight size={14} className="text-[#1B3B2B]/30 group-hover:text-[#1B3B2B] transition-colors" />
+                    <ArrowRight size={14} className="text-[#2C1E11]/30 group-hover:text-[#2C1E11] transition-colors" />
                   </div>
                 </div>
               </article>

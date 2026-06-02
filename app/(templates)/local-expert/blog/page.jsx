@@ -34,7 +34,7 @@ export default function BlogPage() {
                   {post.title}
                 </h2>
                 <p className="text-[15px] text-[#24180F]/50 leading-relaxed mb-3 line-clamp-3">{post.excerpt}</p>
-                <div className="flex items-center gap-3 text-[10px] text-[#1B3B2B]/30">
+                <div className="flex items-center gap-3 text-[10px] text-[#2C1E11]/30">
                   <span>{formatDate(post.date)}</span>
                   <span>·</span>
                   <span>{post.readMinutes} min read</span>

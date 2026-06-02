@@ -53,7 +53,7 @@ export default function LocalExpertContactModal({ agent, open, onClose }) {
               <div className="px-8 pt-8 pb-6 border-b border-[#1B3B2B]/10">
                 <button
                   onClick={onClose}
-                  className="absolute top-5 right-5 p-1.5 text-[#1B3B2B]/40 hover:text-[#1B3B2B] transition-colors"
+                  className="absolute top-5 right-5 p-1.5 text-[#2C1E11]/40 hover:text-[#2C1E11] transition-colors"
                 >
                   <X size={18} />
                 </button>
@@ -64,7 +64,7 @@ export default function LocalExpertContactModal({ agent, open, onClose }) {
                 >
                   Let&apos;s Talk Neighborhoods
                 </h2>
-                <p className="text-sm text-[#1B3B2B]/55 mt-1.5">
+                <p className="text-sm text-[#2C1E11]/55 mt-1.5">
                   Tell me what you&apos;re looking for — I respond within a few hours.
                 </p>
               </div>
@@ -74,7 +74,7 @@ export default function LocalExpertContactModal({ agent, open, onClose }) {
                 {sent ? (
                   <div className="text-center py-6">
                     <div className="w-12 h-12 rounded-full bg-[#1B3B2B]/10 flex items-center justify-center mx-auto mb-4">
-                      <CheckSquare size={22} className="text-[#1B3B2B]" />
+                      <CheckSquare size={22} className="text-[#2C1E11]" />
                     </div>
                     <h3
                       className="text-lg font-bold text-[#24180F] mb-2"
@@ -82,7 +82,7 @@ export default function LocalExpertContactModal({ agent, open, onClose }) {
                     >
                       Message sent
                     </h3>
-                    <p className="text-sm text-[#1B3B2B]/55">
+                    <p className="text-sm text-[#2C1E11]/55">
                       I&apos;ll be in touch within a few hours. Talk soon.
                     </p>
                   </div>
@@ -90,48 +90,48 @@ export default function LocalExpertContactModal({ agent, open, onClose }) {
                   <form onSubmit={handleSubmit} className="space-y-4">
                     <div className="grid grid-cols-2 gap-4">
                       <div>
-                        <label className="block text-[11px] text-[#1B3B2B]/50 mb-1.5 uppercase tracking-wider">Name</label>
+                        <label className="block text-[11px] text-[#2C1E11]/50 mb-1.5 uppercase tracking-wider">Name</label>
                         <input
                           name="name"
                           required
                           value={form.name}
                           onChange={handleChange}
-                          className="w-full px-3 py-2.5 text-sm border border-[#1B3B2B]/15 rounded-lg bg-white/60 text-[#1B3B2B] placeholder-[#1B3B2B]/30 focus:outline-none focus:border-[#1B3B2B]/40 transition-colors"
+                          className="w-full px-3 py-2.5 text-sm border border-[#1B3B2B]/15 rounded-lg bg-white/60 text-[#2C1E11] placeholder-[#2C1E11]/30 focus:outline-none focus:border-[#1B3B2B]/40 transition-colors"
                           placeholder="Your name"
                         />
                       </div>
                       <div>
-                        <label className="block text-[11px] text-[#1B3B2B]/50 mb-1.5 uppercase tracking-wider">Phone</label>
+                        <label className="block text-[11px] text-[#2C1E11]/50 mb-1.5 uppercase tracking-wider">Phone</label>
                         <input
                           name="phone"
                           value={form.phone}
                           onChange={handleChange}
                           type="tel"
-                          className="w-full px-3 py-2.5 text-sm border border-[#1B3B2B]/15 rounded-lg bg-white/60 text-[#1B3B2B] placeholder-[#1B3B2B]/30 focus:outline-none focus:border-[#1B3B2B]/40 transition-colors"
+                          className="w-full px-3 py-2.5 text-sm border border-[#1B3B2B]/15 rounded-lg bg-white/60 text-[#2C1E11] placeholder-[#2C1E11]/30 focus:outline-none focus:border-[#1B3B2B]/40 transition-colors"
                           placeholder="(917) 555-0100"
                         />
                       </div>
                     </div>
                     <div>
-                      <label className="block text-[11px] text-[#1B3B2B]/50 mb-1.5 uppercase tracking-wider">Email</label>
+                      <label className="block text-[11px] text-[#2C1E11]/50 mb-1.5 uppercase tracking-wider">Email</label>
                       <input
                         name="email"
                         required
                         type="email"
                         value={form.email}
                         onChange={handleChange}
-                        className="w-full px-3 py-2.5 text-sm border border-[#1B3B2B]/15 rounded-lg bg-white/60 text-[#1B3B2B] placeholder-[#1B3B2B]/30 focus:outline-none focus:border-[#1B3B2B]/40 transition-colors"
+                        className="w-full px-3 py-2.5 text-sm border border-[#1B3B2B]/15 rounded-lg bg-white/60 text-[#2C1E11] placeholder-[#2C1E11]/30 focus:outline-none focus:border-[#1B3B2B]/40 transition-colors"
                         placeholder="your@email.com"
                       />
                     </div>
                     <div>
-                      <label className="block text-[11px] text-[#1B3B2B]/50 mb-1.5 uppercase tracking-wider">Message</label>
+                      <label className="block text-[11px] text-[#2C1E11]/50 mb-1.5 uppercase tracking-wider">Message</label>
                       <textarea
                         name="message"
                         rows={3}
                         value={form.message}
                         onChange={handleChange}
-                        className="w-full px-3 py-2.5 text-sm border border-[#1B3B2B]/15 rounded-lg bg-white/60 text-[#1B3B2B] placeholder-[#1B3B2B]/30 focus:outline-none focus:border-[#1B3B2B]/40 transition-colors resize-none"
+                        className="w-full px-3 py-2.5 text-sm border border-[#1B3B2B]/15 rounded-lg bg-white/60 text-[#2C1E11] placeholder-[#2C1E11]/30 focus:outline-none focus:border-[#1B3B2B]/40 transition-colors resize-none"
                         placeholder="Which neighborhoods are you curious about?"
                       />
                     </div>
@@ -146,9 +146,9 @@ export default function LocalExpertContactModal({ agent, open, onClose }) {
                         onChange={handleChange}
                         className="mt-0.5 h-3.5 w-3.5 flex-shrink-0 accent-[#1B3B2B]"
                       />
-                      <span className="text-[10.5px] text-[#1B3B2B]/45 leading-relaxed">
+                      <span className="text-[10.5px] text-[#2C1E11]/45 leading-relaxed">
                         I acknowledge receipt of the{' '}
-                        <strong className="font-medium text-[#1B3B2B]/60">
+                        <strong className="font-medium text-[#2C1E11]/60">
                           NYS Disclosure Form for Buyers and Sellers of Real Property
                         </strong>{' '}
                         (First Point of Contact Disclosure — required under NYS DOS regulations).
@@ -167,12 +167,12 @@ export default function LocalExpertContactModal({ agent, open, onClose }) {
                 {/* Direct contact */}
                 <div className="flex items-center gap-6 mt-6 pt-5 border-t border-[#1B3B2B]/10">
                   {agent?.phone && (
-                    <a href={`tel:${agent.phone}`} className="flex items-center gap-1.5 text-xs text-[#1B3B2B]/45 hover:text-[#1B3B2B] transition-colors">
+                    <a href={`tel:${agent.phone}`} className="flex items-center gap-1.5 text-xs text-[#2C1E11]/45 hover:text-[#2C1E11] transition-colors">
                       <Phone size={11} /> {agent.phone}
                     </a>
                   )}
                   {agent?.email && (
-                    <a href={`mailto:${agent.email}`} className="flex items-center gap-1.5 text-xs text-[#1B3B2B]/45 hover:text-[#1B3B2B] transition-colors">
+                    <a href={`mailto:${agent.email}`} className="flex items-center gap-1.5 text-xs text-[#2C1E11]/45 hover:text-[#2C1E11] transition-colors">
                       <Mail size={11} /> {agent.email}
                     </a>
                   )}

@@ -57,7 +57,7 @@ export default function DualSearchWidget() {
       {/* Search input */}
       <form onSubmit={handleSearch} className="flex items-center gap-0 rounded-xl overflow-hidden border border-[#1B3B2B]/20 bg-white/80 shadow-sm">
         <div className="flex items-center gap-2 flex-1 px-4">
-          <Search size={14} className="text-[#1B3B2B]/40 flex-shrink-0" />
+          <Search size={14} className="text-[#2C1E11]/40 flex-shrink-0" />
           <input
             value={query}
             onChange={(e) => setQuery(e.target.value)}
@@ -66,7 +66,7 @@ export default function DualSearchWidget() {
                 ? 'Try "West Village 2BR" or "$2M condo"'
                 : 'Try "West Village" or "Brooklyn"'
             }
-            className="flex-1 py-3 text-[13px] text-[#1B3B2B] placeholder-[#1B3B2B]/30 bg-transparent focus:outline-none"
+            className="flex-1 py-3 text-[13px] text-[#2C1E11] placeholder-[#2C1E11]/30 bg-transparent focus:outline-none"
           />
         </div>
         <button
@@ -79,12 +79,12 @@ export default function DualSearchWidget() {
 
       {/* Popular areas */}
       <div className="flex flex-wrap items-center gap-2 mt-3">
-        <span className="text-[10px] text-[#1B3B2B]/35 uppercase tracking-wider">Popular:</span>
+        <span className="text-[10px] text-[#2C1E11]/35 uppercase tracking-wider">Popular:</span>
         {POPULAR.map((area) => (
           <a
             key={area.label}
             href={mode === 'homes' ? `/local-expert/listings?q=${encodeURIComponent(area.label)}` : `/local-expert/neighborhoods/${area.label.toLowerCase().replace(/\s+/g, '-')}`}
-            className="text-[11px] text-[#1B3B2B]/55 hover:text-[#1B3B2B] underline underline-offset-2 transition-colors"
+            className="text-[11px] text-[#2C1E11]/55 hover:text-[#2C1E11] underline underline-offset-2 transition-colors"
           >
             {area.label}
           </a>
