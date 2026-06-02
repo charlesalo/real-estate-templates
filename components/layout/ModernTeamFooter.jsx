@@ -211,7 +211,7 @@ export default function ModernTeamFooter({
 
       {/* ── Bottom bar ───────────────────────────────────────────── */}
       <div className="border-t border-white/[0.07]">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8 py-5 flex flex-col sm:flex-row items-center justify-between gap-3">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8 py-[24px] lg:py-[32px] flex flex-col sm:flex-row items-center justify-between gap-3">
           <p className="text-xs text-white/25 font-sans">
             © {year} {teamName}. All rights reserved.
           </p>

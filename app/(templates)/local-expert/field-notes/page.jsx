@@ -1,0 +1,60 @@
+import Image from 'next/image'
+import { FIELD_NOTES } from '@/lib/local-expert-data'
+
+export const metadata = {
+  title: 'Local Favorites',
+  description: "Nadia's Field Notes — curated cafes, parks, bookstores, and local gems across NYC.",
+}
+
+const CATEGORY_COLORS = {
+  Coffee: 'bg-[#C4A882]/20 text-[#7A6040]',
+  Bookstore: 'bg-[#8B9E8B]/20 text-[#4A6741]',
+  Park: 'bg-[#8B9E8B]/20 text-[#4A6741]',
+  Food: 'bg-[#C4A882]/20 text-[#7A6040]',
+  Culture: 'bg-[#1B3B2B]/8 text-[#1B3B2B]',
+  Market: 'bg-[#C4A882]/20 text-[#7A6040]',
+}
+
+export default function FieldNotesPage() {
+  return (
+    <section className="pt-[112px] pb-[64px] lg:pt-[144px] lg:pb-[80px]" style={{ backgroundColor: '#F8F3EB' }}>
+      <div className="max-w-7xl mx-auto px-5 lg:px-8">
+        <p className="text-[9px] tracking-[0.4em] uppercase text-[#BA5B3E] mb-3">Chapter Two</p>
+        <h1
+          className="text-[40px] lg:text-[54px] font-normal text-[#24180F] leading-[1.05] mb-4"
+          style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}
+        >
+          Nadia&apos;s Field Notes
+        </h1>
+        <p className="text-[15px] text-[#1B3B2B]/50 max-w-xl mb-12">
+          Forty-four notebooks. Fourteen years. The places that make a New York address feel like home.
+          None of this is sponsored. All of it is walked.
+        </p>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {FIELD_NOTES.map((note) => (
+            <article key={note.id} className="rounded-2xl overflow-hidden border border-[#E5E0D8] bg-white">
+              <div className="relative aspect-[4/3] overflow-hidden">
+                <Image src={note.image} alt={note.name} fill className="object-cover" />
+              </div>
+              <div className="p-5">
+                <span className={`inline-block text-[9px] font-semibold uppercase tracking-wider px-2.5 py-1 rounded-full mb-3 ${CATEGORY_COLORS[note.category] ?? 'bg-[#E5E0D8] text-[#1B3B2B]/50'}`}>
+                  {note.category}
+                </span>
+                <h2
+                  className="text-[18px] font-normal text-[#24180F] mb-1"
+                  style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}
+                >
+                  {note.name}
+                </h2>
+                <p className="text-[11px] text-[#1B3B2B]/40 mb-3">{note.location} · {note.address}</p>
+                <p className="text-[15px] text-[#1B3B2B]/60 leading-relaxed">{note.blurb}</p>
+                <p className="text-[10px] text-[#1B3B2B]/30 mt-3">{note.walkMinutes} min walk from the West Village</p>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}

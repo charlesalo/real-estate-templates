@@ -55,7 +55,7 @@ export default function Footer({
           : 'bg-template-bg border-template-border text-template-fg',
       )}
     >
-      <div className="max-w-7xl mx-auto px-6 lg:px-8 py-16 lg:py-20">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8 py-[64px] lg:py-[80px]">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 lg:gap-20">
 
           {/* Brand */}
