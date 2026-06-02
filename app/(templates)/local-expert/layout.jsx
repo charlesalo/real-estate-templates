@@ -23,6 +23,10 @@ export const metadata = {
   },
   description:
     'Your guide to living in, working in, and loving New York — curated by Nadia Osei, Licensed Associate RE Salesperson with Compass Real Estate.',
+  icons: {
+    icon: '/images/local-expert/nadia-favicon.png',
+    apple: '/images/local-expert/nadia-favicon.png',
+  },
 }
 
 export default function LocalExpertLayout({ children }) {
