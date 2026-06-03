@@ -32,23 +32,21 @@ export default function DualSearchWidget() {
       <div className="flex gap-2 mb-3">
         <button
           onClick={() => setMode('homes')}
-          className="px-4 py-2 text-[13px] font-semibold rounded-full border transition-all duration-200"
-          style={
+          className={`px-4 py-2 text-[13px] font-semibold rounded-full border transition-all duration-200 ${
             mode === 'homes'
-              ? { backgroundColor: '#1B3B2B', color: '#F8F3EB', borderColor: '#1B3B2B' }
-              : { backgroundColor: 'transparent', color: '#1B3B2B', borderColor: '#1B3B2B/30' }
-          }
+              ? 'bg-[#1B3B2B] text-[#F8F3EB] border-[#1B3B2B]'
+              : 'bg-transparent text-[#1B3B2B]/70 border-[#1B3B2B]/30 hover:border-[#1B3B2B]/60 hover:text-[#1B3B2B]'
+          }`}
         >
           Homes for Sale
         </button>
         <button
           onClick={() => setMode('guides')}
-          className="px-4 py-2 text-[13px] font-semibold rounded-full border transition-all duration-200"
-          style={
+          className={`px-4 py-2 text-[13px] font-semibold rounded-full border transition-all duration-200 ${
             mode === 'guides'
-              ? { backgroundColor: '#1B3B2B', color: '#F8F3EB', borderColor: '#1B3B2B' }
-              : { backgroundColor: 'transparent', color: '#1B3B2B', borderColor: '#1B3B2B' }
-          }
+              ? 'bg-[#1B3B2B] text-[#F8F3EB] border-[#1B3B2B]'
+              : 'bg-transparent text-[#1B3B2B]/70 border-[#1B3B2B]/30 hover:border-[#1B3B2B]/60 hover:text-[#1B3B2B]'
+          }`}
         >
           Explore Neighborhood Guides
         </button>

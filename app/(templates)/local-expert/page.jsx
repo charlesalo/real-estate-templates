@@ -2,7 +2,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowRight, Bed, Bath, Square } from 'lucide-react'
 import DualSearchWidget from './DualSearchWidget'
-import NeighborhoodMap from './NeighborhoodMap'
+import NeighborhoodMapClient from './NeighborhoodMapClient'
 import MarketReportForm from './MarketReportForm'
 import {
   AGENT,
@@ -43,12 +43,11 @@ export default function LocalExpertHome() {
             {/* Left: editorial content */}
             <div>
               {/* Masthead label */}
-              <div className="flex items-center gap-3 mb-6">
-                <div className="h-px w-8 bg-[#BA5B3E]/40" />
-                <span className="text-[9px] tracking-[0.45em] uppercase text-[#BA5B3E] font-medium">
+              <div className="flex items-center gap-4 mb-6">
+                <span className="text-[9px] tracking-[0.45em] uppercase text-[#BA5B3E] font-medium whitespace-nowrap">
                   Vol. XIV · Autumn Edition
                 </span>
-                <div className="h-px w-8 bg-[#BA5B3E]/40" />
+                <div className="h-px flex-1 bg-[#BEB7A9]" />
               </div>
 
               {/* Headline */}
@@ -154,7 +153,7 @@ export default function LocalExpertHome() {
       </section>
 
       {/* ─── CHAPTER ONE: NEIGHBORHOOD GRID ──────────────────────────── */}
-      <section className="py-[96px] lg:py-[128px]" style={{ backgroundColor: '#F4F0EA' }}>
+      <section className="py-[96px] lg:py-[128px]" style={{ backgroundColor: '#F8F3EB' }}>
         <div className="max-w-7xl mx-auto px-5 lg:px-8">
 
           {/* Chapter label */}
@@ -173,7 +172,7 @@ export default function LocalExpertHome() {
               href="/local-expert/neighborhoods"
               className="hidden md:flex items-center gap-1.5 text-[12px] font-semibold text-[#2C1E11]/50 hover:text-[#2C1E11] transition-colors whitespace-nowrap"
             >
-              All 38 neighborhoods <ArrowRight size={13} />
+              View All Neighborhoods <ArrowRight size={13} />
             </Link>
           </div>
 
@@ -182,19 +181,19 @@ export default function LocalExpertHome() {
             bakery — the things Zillow won&apos;t tell you.
           </p>
 
-          <NeighborhoodMap neighborhoods={NEIGHBORHOODS} />
+          <NeighborhoodMapClient neighborhoods={NEIGHBORHOODS} />
 
           <Link
             href="/local-expert/neighborhoods"
             className="flex md:hidden items-center gap-1.5 text-[12px] font-semibold text-[#2C1E11]/50 hover:text-[#2C1E11] transition-colors mt-6"
           >
-            All 38 neighborhoods <ArrowRight size={13} />
+            View All Neighborhoods <ArrowRight size={13} />
           </Link>
         </div>
       </section>
 
       {/* ─── CHAPTER TWO: FIELD NOTES ────────────────────────────────── */}
-      <section className="py-[96px] lg:py-[128px]" style={{ backgroundColor: '#F8F3EB' }}>
+      <section className="py-[96px] lg:py-[128px]" style={{ backgroundColor: '#F2ECE1' }}>
         <div className="max-w-7xl mx-auto px-5 lg:px-8">
 
           <div className="grid grid-cols-1 lg:grid-cols-[240px_1fr] gap-12 lg:gap-20">
@@ -221,37 +220,35 @@ export default function LocalExpertHome() {
               </Link>
             </div>
 
-            {/* Field notes grid */}
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-              {FIELD_NOTES.map((note, i) => (
-                <article
-                  key={note.id}
-                  className={`group relative rounded-xl overflow-hidden cursor-pointer ${i === 0 || i === 3 ? 'md:col-span-1' : ''}`}
-                  style={{ aspectRatio: i % 3 === 1 ? '3/4' : '4/3' }}
-                >
-                  <Image
-                    src={note.image}
-                    alt={note.name}
-                    fill
-                    className="object-cover transition-transform duration-500 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
-                  <div className="absolute bottom-0 left-0 right-0 p-4">
-                    <div className="text-[8px] tracking-[0.3em] uppercase text-white/50 mb-1">{note.category}</div>
-                    <p className="text-[13px] font-bold text-white leading-snug" style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}>
-                      {note.name}
-                    </p>
-                    <p className="text-[10px] text-white/60 mt-0.5">{note.location}</p>
-                  </div>
-                </article>
+            {/* Field notes masonry grid — mobile: 2-col uniform, desktop: 3-col variable */}
+            <div className="grid grid-cols-2 gap-3 md:hidden">
+              {FIELD_NOTES.map((note) => (
+                <NoteCard key={note.id} note={note} aspectRatio="4/5" />
               ))}
+            </div>
+            <div className="hidden md:grid md:grid-cols-3 gap-4">
+              {/* Left column: portrait top, bottom grows to align with middle */}
+              <div className="flex flex-col gap-4">
+                <NoteCard note={FIELD_NOTES[0]} aspectRatio="3/4" />
+                <NoteCard note={FIELD_NOTES[3]} className="flex-1" />
+              </div>
+              {/* Middle column: square + tall portrait (sets the row height) */}
+              <div className="flex flex-col gap-4">
+                <NoteCard note={FIELD_NOTES[1]} aspectRatio="1/1" />
+                <NoteCard note={FIELD_NOTES[4]} aspectRatio="2/3" />
+              </div>
+              {/* Right column: portrait top, bottom grows to align with middle */}
+              <div className="flex flex-col gap-4">
+                <NoteCard note={FIELD_NOTES[2]} aspectRatio="3/4" />
+                <NoteCard note={FIELD_NOTES[5]} className="flex-1" />
+              </div>
             </div>
           </div>
         </div>
       </section>
 
       {/* ─── CHAPTER THREE: CURATED LOCAL HOMES ──────────────────────── */}
-      <section className="py-[96px] lg:py-[128px]" style={{ backgroundColor: '#F4F0EA' }}>
+      <section className="py-[96px] lg:py-[128px]" style={{ backgroundColor: '#F8F3EB' }}>
         <div className="max-w-7xl mx-auto px-5 lg:px-8">
 
           <div className="flex items-end justify-between gap-4 mb-2">
@@ -299,53 +296,15 @@ export default function LocalExpertHome() {
       </section>
 
       {/* ─── MARKET REPORT CTA ────────────────────────────────────────── */}
-      <section className="py-[96px] lg:py-[128px]" style={{ backgroundColor: '#1B3B2B' }}>
-        <div className="max-w-7xl mx-auto px-5 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-[1fr_420px] gap-12 lg:gap-20 items-center">
-
-            {/* Left: copy */}
-            <div>
-              <p className="text-[9px] tracking-[0.4em] uppercase text-[#8B9E8B] mb-4">The Insider Edition</p>
-              <h2
-                className="text-[32px] lg:text-[42px] font-normal text-[#F8F3EB] leading-tight mb-6"
-                style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}
-              >
-                Get the real local<br />market report.
-              </h2>
-              <p className="text-[15px] text-[#F8F3EB]/55 mb-6 leading-relaxed">
-                Plug your block. We&apos;ll send you a beautifully designed, hand-annotated PDF on your exact
-                neighborhood — median prices, days on market, recent comps, and what a specific unit is
-                actually worth. Built monthly. Never generic.
-              </p>
-              <ul className="space-y-2.5">
-                {[
-                  'Median sale and ask price by building type',
-                  'Off-market intel curated by building type',
-                  'Days on market vs. borough average',
-                  'School catchment & local score cards',
-                  'Relocation & co-op board tips',
-                ].map((item) => (
-                  <li key={item} className="flex items-center gap-2.5 text-[13px] text-[#F8F3EB]/55">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#8B9E8B] flex-shrink-0" />
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* Right: form */}
-            <MarketReportForm />
-          </div>
-        </div>
-      </section>
+      <MarketReportForm />
 
       {/* ─── ABOUT NADIA ──────────────────────────────────────────────── */}
       <section className="py-[96px] lg:py-[128px]" style={{ backgroundColor: '#F8F3EB' }}>
         <div className="max-w-7xl mx-auto px-5 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-[380px_1fr] gap-12 lg:gap-20 items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-[420px_1fr] gap-12 lg:gap-24 items-start">
 
-            {/* Agent photo */}
-            <div className="relative">
+            {/* Agent photo + caption */}
+            <div>
               <div className="relative aspect-[3/4] rounded-2xl overflow-hidden">
                 <Image
                   src={AGENT.photo}
@@ -354,78 +313,73 @@ export default function LocalExpertHome() {
                   className="object-cover"
                 />
               </div>
-              {/* Agent credential card */}
-              <div className="absolute bottom-4 left-4 right-4 rounded-xl p-4" style={{ backgroundColor: '#F8F3EB/95', backdropFilter: 'blur(8px)', backgroundColor: 'rgba(249,246,240,0.95)' }}>
-                <p className="text-[13px] font-bold text-[#24180F]" style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}>
-                  {AGENT.name}
-                </p>
-                <p className="text-[10px] text-[#24180F]/50 mt-0.5">{AGENT.title}</p>
-                <p className="text-[10px] text-[#2C1E11]/40 mt-0.5">{AGENT.brokerage}</p>
-              </div>
+              <p className="text-[11px] tracking-[0.28em] uppercase text-[#2C1E11]/50 mt-4 leading-relaxed">
+                {AGENT.name} · Licensed Associate Real Estate Broker
+              </p>
             </div>
 
             {/* Bio content */}
-            <div className="lg:pt-4">
-              <p className="text-[9px] tracking-[0.4em] uppercase text-[#BA5B3E] mb-4">A Note from the Agent</p>
+            <div className="lg:pt-2">
+              <p className="text-[9px] tracking-[0.4em] uppercase text-[#BA5B3E] mb-5">A Note from the Broker</p>
+
               <h2
-                className="text-[32px] lg:text-[42px] font-normal text-[#24180F] leading-tight mb-8"
+                className="text-[40px] lg:text-[52px] font-normal text-[#24180F] leading-[1.08] mb-8"
                 style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}
               >
                 I don&apos;t sell apartments.<br />
-                I introduce people to blocks.
+                <em className="text-[#1B3B2B]">I introduce people to blocks.</em>
               </h2>
 
-              <div className="space-y-5">
+              <div className="space-y-5 mb-8">
                 {AGENT.bio.map((para, i) => (
-                  <p key={i} className="text-[15px] text-[#2C1E11]/65 leading-relaxed">
+                  <p key={i} className="text-[15px] text-[#2C1E11]/60 leading-relaxed">
                     {para}
                   </p>
                 ))}
               </div>
 
-              <div className="flex flex-wrap gap-3 mt-8">
+              <div className="flex flex-wrap items-center gap-3">
                 <Link
                   href="/local-expert/contact"
-                  className="px-6 py-3 text-[13px] font-bold rounded-full bg-[#1B3B2B] text-[#F8F3EB] hover:bg-[#2a5540] transition-colors"
+                  className="px-6 py-3 text-[13px] font-bold rounded-full bg-[#1B3B2B] text-[#F8F3EB] hover:bg-[#2a5540] transition-colors min-w-[170px] text-center"
                 >
-                  Book a 30-minute call
+                  Book a 20-minute call
                 </Link>
                 <Link
-                  href="/local-expert/about"
-                  className="px-6 py-3 text-[13px] font-bold rounded-full border border-[#1B3B2B]/20 text-[#2C1E11] hover:bg-[#1B3B2B]/5 transition-colors"
+                  href="/local-expert/field-notes"
+                  className="px-6 py-3 text-[13px] font-bold rounded-full border border-[#1B3B2B]/30 text-[#1B3B2B]/70 bg-transparent hover:border-[#1B3B2B]/60 hover:text-[#1B3B2B] transition-all min-w-[170px] text-center"
                 >
                   Read my story
                 </Link>
               </div>
 
-              {/* Testimonial pull quote */}
-              <div className="mt-10 pt-8 border-t border-[#1B3B2B]/10">
-                <blockquote>
-                  <p
-                    className="text-[17px] italic text-[#24180F]/70 leading-relaxed"
-                    style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}
-                  >
-                    &ldquo;{TESTIMONIAL.quote}&rdquo;
+              {/* Testimonial — left-bordered blockquote */}
+              <blockquote className="mt-12 pl-6 border-l-2 border-[#BA5B3E]">
+                <p
+                  className="text-[18px] italic text-[#24180F]/70 leading-relaxed mb-4"
+                  style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}
+                >
+                  &ldquo;{TESTIMONIAL.quote}&rdquo;
+                </p>
+                <footer>
+                  <p className="text-[9px] tracking-[0.3em] uppercase text-[#2C1E11]/40">
+                    — {TESTIMONIAL.author}, {TESTIMONIAL.location}
                   </p>
-                  <footer className="mt-4">
-                    <p className="text-[12px] font-semibold text-[#2C1E11]">{TESTIMONIAL.author}</p>
-                    <p className="text-[11px] text-[#2C1E11]/40">{TESTIMONIAL.location}</p>
-                  </footer>
-                </blockquote>
-              </div>
+                </footer>
+              </blockquote>
             </div>
           </div>
         </div>
       </section>
 
       {/* ─── BLOG PREVIEW ─────────────────────────────────────────────── */}
-      <section className="py-[96px] lg:py-[128px]" style={{ backgroundColor: '#F4F0EA' }}>
+      <section className="py-[96px] lg:py-[128px]" style={{ backgroundColor: '#F2ECE1' }}>
         <div className="max-w-7xl mx-auto px-5 lg:px-8">
           <div className="flex items-end justify-between gap-4 mb-10">
             <div>
               <span className="text-[9px] tracking-[0.4em] uppercase text-[#BA5B3E]">From the Journal</span>
               <h2
-                className="text-[32px] font-normal text-[#24180F] mt-1"
+                className="text-[32px] lg:text-[42px] font-normal text-[#24180F] mt-1"
                 style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}
               >
                 Recent Writing
@@ -461,7 +415,7 @@ export default function LocalExpertHome() {
                   <p className="text-[12px] text-[#2C1E11]/50 mt-2 leading-relaxed line-clamp-2">
                     {post.excerpt}
                   </p>
-                  <p className="text-[10px] text-[#2C1E11]/30 mt-3">{post.readMinutes} min read</p>
+                  <p className="text-[10px] text-[#2C1E11]/40 mt-3">{post.readMinutes} min read</p>
                 </Link>
               </article>
             ))}
@@ -470,31 +424,65 @@ export default function LocalExpertHome() {
       </section>
 
       {/* ─── CONTACT TEASER ───────────────────────────────────────────── */}
-      <section
-        className="py-[96px] lg:py-[128px]"
-        style={{ backgroundColor: '#F8F3EB', borderTop: '1px solid rgba(27,59,43,0.08)' }}
-      >
-        <div className="max-w-3xl mx-auto px-5 lg:px-8 text-center">
-          <p className="text-[9px] tracking-[0.4em] uppercase text-[#BA5B3E] mb-4">A Note from Nadia</p>
+      <section className="relative py-[120px] lg:py-[168px] overflow-hidden">
+        {/* Full-bleed background */}
+        <Image
+          src="https://images.unsplash.com/photo-1440613905118-99b921706b5c?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+          alt="Dumbo Manhattan Bridge"
+          fill
+          className="object-cover object-center"
+        />
+        {/* Dark green overlay */}
+        <div className="absolute inset-0" style={{ backgroundColor: 'rgba(27,59,43,0.68)' }} />
+
+        {/* Content */}
+        <div className="relative max-w-3xl mx-auto px-5 lg:px-8 text-center">
+          <p className="text-[9px] tracking-[0.4em] uppercase text-[#F8F3EB] mb-4">Let&apos;s Work Together</p>
           <h2
-            className="text-[32px] lg:text-[42px] font-normal text-[#24180F] leading-tight mb-5"
+            className="text-[36px] lg:text-[52px] font-normal text-[#F8F3EB] leading-tight mb-5"
             style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}
           >
-            The right home in New York is a feeling.<br />Let&apos;s find yours.
+            The right home is a feeling.<br />I know how to find it.
           </h2>
-          <p className="text-[15px] text-[#2C1E11]/50 mb-8 max-w-md mx-auto leading-relaxed">
+          <p className="text-[15px] text-[#F8F3EB]/60 mb-8 max-w-md mx-auto leading-relaxed">
             Not sure where to start? Tell me what you&apos;re looking for — or what you&apos;re running from.
             I know this city. I&apos;ll help.
           </p>
           <Link
             href="/local-expert/contact"
-            className="inline-flex items-center gap-2 px-8 py-3.5 text-[13px] font-bold rounded-full bg-[#1B3B2B] text-[#F8F3EB] hover:bg-[#2a5540] transition-colors"
+            className="inline-flex items-center px-8 py-3.5 text-[13px] font-bold rounded-full bg-[#F8F3EB] text-[#1B3B2B] hover:bg-white transition-colors"
           >
-            Start the conversation <ArrowRight size={14} />
+            Start the conversation
           </Link>
         </div>
       </section>
     </>
+  )
+}
+
+// ── Note Card ─────────────────────────────────────────────────────────────────
+
+function NoteCard({ note, aspectRatio, className = '' }) {
+  return (
+    <article
+      className={`group relative rounded-xl overflow-hidden cursor-pointer ${className}`}
+      style={aspectRatio ? { aspectRatio } : undefined}
+    >
+      <Image
+        src={note.image}
+        alt={note.name}
+        fill
+        className="object-cover transition-transform duration-500 group-hover:scale-105"
+      />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+      <div className="absolute bottom-0 left-0 right-0 p-4">
+        <div className="text-[8px] tracking-[0.3em] uppercase text-white/50 mb-1">{note.category}</div>
+        <p className="text-[13px] font-bold text-white leading-snug" style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}>
+          {note.name}
+        </p>
+        <p className="text-[10px] text-white/60 mt-0.5">{note.location}</p>
+      </div>
+    </article>
   )
 }
 

@@ -1,17 +1,45 @@
 'use client'
 
+import mapboxgl from 'mapbox-gl'
 import { useEffect, useRef, useState } from 'react'
 import { MapPin, ArrowRight } from 'lucide-react'
 import Link from 'next/link'
 import { cn } from '@/lib/utils'
-import 'mapbox-gl/dist/mapbox-gl.css'
 
-let mapboxgl = null
+// Real NTA boundaries sourced from NYC Open Data (2020 Neighborhood Tabulation Areas)
+// https://data.cityofnewyork.us/resource/9nt8-h7nd.geojson
+// Upper East Side = "Upper East Side-Lenox Hill-Roosevelt Island" NTA (central UES polygon)
+// DUMBO = "Downtown Brooklyn-DUMBO-Boerum Hill" NTA
+const FALLBACK_BOUNDARIES = {
+  'west-village': [[-74.00915, 40.7425], [-74.00879, 40.74238], [-74.00779, 40.74197], [-74.00536, 40.74095], [-74.00252, 40.73975], [-73.99734, 40.73667], [-73.99853, 40.73504], [-73.99956, 40.73361], [-74.00051, 40.73232], [-74.00168, 40.73058], [-74.00253, 40.72901], [-74.00313, 40.72839], [-74.00859, 40.72892], [-74.01064, 40.72817], [-74.011, 40.72819], [-74.01434, 40.72862], [-74.01409, 40.73066], [-74.01116, 40.73045], [-74.01099, 40.73232], [-74.014, 40.73307], [-74.0109, 40.73335], [-74.01082, 40.73336], [-74.01076, 40.7334], [-74.01073, 40.73346], [-74.01074, 40.73353], [-74.0108, 40.73358], [-74.01083, 40.73401], [-74.01081, 40.73428], [-74.01064, 40.73605], [-74.01069, 40.73611], [-74.01073, 40.73616], [-74.01073, 40.73622], [-74.01069, 40.73628], [-74.01065, 40.73635], [-74.01052, 40.7376], [-74.01107, 40.7383], [-74.01112, 40.73835], [-74.01112, 40.73839], [-74.01105, 40.73839], [-74.01043, 40.7387], [-74.01055, 40.73919], [-74.01148, 40.73926], [-74.01159, 40.73948], [-74.01156, 40.73956], [-74.01146, 40.74058], [-74.01266, 40.7407], [-74.01257, 40.74074], [-74.01072, 40.74069], [-74.00949, 40.74074], [-74.0095, 40.74083], [-74.00954, 40.74125], [-74.01021, 40.74161], [-74.01084, 40.7426], [-74.00932, 40.74224], [-74.00915, 40.7425]],
+  'tribeca': [[-73.99931, 40.71755], [-74.00014, 40.7162], [-74.00053, 40.71517], [-74.00097, 40.71391], [-74.00093, 40.71326], [-74.00089, 40.713], [-74.00085, 40.71154], [-74.00077, 40.71132], [-74.00063, 40.71111], [-74.00066, 40.7108], [-74.001, 40.71035], [-74.00128, 40.70999], [-74.00167, 40.71001], [-74.00323, 40.71125], [-74.00353, 40.71149], [-74.00397, 40.71182], [-74.00442, 40.71219], [-74.00449, 40.71255], [-74.00429, 40.71291], [-74.00499, 40.71237], [-74.00543, 40.7122], [-74.00607, 40.71201], [-74.00702, 40.71178], [-74.00763, 40.71167], [-74.0078, 40.71171], [-74.00796, 40.71174], [-74.00811, 40.71171], [-74.00819, 40.71166], [-74.00822, 40.71158], [-74.0082, 40.7115], [-74.00803, 40.71145], [-74.0086, 40.71139], [-74.01168, 40.71278], [-74.01308, 40.71341], [-74.01326, 40.71506], [-74.01302, 40.71595], [-74.01269, 40.7173], [-74.01244, 40.71906], [-74.01303, 40.71913], [-74.01296, 40.7195], [-74.01341, 40.72002], [-74.01426, 40.7201], [-74.01557, 40.72025], [-74.01638, 40.72038], [-74.01352, 40.7204], [-74.01569, 40.72121], [-74.01312, 40.72147], [-74.01364, 40.72152], [-74.01356, 40.72157], [-74.01311, 40.72151], [-74.01249, 40.72178], [-74.01209, 40.72371], [-74.01144, 40.72428], [-74.01115, 40.72469], [-74.01094, 40.72566], [-74.01081, 40.72579], [-74.00932, 40.7247], [-74.0083, 40.72398], [-74.00763, 40.7235], [-74.00531, 40.72182], [-74.00393, 40.72085], [-74.0026, 40.7199], [-74.00127, 40.71896], [-73.99931, 40.71755]],
+  'upper-east-side': [[-73.97301, 40.76428], [-73.96154, 40.74972], [-73.96133, 40.7496], [-73.96098, 40.74976], [-73.96096, 40.74977], [-73.96091, 40.7498], [-73.95956, 40.75081], [-73.95791, 40.75211], [-73.95692, 40.75296], [-73.95331, 40.75634], [-73.95322, 40.75643], [-73.95254, 40.7571], [-73.94112, 40.76941], [-73.94036, 40.7705], [-73.94028, 40.77067], [-73.94023, 40.77085], [-73.94001, 40.77284], [-73.94212, 40.77946], [-73.94237, 40.78], [-73.94367, 40.78272], [-73.94376, 40.78283], [-73.94405, 40.78296], [-73.94465, 40.78322], [-73.95578, 40.78791], [-73.97301, 40.76428]],
+  'brooklyn-heights': [[-73.99236, 40.68969], [-73.99777, 40.69119], [-73.99894, 40.6915], [-73.99929, 40.69159], [-73.99992, 40.69177], [-74.00059, 40.69213], [-74.0017, 40.69238], [-74.00127, 40.6933], [-74.0007, 40.69439], [-73.9996, 40.69607], [-73.99941, 40.69636], [-73.99929, 40.6968], [-73.99894, 40.69694], [-73.99887, 40.69716], [-73.998, 40.6988], [-73.99716, 40.69979], [-73.99724, 40.70014], [-73.9965, 40.70114], [-73.99538, 40.70264], [-73.99506, 40.7031], [-73.99438, 40.70289], [-73.99385, 40.70267], [-73.99317, 40.70237], [-73.99261, 40.70206], [-73.99211, 40.70169], [-73.99194, 40.70156], [-73.99087, 40.70067], [-73.99082, 40.70035], [-73.99124, 40.69937], [-73.99136, 40.69897], [-73.99142, 40.69856], [-73.99142, 40.69778], [-73.99123, 40.69643], [-73.99115, 40.69618], [-73.99061, 40.69457], [-73.99045, 40.69372], [-73.99068, 40.69317], [-73.99097, 40.69255], [-73.98911, 40.69215], [-73.9891, 40.69142], [-73.98964, 40.69033], [-73.99047, 40.68914], [-73.99236, 40.68969]],
+  'dumbo': [[-73.97906, 40.70595], [-73.97912, 40.70553], [-73.97999, 40.70354], [-73.98003, 40.70214], [-73.98084, 40.7013], [-73.98066, 40.70114], [-73.98052, 40.70096], [-73.98042, 40.70077], [-73.98044, 40.70018], [-73.98049, 40.69928], [-73.98041, 40.69656], [-73.98039, 40.69638], [-73.98031, 40.69591], [-73.98023, 40.69529], [-73.9801, 40.6946], [-73.97986, 40.69429], [-73.97962, 40.69412], [-73.97949, 40.69401], [-73.97929, 40.69376], [-73.97922, 40.69363], [-73.97917, 40.69349], [-73.98147, 40.69357], [-73.98227, 40.6936], [-73.98251, 40.69361], [-73.98176, 40.69296], [-73.98179, 40.69164], [-73.9814, 40.68993], [-73.98277, 40.68999], [-73.98351, 40.68992], [-73.98155, 40.68915], [-73.98083, 40.68886], [-73.98065, 40.68846], [-73.97959, 40.687], [-73.97899, 40.68616], [-73.97808, 40.68491], [-73.97876, 40.68377], [-73.97969, 40.68252], [-73.98612, 40.68502], [-73.98863, 40.68534], [-73.98882, 40.68506], [-73.98913, 40.68459], [-73.99393, 40.68645], [-73.99334, 40.68768], [-73.99293, 40.68852], [-73.99236, 40.68969], [-73.99009, 40.6897], [-73.98922, 40.69097], [-73.98893, 40.69209], [-73.98947, 40.69229], [-73.99085, 40.6928], [-73.99062, 40.69331], [-73.99044, 40.69383], [-73.99074, 40.69503], [-73.99117, 40.69625], [-73.99128, 40.69659], [-73.99143, 40.69828], [-73.99141, 40.69869], [-73.99133, 40.6991], [-73.99103, 40.69985], [-73.99082, 40.70046], [-73.99093, 40.70077], [-73.99203, 40.70163], [-73.99222, 40.70177], [-73.99283, 40.70218], [-73.9933, 40.70243], [-73.99418, 40.70281], [-73.99471, 40.70299], [-73.9948, 40.70329], [-73.995, 40.70365], [-73.99471, 40.704], [-73.99479, 40.70409], [-73.99478, 40.70425], [-73.99457, 40.70438], [-73.99378, 40.70447], [-73.99369, 40.70448], [-73.99351, 40.70462], [-73.99251, 40.70469], [-73.99212, 40.7044], [-73.99142, 40.704], [-73.99055, 40.70442], [-73.99023, 40.70493], [-73.98935, 40.70473], [-73.98899, 40.70469], [-73.9883, 40.70454], [-73.98727, 40.70518], [-73.98682, 40.70514], [-73.98669, 40.70507], [-73.98664, 40.70502], [-73.98663, 40.705], [-73.98662, 40.70498], [-73.98643, 40.70535], [-73.98344, 40.70564], [-73.98337, 40.70546], [-73.98309, 40.70551], [-73.98275, 40.70555], [-73.98246, 40.70554], [-73.98093, 40.70537], [-73.98022, 40.70585], [-73.97956, 40.70577], [-73.97927, 40.70592], [-73.97905, 40.70597], [-73.97906, 40.70595]],
+  'soho': [[-74.00282, 40.72836], [-74.00242, 40.72818], [-74.00063, 40.72729], [-73.99836, 40.72617], [-73.99585, 40.72521], [-73.99418, 40.72469], [-73.9926, 40.72414], [-73.99326, 40.72235], [-73.99353, 40.72163], [-73.99404, 40.72032], [-73.99423, 40.71985], [-73.99543, 40.71728], [-73.99698, 40.71654], [-73.99931, 40.71755], [-74.00127, 40.71896], [-74.0026, 40.7199], [-74.00393, 40.72085], [-74.00531, 40.72182], [-74.00763, 40.7235], [-74.0083, 40.72398], [-74.00932, 40.7247], [-74.01081, 40.72579], [-74.01094, 40.72566], [-74.01115, 40.72469], [-74.01144, 40.72428], [-74.01181, 40.72508], [-74.01196, 40.72598], [-74.01234, 40.72652], [-74.011, 40.72819], [-74.01064, 40.72817], [-74.00859, 40.72892], [-74.00313, 40.72839], [-74.00282, 40.72836]],
+  // Cobble Hill: Atlantic Ave (N) · Court St (E) · Degraw St (S) · Hicks St (W), traced from OSM street intersections
+  'cobble-hill': [[-73.99779, 40.6912], [-73.99623, 40.69076], [-73.99436, 40.69024], [-73.99237, 40.68969], [-73.99523, 40.68374], [-73.99721, 40.6843], [-73.99907, 40.68481], [-74.001, 40.68535], [-73.99779, 40.6912]],
+  'chelsea': [[-74.00179, 40.76229], [-74.00115, 40.76203], [-73.99831, 40.76082], [-73.99604, 40.75986], [-73.99641, 40.75834], [-73.99685, 40.75773], [-73.9973, 40.75711], [-73.99501, 40.75614], [-73.99208, 40.75409], [-73.99346, 40.75219], [-73.99484, 40.75029], [-73.9962, 40.74844], [-73.99501, 40.74632], [-73.99187, 40.74419], [-73.9928, 40.74291], [-73.99397, 40.7413], [-73.99502, 40.73986], [-73.99634, 40.73805], [-74.00252, 40.73975], [-74.00536, 40.74095], [-74.00779, 40.74197], [-74.00879, 40.74238], [-74.00915, 40.7425], [-74.01215, 40.74356], [-74.01171, 40.74596], [-74.01056, 40.74587], [-74.00944, 40.74592], [-74.01159, 40.7466], [-74.01151, 40.74698], [-74.01135, 40.74798], [-74.01115, 40.74903], [-74.00925, 40.74999], [-74.01056, 40.75132], [-74.0079, 40.75354], [-74.00542, 40.75732], [-74.00497, 40.75788], [-74.00696, 40.75916], [-74.00338, 40.76073], [-74.00456, 40.76252], [-74.0044, 40.76267], [-74.00179, 40.76229]],
+  'park-slope': [[-73.97376, 40.68305], [-73.97393, 40.68233], [-73.97439, 40.68105], [-73.9749, 40.67995], [-73.97575, 40.6787], [-73.97189, 40.67639], [-73.96958, 40.6753], [-73.96929, 40.67507], [-73.96906, 40.67481], [-73.96884, 40.67441], [-73.96872, 40.67393], [-73.96873, 40.67357], [-73.9688, 40.67321], [-73.96894, 40.67289], [-73.97, 40.67263], [-73.97085, 40.67186], [-73.97232, 40.67003], [-73.97383, 40.66822], [-73.97534, 40.66642], [-73.97685, 40.66461], [-73.97835, 40.6628], [-73.97965, 40.66124], [-73.97982, 40.66128], [-73.97999, 40.66126], [-73.98013, 40.66119], [-73.98459, 40.66328], [-73.99166, 40.6667], [-73.99073, 40.66795], [-73.98922, 40.66975], [-73.98871, 40.67036], [-73.98744, 40.67188], [-73.98623, 40.67335], [-73.9847, 40.67518], [-73.98347, 40.67677], [-73.98262, 40.67804], [-73.98132, 40.67995], [-73.98004, 40.68185], [-73.97876, 40.68377], [-73.97808, 40.68491], [-73.97595, 40.68351], [-73.97376, 40.68305]],
+}
+
+
+function toGeoJSON(neighborhoods, boundaries) {
+  return {
+    type: 'FeatureCollection',
+    features: neighborhoods
+      .filter(n => boundaries[n.slug])
+      .map(n => ({
+        type: 'Feature',
+        properties: { slug: n.slug, name: n.name },
+        geometry: { type: 'Polygon', coordinates: [boundaries[n.slug]] },
+      })),
+  }
+}
 
 export default function NeighborhoodMap({ neighborhoods }) {
   const containerRef = useRef(null)
   const mapRef = useRef(null)
-  const markersRef = useRef([])
   const [active, setActive] = useState(neighborhoods[0])
   const [ready, setReady] = useState(false)
   const [noToken, setNoToken] = useState(false)
@@ -19,86 +47,76 @@ export default function NeighborhoodMap({ neighborhoods }) {
   useEffect(() => {
     const token = process.env.NEXT_PUBLIC_MAPBOX_TOKEN
     if (!token) { setNoToken(true); return }
+    if (!containerRef.current || mapRef.current) return
 
-    import('mapbox-gl').then(mod => {
-      mapboxgl = mod.default
-      mapboxgl.accessToken = token
+    mapboxgl.accessToken = token
 
-      if (!containerRef.current || mapRef.current) return
+    const map = new mapboxgl.Map({
+      container: containerRef.current,
+      style: 'mapbox://styles/mapbox/light-v11',
+      center: [-73.985, 40.730],
+      zoom: 11.5,
+    })
 
-      const map = new mapboxgl.Map({
-        container: containerRef.current,
-        style: 'mapbox://styles/mapbox/light-v11',
-        center: [-73.985, 40.730],
-        zoom: 11.5,
+    map.addControl(new mapboxgl.NavigationControl({ showCompass: false }), 'top-right')
+    mapRef.current = map
+
+    map.on('load', () => {
+      map.addSource('neighborhoods', {
+        type: 'geojson',
+        data: toGeoJSON(neighborhoods, FALLBACK_BOUNDARIES),
       })
 
-      map.addControl(new mapboxgl.NavigationControl({ showCompass: false }), 'top-right')
-      mapRef.current = map
-      map.on('load', () => setReady(true))
+      map.addLayer({
+        id: 'neighborhood-fills',
+        type: 'fill',
+        source: 'neighborhoods',
+        paint: { 'fill-color': '#1B3B2B', 'fill-opacity': 0.07 },
+      })
+
+      map.addLayer({
+        id: 'neighborhood-borders',
+        type: 'line',
+        source: 'neighborhoods',
+        paint: { 'line-color': '#1B3B2B', 'line-width': 1.5, 'line-opacity': 0.45 },
+      })
+
+      map.on('click', 'neighborhood-fills', (e) => {
+        const slug = e.features?.[0]?.properties?.slug
+        const n = neighborhoods.find(n => n.slug === slug)
+        if (n) setActive(n)
+      })
+      map.on('mouseenter', 'neighborhood-fills', () => { map.getCanvas().style.cursor = 'pointer' })
+      map.on('mouseleave', 'neighborhood-fills', () => { map.getCanvas().style.cursor = '' })
+
+      setReady(true)
     })
 
     return () => {
-      markersRef.current.forEach(m => m.remove())
-      markersRef.current = []
       mapRef.current?.remove()
       mapRef.current = null
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
+  // Update active polygon highlight and fly to neighborhood
   useEffect(() => {
-    if (!ready || !mapRef.current || !mapboxgl) return
+    const map = mapRef.current
+    if (!ready || !map || !active) return
 
-    markersRef.current.forEach(m => m.remove())
-    markersRef.current = []
+    map.setPaintProperty('neighborhood-fills', 'fill-opacity', [
+      'case', ['==', ['get', 'slug'], active.slug], 0.18, 0.07,
+    ])
+    map.setPaintProperty('neighborhood-borders', 'line-width', [
+      'case', ['==', ['get', 'slug'], active.slug], 2.5, 1.5,
+    ])
+    map.setPaintProperty('neighborhood-borders', 'line-opacity', [
+      'case', ['==', ['get', 'slug'], active.slug], 1, 0.45,
+    ])
 
-    neighborhoods.forEach(n => {
-      const { lat, lng } = n.geo ?? {}
-      if (!lat || !lng) return
-
-      const el = document.createElement('div')
-      el.style.cssText = `
-        width: 8px; height: 8px;
-        background: #1B3B2B; border-radius: 50%;
-        border: 2px solid #F8F3EB;
-        box-shadow: 0 0 0 2px #1B3B2B;
-        cursor: pointer; transition: transform 0.2s;
-      `
-      el.addEventListener('mouseenter', () => { el.style.transform = 'scale(1.6)' })
-      el.addEventListener('mouseleave', () => { el.style.transform = 'scale(1)' })
-
-      const popup = new mapboxgl.Popup({
-        offset: 16,
-        closeButton: false,
-        className: 'le-popup',
-      }).setHTML(`
-        <div style="padding: 10px 14px; min-width: 160px;">
-          <div style="font-size: 13px; font-weight: 700; color: #2C1E11; margin-bottom: 2px;">${n.name}</div>
-          <div style="font-size: 11px; color: #2C1E11; opacity: 0.5;">${n.borough}</div>
-          <div style="font-size: 11px; color: #2C1E11; margin-top: 6px;">${n.activeListings} active · from ${n.medianPrice}</div>
-        </div>
-      `)
-
-      const marker = new mapboxgl.Marker({ element: el })
-        .setLngLat([lng, lat])
-        .setPopup(popup)
-        .addTo(mapRef.current)
-
-      el.addEventListener('click', () => setActive(n))
-      markersRef.current.push(marker)
-    })
-  }, [ready, neighborhoods])
-
-  // Fly to active neighborhood
-  useEffect(() => {
-    if (!ready || !mapRef.current || !active?.geo) return
-    mapRef.current.flyTo({
-      center: [active.geo.lng, active.geo.lat],
-      zoom: 13.5,
-      duration: 800,
-      essential: true,
-    })
+    if (active.geo) {
+      map.flyTo({ center: [active.geo.lng, active.geo.lat], zoom: 13.5, duration: 800, essential: true })
+    }
   }, [active, ready])
 
   if (noToken) {
@@ -107,17 +125,14 @@ export default function NeighborhoodMap({ neighborhoods }) {
 
   return (
     <div className="flex flex-col lg:flex-row gap-0 rounded-2xl overflow-hidden border border-[#E5E0D8] shadow-sm" style={{ minHeight: 520 }}>
-      {/* Map */}
-      <div className="relative lg:w-[58%] h-[300px] lg:h-auto bg-[#E5E0D8]">
-        <div ref={containerRef} className="absolute inset-0" />
+      <div className="relative lg:w-[58%] h-[300px] lg:h-[520px] bg-[#E5E0D8]">
+        <div ref={containerRef} style={{ position: 'absolute', inset: 0 }} />
         {!ready && (
           <div className="absolute inset-0 flex items-center justify-center bg-[#E5E0D8]">
             <div className="w-6 h-6 border-2 border-[#1B3B2B]/20 border-t-[#1B3B2B] rounded-full animate-spin" />
           </div>
         )}
       </div>
-
-      {/* Neighborhood list panel */}
       <SidePanel neighborhoods={neighborhoods} active={active} setActive={setActive} />
     </div>
   )
@@ -132,40 +147,24 @@ function SidePanel({ neighborhoods, active, setActive }) {
       {neighborhoods.map((n) => {
         const isActive = active?.slug === n.slug
         return (
-          <button
-            key={n.slug}
-            onClick={() => setActive(n)}
-            className="w-full text-left"
-          >
-            <div
-              className={cn(
-                'flex gap-3 px-5 py-4 transition-colors duration-150',
-                isActive ? 'bg-[#1B3B2B]/5' : 'hover:bg-[#1B3B2B]/[0.03]',
-              )}
-            >
-              <img
-                src={n.image}
-                alt={n.name}
-                className="w-16 h-16 object-cover rounded-lg flex-shrink-0"
-              />
+          <button key={n.slug} onClick={() => setActive(n)} className="w-full text-left">
+            <div className={cn(
+              'flex gap-3 px-5 py-4 transition-colors duration-150',
+              isActive ? 'bg-[#1B3B2B]/5' : 'hover:bg-[#1B3B2B]/[0.03]',
+            )}>
+              <img src={n.image} alt={n.name} className="w-16 h-16 object-cover rounded-lg flex-shrink-0" />
               <div className="min-w-0 flex-1">
                 <div className="flex items-start justify-between gap-2">
                   <div>
                     <p className="text-[10px] text-[#24180F]/40 uppercase tracking-wider mb-0.5">{n.borough}</p>
-                    <p
-                      className="text-[15px] font-bold text-[#24180F] leading-snug"
-                      style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}
-                    >
+                    <p className="text-[15px] font-bold text-[#24180F] leading-snug"
+                      style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}>
                       {n.name}
                     </p>
                   </div>
-                  {isActive && (
-                    <div className="w-2 h-2 rounded-full bg-[#1B3B2B] flex-shrink-0 mt-1.5" />
-                  )}
+                  {isActive && <div className="w-2 h-2 rounded-full bg-[#1B3B2B] flex-shrink-0 mt-1.5" />}
                 </div>
-                <p className="text-[11px] text-[#2C1E11]/50 mt-1 leading-snug line-clamp-2">
-                  {n.tagline}
-                </p>
+                <p className="text-[11px] text-[#2C1E11]/50 mt-1 leading-snug line-clamp-2">{n.tagline}</p>
                 <div className="flex items-center gap-3 mt-2">
                   <span className="text-[10px] text-[#2C1E11]/50">From {n.medianPrice}</span>
                   <span className="text-[#2C1E11]/20">·</span>
@@ -173,18 +172,14 @@ function SidePanel({ neighborhoods, active, setActive }) {
                 </div>
               </div>
             </div>
-
-            {/* Expanded detail when active */}
             {isActive && (
               <div className="px-5 pb-4 bg-[#1B3B2B]/5">
                 <p className="text-[12px] text-[#2C1E11]/60 leading-relaxed mb-3">
                   {n.description.slice(0, 120)}…
                 </p>
-                <Link
-                  href={`/local-expert/neighborhoods/${n.slug}`}
+                <Link href={`/local-expert/neighborhoods/${n.slug}`}
                   className="inline-flex items-center gap-1 text-[11px] font-semibold text-[#2C1E11] hover:opacity-70 transition-opacity"
-                  onClick={(e) => e.stopPropagation()}
-                >
+                  onClick={(e) => e.stopPropagation()}>
                   Open the {n.name} guide <ArrowRight size={11} />
                 </Link>
               </div>
@@ -199,8 +194,7 @@ function SidePanel({ neighborhoods, active, setActive }) {
 function NoTokenFallback({ neighborhoods, active, setActive }) {
   return (
     <div className="flex flex-col lg:flex-row gap-0 rounded-2xl overflow-hidden border border-[#E5E0D8] shadow-sm" style={{ minHeight: 520 }}>
-      {/* Static map placeholder */}
-      <div className="lg:w-[58%] h-[300px] lg:h-auto bg-[#E5E0D8] flex flex-col items-center justify-center gap-3">
+      <div className="lg:w-[58%] h-[300px] lg:h-[520px] bg-[#E5E0D8] flex flex-col items-center justify-center gap-3">
         <MapPin size={28} className="text-[#2C1E11]/30" />
         <p className="text-[12px] text-[#2C1E11]/40 text-center px-8">
           Add <code className="font-mono">NEXT_PUBLIC_MAPBOX_TOKEN</code> to .env.local to enable the interactive map.
