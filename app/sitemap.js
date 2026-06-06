@@ -1,6 +1,6 @@
 import { FEATURED_LISTINGS } from '@/lib/featured-listings'
 
-const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://victoriasinclair.com'
+const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://re-templates.chavbuilds.com'
 
 const STATIC_ROUTES = [
   { path: '/luxury-agent',                   changeFrequency: 'weekly',  priority: 1.0 },

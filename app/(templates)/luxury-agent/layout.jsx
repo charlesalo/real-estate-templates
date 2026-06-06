@@ -84,7 +84,7 @@ const FOOTER_LINKS = [
   { label: "Let's Connect", modal: true },
 ]
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://victoriasinclair.com'
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://re-templates.chavbuilds.com'
 const OG_IMAGE  = 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=1200&q=80'
 
 export const metadata = {
