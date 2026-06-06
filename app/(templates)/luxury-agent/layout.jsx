@@ -98,7 +98,7 @@ export const metadata = {
   openGraph: {
     title:       'Victoria Sinclair | Los Angeles Real Estate Agent',
     description: 'Beverly Hills and Los Angeles luxury real estate. Victoria Sinclair represents extraordinary homes for extraordinary clients. DRE# 01234567.',
-    url:         SITE_URL,
+    url:         `${SITE_URL}/luxury-agent`,
     siteName:    'Victoria Sinclair Real Estate',
     images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: 'Victoria Sinclair — Beverly Hills Luxury Real Estate' }],
     locale:      'en_US',
