@@ -82,8 +82,21 @@ export default function LocalExpertHome() {
               {/* Dual search widget */}
               <DualSearchWidget />
 
+              {/* Fair Housing */}
+              <p className="mt-6 text-[12px] text-[#2C1E11]/40">
+                Every showing, every block, every borough — committed to all applicable{' '}
+                <a
+                  href="https://www.dos.ny.gov/licensing/docs/FairHousingNotice_new.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-medium text-[#2C1E11]/55 hover:text-[#2C1E11]/80 transition-colors"
+                >
+                  Fair Housing Laws.
+                </a>
+              </p>
+
               {/* Stats row */}
-              <div className="flex flex-wrap items-center gap-8 mt-10 pt-8 border-t border-[#1B3B2B]/10">
+              <div className="flex flex-wrap items-center gap-8 mt-6 pt-8 border-t border-[#1B3B2B]/10">
                 {HERO_STATS.map((stat) => (
                   <div key={stat.label}>
                     <div
@@ -135,24 +148,6 @@ export default function LocalExpertHome() {
         </div>
 
       </section>
-
-      {/* ─── FAIR HOUSING ────────────────────────────────────────────── */}
-      <div style={{ backgroundColor: '#F8F3EB', borderTop: '1px solid #E5E0D8' }}>
-        <div className="max-w-7xl mx-auto px-5 lg:px-8 py-3 flex items-center justify-center">
-          <a
-            href="https://www.dos.ny.gov/licensing/docs/FairHousingNotice_new.pdf"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group flex items-center gap-2 text-[12px] text-[#2C1E11]/45 hover:text-[#2C1E11]/70 transition-colors text-center"
-          >
-            Every showing, every block, every borough — Nadia upholds the principles of all applicable{' '}
-            <span className="text-[11px] tracking-[0.32em] uppercase font-semibold text-[#2C1E11]/60 group-hover:text-[#2C1E11] transition-colors">
-              Fair Housing Laws.
-            </span>
-            <ArrowRight size={11} className="opacity-40 group-hover:opacity-70 transition-opacity flex-shrink-0" />
-          </a>
-        </div>
-      </div>
 
       {/* ─── AS FEATURED IN ──────────────────────────────────────────── */}
       <section style={{ backgroundColor: '#F3EDE3' }}>
@@ -292,7 +287,7 @@ export default function LocalExpertHome() {
               href="/local-expert/listings"
               className="hidden md:flex items-center gap-1.5 text-[13px] font-semibold text-[#2C1E11]/50 hover:text-[#2C1E11] transition-colors whitespace-nowrap"
             >
-              View all 37 active listings <ArrowRight size={13} />
+              View all active listings <ArrowRight size={13} />
             </Link>
           </div>
 
@@ -300,10 +295,13 @@ export default function LocalExpertHome() {
             Homes in neighborhoods I know block by block. Not just listed here — actually considered.
           </p>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {HOMEPAGE_LISTINGS.map((listing) => (
-              <ListingCard key={listing.id} listing={listing} />
-            ))}
+          {/* Asymmetric feature layout: hero left, two sidebar cards right */}
+          <div className="grid grid-cols-1 lg:grid-cols-[3fr_2fr] gap-3 lg:h-[560px]">
+            <HeroListingCard listing={HOMEPAGE_LISTINGS[0]} />
+            <div className="flex flex-col gap-3 h-full">
+              <SideListingCard listing={HOMEPAGE_LISTINGS[1]} />
+              <SideListingCard listing={HOMEPAGE_LISTINGS[2]} />
+            </div>
           </div>
 
           {/* Compliance footer */}
@@ -317,7 +315,7 @@ export default function LocalExpertHome() {
             href="/local-expert/listings"
             className="flex md:hidden items-center gap-1.5 text-[13px] font-semibold text-[#2C1E11]/50 hover:text-[#2C1E11] transition-colors mt-6"
           >
-            View all 37 active listings <ArrowRight size={13} />
+            View all active listings <ArrowRight size={13} />
           </Link>
         </div>
       </section>
@@ -515,52 +513,60 @@ function NoteCard({ note, aspectRatio, className = '' }) {
 
 // ── Listing Card ──────────────────────────────────────────────────────────────
 
-function ListingCard({ listing }) {
+function HeroListingCard({ listing }) {
   return (
-    <Link href={`/local-expert/listings/${listing.id}`} className="group block">
-      <article className="rounded-xl overflow-hidden border border-[#E5E0D8] bg-white/60">
-        {/* Image */}
-        <div className="relative aspect-[4/3] overflow-hidden">
-          <Image
-            src={listing.images[0]}
-            alt={listing.address}
-            fill
-            className="object-cover transition-transform duration-500 group-hover:scale-105"
-          />
-          <div className="absolute top-3 left-3">
-            <span className="text-[12px] font-semibold uppercase tracking-wider px-2.5 py-1 rounded-full bg-white/90 text-[#2C1E11]">
-              {listing.type}
-            </span>
-          </div>
+    <Link href={`/local-expert/listings/${listing.id}`} className="group block h-full">
+      <article className="relative rounded-2xl overflow-hidden h-full min-h-[420px] lg:min-h-0">
+        <Image
+          src={listing.images[0]}
+          alt={listing.address}
+          fill
+          className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+        />
+        <div className="absolute top-4 left-4">
+          <span className="text-[11px] font-semibold uppercase tracking-wider px-3 py-1.5 rounded-full bg-white/90 text-[#2C1E11]">
+            {listing.type}
+          </span>
         </div>
-
-        {/* Content */}
-        <div className="p-4">
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/25 to-transparent" />
+        <div className="absolute bottom-0 left-0 right-0 px-6 py-6 lg:px-8 lg:py-7">
           <div
-            className="text-[24px] font-normal text-[#24180F] leading-none mb-1"
+            className="text-[36px] lg:text-[44px] font-normal text-white leading-none mb-1.5"
             style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}
           >
             {formatPrice(listing.price)}
           </div>
-          <p className="text-[14px] font-semibold text-[#2C1E11]">{listing.address}</p>
-          <p className="text-[12px] text-[#2C1E11]/45 mt-0.5">{listing.neighborhood}, {listing.city}</p>
+          <p className="text-[13px] text-white/65">{listing.address}</p>
+        </div>
+      </article>
+    </Link>
+  )
+}
 
-          <div className="flex items-center gap-4 mt-3 pt-3 border-t border-[#E5E0D8]">
-            <span className="flex items-center gap-1 text-[12px] text-[#2C1E11]/50">
-              <Bed size={12} /> {listing.beds} bd
-            </span>
-            <span className="flex items-center gap-1 text-[12px] text-[#2C1E11]/50">
-              <Bath size={12} /> {listing.baths} ba
-            </span>
-            <span className="flex items-center gap-1 text-[12px] text-[#2C1E11]/50">
-              <Square size={12} /> {listing.sqft.toLocaleString()} sf
-            </span>
+function SideListingCard({ listing }) {
+  return (
+    <Link href={`/local-expert/listings/${listing.id}`} className="group block flex-1 min-h-[200px] lg:min-h-0">
+      <article className="relative rounded-xl overflow-hidden h-full">
+        <Image
+          src={listing.images[0]}
+          alt={listing.address}
+          fill
+          className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+        />
+        <div className="absolute top-3 left-3">
+          <span className="text-[11px] font-semibold uppercase tracking-wider px-2.5 py-1 rounded-full bg-white/90 text-[#2C1E11]">
+            {listing.type}
+          </span>
+        </div>
+        <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/15 to-transparent" />
+        <div className="absolute bottom-0 left-0 right-0 px-4 py-4">
+          <div
+            className="text-[22px] font-normal text-white leading-none"
+            style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}
+          >
+            {formatPrice(listing.price)}
           </div>
-
-          {/* NY Compliance */}
-          <p className="text-[12px] text-[#2C1E11]/25 mt-2.5 leading-snug">
-            Listing Provided Courtesy of {listing.listingBrokerage} · {listing.mlsId}
-          </p>
+          <p className="text-[12px] text-white/65 mt-1 truncate">{listing.address}</p>
         </div>
       </article>
     </Link>
