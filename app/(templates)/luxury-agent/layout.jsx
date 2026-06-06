@@ -84,15 +84,34 @@ const FOOTER_LINKS = [
   { label: "Let's Connect", modal: true },
 ]
 
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://victoriasinclair.com'
+const OG_IMAGE  = 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=1200&q=80'
+
 export const metadata = {
+  metadataBase: new URL(SITE_URL),
   title: {
     default: 'Victoria Sinclair | Los Angeles Real Estate Agent',
     template: '%s | Victoria Sinclair',
   },
   description:
     'Beverly Hills and Los Angeles luxury real estate. Victoria Sinclair represents extraordinary homes for extraordinary clients. DRE# 01234567.',
+  openGraph: {
+    title:       'Victoria Sinclair | Los Angeles Real Estate Agent',
+    description: 'Beverly Hills and Los Angeles luxury real estate. Victoria Sinclair represents extraordinary homes for extraordinary clients. DRE# 01234567.',
+    url:         SITE_URL,
+    siteName:    'Victoria Sinclair Real Estate',
+    images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: 'Victoria Sinclair — Beverly Hills Luxury Real Estate' }],
+    locale:      'en_US',
+    type:        'website',
+  },
+  twitter: {
+    card:        'summary_large_image',
+    title:       'Victoria Sinclair | Los Angeles Real Estate Agent',
+    description: 'Beverly Hills and Los Angeles luxury real estate. Victoria Sinclair represents extraordinary homes for extraordinary clients.',
+    images:      [OG_IMAGE],
+  },
   icons: {
-    icon: '/images/luxury-agent/Victoria Sinclair Favicon.png',
+    icon:  '/images/luxury-agent/Victoria Sinclair Favicon.png',
     apple: '/images/luxury-agent/Victoria Sinclair Favicon.png',
   },
 }
