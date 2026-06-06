@@ -73,7 +73,7 @@ export default function ModernTeamContactModal({
 
   const inputCls =
     'w-full bg-transparent border border-[#D5DBE9] text-[#111827] text-sm px-4 py-3 rounded-lg outline-none placeholder:text-[#9CA3AF] focus:border-[#1A2D5A] transition-colors'
-  const labelCls = 'block text-[10px] tracking-[0.2em] uppercase text-[#6B7280] mb-1.5 font-sans'
+  const labelCls = 'block text-[12px] tracking-[0.2em] uppercase text-[#6B7280] mb-1.5 font-sans'
   const errorCls = 'text-red-500 text-xs mt-1 font-sans'
 
   return (
@@ -101,7 +101,7 @@ export default function ModernTeamContactModal({
 
               {/* Header */}
               <div className="mb-8">
-                <p className="text-[10px] tracking-[0.3em] uppercase text-[#4B6090] font-sans mb-2">
+                <p className="text-[12px] tracking-[0.3em] uppercase text-[#4B6090] font-sans mb-2">
                   We'd love to hear from you
                 </p>
                 <h2 className="text-3xl lg:text-4xl font-bold text-[#1A2D5A] tracking-tight leading-tight">
@@ -118,7 +118,7 @@ export default function ModernTeamContactModal({
                   </p>
                   <button
                     onClick={close}
-                    className="mt-8 text-[11px] tracking-[0.2em] uppercase text-[#9CA3AF] hover:text-[#1A2D5A] font-sans transition-colors"
+                    className="mt-8 text-[12px] tracking-[0.2em] uppercase text-[#9CA3AF] hover:text-[#1A2D5A] font-sans transition-colors"
                   >
                     Close
                   </button>
@@ -172,7 +172,7 @@ export default function ModernTeamContactModal({
                       id="mt-consent"
                       className="mt-0.5 w-4 h-4 rounded border-[#D5DBE9] accent-[#1A2D5A] flex-shrink-0"
                     />
-                    <label htmlFor="mt-consent" className="text-[10px] text-[#9CA3AF] font-sans leading-relaxed">
+                    <label htmlFor="mt-consent" className="text-[12px] text-[#9CA3AF] font-sans leading-relaxed">
                       I agree to be contacted by {agentName} via call, email, and text for real estate services. Message and data rates may apply.
                     </label>
                   </div>
@@ -180,7 +180,7 @@ export default function ModernTeamContactModal({
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full py-3.5 bg-[#1A2D5A] text-white text-[11px] tracking-[0.25em] uppercase font-semibold rounded-lg hover:bg-[#243870] transition-colors disabled:opacity-50"
+                    className="w-full py-3.5 bg-[#1A2D5A] text-white text-[12px] tracking-[0.25em] uppercase font-semibold rounded-lg hover:bg-[#243870] transition-colors disabled:opacity-50"
                   >
                     {isSubmitting ? 'Sending…' : 'Submit'}
                   </button>
@@ -202,7 +202,7 @@ export default function ModernTeamContactModal({
 
               {/* Team name */}
               <div className="mb-10 mt-2">
-                <p className="text-[10px] tracking-[0.3em] uppercase text-[#7B93C5] font-sans mb-2">
+                <p className="text-[12px] tracking-[0.3em] uppercase text-[#7B93C5] font-sans mb-2">
                   Contact Details
                 </p>
                 <h3 className="text-xl font-semibold text-white leading-snug">
@@ -225,7 +225,7 @@ export default function ModernTeamContactModal({
                       <Icon size={13} className="text-[#7B93C5]" strokeWidth={1.75} />
                     </div>
                     <div>
-                      <p className="text-[9px] tracking-[0.3em] uppercase text-white/35 font-sans mb-1">{label}</p>
+                      <p className="text-[12px] tracking-[0.3em] uppercase text-white/35 font-sans mb-1">{label}</p>
                       {href ? (
                         <a href={href} className="text-sm text-white/70 hover:text-white transition-colors font-sans whitespace-pre-line">
                           {value}
@@ -262,7 +262,7 @@ export default function ModernTeamContactModal({
 
               {/* Decorative bottom accent */}
               <div className="mt-10 pt-8 border-t border-white/10">
-                <p className="text-[10px] text-white/25 font-sans leading-relaxed">
+                <p className="text-[12px] text-white/25 font-sans leading-relaxed">
                   Houston's trusted real estate team. Available 7 days a week.
                 </p>
               </div>

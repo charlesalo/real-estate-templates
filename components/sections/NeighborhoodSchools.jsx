@@ -32,7 +32,7 @@ function StarRating({ rating }) {
 function TypeBadge({ isPrivate, isCharter, isMagnet }) {
   const label = isPrivate ? 'Private' : isCharter ? 'Charter' : isMagnet ? 'Magnet' : 'Public'
   return (
-    <span className="inline-flex px-2.5 py-1 rounded bg-[#EEF1F7] text-[#1A2D5A] text-[10px] font-semibold uppercase tracking-wide">
+    <span className="inline-flex px-2.5 py-1 rounded bg-[#EEF1F7] text-[#1A2D5A] text-[12px] font-semibold uppercase tracking-wide">
       {label}
     </span>
   )
@@ -90,7 +90,7 @@ export default function NeighborhoodSchools({ neighborhoodName, schools }) {
               </button>
             ))}
           </div>
-          <p className="text-[11px] text-[#C4C9D4] font-sans">Data provided by SchoolDigger</p>
+          <p className="text-[12px] text-[#C4C9D4] font-sans">Data provided by SchoolDigger</p>
         </div>
 
         {/* Table */}
@@ -99,7 +99,7 @@ export default function NeighborhoodSchools({ neighborhoodName, schools }) {
           <div className="hidden md:grid grid-cols-[56px_1fr_140px_130px_160px] gap-4 px-6 py-3 bg-[#1A2D5A]">
             <div />
             {['Name', 'Category', 'Grades', 'School Rating'].map(h => (
-              <p key={h} className="text-[10px] tracking-[0.2em] uppercase text-white/70 font-sans">{h}</p>
+              <p key={h} className="text-[12px] tracking-[0.2em] uppercase text-white/70 font-sans">{h}</p>
             ))}
           </div>
 

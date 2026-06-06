@@ -25,7 +25,7 @@ export default function FeaturedListingCard({ listing, href }) {
 
         {/* Badge */}
         <div className="absolute top-4 left-4">
-          <span className={`inline-block px-2.5 py-1 text-[9px] tracking-[0.2em] uppercase font-semibold ${BADGE_STYLES[listing.badge] ?? 'bg-white/15 text-white backdrop-blur-sm'}`}>
+          <span className={`inline-block px-2.5 py-1 text-[12px] tracking-[0.2em] uppercase font-semibold ${BADGE_STYLES[listing.badge] ?? 'bg-white/15 text-white backdrop-blur-sm'}`}>
             {listing.badge}
           </span>
         </div>
@@ -46,7 +46,7 @@ export default function FeaturedListingCard({ listing, href }) {
         {listing.beds  != null && <span className="flex items-center gap-1.5"><Bed      size={12} strokeWidth={1.5} />{listing.beds} Beds</span>}
         {listing.baths != null && <span className="flex items-center gap-1.5"><Bath     size={12} strokeWidth={1.5} />{listing.baths} Baths</span>}
         {listing.sqft  != null && <span className="flex items-center gap-1.5"><Maximize2 size={12} strokeWidth={1.5} />{listing.sqft.toLocaleString()} sqft</span>}
-        <span className="ml-auto text-[10px] tracking-[0.15em] uppercase text-[#C9A96E]/50 group-hover:text-[#C9A96E] transition-colors">
+        <span className="ml-auto text-[12px] tracking-[0.15em] uppercase text-[#C9A96E]/50 group-hover:text-[#C9A96E] transition-colors">
           View Details →
         </span>
       </div>

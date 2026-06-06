@@ -133,7 +133,7 @@ export default function LuxuryAgentHome() {
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="flex items-end justify-between mb-14">
             <div>
-              <p className="text-[10px] tracking-[0.5em] uppercase text-[#C9A96E] mb-3 font-sans">
+              <p className="text-[12px] tracking-[0.5em] uppercase text-[#C9A96E] mb-3 font-sans">
                 Exclusively Represented
               </p>
               <h2 className="font-heading text-4xl lg:text-5xl font-normal text-white leading-tight">
@@ -142,7 +142,7 @@ export default function LuxuryAgentHome() {
             </div>
             <a
               href="/luxury-agent/featured-listings"
-              className="hidden md:inline-block text-[10px] tracking-[0.3em] uppercase text-[#C9A96E]/60 hover:text-[#C9A96E] transition-colors font-sans"
+              className="hidden md:inline-block text-[12px] tracking-[0.3em] uppercase text-[#C9A96E]/60 hover:text-[#C9A96E] transition-colors font-sans"
             >
               View All Featured →
             </a>
@@ -183,7 +183,7 @@ export default function LuxuryAgentHome() {
 
           {/* Header */}
           <div className="mb-10">
-            <p className="text-[10px] tracking-[0.5em] uppercase text-[#C9A96E] mb-3 font-sans">
+            <p className="text-[12px] tracking-[0.5em] uppercase text-[#C9A96E] mb-3 font-sans">
               Explore
             </p>
             <h2 className="font-heading text-4xl lg:text-5xl font-normal text-white">
@@ -209,14 +209,14 @@ export default function LuxuryAgentHome() {
               <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent" />
               <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-500" />
               <div className="absolute bottom-0 left-0 right-0 p-8 lg:p-10">
-                <p className="text-[10px] tracking-[0.4em] uppercase text-[#C9A96E] mb-3 font-sans">
+                <p className="text-[12px] tracking-[0.4em] uppercase text-[#C9A96E] mb-3 font-sans">
                   {FEATURED_HOODS[0].stats}
                 </p>
                 <h3 className="font-heading text-3xl lg:text-5xl font-normal text-white leading-tight">
                   {FEATURED_HOODS[0].name}
                 </h3>
                 <p className="text-white/50 text-sm mt-2 max-w-xs">{FEATURED_HOODS[0].tagline}</p>
-                <div className="mt-5 inline-flex items-center gap-2 text-[10px] tracking-[0.25em] uppercase text-white/40 group-hover:text-[#C9A96E] transition-colors font-sans">
+                <div className="mt-5 inline-flex items-center gap-2 text-[12px] tracking-[0.25em] uppercase text-white/40 group-hover:text-[#C9A96E] transition-colors font-sans">
                   Explore <span className="transition-transform group-hover:translate-x-1 inline-block">→</span>
                 </div>
               </div>
@@ -240,7 +240,7 @@ export default function LuxuryAgentHome() {
                   <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent" />
                   <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-500" />
                   <div className="absolute bottom-0 left-0 right-0 p-6 lg:p-7">
-                    <p className="text-[9px] tracking-[0.4em] uppercase text-[#C9A96E] mb-2 font-sans">
+                    <p className="text-[12px] tracking-[0.4em] uppercase text-[#C9A96E] mb-2 font-sans">
                       {hood.stats}
                     </p>
                     <h3 className="font-heading text-xl lg:text-2xl font-normal text-white">
@@ -257,7 +257,7 @@ export default function LuxuryAgentHome() {
           <div className="flex justify-center mt-10">
             <a
               href="/luxury-agent/neighborhoods"
-              className="inline-block px-10 py-4 text-[11px] tracking-[0.2em] uppercase font-medium border border-[#C9A96E] text-[#C9A96E] hover:bg-[#C9A96E] hover:text-[#0A0A0A] transition-all duration-300 font-sans"
+              className="inline-block px-10 py-4 text-[12px] tracking-[0.2em] uppercase font-medium border border-[#C9A96E] text-[#C9A96E] hover:bg-[#C9A96E] hover:text-[#0A0A0A] transition-all duration-300 font-sans"
             >
               View All Neighborhoods
             </a>
@@ -276,7 +276,7 @@ export default function LuxuryAgentHome() {
           {/* Header */}
           <div className="flex items-end justify-between mb-12">
             <div>
-              <p className="text-[10px] tracking-[0.5em] uppercase text-[#C9A96E] mb-3 font-sans">
+              <p className="text-[12px] tracking-[0.5em] uppercase text-[#C9A96E] mb-3 font-sans">
                 From the Luxury Real Estate Journal
               </p>
               <h2 className="font-heading text-4xl lg:text-5xl font-normal text-white">
@@ -285,7 +285,7 @@ export default function LuxuryAgentHome() {
             </div>
             <a
               href="/luxury-agent/blog"
-              className="hidden md:inline-block text-[10px] tracking-[0.3em] uppercase text-[#C9A96E]/60 hover:text-[#C9A96E] transition-colors font-sans"
+              className="hidden md:inline-block text-[12px] tracking-[0.3em] uppercase text-[#C9A96E]/60 hover:text-[#C9A96E] transition-colors font-sans"
             >
               View All Articles →
             </a>
@@ -311,10 +311,10 @@ export default function LuxuryAgentHome() {
 
               {/* Category + date — top */}
               <div className="absolute top-0 left-0 right-0 p-8 lg:p-10 flex items-center justify-between">
-                <span className="text-[9px] tracking-[0.35em] uppercase text-[#C9A96E] font-sans">
+                <span className="text-[12px] tracking-[0.35em] uppercase text-[#C9A96E] font-sans">
                   {FEATURED_POSTS[0].category}
                 </span>
-                <span className="text-[9px] tracking-[0.2em] text-white/30 font-sans">
+                <span className="text-[12px] tracking-[0.2em] text-white/30 font-sans">
                   {FEATURED_POSTS[0].date}
                 </span>
               </div>
@@ -329,7 +329,7 @@ export default function LuxuryAgentHome() {
                     {FEATURED_POSTS[0].excerpt}
                   </p>
                 )}
-                <span className="inline-flex items-center gap-2 text-[10px] tracking-[0.25em] uppercase text-white/40 group-hover:text-[#C9A96E] transition-colors font-sans">
+                <span className="inline-flex items-center gap-2 text-[12px] tracking-[0.25em] uppercase text-white/40 group-hover:text-[#C9A96E] transition-colors font-sans">
                   Read Article <span className="transition-transform group-hover:translate-x-1 inline-block">→</span>
                 </span>
               </div>
@@ -353,13 +353,13 @@ export default function LuxuryAgentHome() {
                   <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
                   <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-500" />
                   <div className="absolute bottom-0 left-0 right-0 p-6 lg:p-7">
-                    <p className="text-[9px] tracking-[0.35em] uppercase text-[#C9A96E] mb-2 font-sans">
+                    <p className="text-[12px] tracking-[0.35em] uppercase text-[#C9A96E] mb-2 font-sans">
                       {post.category}
                     </p>
                     <h3 className="font-heading text-lg lg:text-xl font-normal text-white leading-snug">
                       {post.title}
                     </h3>
-                    <span className="mt-3 inline-flex items-center gap-1.5 text-[9px] tracking-[0.25em] uppercase text-white/30 group-hover:text-[#C9A96E] transition-colors font-sans">
+                    <span className="mt-3 inline-flex items-center gap-1.5 text-[12px] tracking-[0.25em] uppercase text-white/30 group-hover:text-[#C9A96E] transition-colors font-sans">
                       Read <span className="transition-transform group-hover:translate-x-0.5 inline-block">→</span>
                     </span>
                   </div>
@@ -372,7 +372,7 @@ export default function LuxuryAgentHome() {
           <div className="flex justify-center mt-8 md:hidden">
             <a
               href="/luxury-agent/blog"
-              className="text-[10px] tracking-[0.3em] uppercase text-[#C9A96E]/60 hover:text-[#C9A96E] transition-colors font-sans"
+              className="text-[12px] tracking-[0.3em] uppercase text-[#C9A96E]/60 hover:text-[#C9A96E] transition-colors font-sans"
             >
               View All Articles →
             </a>
@@ -389,7 +389,7 @@ export default function LuxuryAgentHome() {
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
 
           <div className="mb-14">
-            <p className="text-[10px] tracking-[0.5em] uppercase text-[#C9A96E] mb-3 font-sans">
+            <p className="text-[12px] tracking-[0.5em] uppercase text-[#C9A96E] mb-3 font-sans">
               The Process
             </p>
             <h2 className="font-heading text-4xl lg:text-5xl font-normal text-white">

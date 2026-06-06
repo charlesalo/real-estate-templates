@@ -164,7 +164,7 @@ function ListRow({ listing, template, isLuxury }) {
         </div>
       </div>
       <div className="hidden md:flex items-center pr-5">
-        <span className={cn('text-[10px] tracking-[0.2em] uppercase transition-colors', isLuxury ? 'text-white/20 group-hover:text-[#C9A96E]' : 'text-template-fg/30 group-hover:text-template-accent')}>
+        <span className={cn('text-[12px] tracking-[0.2em] uppercase transition-colors', isLuxury ? 'text-white/20 group-hover:text-[#C9A96E]' : 'text-template-fg/30 group-hover:text-template-accent')}>
           View →
         </span>
       </div>
@@ -178,7 +178,7 @@ function FilterDrawer({ filters, onApply, onClose, isLuxury }) {
   const [local, setLocal] = useState(filters)
   const set = (k, v) => setLocal(f => ({ ...f, [k]: v }))
 
-  const labelCls = 'block text-[10px] tracking-[0.2em] uppercase mb-3 font-sans ' + (isLuxury ? 'text-white/40' : 'text-template-fg/50')
+  const labelCls = 'block text-[12px] tracking-[0.2em] uppercase mb-3 font-sans ' + (isLuxury ? 'text-white/40' : 'text-template-fg/50')
   const pillCls = (active) => cn(
     'px-3 py-1.5 text-xs border transition-all cursor-pointer',
     active
@@ -283,13 +283,13 @@ function FilterDrawer({ filters, onApply, onClose, isLuxury }) {
         <div className={cn('px-6 py-5 border-t flex gap-3', isLuxury ? 'border-white/10' : 'border-template-border')}>
           <button
             onClick={() => { setLocal(Object.fromEntries(Object.keys(local).map(k => [k, k === 'sort' ? '-listdate' : '']))); }}
-            className={cn('flex-1 py-3 text-[11px] tracking-[0.15em] uppercase border transition-all', isLuxury ? 'border-white/20 text-white/50 hover:border-white/40 hover:text-white' : 'border-template-border text-template-fg/50 rounded hover:border-template-accent/40')}
+            className={cn('flex-1 py-3 text-[12px] tracking-[0.15em] uppercase border transition-all', isLuxury ? 'border-white/20 text-white/50 hover:border-white/40 hover:text-white' : 'border-template-border text-template-fg/50 rounded hover:border-template-accent/40')}
           >
             Reset
           </button>
           <button
             onClick={() => onApply(local)}
-            className={cn('flex-1 py-3 text-[11px] tracking-[0.15em] uppercase font-medium transition-all', isLuxury ? 'bg-[#C9A96E] text-[#0A0A0A] hover:opacity-90' : 'bg-template-accent text-template-accent-fg rounded hover:opacity-90')}
+            className={cn('flex-1 py-3 text-[12px] tracking-[0.15em] uppercase font-medium transition-all', isLuxury ? 'bg-[#C9A96E] text-[#0A0A0A] hover:opacity-90' : 'bg-template-accent text-template-accent-fg rounded hover:opacity-90')}
           >
             Apply Filters
           </button>
@@ -475,9 +475,9 @@ export default function MLSSearchClient({
               )}
             >
               <SlidersHorizontal size={14} />
-              <span className="text-[11px] tracking-[0.1em] uppercase font-sans">Filters</span>
+              <span className="text-[12px] tracking-[0.1em] uppercase font-sans">Filters</span>
               {activeTags.length > 0 && (
-                <span className={cn('w-4 h-4 text-[10px] flex items-center justify-center font-medium', isLuxury ? 'bg-[#C9A96E] text-[#0A0A0A]' : 'bg-template-accent text-template-accent-fg rounded-full')}>
+                <span className={cn('w-4 h-4 text-[12px] flex items-center justify-center font-medium', isLuxury ? 'bg-[#C9A96E] text-[#0A0A0A]' : 'bg-template-accent text-template-accent-fg rounded-full')}>
                   {activeTags.length}
                 </span>
               )}
@@ -492,7 +492,7 @@ export default function MLSSearchClient({
               )}
               <button
                 onClick={() => apply(filters)}
-                className={cn('px-5 py-2 text-[11px] tracking-[0.15em] uppercase font-medium transition-all', isLuxury ? 'bg-[#C9A96E] text-[#0A0A0A] hover:opacity-90' : 'bg-template-accent text-template-accent-fg rounded hover:opacity-90')}
+                className={cn('px-5 py-2 text-[12px] tracking-[0.15em] uppercase font-medium transition-all', isLuxury ? 'bg-[#C9A96E] text-[#0A0A0A] hover:opacity-90' : 'bg-template-accent text-template-accent-fg rounded hover:opacity-90')}
               >
                 Search
               </button>
@@ -507,14 +507,14 @@ export default function MLSSearchClient({
                   key={t.key}
                   onClick={() => clearOne(t.key)}
                   className={cn(
-                    'flex items-center gap-1.5 px-3 py-1 text-[11px] border transition-colors font-sans',
+                    'flex items-center gap-1.5 px-3 py-1 text-[12px] border transition-colors font-sans',
                     isLuxury ? 'border-[#C9A96E]/40 text-[#C9A96E] hover:bg-[#C9A96E]/10' : 'border-template-accent/40 text-template-accent rounded-full hover:bg-template-accent/10',
                   )}
                 >
                   {t.label} <X size={10} />
                 </button>
               ))}
-              <button onClick={clearAll} className={cn('text-[11px] font-sans transition-colors', isLuxury ? 'text-white/30 hover:text-white' : 'text-template-fg/40 hover:text-template-fg')}>
+              <button onClick={clearAll} className={cn('text-[12px] font-sans transition-colors', isLuxury ? 'text-white/30 hover:text-white' : 'text-template-fg/40 hover:text-template-fg')}>
                 Clear all
               </button>
             </div>
@@ -547,7 +547,7 @@ export default function MLSSearchClient({
               <button
                 onClick={() => setShowMap(v => !v)}
                 className={cn(
-                  'hidden lg:flex items-center gap-1.5 px-3 py-1.5 text-[11px] tracking-[0.1em] uppercase border transition-all font-sans cursor-pointer',
+                  'hidden lg:flex items-center gap-1.5 px-3 py-1.5 text-[12px] tracking-[0.1em] uppercase border transition-all font-sans cursor-pointer',
                   isLuxury
                     ? 'border-white/20 text-white/40 hover:border-white/40 hover:text-white'
                     : 'border-template-border text-template-fg/40 hover:border-template-accent/40 hover:text-template-fg',
@@ -573,7 +573,7 @@ export default function MLSSearchClient({
                 <p className={cn('text-sm mb-8', isLuxury ? 'text-white/40' : 'text-template-fg/50')}>Try adjusting your filters.</p>
                 <button
                   onClick={clearAll}
-                  className={cn('px-8 py-3 text-[11px] tracking-[0.15em] uppercase border transition-all', isLuxury ? 'border-[#C9A96E] text-[#C9A96E] hover:bg-[#C9A96E] hover:text-[#0A0A0A]' : 'border-template-accent text-template-accent rounded')}
+                  className={cn('px-8 py-3 text-[12px] tracking-[0.15em] uppercase border transition-all', isLuxury ? 'border-[#C9A96E] text-[#C9A96E] hover:bg-[#C9A96E] hover:text-[#0A0A0A]' : 'border-template-accent text-template-accent rounded')}
                 >
                   Clear Filters
                 </button>

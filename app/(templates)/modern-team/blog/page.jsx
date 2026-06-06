@@ -125,7 +125,7 @@ export default function BlogPage() {
                 sizes="(max-width: 1024px) 100vw, 50vw"
                 className="object-cover transition-transform duration-500 group-hover:scale-[1.02]"
               />
-              <span className="absolute top-4 left-4 px-3 py-1.5 bg-[#1A2D5A] text-white text-[10px] tracking-[0.15em] uppercase rounded font-sans">
+              <span className="absolute top-4 left-4 px-3 py-1.5 bg-[#1A2D5A] text-white text-[12px] tracking-[0.15em] uppercase rounded font-sans">
                 Featured · {featured.category}
               </span>
             </div>
@@ -161,12 +161,12 @@ export default function BlogPage() {
                   sizes="(max-width: 768px) 100vw, 33vw"
                   className="object-cover transition-transform duration-500 group-hover:scale-[1.04]"
                 />
-                <span className="absolute top-3 left-3 px-2.5 py-1 bg-[#1A2D5A]/85 backdrop-blur-sm text-white text-[10px] tracking-[0.15em] uppercase rounded font-sans">
+                <span className="absolute top-3 left-3 px-2.5 py-1 bg-[#1A2D5A]/85 backdrop-blur-sm text-white text-[12px] tracking-[0.15em] uppercase rounded font-sans">
                   {post.category}
                 </span>
               </div>
               <div className="p-5">
-                <p className="text-[11px] text-[#9CA3AF] mb-2 font-sans">{post.date} · {post.readTime}</p>
+                <p className="text-[12px] text-[#9CA3AF] mb-2 font-sans">{post.date} · {post.readTime}</p>
                 <h3
                   className="font-bold text-[#111827] text-base leading-snug group-hover:text-[#1A2D5A] transition-colors"
                   style={{ fontFamily: 'var(--font-inter, system-ui)' }}

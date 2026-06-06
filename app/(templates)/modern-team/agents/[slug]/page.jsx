@@ -103,7 +103,7 @@ export default async function AgentPage({ params }) {
 
             <dl className="space-y-5 mb-8">
               <div>
-                <dt className="text-[11px] tracking-[0.2em] uppercase font-semibold text-[#111827] font-sans mb-0.5">Email</dt>
+                <dt className="text-[12px] tracking-[0.2em] uppercase font-semibold text-[#111827] font-sans mb-0.5">Email</dt>
                 <dd>
                   <a href={`mailto:${member.email}`} className="text-[#1A2D5A] text-sm font-sans hover:underline">
                     {member.email}
@@ -111,7 +111,7 @@ export default async function AgentPage({ params }) {
                 </dd>
               </div>
               <div>
-                <dt className="text-[11px] tracking-[0.2em] uppercase font-semibold text-[#111827] font-sans mb-0.5">Mobile</dt>
+                <dt className="text-[12px] tracking-[0.2em] uppercase font-semibold text-[#111827] font-sans mb-0.5">Mobile</dt>
                 <dd>
                   <a href={`tel:${member.phone.replace(/\D/g, '')}`} className="text-[#1A2D5A] text-sm font-sans hover:underline">
                     {member.phone}
@@ -119,11 +119,11 @@ export default async function AgentPage({ params }) {
                 </dd>
               </div>
               <div>
-                <dt className="text-[11px] tracking-[0.2em] uppercase font-semibold text-[#111827] font-sans mb-0.5">Address</dt>
+                <dt className="text-[12px] tracking-[0.2em] uppercase font-semibold text-[#111827] font-sans mb-0.5">Address</dt>
                 <dd className="text-sm text-[#4B5563] font-sans">{member.address}</dd>
               </div>
               <div>
-                <dt className="text-[11px] tracking-[0.2em] uppercase font-semibold text-[#111827] font-sans mb-0.5">License #</dt>
+                <dt className="text-[12px] tracking-[0.2em] uppercase font-semibold text-[#111827] font-sans mb-0.5">License #</dt>
                 <dd className="text-sm text-[#4B5563] font-sans">{member.license}</dd>
               </div>
             </dl>
@@ -231,7 +231,7 @@ export default async function AgentPage({ params }) {
                         sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                         className="object-cover transition-transform duration-500 group-hover:scale-105"
                       />
-                      <div className="absolute top-3 left-3 px-2.5 py-1 bg-[#1A2D5A]/85 backdrop-blur-sm text-white text-[10px] font-semibold rounded-md tracking-wide uppercase font-sans">
+                      <div className="absolute top-3 left-3 px-2.5 py-1 bg-[#1A2D5A]/85 backdrop-blur-sm text-white text-[12px] font-semibold rounded-md tracking-wide uppercase font-sans">
                         {listing.status}
                       </div>
                     </div>
@@ -255,7 +255,7 @@ export default async function AgentPage({ params }) {
                         <span className="flex items-center gap-1.5"><Square size={13} className="text-[#4B6090]" />{listing.sqft} sf</span>
                       </div>
                       <div className="pt-4 border-t border-[#F3F4F6] flex items-center justify-between">
-                        <span className="text-[10px] px-2.5 py-1 rounded-full border border-[#D5DBE9] text-[#4B6090] font-sans">{listing.type}</span>
+                        <span className="text-[12px] px-2.5 py-1 rounded-full border border-[#D5DBE9] text-[#4B6090] font-sans">{listing.type}</span>
                         <span className="inline-flex items-center gap-1 text-xs font-semibold text-[#1A2D5A] font-sans">View Details <span className="inline-block group-hover:translate-x-1 transition-transform duration-200">→</span></span>
                       </div>
                     </div>

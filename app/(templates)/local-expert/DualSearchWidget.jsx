@@ -32,7 +32,7 @@ export default function DualSearchWidget() {
       <div className="flex gap-2 mb-3">
         <button
           onClick={() => setMode('homes')}
-          className={`px-4 py-2 text-[13px] font-semibold rounded-full border transition-all duration-200 ${
+          className={`px-4 py-2 text-[14px] font-semibold rounded-full border transition-all duration-200 ${
             mode === 'homes'
               ? 'bg-[#1B3B2B] text-[#F8F3EB] border-[#1B3B2B]'
               : 'bg-transparent text-[#1B3B2B]/70 border-[#1B3B2B]/30 hover:border-[#1B3B2B]/60 hover:text-[#1B3B2B]'
@@ -42,7 +42,7 @@ export default function DualSearchWidget() {
         </button>
         <button
           onClick={() => setMode('guides')}
-          className={`px-4 py-2 text-[13px] font-semibold rounded-full border transition-all duration-200 ${
+          className={`px-4 py-2 text-[14px] font-semibold rounded-full border transition-all duration-200 ${
             mode === 'guides'
               ? 'bg-[#1B3B2B] text-[#F8F3EB] border-[#1B3B2B]'
               : 'bg-transparent text-[#1B3B2B]/70 border-[#1B3B2B]/30 hover:border-[#1B3B2B]/60 hover:text-[#1B3B2B]'
@@ -64,12 +64,12 @@ export default function DualSearchWidget() {
                 ? 'Try "West Village 2BR" or "$2M condo"'
                 : 'Try "West Village" or "Brooklyn"'
             }
-            className="flex-1 py-3 text-[13px] text-[#2C1E11] placeholder-[#2C1E11]/30 bg-transparent focus:outline-none"
+            className="flex-1 py-3 text-[14px] text-[#2C1E11] placeholder-[#2C1E11]/30 bg-transparent focus:outline-none"
           />
         </div>
         <button
           type="submit"
-          className="px-5 py-3 text-[13px] font-bold text-[#F8F3EB] bg-[#1B3B2B] hover:bg-[#2a5540] transition-colors"
+          className="px-5 py-3 text-[14px] font-bold text-[#F8F3EB] bg-[#1B3B2B] hover:bg-[#2a5540] transition-colors"
         >
           Search
         </button>
@@ -77,12 +77,12 @@ export default function DualSearchWidget() {
 
       {/* Popular areas */}
       <div className="flex flex-wrap items-center gap-2 mt-3">
-        <span className="text-[10px] text-[#2C1E11]/35 uppercase tracking-wider">Popular:</span>
+        <span className="text-[12px] text-[#2C1E11]/35 uppercase tracking-wider">Popular:</span>
         {POPULAR.map((area) => (
           <a
             key={area.label}
             href={mode === 'homes' ? `/local-expert/listings?q=${encodeURIComponent(area.label)}` : `/local-expert/neighborhoods/${area.label.toLowerCase().replace(/\s+/g, '-')}`}
-            className="text-[11px] text-[#2C1E11]/55 hover:text-[#2C1E11] underline underline-offset-2 transition-colors"
+            className="text-[12px] text-[#2C1E11]/55 hover:text-[#2C1E11] underline underline-offset-2 transition-colors"
           >
             {area.label}
           </a>

@@ -428,7 +428,7 @@ export default async function NeighborhoodPage({ params }) {
                   Community Demographics
                 </h2>
               </div>
-              <p className="text-[11px] text-[#9CA3AF] font-sans">
+              <p className="text-[12px] text-[#9CA3AF] font-sans">
                 U.S. Census Bureau · ACS 5-Year Estimates · ZIP {demo.zip}
               </p>
             </div>
@@ -441,7 +441,7 @@ export default async function NeighborhoodPage({ params }) {
                 { label: 'Median HH Income',       value: demo.income.medianHousehold },
               ].map(s => (
                 <div key={s.label} className="bg-white border border-[#D5DBE9] rounded-xl p-5">
-                  <p className="text-[10px] tracking-[0.2em] uppercase text-[#9CA3AF] mb-1 font-sans">{s.label}</p>
+                  <p className="text-[12px] tracking-[0.2em] uppercase text-[#9CA3AF] mb-1 font-sans">{s.label}</p>
                   <p className="text-2xl font-bold text-[#1A2D5A]">{s.value}</p>
                 </div>
               ))}
@@ -521,7 +521,7 @@ export default async function NeighborhoodPage({ params }) {
                     { label: 'Not in Labor Force',      value: demo.employment.notInLaborForce },
                   ].map((s, i) => (
                     <div key={s.label} className={i > 0 ? 'pt-4 border-t border-[#EEF1F7]' : ''}>
-                      <p className="text-[10px] uppercase tracking-wide text-[#9CA3AF] font-sans">{s.label}</p>
+                      <p className="text-[12px] uppercase tracking-wide text-[#9CA3AF] font-sans">{s.label}</p>
                       <p className="text-xl font-bold text-[#1A2D5A] mt-0.5">{s.value}</p>
                     </div>
                   ))}
@@ -538,17 +538,17 @@ export default async function NeighborhoodPage({ params }) {
                     { label: 'Median Gross Rent',    value: demo.housing.medianRent },
                   ].map((s, i) => (
                     <div key={s.label} className={i > 0 ? 'pt-4 border-t border-[#EEF1F7]' : ''}>
-                      <p className="text-[10px] uppercase tracking-wide text-[#9CA3AF] font-sans">{s.label}</p>
+                      <p className="text-[12px] uppercase tracking-wide text-[#9CA3AF] font-sans">{s.label}</p>
                       <p className="text-xl font-bold text-[#1A2D5A] mt-0.5">{s.value}</p>
                     </div>
                   ))}
                   <div className="pt-4 border-t border-[#EEF1F7]">
-                    <p className="text-[10px] uppercase tracking-wide text-[#9CA3AF] font-sans mb-2">Owner vs. Renter</p>
+                    <p className="text-[12px] uppercase tracking-wide text-[#9CA3AF] font-sans mb-2">Owner vs. Renter</p>
                     <div className="h-2.5 bg-[#EEF1F7] rounded-full overflow-hidden flex">
                       <div className="h-full bg-[#1A2D5A] rounded-l-full" style={{ width: `${demo.housing.ownerPct}%` }} />
                       <div className="h-full bg-[#4B6090]" style={{ width: `${demo.housing.renterPct}%` }} />
                     </div>
-                    <div className="flex justify-between text-[11px] text-[#6B7280] mt-1.5 font-sans">
+                    <div className="flex justify-between text-[12px] text-[#6B7280] mt-1.5 font-sans">
                       <span>Owner {demo.housing.ownerPct}%</span>
                       <span>Renter {demo.housing.renterPct}%</span>
                     </div>
@@ -594,11 +594,11 @@ export default async function NeighborhoodPage({ params }) {
                   <p className="text-white/60 text-sm leading-relaxed line-clamp-2 font-sans mb-4">{h.tagline}</p>
                   <div className="flex items-center gap-4">
                     <div>
-                      <p className="text-[10px] text-white/40 uppercase tracking-wide font-sans">Median Price</p>
+                      <p className="text-[12px] text-white/40 uppercase tracking-wide font-sans">Median Price</p>
                       <p className="text-sm font-bold text-white">{h.stats[0].value}</p>
                     </div>
                     <div className="border-l border-white/20 pl-4">
-                      <p className="text-[10px] text-white/40 uppercase tracking-wide font-sans">Listings</p>
+                      <p className="text-[12px] text-white/40 uppercase tracking-wide font-sans">Listings</p>
                       <p className="text-sm font-bold text-white">{h.stats[1].value}</p>
                     </div>
                     <span className="ml-auto inline-flex items-center gap-1 text-xs text-white/50 group-hover:text-white transition-colors duration-300 font-sans">

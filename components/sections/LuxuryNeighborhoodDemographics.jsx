@@ -18,7 +18,7 @@ function BarRow({ label, pct, color = '#C9A96E' }) {
 function StatCard({ label, value }) {
   return (
     <div className="bg-[#111111] border border-white/10 p-6">
-      <p className="text-[9px] tracking-[0.3em] uppercase text-white/30 font-sans mb-2">{label}</p>
+      <p className="text-[12px] tracking-[0.3em] uppercase text-white/30 font-sans mb-2">{label}</p>
       <p className="font-heading text-3xl font-normal text-white">{value}</p>
     </div>
   )
@@ -27,7 +27,7 @@ function StatCard({ label, value }) {
 function ChartCard({ title, children }) {
   return (
     <div className="bg-[#111111] border border-white/10 p-6">
-      <p className="text-[9px] tracking-[0.3em] uppercase text-[#C9A96E] font-sans mb-6">{title}</p>
+      <p className="text-[12px] tracking-[0.3em] uppercase text-[#C9A96E] font-sans mb-6">{title}</p>
       {children}
     </div>
   )
@@ -43,7 +43,7 @@ export default function LuxuryNeighborhoodDemographics({ neighborhoodName, demo 
         {/* Header */}
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 mb-10">
           <div>
-            <p className="text-[9px] tracking-[0.45em] uppercase text-[#C9A96E] mb-3 font-sans">
+            <p className="text-[12px] tracking-[0.45em] uppercase text-[#C9A96E] mb-3 font-sans">
               By the Numbers
             </p>
             <h2 className="font-heading text-2xl lg:text-3xl font-normal text-white">
@@ -51,7 +51,7 @@ export default function LuxuryNeighborhoodDemographics({ neighborhoodName, demo 
             </h2>
             <div className="w-8 h-px bg-[#C9A96E] mt-4" />
           </div>
-          <p className="text-[10px] text-white/20 font-sans">
+          <p className="text-[12px] text-white/20 font-sans">
             U.S. Census Bureau · ACS 5-Year Estimates · ZIP {demo.zip}
           </p>
         </div>
@@ -104,7 +104,7 @@ export default function LuxuryNeighborhoodDemographics({ neighborhoodName, demo 
                 { label: 'Labor Participation', value: demo.employment.laborParticipation },
               ].map((s, i) => (
                 <div key={s.label} className={i > 0 ? 'pt-5 border-t border-white/[0.06]' : ''}>
-                  <p className="text-[9px] tracking-[0.2em] uppercase text-white/30 font-sans mb-1">{s.label}</p>
+                  <p className="text-[12px] tracking-[0.2em] uppercase text-white/30 font-sans mb-1">{s.label}</p>
                   <p className="font-heading text-2xl font-normal text-white">{s.value}</p>
                 </div>
               ))}
@@ -119,19 +119,19 @@ export default function LuxuryNeighborhoodDemographics({ neighborhoodName, demo 
                 { label: 'Median Rent',      value: demo.housing.medianRent },
               ].map((s, i) => (
                 <div key={s.label} className={i > 0 ? 'pt-5 border-t border-white/[0.06]' : ''}>
-                  <p className="text-[9px] tracking-[0.2em] uppercase text-white/30 font-sans mb-1">{s.label}</p>
+                  <p className="text-[12px] tracking-[0.2em] uppercase text-white/30 font-sans mb-1">{s.label}</p>
                   <p className="font-heading text-2xl font-normal text-white">{s.value}</p>
                 </div>
               ))}
 
               {/* Owner vs Renter bar */}
               <div className="pt-5 border-t border-white/[0.06]">
-                <p className="text-[9px] tracking-[0.2em] uppercase text-white/30 font-sans mb-3">Owner vs. Renter</p>
+                <p className="text-[12px] tracking-[0.2em] uppercase text-white/30 font-sans mb-3">Owner vs. Renter</p>
                 <div className="h-1 bg-white/[0.08] overflow-hidden flex">
                   <div className="h-full bg-[#C9A96E]"        style={{ width: `${demo.housing.ownerPct}%` }} />
                   <div className="h-full bg-[#C9A96E]/30"     style={{ width: `${demo.housing.renterPct}%` }} />
                 </div>
-                <div className="flex justify-between text-[10px] text-white/30 mt-2 font-sans">
+                <div className="flex justify-between text-[12px] text-white/30 mt-2 font-sans">
                   <span>Owner {demo.housing.ownerPct}%</span>
                   <span>Renter {demo.housing.renterPct}%</span>
                 </div>

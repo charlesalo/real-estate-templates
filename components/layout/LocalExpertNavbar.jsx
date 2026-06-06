@@ -72,7 +72,7 @@ export default function LocalExpertNavbar({ agentName, phone, onContactOpen }) {
                   priority
                 />
                 <span
-                  className="inline-block lg:hidden min-[1200px]:!inline-block text-[12px] font-medium tracking-[0.28em] uppercase"
+                  className="inline-block lg:hidden min-[1200px]:!inline-block text-[13px] font-medium tracking-[0.28em] uppercase"
                   style={{ color: '#24180F' }}
                 >
                   NY LOCAL
@@ -87,7 +87,7 @@ export default function LocalExpertNavbar({ agentName, phone, onContactOpen }) {
                   key={link.href}
                   href={link.href}
                   className={cn(
-                    'text-[12px] tracking-wide transition-colors duration-200',
+                    'text-[13px] tracking-wide transition-colors duration-200',
                     pathname.startsWith(link.href) && link.href !== BASE
                       ? 'text-[#2C1E11] font-semibold'
                       : mutedCls,
@@ -103,7 +103,7 @@ export default function LocalExpertNavbar({ agentName, phone, onContactOpen }) {
               {phone && (
                 <a
                   href={`tel:${phone}`}
-                  className={cn('hidden xl:flex items-center gap-1.5 text-[12px] transition-colors', mutedCls)}
+                  className={cn('hidden xl:flex items-center gap-1.5 text-[13px] transition-colors', mutedCls)}
                 >
                   <Phone size={11} strokeWidth={2} />
                   {phone}
@@ -112,7 +112,7 @@ export default function LocalExpertNavbar({ agentName, phone, onContactOpen }) {
 
               <button
                 onClick={onContactOpen}
-                className="hidden lg:block text-[12px] font-semibold px-4 py-2 rounded-full bg-[#1B3B2B] text-[#F8F3EB] hover:bg-[#2a5540] transition-colors duration-200"
+                className="hidden lg:block text-[13px] font-semibold px-4 py-2 rounded-full bg-[#1B3B2B] text-[#F8F3EB] hover:bg-[#2a5540] transition-colors duration-200"
               >
                 Talk to Nadia
               </button>
@@ -159,7 +159,7 @@ export default function LocalExpertNavbar({ agentName, phone, onContactOpen }) {
                     style={{ height: '28px', width: 'auto' }}
                   />
                   <span
-                    className="text-[12px] font-medium tracking-[0.28em] uppercase"
+                    className="text-[13px] font-medium tracking-[0.28em] uppercase"
                     style={{ color: '#24180F' }}
                   >
                     NY LOCAL
@@ -180,7 +180,7 @@ export default function LocalExpertNavbar({ agentName, phone, onContactOpen }) {
                       key={link.href}
                       href={link.href}
                       onClick={() => setMenuOpen(false)}
-                      className="flex items-center justify-between py-3 border-b border-[#1B3B2B]/8 text-[15px] text-[#2C1E11] hover:text-[#2C1E11]/60 transition-colors"
+                      className="flex items-center justify-between py-3 border-b border-[#1B3B2B]/8 text-[16px] text-[#2C1E11] hover:text-[#2C1E11]/60 transition-colors"
                       style={{ fontFamily: 'var(--font-plus-jakarta, system-ui)' }}
                     >
                       {link.label}
@@ -193,14 +193,14 @@ export default function LocalExpertNavbar({ agentName, phone, onContactOpen }) {
               <div className="px-6 pb-8 pt-4 border-t border-[#1B3B2B]/10">
                 <button
                   onClick={() => { setMenuOpen(false); onContactOpen?.() }}
-                  className="w-full py-3.5 text-[13px] font-semibold bg-[#1B3B2B] text-[#F8F3EB] rounded-full hover:bg-[#2a5540] transition-colors"
+                  className="w-full py-3.5 text-[14px] font-semibold bg-[#1B3B2B] text-[#F8F3EB] rounded-full hover:bg-[#2a5540] transition-colors"
                 >
                   Talk to Nadia
                 </button>
                 {phone && (
                   <a
                     href={`tel:${phone}`}
-                    className="flex items-center justify-center gap-2 mt-3 text-[12px] text-[#2C1E11]/50"
+                    className="flex items-center justify-center gap-2 mt-3 text-[13px] text-[#2C1E11]/50"
                   >
                     <Phone size={11} /> {phone}
                   </a>

@@ -73,7 +73,7 @@ export default function LeadCaptureSection({
           {/* ── Left: form ───────────────────────────────── */}
           <div className="flex flex-col justify-center py-16 lg:py-28 lg:pr-16">
 
-            <p className="text-[10px] tracking-[0.5em] uppercase text-[#C9A96E] mb-6 font-sans">
+            <p className="text-[12px] tracking-[0.5em] uppercase text-[#C9A96E] mb-6 font-sans">
               Exclusive Access
             </p>
 
@@ -119,7 +119,7 @@ export default function LeadCaptureSection({
                       value={form.name}
                       onChange={e => { setForm(f => ({ ...f, name: e.target.value })); setErrors(err => ({ ...err, name: undefined })) }}
                     />
-                    {errors.name && <p className="mt-1.5 text-[10px] text-red-400/80 font-sans">{errors.name}</p>}
+                    {errors.name && <p className="mt-1.5 text-[12px] text-red-400/80 font-sans">{errors.name}</p>}
                   </div>
 
                   <div>
@@ -130,7 +130,7 @@ export default function LeadCaptureSection({
                       value={form.email}
                       onChange={e => { setForm(f => ({ ...f, email: e.target.value })); setErrors(err => ({ ...err, email: undefined })) }}
                     />
-                    {errors.email && <p className="mt-1.5 text-[10px] text-red-400/80 font-sans">{errors.email}</p>}
+                    {errors.email && <p className="mt-1.5 text-[12px] text-red-400/80 font-sans">{errors.email}</p>}
                   </div>
 
                   <div>
@@ -141,7 +141,7 @@ export default function LeadCaptureSection({
                       value={form.phone}
                       onChange={e => { setForm(f => ({ ...f, phone: e.target.value })); setErrors(err => ({ ...err, phone: undefined })) }}
                     />
-                    {errors.phone && <p className="mt-1.5 text-[10px] text-red-400/80 font-sans">{errors.phone}</p>}
+                    {errors.phone && <p className="mt-1.5 text-[12px] text-red-400/80 font-sans">{errors.phone}</p>}
                   </div>
 
                   <label className="flex items-start gap-3 cursor-pointer">
@@ -151,7 +151,7 @@ export default function LeadCaptureSection({
                       onChange={e => setConsent(e.target.checked)}
                       className="mt-0.5 flex-shrink-0 accent-[#C9A96E]"
                     />
-                    <span className="text-[10px] text-white/30 font-sans leading-relaxed">
+                    <span className="text-[12px] text-white/30 font-sans leading-relaxed">
                       I agree to be contacted by {agentName} via call, email, and text for real estate services.
                       To opt out, reply &apos;stop&apos; at any time. Message and data rates may apply.
                     </span>
@@ -160,7 +160,7 @@ export default function LeadCaptureSection({
                   <button
                     type="submit"
                     disabled={!consent || loading}
-                    className="w-full py-4 border border-[#C9A96E] text-[#C9A96E] bg-transparent text-[11px] tracking-[0.25em] uppercase font-semibold font-sans hover:bg-[#C9A96E] hover:text-[#0A0A0A] transition-all duration-200 disabled:opacity-40 disabled:cursor-not-allowed"
+                    className="w-full py-4 border border-[#C9A96E] text-[#C9A96E] bg-transparent text-[12px] tracking-[0.25em] uppercase font-semibold font-sans hover:bg-[#C9A96E] hover:text-[#0A0A0A] transition-all duration-200 disabled:opacity-40 disabled:cursor-not-allowed"
                   >
                     {loading ? 'Submitting…' : 'Get Exclusive Access'}
                   </button>

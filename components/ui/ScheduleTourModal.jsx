@@ -113,7 +113,7 @@ export default function ScheduleTourModal({
                   )}
                   <div className="p-6 flex-1 space-y-2">
                     {(propertyBadge || propertyStatus) && (
-                      <span className="inline-block px-2 py-0.5 text-[9px] tracking-[0.2em] uppercase bg-[#C9A96E] text-[#0A0A0A] font-semibold font-sans whitespace-nowrap">
+                      <span className="inline-block px-2 py-0.5 text-[12px] tracking-[0.2em] uppercase bg-[#C9A96E] text-[#0A0A0A] font-semibold font-sans whitespace-nowrap">
                         {propertyBadge ?? propertyStatus}
                       </span>
                     )}
@@ -149,7 +149,7 @@ export default function ScheduleTourModal({
                     </motion.div>
                   ) : step === 1 ? (
                     <>
-                      <p className="text-[10px] tracking-[0.4em] uppercase text-[#C9A96E] font-sans mb-2">
+                      <p className="text-[12px] tracking-[0.4em] uppercase text-[#C9A96E] font-sans mb-2">
                         Schedule a Showing
                       </p>
                       <h2 className="font-heading text-2xl font-normal text-white mb-1">
@@ -178,7 +178,7 @@ export default function ScheduleTourModal({
                       </div>
 
                       {/* Date picker */}
-                      <p className="text-[10px] tracking-[0.25em] uppercase text-white/30 font-sans mb-3">Select a Date</p>
+                      <p className="text-[12px] tracking-[0.25em] uppercase text-white/30 font-sans mb-3">Select a Date</p>
                       <div className="grid grid-cols-7 gap-1.5 mb-7">
                         {dates.map((d, i) => {
                           const isSelected = selectedDate?.toDateString() === d.toDateString()
@@ -192,13 +192,13 @@ export default function ScheduleTourModal({
                                   : 'border-white/[0.07] hover:border-white/20'
                               }`}
                             >
-                              <span className={`text-[9px] uppercase tracking-wide font-sans ${isSelected ? 'text-[#C9A96E]' : 'text-white/30'}`}>
+                              <span className={`text-[12px] uppercase tracking-wide font-sans ${isSelected ? 'text-[#C9A96E]' : 'text-white/30'}`}>
                                 {DAY_ABBR[d.getDay()]}
                               </span>
                               <span className={`text-sm font-heading font-normal mt-0.5 ${isSelected ? 'text-white' : 'text-white/55'}`}>
                                 {d.getDate()}
                               </span>
-                              <span className={`text-[8px] font-sans mt-0.5 ${isSelected ? 'text-[#C9A96E]/70' : 'text-white/20'}`}>
+                              <span className={`text-[9px] font-sans mt-0.5 ${isSelected ? 'text-[#C9A96E]/70' : 'text-white/20'}`}>
                                 {MONTH_ABBR[d.getMonth()]}
                               </span>
                             </button>
@@ -207,7 +207,7 @@ export default function ScheduleTourModal({
                       </div>
 
                       {/* Time slots */}
-                      <p className="text-[10px] tracking-[0.25em] uppercase text-white/30 font-sans mb-3">Select a Time</p>
+                      <p className="text-[12px] tracking-[0.25em] uppercase text-white/30 font-sans mb-3">Select a Time</p>
                       <div className="grid grid-cols-3 gap-2 mb-8">
                         {TIME_SLOTS.map(t => {
                           const isSelected = selectedTime === t
@@ -235,7 +235,7 @@ export default function ScheduleTourModal({
                         <button
                           onClick={() => setStep(2)}
                           disabled={!selectedDate || !selectedTime}
-                          className="px-8 py-3 bg-[#C9A96E] text-[#0A0A0A] text-[11px] tracking-[0.2em] uppercase font-semibold font-sans hover:bg-[#b8935a] transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+                          className="px-8 py-3 bg-[#C9A96E] text-[#0A0A0A] text-[12px] tracking-[0.2em] uppercase font-semibold font-sans hover:bg-[#b8935a] transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
                         >
                           Next
                         </button>
@@ -243,7 +243,7 @@ export default function ScheduleTourModal({
                     </>
                   ) : (
                     <>
-                      <p className="text-[10px] tracking-[0.4em] uppercase text-[#C9A96E] font-sans mb-2">
+                      <p className="text-[12px] tracking-[0.4em] uppercase text-[#C9A96E] font-sans mb-2">
                         Almost there
                       </p>
                       <h2 className="font-heading text-2xl font-normal text-white mb-1">
@@ -272,7 +272,7 @@ export default function ScheduleTourModal({
                           <button
                             type="submit"
                             disabled={!form.name || !form.email}
-                            className="px-8 py-3 bg-[#C9A96E] text-[#0A0A0A] text-[11px] tracking-[0.2em] uppercase font-semibold font-sans hover:bg-[#b8935a] transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+                            className="px-8 py-3 bg-[#C9A96E] text-[#0A0A0A] text-[12px] tracking-[0.2em] uppercase font-semibold font-sans hover:bg-[#b8935a] transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
                           >
                             Confirm Tour
                           </button>

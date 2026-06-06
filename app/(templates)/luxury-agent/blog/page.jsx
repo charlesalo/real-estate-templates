@@ -5,8 +5,8 @@ import CTASection from '@/components/sections/CTASection'
 import LeadCaptureSection from '@/components/sections/LeadCaptureSection'
 
 export const metadata = {
-  title: 'Blog',
-  description: 'Market reports, buying guides, and neighborhood news from Victoria Sinclair.',
+  title: 'Los Angeles Real Estate & Community Blog',
+  description: 'Market reports, buying guides, and neighborhood news from Victoria Sinclair — your source for Los Angeles luxury real estate insights and trends.',
 }
 
 const POSTS = [
@@ -40,7 +40,7 @@ export default function BlogPage() {
   return (
     <div className="min-h-screen bg-[#0A0A0A] pt-20">
       <ParallaxBanner src="/images/luxury-agent/xtra12.jpg" priority>
-        <p className="text-[10px] tracking-[0.5em] uppercase text-[#C9A96E] mb-4 font-sans">Los Angeles Real Estate Market Insights</p>
+        <p className="text-[12px] tracking-[0.5em] uppercase text-[#C9A96E] mb-4 font-sans">Los Angeles Real Estate Market Insights</p>
         <h1 className="font-heading text-4xl lg:text-5xl font-normal text-white mb-5">Luxury Real Estate Journal</h1>
         <div className="w-12 h-px bg-[#C9A96E] mb-5" />
         <p className="text-white/45 font-sans text-base max-w-xl leading-relaxed">
@@ -62,9 +62,9 @@ export default function BlogPage() {
                 />
               </div>
               <div className="flex items-center gap-2 mb-3">
-                <span className="text-[10px] tracking-[0.2em] uppercase text-[#C9A96E] font-sans">{post.category}</span>
+                <span className="text-[12px] tracking-[0.2em] uppercase text-[#C9A96E] font-sans">{post.category}</span>
                 <span className="text-white/20">·</span>
-                <span className="text-[11px] text-white/35 font-sans">{post.date}</span>
+                <span className="text-[12px] text-white/35 font-sans">{post.date}</span>
               </div>
               <h2 className="font-heading text-xl font-normal text-white group-hover:text-[#C9A96E] transition-colors leading-snug mb-3">
                 {post.title}

@@ -126,7 +126,7 @@ export default function ModernTeamScheduleTourModal({
                   )}
                   <div className="p-6 flex-1 space-y-3">
                     {propertyStatus && (
-                      <span className={`inline-block px-2.5 py-1 text-[10px] tracking-[0.12em] uppercase font-semibold rounded font-sans ${STATUS_STYLES[propertyStatus] ?? STATUS_STYLES.Active}`}>
+                      <span className={`inline-block px-2.5 py-1 text-[12px] tracking-[0.12em] uppercase font-semibold rounded font-sans ${STATUS_STYLES[propertyStatus] ?? STATUS_STYLES.Active}`}>
                         {propertyStatus}
                       </span>
                     )}
@@ -177,7 +177,7 @@ export default function ModernTeamScheduleTourModal({
                   ) : step === 1 ? (
                     <>
                       {/* Step 1: date + time */}
-                      <p className="text-[10px] tracking-[0.2em] uppercase text-[#1A2D5A] font-semibold font-sans mb-1">
+                      <p className="text-[12px] tracking-[0.2em] uppercase text-[#1A2D5A] font-semibold font-sans mb-1">
                         Schedule a Showing
                       </p>
                       <h2 className="text-2xl font-bold text-[#111827] mb-1 font-sans">
@@ -205,7 +205,7 @@ export default function ModernTeamScheduleTourModal({
                       </div>
 
                       {/* Date picker */}
-                      <p className="text-[10px] tracking-[0.2em] uppercase text-[#9CA3AF] font-sans mb-3">Select a Date</p>
+                      <p className="text-[12px] tracking-[0.2em] uppercase text-[#9CA3AF] font-sans mb-3">Select a Date</p>
                       <div className="grid grid-cols-7 gap-1.5 mb-7">
                         {dates.map((d, i) => {
                           const isSelected = selectedDate?.toDateString() === d.toDateString()
@@ -219,13 +219,13 @@ export default function ModernTeamScheduleTourModal({
                                   : 'border-[#D5DBE9] hover:border-[#1A2D5A]/50 hover:bg-[#EEF1F7]'
                               }`}
                             >
-                              <span className={`text-[9px] uppercase tracking-wide font-sans font-medium ${isSelected ? 'text-white/70' : 'text-[#9CA3AF]'}`}>
+                              <span className={`text-[12px] uppercase tracking-wide font-sans font-medium ${isSelected ? 'text-white/70' : 'text-[#9CA3AF]'}`}>
                                 {DAY_ABBR[d.getDay()]}
                               </span>
                               <span className={`text-sm font-bold font-sans mt-0.5 ${isSelected ? 'text-white' : 'text-[#111827]'}`}>
                                 {d.getDate()}
                               </span>
-                              <span className={`text-[8px] font-sans mt-0.5 ${isSelected ? 'text-white/60' : 'text-[#9CA3AF]'}`}>
+                              <span className={`text-[9px] font-sans mt-0.5 ${isSelected ? 'text-white/60' : 'text-[#9CA3AF]'}`}>
                                 {MONTH_ABBR[d.getMonth()]}
                               </span>
                             </button>
@@ -234,7 +234,7 @@ export default function ModernTeamScheduleTourModal({
                       </div>
 
                       {/* Time slots */}
-                      <p className="text-[10px] tracking-[0.2em] uppercase text-[#9CA3AF] font-sans mb-3">Select a Time</p>
+                      <p className="text-[12px] tracking-[0.2em] uppercase text-[#9CA3AF] font-sans mb-3">Select a Time</p>
                       <div className="grid grid-cols-3 gap-2 mb-8">
                         {TIME_SLOTS.map(t => {
                           const isSelected = selectedTime === t
@@ -275,7 +275,7 @@ export default function ModernTeamScheduleTourModal({
                   ) : (
                     <>
                       {/* Step 2: contact details */}
-                      <p className="text-[10px] tracking-[0.2em] uppercase text-[#1A2D5A] font-semibold font-sans mb-1">
+                      <p className="text-[12px] tracking-[0.2em] uppercase text-[#1A2D5A] font-semibold font-sans mb-1">
                         Almost There
                       </p>
                       <h2 className="text-2xl font-bold text-[#111827] mb-1 font-sans">
@@ -289,7 +289,7 @@ export default function ModernTeamScheduleTourModal({
 
                       <form onSubmit={handleSubmit} className="space-y-4">
                         <div>
-                          <label className="text-[10px] tracking-[0.15em] uppercase text-[#9CA3AF] font-sans mb-1.5 block">Full Name</label>
+                          <label className="text-[12px] tracking-[0.15em] uppercase text-[#9CA3AF] font-sans mb-1.5 block">Full Name</label>
                           <input
                             required
                             value={form.name}
@@ -300,7 +300,7 @@ export default function ModernTeamScheduleTourModal({
                           />
                         </div>
                         <div>
-                          <label className="text-[10px] tracking-[0.15em] uppercase text-[#9CA3AF] font-sans mb-1.5 block">Email Address</label>
+                          <label className="text-[12px] tracking-[0.15em] uppercase text-[#9CA3AF] font-sans mb-1.5 block">Email Address</label>
                           <input
                             required
                             value={form.email}
@@ -311,7 +311,7 @@ export default function ModernTeamScheduleTourModal({
                           />
                         </div>
                         <div>
-                          <label className="text-[10px] tracking-[0.15em] uppercase text-[#9CA3AF] font-sans mb-1.5 block">Phone <span className="normal-case tracking-normal text-[#C4C9D4]">(optional)</span></label>
+                          <label className="text-[12px] tracking-[0.15em] uppercase text-[#9CA3AF] font-sans mb-1.5 block">Phone <span className="normal-case tracking-normal text-[#C4C9D4]">(optional)</span></label>
                           <input
                             value={form.phone}
                             onChange={e => setForm(v => ({ ...v, phone: e.target.value }))}

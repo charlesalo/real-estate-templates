@@ -97,7 +97,7 @@ export default async function PastTransactionDetailPage({ params }) {
           </Link>
           <div className="flex flex-wrap items-end justify-between gap-4">
             <div>
-              <span className="inline-block px-2.5 py-1 bg-[#111827]/80 backdrop-blur-sm text-white text-[10px] font-semibold rounded-md tracking-wide uppercase font-sans mb-3">
+              <span className="inline-block px-2.5 py-1 bg-[#111827]/80 backdrop-blur-sm text-white text-[12px] font-semibold rounded-md tracking-wide uppercase font-sans mb-3">
                 Sold · {property.soldDate}
               </span>
               <h1
@@ -158,7 +158,7 @@ export default async function PastTransactionDetailPage({ params }) {
                   <div key={label} className="bg-white border border-[#E5E7EB] rounded-xl p-4 text-center">
                     <Icon size={15} className="text-[#4B6090] mx-auto mb-2" />
                     <p className="text-base font-bold text-[#111827]" style={{ fontFamily: 'var(--font-inter, system-ui)' }}>{value}</p>
-                    <p className="text-[10px] text-[#9CA3AF] font-sans uppercase tracking-wide mt-0.5">{label}</p>
+                    <p className="text-[12px] text-[#9CA3AF] font-sans uppercase tracking-wide mt-0.5">{label}</p>
                   </div>
                 ))}
               </div>
@@ -247,7 +247,7 @@ export default async function PastTransactionDetailPage({ params }) {
               {/* Agent card */}
               <div className="bg-[#1A2D5A] rounded-xl overflow-hidden">
                 <div className="px-6 pt-8 pb-6 text-center border-b border-white/10">
-                  <p className="text-[10px] tracking-[0.3em] uppercase text-white/40 font-sans mb-4">Your Agent</p>
+                  <p className="text-[12px] tracking-[0.3em] uppercase text-white/40 font-sans mb-4">Your Agent</p>
                   <div className="relative w-20 h-20 rounded-full overflow-hidden mx-auto mb-4 ring-2 ring-white/20">
                     <Image src={property.agent.photo} alt={property.agent.name} fill className="object-cover object-top" />
                   </div>
@@ -271,7 +271,7 @@ export default async function PastTransactionDetailPage({ params }) {
                     <Mail size={13} className="text-white/40 flex-shrink-0" />
                     {property.agent.email}
                   </a>
-                  <p className="text-[10px] text-white/25 font-sans pt-2 border-t border-white/10">{property.agent.license}</p>
+                  <p className="text-[12px] text-white/25 font-sans pt-2 border-t border-white/10">{property.agent.license}</p>
                 </div>
                 <div className="px-6 pb-6">
                   <ModalTrigger className="w-full py-3.5 bg-white text-[#1A2D5A] text-xs font-bold tracking-[0.2em] uppercase rounded-lg hover:bg-white/90 transition-colors cursor-pointer">
@@ -318,7 +318,7 @@ export default async function PastTransactionDetailPage({ params }) {
                     {hood.stats.map(s => (
                       <div key={s.label}>
                         <p className="text-xl font-bold text-[#1A2D5A] mb-0.5" style={{ fontFamily: 'var(--font-inter, system-ui)' }}>{s.value}</p>
-                        <p className="text-[10px] text-[#9CA3AF] font-sans uppercase tracking-[0.15em]">{s.label}</p>
+                        <p className="text-[12px] text-[#9CA3AF] font-sans uppercase tracking-[0.15em]">{s.label}</p>
                       </div>
                     ))}
                   </div>
@@ -356,7 +356,7 @@ export default async function PastTransactionDetailPage({ params }) {
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                     className="object-cover transition-transform duration-500 group-hover:scale-105"
                   />
-                  <div className="absolute top-3 left-3 px-2.5 py-1 bg-[#111827]/80 backdrop-blur-sm text-white text-[10px] font-semibold rounded-md tracking-wide uppercase font-sans">
+                  <div className="absolute top-3 left-3 px-2.5 py-1 bg-[#111827]/80 backdrop-blur-sm text-white text-[12px] font-semibold rounded-md tracking-wide uppercase font-sans">
                     Sold
                   </div>
                 </div>

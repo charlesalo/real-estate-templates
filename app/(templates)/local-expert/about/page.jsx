@@ -26,14 +26,14 @@ export default function AboutPage() {
         <div className="max-w-7xl mx-auto px-5 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_420px] gap-12 lg:gap-20 items-start">
             <div>
-              <p className="text-[9px] tracking-[0.4em] uppercase text-[#BA5B3E] mb-4">About</p>
+              <p className="text-[12px] tracking-[0.4em] uppercase text-[#BA5B3E] mb-4">About</p>
               <h1
-                className="text-[40px] lg:text-[54px] font-normal text-[#24180F] leading-[1.05] mb-6"
+                className="text-[43px] lg:text-[58px] font-normal text-[#24180F] leading-[1.05] mb-6"
                 style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}
               >
                 Fourteen years<br />in New York.
               </h1>
-              <p className="text-[17px] text-[#2C1E11]/60 leading-relaxed max-w-lg">
+              <p className="text-[18px] text-[#2C1E11]/60 leading-relaxed max-w-lg">
                 I moved here for a job that didn&apos;t pan out. I stayed because no city on earth
                 has this particular pull. Now I help other people figure out their version of New York —
                 which block, which building, which life.
@@ -59,12 +59,12 @@ export default function AboutPage() {
             {AGENT_STATS.map((stat) => (
               <div key={stat.label}>
                 <div
-                  className="text-[32px] font-normal text-[#24180F] leading-none"
+                  className="text-[34px] font-normal text-[#24180F] leading-none"
                   style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}
                 >
                   {stat.prefix ?? ''}{stat.numericValue}{stat.suffix ?? ''}
                 </div>
-                <div className="text-[11px] uppercase tracking-wider text-[#2C1E11]/40 mt-1">{stat.label}</div>
+                <div className="text-[12px] uppercase tracking-wider text-[#2C1E11]/40 mt-1">{stat.label}</div>
               </div>
             ))}
           </div>
@@ -76,11 +76,11 @@ export default function AboutPage() {
         <div className="max-w-3xl mx-auto px-5 lg:px-8">
           <div className="space-y-6">
             {AGENT.bio.map((para, i) => (
-              <p key={i} className="text-[15px] text-[#2C1E11]/65 leading-relaxed">
+              <p key={i} className="text-[16px] text-[#2C1E11]/65 leading-relaxed">
                 {para}
               </p>
             ))}
-            <p className="text-[15px] text-[#2C1E11]/65 leading-relaxed">
+            <p className="text-[16px] text-[#2C1E11]/65 leading-relaxed">
               The areas I focus on — West Village, Tribeca, Brooklyn Heights, DUMBO, Park Slope,
               and the Upper East Side — are neighborhoods I know the way you know a friend&apos;s face.
               I know which buildings have good boards and which ones stall on approvals. I know where the
@@ -90,12 +90,12 @@ export default function AboutPage() {
 
           {/* Credentials */}
           <div className="mt-12 p-6 rounded-2xl border border-[#E5E0D8]">
-            <p className="text-[11px] uppercase tracking-wider text-[#2C1E11]/30 mb-4">Credentials</p>
+            <p className="text-[12px] uppercase tracking-wider text-[#2C1E11]/30 mb-4">Credentials</p>
             <div className="space-y-2">
-              <p className="text-[14px] text-[#2C1E11]">{AGENT.title}</p>
-              <p className="text-[13px] text-[#2C1E11]/50">{AGENT.license}</p>
-              <p className="text-[13px] text-[#2C1E11]/50">{AGENT.brokerage} · {AGENT.brokerageLicense}</p>
-              <p className="text-[13px] text-[#2C1E11]/40">{AGENT.brokerageAddress}</p>
+              <p className="text-[15px] text-[#2C1E11]">{AGENT.title}</p>
+              <p className="text-[14px] text-[#2C1E11]/50">{AGENT.license}</p>
+              <p className="text-[14px] text-[#2C1E11]/50">{AGENT.brokerage} · {AGENT.brokerageLicense}</p>
+              <p className="text-[14px] text-[#2C1E11]/40">{AGENT.brokerageAddress}</p>
             </div>
           </div>
         </div>
@@ -105,7 +105,7 @@ export default function AboutPage() {
       <section className="py-[96px] lg:py-[128px]" style={{ backgroundColor: '#F4F0EA' }}>
         <div className="max-w-3xl mx-auto px-5 lg:px-8">
           <h2
-            className="text-[32px] font-normal text-[#24180F] mb-12"
+            className="text-[34px] font-normal text-[#24180F] mb-12"
             style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}
           >
             The story so far.
@@ -120,8 +120,8 @@ export default function AboutPage() {
                   )}
                 </div>
                 <div className="pb-2">
-                  <p className="text-[11px] font-bold tracking-wider text-[#8B9E8B] mb-1">{item.year}</p>
-                  <p className="text-[15px] text-[#2C1E11]/65 leading-relaxed">{item.event}</p>
+                  <p className="text-[12px] font-bold tracking-wider text-[#8B9E8B] mb-1">{item.year}</p>
+                  <p className="text-[16px] text-[#2C1E11]/65 leading-relaxed">{item.event}</p>
                 </div>
               </div>
             ))}
@@ -134,14 +134,14 @@ export default function AboutPage() {
         <div className="max-w-3xl mx-auto px-5 lg:px-8 text-center">
           <blockquote>
             <p
-              className="text-[22px] lg:text-[28px] font-normal italic text-[#F8F3EB] leading-snug"
+              className="text-[24px] lg:text-[28px] font-normal italic text-[#F8F3EB] leading-snug"
               style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}
             >
               &ldquo;{TESTIMONIAL.quote}&rdquo;
             </p>
             <footer className="mt-6">
-              <p className="text-[13px] font-semibold text-[#8B9E8B]">{TESTIMONIAL.author}</p>
-              <p className="text-[11px] text-[#F8F3EB]/30 mt-0.5">{TESTIMONIAL.location}</p>
+              <p className="text-[14px] font-semibold text-[#8B9E8B]">{TESTIMONIAL.author}</p>
+              <p className="text-[12px] text-[#F8F3EB]/30 mt-0.5">{TESTIMONIAL.location}</p>
             </footer>
           </blockquote>
         </div>
@@ -151,17 +151,17 @@ export default function AboutPage() {
       <section className="py-[64px] lg:py-[80px]" style={{ backgroundColor: '#F8F3EB' }}>
         <div className="max-w-3xl mx-auto px-5 lg:px-8 text-center">
           <h2
-            className="text-[32px] font-normal text-[#24180F] mb-4"
+            className="text-[34px] font-normal text-[#24180F] mb-4"
             style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}
           >
             Let&apos;s talk about your next block.
           </h2>
-          <p className="text-[15px] text-[#2C1E11]/50 mb-8">
+          <p className="text-[16px] text-[#2C1E11]/50 mb-8">
             No pressure. Just a conversation about what you&apos;re looking for.
           </p>
           <Link
             href="/local-expert/contact"
-            className="inline-flex items-center gap-2 px-8 py-3.5 text-[13px] font-bold rounded-full bg-[#1B3B2B] text-[#F8F3EB] hover:bg-[#2a5540] transition-colors"
+            className="inline-flex items-center gap-2 px-8 py-3.5 text-[14px] font-bold rounded-full bg-[#1B3B2B] text-[#F8F3EB] hover:bg-[#2a5540] transition-colors"
           >
             Get in touch <ArrowRight size={14} />
           </Link>

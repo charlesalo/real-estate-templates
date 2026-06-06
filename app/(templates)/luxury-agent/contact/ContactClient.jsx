@@ -58,14 +58,14 @@ export default function ContactClient() {
   }
 
   const inputClass = 'w-full text-sm px-4 py-3 outline-none border border-white/10 bg-transparent text-white placeholder:text-white/25 focus:border-[#C9A96E] transition-colors'
-  const labelClass = 'block text-[10px] tracking-[0.2em] uppercase text-white/40 mb-2 font-sans'
+  const labelClass = 'block text-[12px] tracking-[0.2em] uppercase text-white/40 mb-2 font-sans'
   const errorClass = 'text-red-400 text-xs mt-1'
 
   return (
     <div className="min-h-screen bg-[#0A0A0A] pt-20">
       {/* Header */}
       <ParallaxBanner src="/images/luxury-agent/xtra13.jpg" priority>
-        <p className="text-[10px] tracking-[0.5em] uppercase text-[#C9A96E] mb-4 font-sans">Ready to Make Your Move?</p>
+        <p className="text-[12px] tracking-[0.5em] uppercase text-[#C9A96E] mb-4 font-sans">Ready to Make Your Move?</p>
         <h1 className="font-heading text-4xl lg:text-5xl font-normal text-white mb-5">Let&apos;s Connect</h1>
         <div className="w-12 h-px bg-[#C9A96E] mb-5" />
         <p className="text-white/45 font-sans text-base max-w-xl leading-relaxed">
@@ -160,7 +160,7 @@ export default function ContactClient() {
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="px-10 py-4 bg-[#C9A96E] text-[#0A0A0A] text-[11px] tracking-[0.2em] uppercase font-medium hover:opacity-90 transition-opacity disabled:opacity-50"
+                    className="px-10 py-4 bg-[#C9A96E] text-[#0A0A0A] text-[12px] tracking-[0.2em] uppercase font-medium hover:opacity-90 transition-opacity disabled:opacity-50"
                   >
                     {isSubmitting ? 'Sending…' : 'Send Message'}
                   </button>
@@ -198,13 +198,13 @@ export default function ContactClient() {
 
                 {/* Content */}
                 <div className="absolute inset-0 flex flex-col justify-end p-8 lg:p-10">
-                  <p className="text-[9px] tracking-[0.45em] uppercase text-[#C9A96E] font-sans mb-2">
+                  <p className="text-[12px] tracking-[0.45em] uppercase text-[#C9A96E] font-sans mb-2">
                     {item.eyebrow}
                   </p>
                   <h3 className="font-heading text-2xl lg:text-3xl font-normal text-white leading-tight mb-4">
                     {item.label}
                   </h3>
-                  <span className="text-[10px] tracking-[0.3em] uppercase text-white/50 group-hover:text-[#C9A96E] transition-colors font-sans">
+                  <span className="text-[12px] tracking-[0.3em] uppercase text-white/50 group-hover:text-[#C9A96E] transition-colors font-sans">
                     Explore →
                   </span>
                 </div>

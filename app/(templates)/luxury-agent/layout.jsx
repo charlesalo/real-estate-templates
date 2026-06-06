@@ -86,11 +86,11 @@ const FOOTER_LINKS = [
 
 export const metadata = {
   title: {
-    default: 'Victoria Sinclair | Luxury Real Estate',
+    default: 'Victoria Sinclair | Los Angeles Real Estate Agent',
     template: '%s | Victoria Sinclair',
   },
   description:
-    'Beverly Hills luxury real estate. Extraordinary homes for extraordinary lives. DRE# 01234567.',
+    'Beverly Hills and Los Angeles luxury real estate. Victoria Sinclair represents extraordinary homes for extraordinary clients. DRE# 01234567.',
   icons: {
     icon: '/images/luxury-agent/Victoria Sinclair Favicon.png',
     apple: '/images/luxury-agent/Victoria Sinclair Favicon.png',

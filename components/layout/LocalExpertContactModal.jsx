@@ -57,7 +57,7 @@ export default function LocalExpertContactModal({ agent, open, onClose }) {
                 >
                   <X size={18} />
                 </button>
-                <p className="text-[10px] tracking-[0.3em] uppercase text-[#8B9E8B] mb-1">Get in Touch</p>
+                <p className="text-[12px] tracking-[0.3em] uppercase text-[#8B9E8B] mb-1">Get in Touch</p>
                 <h2
                   className="text-xl font-bold text-[#24180F]"
                   style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}
@@ -90,7 +90,7 @@ export default function LocalExpertContactModal({ agent, open, onClose }) {
                   <form onSubmit={handleSubmit} className="space-y-4">
                     <div className="grid grid-cols-2 gap-4">
                       <div>
-                        <label className="block text-[11px] text-[#2C1E11]/50 mb-1.5 uppercase tracking-wider">Name</label>
+                        <label className="block text-[12px] text-[#2C1E11]/50 mb-1.5 uppercase tracking-wider">Name</label>
                         <input
                           name="name"
                           required
@@ -101,7 +101,7 @@ export default function LocalExpertContactModal({ agent, open, onClose }) {
                         />
                       </div>
                       <div>
-                        <label className="block text-[11px] text-[#2C1E11]/50 mb-1.5 uppercase tracking-wider">Phone</label>
+                        <label className="block text-[12px] text-[#2C1E11]/50 mb-1.5 uppercase tracking-wider">Phone</label>
                         <input
                           name="phone"
                           value={form.phone}
@@ -113,7 +113,7 @@ export default function LocalExpertContactModal({ agent, open, onClose }) {
                       </div>
                     </div>
                     <div>
-                      <label className="block text-[11px] text-[#2C1E11]/50 mb-1.5 uppercase tracking-wider">Email</label>
+                      <label className="block text-[12px] text-[#2C1E11]/50 mb-1.5 uppercase tracking-wider">Email</label>
                       <input
                         name="email"
                         required
@@ -125,7 +125,7 @@ export default function LocalExpertContactModal({ agent, open, onClose }) {
                       />
                     </div>
                     <div>
-                      <label className="block text-[11px] text-[#2C1E11]/50 mb-1.5 uppercase tracking-wider">Message</label>
+                      <label className="block text-[12px] text-[#2C1E11]/50 mb-1.5 uppercase tracking-wider">Message</label>
                       <textarea
                         name="message"
                         rows={3}
@@ -157,7 +157,7 @@ export default function LocalExpertContactModal({ agent, open, onClose }) {
 
                     <button
                       type="submit"
-                      className="w-full py-3 text-[13px] font-semibold bg-[#1B3B2B] text-[#F8F3EB] rounded-full hover:bg-[#2a5540] transition-colors mt-1"
+                      className="w-full py-3 text-[14px] font-semibold bg-[#1B3B2B] text-[#F8F3EB] rounded-full hover:bg-[#2a5540] transition-colors mt-1"
                     >
                       Send Message
                     </button>

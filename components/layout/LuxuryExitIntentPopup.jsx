@@ -150,7 +150,7 @@ export default function LuxuryExitIntentPopup({ agentName = 'Victoria Sinclair' 
               <div className="px-8 py-8 lg:px-10 lg:py-12 flex flex-col justify-center">
 
                 {/* Eyebrow */}
-                <p className="text-[9px] tracking-[0.45em] uppercase text-[#C9A96E] mb-4 font-sans">
+                <p className="text-[12px] tracking-[0.45em] uppercase text-[#C9A96E] mb-4 font-sans">
                   Before You Go
                 </p>
 
@@ -161,7 +161,7 @@ export default function LuxuryExitIntentPopup({ agentName = 'Victoria Sinclair' 
                 <div className="w-8 h-px bg-[#C9A96E] mb-5" />
 
                 {/* Subheadline */}
-                <p className="text-[12px] text-white/50 font-sans leading-relaxed mb-8">
+                <p className="text-[13px] text-white/50 font-sans leading-relaxed mb-8">
                   Receive hand-selected properties matched to your criteria — including exclusive off-market opportunities — delivered directly to your inbox.
                 </p>
 
@@ -174,7 +174,7 @@ export default function LuxuryExitIntentPopup({ agentName = 'Victoria Sinclair' 
                     </p>
                     <button
                       onClick={dismiss}
-                      className="text-[9px] tracking-[0.25em] uppercase text-white/25 hover:text-white font-sans transition-colors"
+                      className="text-[12px] tracking-[0.25em] uppercase text-white/25 hover:text-white font-sans transition-colors"
                     >
                       Close
                     </button>
@@ -204,7 +204,7 @@ export default function LuxuryExitIntentPopup({ agentName = 'Victoria Sinclair' 
                         onChange={(e) => setAgreed(e.target.checked)}
                         className="mt-0.5 flex-shrink-0 accent-[#C9A96E]"
                       />
-                      <label htmlFor="exit-consent" className="text-[10px] text-white/25 font-sans leading-relaxed">
+                      <label htmlFor="exit-consent" className="text-[12px] text-white/25 font-sans leading-relaxed">
                         I agree to be contacted by {agentName} via call, email, and text for real estate services. To opt out, reply 'stop' at any time. Message and data rates may apply.
                       </label>
                     </div>
@@ -217,7 +217,7 @@ export default function LuxuryExitIntentPopup({ agentName = 'Victoria Sinclair' 
                     <button
                       type="submit"
                       disabled={status === 'sending'}
-                      className="w-full py-4 bg-[#C9A96E] text-[#0A0A0A] text-[11px] tracking-[0.25em] uppercase font-medium font-sans hover:opacity-90 transition-opacity disabled:opacity-50"
+                      className="w-full py-4 bg-[#C9A96E] text-[#0A0A0A] text-[12px] tracking-[0.25em] uppercase font-medium font-sans hover:opacity-90 transition-opacity disabled:opacity-50"
                     >
                       {status === 'sending' ? 'Submitting…' : 'Submit'}
                     </button>
@@ -226,7 +226,7 @@ export default function LuxuryExitIntentPopup({ agentName = 'Victoria Sinclair' 
                     <button
                       type="button"
                       onClick={dismiss}
-                      className="w-full text-center text-[9px] tracking-[0.2em] uppercase text-white/20 hover:text-white/50 font-sans transition-colors pt-1"
+                      className="w-full text-center text-[12px] tracking-[0.2em] uppercase text-white/20 hover:text-white/50 font-sans transition-colors pt-1"
                     >
                       No thanks
                     </button>

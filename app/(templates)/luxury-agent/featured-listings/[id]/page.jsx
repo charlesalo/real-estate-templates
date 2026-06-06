@@ -53,7 +53,7 @@ export default async function FeaturedListingDetailPage({ params }) {
 
         {/* Badge */}
         <div className="absolute top-8 left-6 lg:left-10">
-          <span className={`inline-block px-3 py-1.5 text-[9px] tracking-[0.25em] uppercase font-semibold ${BADGE_STYLES[listing.badge] ?? 'bg-white/15 text-white backdrop-blur-sm'}`}>
+          <span className={`inline-block px-3 py-1.5 text-[12px] tracking-[0.25em] uppercase font-semibold ${BADGE_STYLES[listing.badge] ?? 'bg-white/15 text-white backdrop-blur-sm'}`}>
             {listing.badge}
           </span>
         </div>
@@ -62,7 +62,7 @@ export default async function FeaturedListingDetailPage({ params }) {
         <div className="absolute top-8 right-6 lg:right-10">
           <Link
             href="/luxury-agent/featured-listings"
-            className="flex items-center gap-1.5 text-[10px] tracking-[0.25em] uppercase text-white/40 hover:text-white transition-colors font-sans"
+            className="flex items-center gap-1.5 text-[12px] tracking-[0.25em] uppercase text-white/40 hover:text-white transition-colors font-sans"
           >
             <ChevronLeft size={13} strokeWidth={1.5} />
             All Listings
@@ -76,7 +76,7 @@ export default async function FeaturedListingDetailPage({ params }) {
 
           {/* Left: details */}
           <div>
-            <p className="text-[10px] tracking-[0.45em] uppercase text-[#C9A96E] mb-3 font-sans">
+            <p className="text-[12px] tracking-[0.45em] uppercase text-[#C9A96E] mb-3 font-sans">
               {listing.city}, {listing.state} {listing.zip}
             </p>
             <h1 className="font-heading text-4xl lg:text-5xl font-normal text-white mb-4 leading-tight">
@@ -136,7 +136,7 @@ export default async function FeaturedListingDetailPage({ params }) {
           {/* Right: sticky inquiry card */}
           <div className="lg:sticky lg:top-28">
             <div className="border border-white/[0.08] bg-[#0D0D0D] p-8">
-              <p className="text-[9px] tracking-[0.4em] uppercase text-[#C9A96E] font-sans mb-1">
+              <p className="text-[12px] tracking-[0.4em] uppercase text-[#C9A96E] font-sans mb-1">
                 Listed By
               </p>
               <p className="font-heading text-lg text-white mb-1">Victoria Sinclair</p>
@@ -153,7 +153,7 @@ export default async function FeaturedListingDetailPage({ params }) {
               </p>
 
               {listing.badge === 'Sold' ? (
-                <ModalTrigger className="w-full block text-center py-3.5 border border-white/15 text-white/50 text-[11px] tracking-[0.2em] uppercase font-sans hover:border-white/40 hover:text-white transition-all">
+                <ModalTrigger className="w-full block text-center py-3.5 border border-white/15 text-white/50 text-[12px] tracking-[0.2em] uppercase font-sans hover:border-white/40 hover:text-white transition-all">
                   Contact Victoria
                 </ModalTrigger>
               ) : (
@@ -177,7 +177,7 @@ export default async function FeaturedListingDetailPage({ params }) {
             <h2 className="font-heading text-2xl font-normal text-white">More Exclusive Properties</h2>
             <Link
               href="/luxury-agent/featured-listings"
-              className="text-[10px] tracking-[0.3em] uppercase text-[#C9A96E]/60 hover:text-[#C9A96E] transition-colors font-sans"
+              className="text-[12px] tracking-[0.3em] uppercase text-[#C9A96E]/60 hover:text-[#C9A96E] transition-colors font-sans"
             >
               View All →
             </Link>
@@ -189,7 +189,7 @@ export default async function FeaturedListingDetailPage({ params }) {
                   <Image src={l.image} alt={l.address} fill sizes="(max-width: 640px) 100vw, 33vw" className="object-cover transition-transform duration-700 group-hover:scale-[1.04]" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
                   <div className="absolute top-3 left-3">
-                    <span className={`inline-block px-2 py-1 text-[9px] tracking-[0.2em] uppercase font-semibold ${BADGE_STYLES[l.badge] ?? 'bg-white/15 text-white backdrop-blur-sm'}`}>{l.badge}</span>
+                    <span className={`inline-block px-2 py-1 text-[12px] tracking-[0.2em] uppercase font-semibold ${BADGE_STYLES[l.badge] ?? 'bg-white/15 text-white backdrop-blur-sm'}`}>{l.badge}</span>
                   </div>
                   <div className="absolute bottom-3 left-4">
                     <p className="font-heading text-xl text-white">${l.price.toLocaleString()}</p>
@@ -220,7 +220,7 @@ function Stat({ icon, value, label }) {
     <div className="flex flex-col gap-1">
       <div className="flex items-center gap-2 text-[#C9A96E]/60">{icon}</div>
       <p className="font-heading text-xl text-white font-normal">{value}</p>
-      <p className="text-[10px] tracking-[0.2em] uppercase text-white/30 font-sans">{label}</p>
+      <p className="text-[12px] tracking-[0.2em] uppercase text-white/30 font-sans">{label}</p>
     </div>
   )
 }

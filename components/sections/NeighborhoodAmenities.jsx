@@ -82,7 +82,7 @@ function CategoryBadge({ catKey, categories }) {
   const cat = categories.find(c => c.key === catKey)
   if (!cat) return null
   return (
-    <span className="inline-flex px-2.5 py-1 rounded bg-[#EEF1F7] text-[#1A2D5A] text-[10px] font-semibold uppercase tracking-wide">
+    <span className="inline-flex px-2.5 py-1 rounded bg-[#EEF1F7] text-[#1A2D5A] text-[12px] font-semibold uppercase tracking-wide">
       {cat.label}
     </span>
   )
@@ -140,7 +140,7 @@ export default function NeighborhoodAmenities({ neighborhoodName, walkData, plac
                   <ScoreRing score={s.score} />
                   <div>
                     <p className="font-semibold text-[#111827] text-base">{s.description}</p>
-                    <p className="text-[10px] tracking-[0.2em] uppercase text-[#9CA3AF] mt-1 font-sans">
+                    <p className="text-[12px] tracking-[0.2em] uppercase text-[#9CA3AF] mt-1 font-sans">
                       {s.label}
                     </p>
                   </div>
@@ -180,7 +180,7 @@ export default function NeighborhoodAmenities({ neighborhoodName, walkData, plac
                   </button>
                 ))}
               </div>
-              <p className="text-[11px] text-[#C4C9D4] font-sans">Data provided by Google Places</p>
+              <p className="text-[12px] text-[#C4C9D4] font-sans">Data provided by Google Places</p>
             </div>
 
             {/* POI list */}
@@ -188,7 +188,7 @@ export default function NeighborhoodAmenities({ neighborhoodName, walkData, plac
               {/* Table header — desktop only */}
               <div className="hidden md:grid grid-cols-[1fr_160px_90px_170px] gap-4 px-6 py-3 bg-[#1A2D5A]">
                 {['Name', 'Category', 'Distance', 'Rating'].map(h => (
-                  <p key={h} className="text-[10px] tracking-[0.2em] uppercase text-white/70 font-sans">{h}</p>
+                  <p key={h} className="text-[12px] tracking-[0.2em] uppercase text-white/70 font-sans">{h}</p>
                 ))}
               </div>
 

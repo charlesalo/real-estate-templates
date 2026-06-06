@@ -1,7 +1,7 @@
 import HomeValuationClient from './HomeValuationClient'
 
 export const metadata = {
-  title: 'Home Valuation',
+  title: 'Personalized California Home Valuation',
   description: 'Find out what your home is worth. Get a free, no-obligation home valuation from Victoria Sinclair — Beverly Hills luxury real estate specialist.',
 }
 

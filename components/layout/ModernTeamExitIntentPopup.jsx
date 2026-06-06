@@ -143,7 +143,7 @@ export default function ModernTeamExitIntentPopup({ teamName = 'The Hargrove Gro
                   <div className="px-8 py-8 lg:px-10 lg:py-12 flex flex-col justify-center">
 
                     {/* Eyebrow */}
-                    <p className="text-[10px] tracking-[0.4em] uppercase text-[#4B6090] font-sans mb-3">
+                    <p className="text-[12px] tracking-[0.4em] uppercase text-[#4B6090] font-sans mb-3">
                       Before You Go
                     </p>
 
@@ -201,7 +201,7 @@ export default function ModernTeamExitIntentPopup({ teamName = 'The Hargrove Gro
                             onChange={(e) => setAgreed(e.target.checked)}
                             className="mt-0.5 flex-shrink-0 accent-[#1A2D5A]"
                           />
-                          <label htmlFor="mt-exit-consent" className="text-[10px] text-[#9CA3AF] font-sans leading-relaxed">
+                          <label htmlFor="mt-exit-consent" className="text-[12px] text-[#9CA3AF] font-sans leading-relaxed">
                             I agree to be contacted by {teamName} via call, email, and text for real estate services. To opt out, reply 'stop' at any time. Message and data rates may apply.
                           </label>
                         </div>
@@ -214,7 +214,7 @@ export default function ModernTeamExitIntentPopup({ teamName = 'The Hargrove Gro
                         <button
                           type="submit"
                           disabled={status === 'sending'}
-                          className="w-full py-3.5 bg-[#1A2D5A] text-white text-[11px] tracking-[0.2em] uppercase font-bold font-sans rounded-lg hover:bg-[#243870] transition-colors disabled:opacity-50"
+                          className="w-full py-3.5 bg-[#1A2D5A] text-white text-[12px] tracking-[0.2em] uppercase font-bold font-sans rounded-lg hover:bg-[#243870] transition-colors disabled:opacity-50"
                         >
                           {status === 'sending' ? 'Submitting…' : 'Get Listing Alerts'}
                         </button>

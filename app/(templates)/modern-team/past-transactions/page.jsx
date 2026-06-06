@@ -64,7 +64,7 @@ export default function PastTransactionsPage() {
                   className="object-cover transition-transform duration-500 group-hover:scale-105"
                 />
                 {/* Sold badge */}
-                <div className="absolute top-3 left-3 px-2.5 py-1 bg-[#111827]/80 backdrop-blur-sm text-white text-[10px] font-semibold rounded-md tracking-wide uppercase font-sans">
+                <div className="absolute top-3 left-3 px-2.5 py-1 bg-[#111827]/80 backdrop-blur-sm text-white text-[12px] font-semibold rounded-md tracking-wide uppercase font-sans">
                   Sold
                 </div>
               </div>
@@ -112,14 +112,14 @@ export default function PastTransactionsPage() {
                 {/* Meta row */}
                 <div className="pt-4 border-t border-[#F3F4F6] flex items-center justify-between">
                   <div>
-                    <p className="text-[10px] text-[#9CA3AF] uppercase tracking-wide font-sans">Closed</p>
+                    <p className="text-[12px] text-[#9CA3AF] uppercase tracking-wide font-sans">Closed</p>
                     <p className="text-xs font-semibold text-[#374151] font-sans mt-0.5">{property.soldDate}</p>
                   </div>
                   <div className="text-right">
-                    <p className="text-[10px] text-[#9CA3AF] uppercase tracking-wide font-sans">Days on Market</p>
+                    <p className="text-[12px] text-[#9CA3AF] uppercase tracking-wide font-sans">Days on Market</p>
                     <p className="text-xs font-semibold text-[#374151] font-sans mt-0.5">{property.daysOnMarket} days</p>
                   </div>
-                  <span className="text-[10px] px-2.5 py-1 rounded-full border border-[#D5DBE9] text-[#4B6090] font-sans">
+                  <span className="text-[12px] px-2.5 py-1 rounded-full border border-[#D5DBE9] text-[#4B6090] font-sans">
                     {property.role}
                   </span>
                 </div>

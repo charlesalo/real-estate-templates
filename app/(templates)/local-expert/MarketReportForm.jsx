@@ -38,17 +38,17 @@ export default function MarketReportForm() {
 
           {/* Left: copy — changes per step */}
           <div>
-            <p className="text-[9px] tracking-[0.4em] uppercase text-[#8B9E8B] mb-4">{copy.eyebrow}</p>
+            <p className="text-[12px] tracking-[0.4em] uppercase text-[#8B9E8B] mb-4">{copy.eyebrow}</p>
             <h2
-              className="text-[36px] lg:text-[52px] font-normal text-[#F8F3EB] leading-tight mb-6"
+              className="text-[38px] lg:text-[56px] font-normal text-[#F8F3EB] leading-tight mb-6"
               style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}
             >
               Get the real local<br />market report.
             </h2>
-            <p className="text-[15px] text-[#F8F3EB]/55 mb-6 leading-relaxed max-w-lg">{copy.description}</p>
+            <p className="text-[16px] text-[#F8F3EB]/55 mb-6 leading-relaxed max-w-lg">{copy.description}</p>
             <ul className="space-y-2.5">
               {copy.bullets.map((b) => (
-                <li key={b} className="flex items-center gap-2.5 text-[13px] text-[#F8F3EB]/55">
+                <li key={b} className="flex items-center gap-2.5 text-[14px] text-[#F8F3EB]/55">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#BA5B3E] flex-shrink-0" />
                   {b}
                 </li>
@@ -56,17 +56,39 @@ export default function MarketReportForm() {
             </ul>
           </div>
 
-          {/* Right: multi-step card — flex column + fixed height so every step renders at the same size */}
-          <div className="flex flex-col" style={{ minHeight: 390 }}>
-            {step === 1 && (
+          {/* Right: multi-step card. All three steps are stacked in a single grid
+              cell, so the card is always as tall as the TALLEST step — every step
+              renders at identical dimensions, at any breakpoint, with no fixed
+              pixel height to maintain. Only the active step is visible and
+              interactive; the others are faded out and inert. */}
+          <div className="grid">
+            <div
+              className={cn(
+                '[grid-area:1/1] flex flex-col transition-opacity duration-200',
+                step === 1 ? 'opacity-100' : 'opacity-0 pointer-events-none',
+              )}
+              inert={step !== 1}
+            >
               <StepOne neighborhood={neighborhood} setNeighborhood={setNeighborhood} onNext={() => setStep(2)} />
-            )}
-            {step === 2 && (
+            </div>
+            <div
+              className={cn(
+                '[grid-area:1/1] flex flex-col transition-opacity duration-200',
+                step === 2 ? 'opacity-100' : 'opacity-0 pointer-events-none',
+              )}
+              inert={step !== 2}
+            >
               <StepTwo neighborhood={neighborhood} form={form} setForm={setForm} onBack={() => setStep(1)} onSubmit={handleSubmit} />
-            )}
-            {step === 3 && (
+            </div>
+            <div
+              className={cn(
+                '[grid-area:1/1] flex flex-col transition-opacity duration-200',
+                step === 3 ? 'opacity-100' : 'opacity-0 pointer-events-none',
+              )}
+              inert={step !== 3}
+            >
               <StepThree neighborhood={neighborhood} />
-            )}
+            </div>
           </div>
         </div>
       </div>
@@ -80,7 +102,7 @@ function StepHeader({ step, total, theme = 'dark' }) {
   const emptyBar = theme === 'dark' ? 'bg-white/15' : 'bg-[#2C1E11]/12'
   return (
     <div className="flex items-center gap-3 mb-6">
-      <span className={cn('text-[9px] tracking-[0.35em] uppercase font-medium', labelColor)}>
+      <span className={cn('text-[12px] tracking-[0.35em] uppercase font-medium', labelColor)}>
         Step {step} of {total}
       </span>
       <div className="flex gap-1.5">
@@ -96,7 +118,7 @@ function StepOne({ neighborhood, setNeighborhood, onNext }) {
   return (
     <div className="flex-1 flex flex-col rounded-2xl p-7 lg:p-8" style={{ backgroundColor: '#FDFAF6' }}>
       <StepHeader step={1} total={3} theme="light" />
-      <h3 className="text-[22px] font-normal text-[#24180F] mb-5 leading-snug" style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}>
+      <h3 className="text-[24px] font-normal text-[#24180F] mb-5 leading-snug" style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}>
         Which neighborhood would you like the report on?
       </h3>
       <div className="grid grid-cols-3 gap-2">
@@ -105,7 +127,7 @@ function StepOne({ neighborhood, setNeighborhood, onNext }) {
             key={n}
             onClick={() => setNeighborhood(n)}
             className={cn(
-              'px-4 py-2.5 text-[12px] font-medium rounded-full border transition-all duration-150 text-center',
+              'px-4 py-2.5 text-[13px] font-medium rounded-full border transition-all duration-150 text-center',
               neighborhood === n
                 ? 'bg-[#1B3B2B] text-[#F8F3EB] border-[#1B3B2B]'
                 : 'bg-transparent text-[#1B3B2B]/70 border-[#1B3B2B]/30 hover:border-[#1B3B2B]/60 hover:text-[#1B3B2B]',
@@ -119,7 +141,7 @@ function StepOne({ neighborhood, setNeighborhood, onNext }) {
         <button
           disabled={!neighborhood}
           onClick={onNext}
-          className="inline-flex items-center gap-2 px-5 py-2.5 text-[12px] font-semibold rounded-full bg-[#1B3B2B] text-[#F8F3EB] disabled:opacity-30 hover:bg-[#2a5540] transition-colors"
+          className="inline-flex items-center gap-2 px-5 py-2.5 text-[13px] font-semibold rounded-full bg-[#1B3B2B] text-[#F8F3EB] disabled:opacity-30 hover:bg-[#2a5540] transition-colors"
         >
           Continue <ArrowRight size={13} />
         </button>
@@ -129,12 +151,12 @@ function StepOne({ neighborhood, setNeighborhood, onNext }) {
 }
 
 function StepTwo({ neighborhood, form, setForm, onBack, onSubmit }) {
-  const inputCls = 'w-full px-4 py-3 text-[13px] rounded-xl border border-[#E5E0D8] bg-[#F8F3EB] text-[#2C1E11] placeholder:text-[#2C1E11]/35 focus:outline-none focus:border-[#1B3B2B]/40 transition-colors'
+  const inputCls = 'w-full px-4 py-3 text-[14px] rounded-xl border border-[#E5E0D8] bg-[#F8F3EB] text-[#2C1E11] placeholder:text-[#2C1E11]/35 focus:outline-none focus:border-[#1B3B2B]/40 transition-colors'
   return (
     <div className="flex-1 flex flex-col rounded-2xl p-7 lg:p-8" style={{ backgroundColor: '#FDFAF6' }}>
       <StepHeader step={2} total={3} theme="light" />
       <h3
-        className="text-[22px] font-normal text-[#24180F] mb-6"
+        className="text-[24px] font-normal text-[#24180F] mb-6"
         style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}
       >
         A little about you.
@@ -182,13 +204,13 @@ function StepTwo({ neighborhood, form, setForm, onBack, onSubmit }) {
         <div className="flex items-center justify-between pt-4">
           <button
             type="button" onClick={onBack}
-            className="flex items-center gap-1.5 text-[12px] text-[#2C1E11]/40 hover:text-[#2C1E11]/70 transition-colors"
+            className="flex items-center gap-1.5 text-[13px] text-[#2C1E11]/40 hover:text-[#2C1E11]/70 transition-colors"
           >
             <ArrowLeft size={13} /> Back
           </button>
           <button
             type="submit"
-            className="flex items-center gap-2 px-5 py-3 text-[12px] font-bold rounded-full bg-[#1B3B2B] text-[#F8F3EB] hover:bg-[#2a5540] transition-colors"
+            className="flex items-center gap-2 px-5 py-3 text-[13px] font-bold rounded-full bg-[#1B3B2B] text-[#F8F3EB] hover:bg-[#2a5540] transition-colors"
           >
             Send me the {neighborhood} report <ArrowRight size={13} />
           </button>
@@ -206,12 +228,12 @@ function StepThree({ neighborhood }) {
         <Check size={22} strokeWidth={2.5} className="text-[#F8F3EB]" />
       </div>
       <h3
-        className="text-[22px] lg:text-[24px] font-normal text-[#24180F] mb-3 leading-snug"
+        className="text-[24px] lg:text-[24px] font-normal text-[#24180F] mb-3 leading-snug"
         style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}
       >
         Your {neighborhood} briefing is on the way.
       </h3>
-      <p className="text-[13px] text-[#2C1E11]/50 leading-relaxed max-w-[280px]">
+      <p className="text-[14px] text-[#2C1E11]/50 leading-relaxed max-w-[280px]">
         Check your inbox in the next few minutes. Nadia will follow up personally within 24 hours.
       </p>
     </div>

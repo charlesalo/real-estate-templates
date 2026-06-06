@@ -61,12 +61,12 @@ const PRICING = [
     note: 'Setup fee',
     description: 'A professional custom site for solo agents — fast to launch, built to convert.',
     features: [
-      'Custom-coded 5-page website',
-      'MLS / IDX integration',
-      'Lead capture & contact forms',
-      'Brand customization (logo, colors, copy)',
-      'Home valuation widget',
-      '30-day post-launch support',
+      'Custom-coded 5-page site that loads in under a second',
+      'Buyers search live MLS listings right on your site',
+      'Every inquiry captured and routed straight to you',
+      'Your brand, your colors, your voice — never a template',
+      'Instant home-valuation tool that turns visitors into leads',
+      '30 days of hands-on support after launch',
     ],
     cta: 'Start My Project',
     highlight: false,
@@ -79,11 +79,11 @@ const PRICING = [
     description: 'For agents and small teams ready to add IDX search, CRM routing, and content pages.',
     features: [
       'Everything in Starter',
-      'Team profiles & agent pages',
-      'Advanced IDX property search',
-      'CRM setup & lead routing',
-      'Neighborhood & community guides',
-      'Blog & listing alert pages',
+      'Profiles that build trust for every agent on the team',
+      'Advanced IDX search so buyers find listings faster',
+      'Leads auto-routed to your CRM so none slip away',
+      'Neighborhood guides that rank and pull in local traffic',
+      'Blog & listing alerts that keep clients coming back',
     ],
     cta: 'Start My Project',
     highlight: false,
@@ -96,15 +96,24 @@ const PRICING = [
     description: 'Flagship build for brokerages and top producers who need a fully tailored web presence.',
     features: [
       'Everything in Growth',
-      'Brokerage or multi-agent roster',
-      'Fully custom pages & features',
-      'Priority builds & support',
-      'Performance & analytics setup',
-      'Ongoing retainer development',
+      'Multi-agent roster built to scale with your brokerage',
+      'Fully custom pages and features, built to spec',
+      'Priority builds and front-of-line support',
+      'Analytics setup so you can see what actually converts',
+      'Ongoing development on retainer',
     ],
     cta: 'Start My Project',
     highlight: false,
   },
+]
+
+const INCLUDED = [
+  'Fully custom-coded — no WordPress',
+  'No page-builder lock-in',
+  'Fast, SEO-friendly architecture',
+  'Direct access to the developer building your site',
+  'Custom API integrations available',
+  'Transparent pricing — no sales-call quotes',
 ]
 
 // ─── Page ─────────────────────────────────────────────────────────────────────
@@ -389,6 +398,19 @@ export default function HomePage() {
                 />
               </div>
             ))}
+          </div>
+
+          {/* Included with every project */}
+          <div className="mt-12 rounded-xl border border-[#2a2a2a] bg-[#1c1c1c] p-8">
+            <p className="text-xs text-[#555555] uppercase tracking-widest mb-6 text-center">Included With Every Project</p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-4 max-w-4xl mx-auto">
+              {INCLUDED.map((item) => (
+                <div key={item} className="flex items-start gap-3 text-sm text-[#8a8a8a]">
+                  <span className="text-[#c4a882] mt-0.5 shrink-0">✓</span>
+                  {item}
+                </div>
+              ))}
+            </div>
           </div>
 
           <p className="text-center text-xs text-[#555555] mt-8">

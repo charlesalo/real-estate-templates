@@ -20,7 +20,7 @@ function DropdownNavItem({ link, isLuxury }) {
   const linkCls = cn(
     'transition-colors duration-200',
     isLuxury
-      ? 'text-[11px] tracking-[0.25em] uppercase text-white/60 hover:text-white font-sans'
+      ? 'text-[12px] tracking-[0.25em] uppercase text-white/60 hover:text-white font-sans'
       : 'text-sm text-template-fg/70 hover:text-template-fg font-medium',
   )
 
@@ -43,14 +43,14 @@ function DropdownNavItem({ link, isLuxury }) {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -6 }}
             transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
-            className="absolute top-full left-1/2 -translate-x-1/2 mt-3 min-w-[180px] bg-[#0D0D0D] border border-white/[0.08] py-2"
+            className="absolute top-full left-1/2 -translate-x-1/2 mt-3 min-w-max bg-[#0D0D0D] border border-white/[0.08] py-2"
           >
             {link.children.map(child => (
               <Link
                 key={child.href}
                 href={child.href}
                 onClick={() => setOpen(false)}
-                className="block px-5 py-2.5 text-[10px] tracking-[0.2em] uppercase text-white/50 hover:text-white hover:bg-white/[0.03] transition-colors font-sans"
+                className="block px-5 py-2.5 text-[12px] tracking-[0.2em] uppercase text-white/50 hover:text-white hover:bg-white/[0.03] transition-colors font-sans"
               >
                 {child.label}
               </Link>
@@ -85,7 +85,7 @@ export default function Navbar({
   const linkCls = cn(
     'transition-colors duration-200',
     isLuxury
-      ? 'text-[11px] tracking-[0.25em] uppercase text-white/60 hover:text-white font-sans'
+      ? 'text-[12px] tracking-[0.25em] uppercase text-white/60 hover:text-white font-sans'
       : 'text-sm text-template-fg/70 hover:text-template-fg font-medium',
   )
 
@@ -119,7 +119,7 @@ export default function Navbar({
                     {logo?.text ?? 'Agent Name'}
                   </div>
                   {isLuxury && (
-                    <div className="text-[9px] tracking-[0.35em] text-[#C9A96E] uppercase font-sans mt-0.5">
+                    <div className="text-[12px] tracking-[0.35em] text-[#C9A96E] uppercase font-sans mt-0.5">
                       Real Estate
                     </div>
                   )}
@@ -152,7 +152,7 @@ export default function Navbar({
                       className={cn(
                         'transition-colors duration-200 font-sans',
                         isLuxury
-                          ? 'text-[11px] tracking-[0.25em] text-white/60 hover:text-white'
+                          ? 'text-[12px] tracking-[0.25em] text-white/60 hover:text-white'
                           : 'text-sm text-template-fg/70 hover:text-template-fg',
                       )}
                     >

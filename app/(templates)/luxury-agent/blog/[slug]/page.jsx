@@ -184,9 +184,9 @@ export default async function BlogPostPage({ params }) {
       <div className="max-w-3xl mx-auto px-6 lg:px-8 py-12 lg:py-16">
         {/* Meta */}
         <div className="flex items-center gap-3 mb-6">
-          <span className="text-[10px] tracking-[0.3em] uppercase text-[#C9A96E] font-sans">{post.category}</span>
+          <span className="text-[12px] tracking-[0.3em] uppercase text-[#C9A96E] font-sans">{post.category}</span>
           <span className="text-white/20">·</span>
-          <span className="text-[11px] text-white/40 font-sans">{post.date}</span>
+          <span className="text-[12px] text-white/40 font-sans">{post.date}</span>
         </div>
 
         <h1 className="font-heading text-3xl lg:text-4xl xl:text-5xl font-normal text-white leading-snug mb-6">
@@ -241,7 +241,7 @@ export default async function BlogPostPage({ params }) {
         <div className="mt-10">
           <Link
             href="/luxury-agent/blog"
-            className="text-[11px] tracking-[0.2em] uppercase text-white/30 hover:text-white transition-colors font-sans"
+            className="text-[12px] tracking-[0.2em] uppercase text-white/30 hover:text-white transition-colors font-sans"
           >
             ← Back to Blog
           </Link>

@@ -162,7 +162,7 @@ export default function ModernTeamSideMenu({
                 aria-label="Close menu"
                 className="flex items-center gap-1.5 text-white/50 hover:text-white transition-colors group"
               >
-                <span className="text-[10px] font-sans tracking-wide">Close</span>
+                <span className="text-[12px] font-sans tracking-wide">Close</span>
                 <X size={17} strokeWidth={2} />
               </button>
             </div>
@@ -234,7 +234,7 @@ export default function ModernTeamSideMenu({
                     </a>
                   ))}
                 </div>
-                <p className="text-[10px] text-[#9CA3AF] font-sans">
+                <p className="text-[12px] text-[#9CA3AF] font-sans">
                   © {new Date().getFullYear()} {teamName}
                 </p>
               </div>

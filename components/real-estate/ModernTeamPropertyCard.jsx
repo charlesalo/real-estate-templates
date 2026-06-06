@@ -42,7 +42,7 @@ export default function ModernTeamPropertyCard({
           />
         )}
         <span
-          className={`absolute top-3 left-3 px-2.5 py-1 text-[10px] tracking-[0.15em] uppercase font-semibold rounded ${STATUS_STYLES[status] ?? STATUS_STYLES.Active}`}
+          className={`absolute top-3 left-3 px-2.5 py-1 text-[12px] tracking-[0.15em] uppercase font-semibold rounded ${STATUS_STYLES[status] ?? STATUS_STYLES.Active}`}
         >
           {status}
         </span>

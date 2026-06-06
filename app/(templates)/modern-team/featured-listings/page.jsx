@@ -62,7 +62,7 @@ export default function FeaturedListingsPage() {
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   className="object-cover transition-transform duration-500 group-hover:scale-105"
                 />
-                <div className="absolute top-3 left-3 px-2.5 py-1 bg-[#1A2D5A]/85 backdrop-blur-sm text-white text-[10px] font-semibold rounded-md tracking-wide uppercase font-sans">
+                <div className="absolute top-3 left-3 px-2.5 py-1 bg-[#1A2D5A]/85 backdrop-blur-sm text-white text-[12px] font-semibold rounded-md tracking-wide uppercase font-sans">
                   {listing.status}
                 </div>
               </div>
@@ -109,7 +109,7 @@ export default function FeaturedListingsPage() {
 
                 {/* Meta row */}
                 <div className="pt-4 border-t border-[#F3F4F6] flex items-center justify-between">
-                  <span className="text-[10px] px-2.5 py-1 rounded-full border border-[#D5DBE9] text-[#4B6090] font-sans">
+                  <span className="text-[12px] px-2.5 py-1 rounded-full border border-[#D5DBE9] text-[#4B6090] font-sans">
                     {listing.type}
                   </span>
                   <span className="inline-flex items-center gap-1 text-xs font-semibold text-[#1A2D5A] font-sans">

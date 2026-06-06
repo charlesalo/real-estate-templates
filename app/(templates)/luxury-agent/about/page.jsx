@@ -9,8 +9,8 @@ import { PAST_TRANSACTIONS } from '@/lib/featured-listings'
 import { Phone, Mail, MapPin } from 'lucide-react'
 
 export const metadata = {
-  title: 'About',
-  description: 'Meet Victoria Sinclair — Beverly Hills luxury real estate specialist with over 22 years of experience.',
+  title: { absolute: 'Victoria Sinclair | Real Estate Agent Serving Los Angeles' },
+  description: 'Meet Victoria Sinclair, a Beverly Hills luxury real estate specialist with 22+ years of experience and $1.2B+ in closed sales across Los Angeles.',
 }
 
 const AGENT = {
@@ -80,7 +80,7 @@ export default function AboutPage() {
 
       {/* Page heading */}
       <ParallaxBanner src="/images/luxury-agent/xtra13.jpg" priority>
-        <p className="text-[10px] tracking-[0.5em] uppercase text-[#C9A96E] mb-4 font-sans">Your Trusted Advisor</p>
+        <p className="text-[12px] tracking-[0.5em] uppercase text-[#C9A96E] mb-4 font-sans">Your Trusted Advisor</p>
         <h1 className="font-heading text-4xl lg:text-5xl font-normal text-white mb-5">About Victoria</h1>
         <div className="w-12 h-px bg-[#C9A96E] mb-5" />
         <p className="text-white/45 font-sans text-base max-w-xl leading-relaxed">
@@ -105,7 +105,7 @@ export default function AboutPage() {
 
           {/* Left: label + social */}
           <div>
-            <p className="text-[10px] tracking-[0.5em] uppercase text-[#C9A96E] mb-6 font-sans">Contact</p>
+            <p className="text-[12px] tracking-[0.5em] uppercase text-[#C9A96E] mb-6 font-sans">Contact</p>
             <p className="text-white/50 text-sm font-sans leading-relaxed mb-10 max-w-xs">
               Available for private consultations, buyer inquiries, and dedicated seller representation throughout the Greater Los Angeles area, offering personalized guidance, local market expertise, and a seamless experience from initial conversation to closing.
             </p>
@@ -172,7 +172,7 @@ export default function AboutPage() {
               <div key={label} className={`flex items-start justify-between gap-8 pt-6 ${i < arr.length - 1 ? 'pb-6' : ''}`}>
                 <div className="flex items-center gap-2.5 min-w-[100px]">
                   {icon}
-                  <span className="text-[9px] tracking-[0.35em] uppercase text-white/30 font-sans">{label}</span>
+                  <span className="text-[12px] tracking-[0.35em] uppercase text-white/30 font-sans">{label}</span>
                 </div>
                 <div className="text-right">{content}</div>
               </div>
@@ -195,12 +195,12 @@ export default function AboutPage() {
         <div className="max-w-7xl mx-auto">
           <div className="flex items-end justify-between mb-12">
             <div>
-              <p className="text-[10px] tracking-[0.5em] uppercase text-[#C9A96E] mb-3 font-sans">Track Record</p>
+              <p className="text-[12px] tracking-[0.5em] uppercase text-[#C9A96E] mb-3 font-sans">Track Record</p>
               <h2 className="font-heading text-3xl lg:text-4xl font-normal text-white">Recent Closed Sales</h2>
             </div>
             <Link
               href="/luxury-agent/past-transactions"
-              className="hidden sm:inline-block text-[10px] tracking-[0.3em] uppercase text-[#C9A96E]/60 hover:text-[#C9A96E] transition-colors font-sans"
+              className="hidden sm:inline-block text-[12px] tracking-[0.3em] uppercase text-[#C9A96E]/60 hover:text-[#C9A96E] transition-colors font-sans"
             >
               View All Past Sales →
             </Link>
@@ -216,7 +216,7 @@ export default function AboutPage() {
           <div className="mt-8 sm:hidden">
             <Link
               href="/luxury-agent/past-transactions"
-              className="text-[10px] tracking-[0.3em] uppercase text-[#C9A96E]/60 hover:text-[#C9A96E] transition-colors font-sans"
+              className="text-[12px] tracking-[0.3em] uppercase text-[#C9A96E]/60 hover:text-[#C9A96E] transition-colors font-sans"
             >
               View All Past Sales →
             </Link>
@@ -229,7 +229,7 @@ export default function AboutPage() {
         <div className="max-w-7xl mx-auto">
           <div className="border border-white/[0.07] px-8 py-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
             <div>
-              <p className="text-[10px] tracking-[0.4em] uppercase text-[#C9A96E] mb-2 font-sans">
+              <p className="text-[12px] tracking-[0.4em] uppercase text-[#C9A96E] mb-2 font-sans">
                 Start Your Property Search
               </p>
               <h2 className="font-heading text-2xl lg:text-3xl text-white font-normal">
@@ -241,7 +241,7 @@ export default function AboutPage() {
             </div>
             <Link
               href="/luxury-agent/listings"
-              className="flex-shrink-0 flex items-center gap-2 px-7 py-3.5 text-[11px] tracking-[0.2em] uppercase border border-white/25 text-white/70 hover:border-white hover:text-white transition-all font-sans"
+              className="flex-shrink-0 flex items-center gap-2 px-7 py-3.5 text-[12px] tracking-[0.2em] uppercase border border-white/25 text-white/70 hover:border-white hover:text-white transition-all font-sans"
             >
               Browse Homes<ChevronRight size={14} />
             </Link>

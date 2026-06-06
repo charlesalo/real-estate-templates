@@ -86,7 +86,7 @@ export default function ModernTeamNewsletterForm({ consentId = 'newsletter-conse
 
       <div className="flex items-start gap-3 pt-1">
         <input type="checkbox" required id={consentId} className="mt-0.5 w-3.5 h-3.5 flex-shrink-0 accent-[#1A2D5A]" />
-        <label htmlFor={consentId} className="text-[10px] text-[#9CA3AF] font-sans leading-relaxed">
+        <label htmlFor={consentId} className="text-[12px] text-[#9CA3AF] font-sans leading-relaxed">
           I agree to be contacted by The Hargrove Group via email for market updates and real estate information. You can unsubscribe at any time.
         </label>
       </div>

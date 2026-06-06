@@ -76,10 +76,10 @@ export default function AboutPage() {
                   <h3 className="text-base font-bold text-[#111827] mb-0.5" style={{ fontFamily: 'var(--font-inter, system-ui)' }}>
                     {member.name}
                   </h3>
-                  <p className="text-[10px] tracking-[0.15em] uppercase text-[#4B6090] font-sans mb-3">{member.title}</p>
+                  <p className="text-[12px] tracking-[0.15em] uppercase text-[#4B6090] font-sans mb-3">{member.title}</p>
 
                   <div className="border-t border-[#EEF1F7] pt-3 space-y-1.5">
-                    <p className="text-[10px] text-[#9CA3AF] font-sans uppercase tracking-wide">{member.license}</p>
+                    <p className="text-[12px] text-[#9CA3AF] font-sans uppercase tracking-wide">{member.license}</p>
                     <a href={`tel:${member.phone.replace(/\D/g, '')}`} className="flex items-center gap-1.5 text-xs text-[#374151] hover:text-[#1A2D5A] transition-colors font-sans">
                       <Phone size={11} className="text-[#1A2D5A] flex-shrink-0" />
                       {member.phone}
@@ -139,7 +139,7 @@ export default function AboutPage() {
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                     className="object-cover transition-transform duration-500 group-hover:scale-105"
                   />
-                  <div className="absolute top-3 left-3 px-2.5 py-1 bg-[#111827]/80 backdrop-blur-sm text-white text-[10px] font-semibold rounded-md tracking-wide uppercase font-sans">
+                  <div className="absolute top-3 left-3 px-2.5 py-1 bg-[#111827]/80 backdrop-blur-sm text-white text-[12px] font-semibold rounded-md tracking-wide uppercase font-sans">
                     Sold
                   </div>
                 </div>

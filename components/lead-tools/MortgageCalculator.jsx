@@ -48,7 +48,7 @@ export default function MortgageCalculator({
       : 'border-template-border text-template-fg placeholder:text-template-fg/40 rounded focus:border-template-accent',
   )
 
-  const labelClass = cn('text-[10px] tracking-[0.2em] uppercase font-sans block mb-1.5', isLuxury ? 'text-white/40' : 'text-template-fg/50')
+  const labelClass = cn('text-[12px] tracking-[0.2em] uppercase font-sans block mb-1.5', isLuxury ? 'text-white/40' : 'text-template-fg/50')
 
   return (
     <div className={cn('p-6 lg:p-8', isLuxury ? 'bg-[#0D0D0D] border border-white/10' : 'bg-template-surface border border-template-border rounded-xl')}>
@@ -164,7 +164,7 @@ export default function MortgageCalculator({
         {/* Results */}
         <div className="space-y-6">
           <div className="text-center">
-            <p className={cn('text-[10px] tracking-[0.3em] uppercase mb-2 font-sans', isLuxury ? 'text-white/40' : 'text-template-fg/50')}>
+            <p className={cn('text-[12px] tracking-[0.3em] uppercase mb-2 font-sans', isLuxury ? 'text-white/40' : 'text-template-fg/50')}>
               Estimated Monthly Payment
             </p>
             <p className={cn('font-heading text-4xl lg:text-5xl font-normal', isLuxury ? 'text-white' : 'text-template-fg')}>
@@ -200,7 +200,7 @@ export default function MortgageCalculator({
           <a
             href="/luxury-agent/contact"
             className={cn(
-              'block w-full text-center py-3 text-[11px] tracking-[0.2em] uppercase font-medium transition-opacity hover:opacity-90',
+              'block w-full text-center py-3 text-[12px] tracking-[0.2em] uppercase font-medium transition-opacity hover:opacity-90',
               isLuxury ? 'border border-template-accent text-template-accent' : 'bg-template-accent text-template-accent-fg rounded',
             )}
           >

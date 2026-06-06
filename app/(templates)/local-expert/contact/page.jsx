@@ -31,48 +31,48 @@ export default function ContactPage() {
 
             {/* Left: info */}
             <div>
-              <p className="text-[9px] tracking-[0.4em] uppercase text-[#BA5B3E] mb-4">Contact</p>
+              <p className="text-[12px] tracking-[0.4em] uppercase text-[#BA5B3E] mb-4">Contact</p>
               <h1
-                className="text-[40px] lg:text-[54px] font-normal text-[#24180F] leading-[1.05] mb-6"
+                className="text-[43px] lg:text-[58px] font-normal text-[#24180F] leading-[1.05] mb-6"
                 style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}
               >
                 Let&apos;s start<br />the conversation.
               </h1>
-              <p className="text-[17px] text-[#2C1E11]/55 leading-relaxed max-w-md mb-10">
+              <p className="text-[18px] text-[#2C1E11]/55 leading-relaxed max-w-md mb-10">
                 Tell me what you&apos;re thinking. I respond within a few hours — usually sooner.
               </p>
 
               <div className="space-y-5">
-                <a href={`tel:${AGENT.phone}`} className="flex items-center gap-3 text-[15px] text-[#2C1E11] hover:opacity-60 transition-opacity">
+                <a href={`tel:${AGENT.phone}`} className="flex items-center gap-3 text-[16px] text-[#2C1E11] hover:opacity-60 transition-opacity">
                   <div className="w-10 h-10 rounded-full bg-[#1B3B2B]/8 flex items-center justify-center flex-shrink-0">
                     <Phone size={16} className="text-[#2C1E11]" />
                   </div>
                   {AGENT.phone}
                 </a>
-                <a href={`mailto:${AGENT.email}`} className="flex items-center gap-3 text-[15px] text-[#2C1E11] hover:opacity-60 transition-opacity">
+                <a href={`mailto:${AGENT.email}`} className="flex items-center gap-3 text-[16px] text-[#2C1E11] hover:opacity-60 transition-opacity">
                   <div className="w-10 h-10 rounded-full bg-[#1B3B2B]/8 flex items-center justify-center flex-shrink-0">
                     <Mail size={16} className="text-[#2C1E11]" />
                   </div>
                   {AGENT.email}
                 </a>
-                <div className="flex items-start gap-3 text-[15px] text-[#2C1E11]/50">
+                <div className="flex items-start gap-3 text-[16px] text-[#2C1E11]/50">
                   <div className="w-10 h-10 rounded-full bg-[#1B3B2B]/8 flex items-center justify-center flex-shrink-0">
                     <MapPin size={16} className="text-[#2C1E11]" />
                   </div>
                   <div>
                     <p className="text-[#2C1E11] font-medium">{AGENT.brokerage}</p>
                     <p className="text-[#2C1E11]/40">{AGENT.brokerageAddress}</p>
-                    <p className="text-[#2C1E11]/30 text-[11px] mt-1">{AGENT.brokerageLicense}</p>
+                    <p className="text-[#2C1E11]/30 text-[12px] mt-1">{AGENT.brokerageLicense}</p>
                   </div>
                 </div>
               </div>
 
               {/* NYS agency disclosure */}
               <div className="mt-12 p-5 rounded-xl border border-[#E5E0D8] bg-[#F4F0EA]">
-                <p className="text-[10px] font-semibold uppercase tracking-wider text-[#2C1E11]/40 mb-2">
+                <p className="text-[12px] font-semibold uppercase tracking-wider text-[#2C1E11]/40 mb-2">
                   NYS Agency Disclosure
                 </p>
-                <p className="text-[11px] text-[#2C1E11]/45 leading-relaxed">
+                <p className="text-[12px] text-[#2C1E11]/45 leading-relaxed">
                   New York State law requires real estate licensees who are acting as agents of buyers or sellers
                   of property to advise the potential buyers or sellers with whom they work of the nature of their
                   agency relationship. Before you begin working with a licensed real estate agent, please make sure
@@ -94,7 +94,7 @@ export default function ContactPage() {
                     >
                       Message received.
                     </h3>
-                    <p className="text-[15px] text-[#2C1E11]/50 mt-2">
+                    <p className="text-[16px] text-[#2C1E11]/50 mt-2">
                       I&apos;ll be in touch within a few hours. Talk soon.
                     </p>
                   </div>
@@ -103,41 +103,41 @@ export default function ContactPage() {
                 <form onSubmit={handleSubmit} className="space-y-5">
                   <div>
                     <h2
-                      className="text-[18px] font-normal text-[#24180F] mb-1"
+                      className="text-[19px] font-normal text-[#24180F] mb-1"
                       style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}
                     >
                       Send a message
                     </h2>
-                    <p className="text-[12px] text-[#2C1E11]/40">All fields marked * are required.</p>
+                    <p className="text-[13px] text-[#2C1E11]/40">All fields marked * are required.</p>
                   </div>
 
                   <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-[10px] uppercase tracking-wider text-[#2C1E11]/40 mb-1.5">Name *</label>
+                      <label className="block text-[12px] uppercase tracking-wider text-[#2C1E11]/40 mb-1.5">Name *</label>
                       <input
                         name="name"
                         required
                         value={form.name}
                         onChange={handleChange}
                         placeholder="Your name"
-                        className="w-full px-3 py-2.5 text-[13px] border border-[#E5E0D8] rounded-lg text-[#2C1E11] placeholder-[#2C1E11]/25 focus:outline-none focus:border-[#1B3B2B]/30 transition-colors"
+                        className="w-full px-3 py-2.5 text-[14px] border border-[#E5E0D8] rounded-lg text-[#2C1E11] placeholder-[#2C1E11]/25 focus:outline-none focus:border-[#1B3B2B]/30 transition-colors"
                       />
                     </div>
                     <div>
-                      <label className="block text-[10px] uppercase tracking-wider text-[#2C1E11]/40 mb-1.5">Phone</label>
+                      <label className="block text-[12px] uppercase tracking-wider text-[#2C1E11]/40 mb-1.5">Phone</label>
                       <input
                         name="phone"
                         type="tel"
                         value={form.phone}
                         onChange={handleChange}
                         placeholder="(917) 555-0100"
-                        className="w-full px-3 py-2.5 text-[13px] border border-[#E5E0D8] rounded-lg text-[#2C1E11] placeholder-[#2C1E11]/25 focus:outline-none focus:border-[#1B3B2B]/30 transition-colors"
+                        className="w-full px-3 py-2.5 text-[14px] border border-[#E5E0D8] rounded-lg text-[#2C1E11] placeholder-[#2C1E11]/25 focus:outline-none focus:border-[#1B3B2B]/30 transition-colors"
                       />
                     </div>
                   </div>
 
                   <div>
-                    <label className="block text-[10px] uppercase tracking-wider text-[#2C1E11]/40 mb-1.5">Email *</label>
+                    <label className="block text-[12px] uppercase tracking-wider text-[#2C1E11]/40 mb-1.5">Email *</label>
                     <input
                       name="email"
                       type="email"
@@ -145,17 +145,17 @@ export default function ContactPage() {
                       value={form.email}
                       onChange={handleChange}
                       placeholder="your@email.com"
-                      className="w-full px-3 py-2.5 text-[13px] border border-[#E5E0D8] rounded-lg text-[#2C1E11] placeholder-[#2C1E11]/25 focus:outline-none focus:border-[#1B3B2B]/30 transition-colors"
+                      className="w-full px-3 py-2.5 text-[14px] border border-[#E5E0D8] rounded-lg text-[#2C1E11] placeholder-[#2C1E11]/25 focus:outline-none focus:border-[#1B3B2B]/30 transition-colors"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-[10px] uppercase tracking-wider text-[#2C1E11]/40 mb-1.5">I&apos;m interested in</label>
+                    <label className="block text-[12px] uppercase tracking-wider text-[#2C1E11]/40 mb-1.5">I&apos;m interested in</label>
                     <select
                       name="interest"
                       value={form.interest}
                       onChange={handleChange}
-                      className="w-full px-3 py-2.5 text-[13px] border border-[#E5E0D8] rounded-lg text-[#2C1E11] focus:outline-none focus:border-[#1B3B2B]/30 bg-white transition-colors"
+                      className="w-full px-3 py-2.5 text-[14px] border border-[#E5E0D8] rounded-lg text-[#2C1E11] focus:outline-none focus:border-[#1B3B2B]/30 bg-white transition-colors"
                     >
                       <option value="">Select one...</option>
                       <option>Buying a home in NYC</option>
@@ -167,14 +167,14 @@ export default function ContactPage() {
                   </div>
 
                   <div>
-                    <label className="block text-[10px] uppercase tracking-wider text-[#2C1E11]/40 mb-1.5">Message</label>
+                    <label className="block text-[12px] uppercase tracking-wider text-[#2C1E11]/40 mb-1.5">Message</label>
                     <textarea
                       name="message"
                       rows={4}
                       value={form.message}
                       onChange={handleChange}
                       placeholder="Tell me about what you're looking for — neighborhood, timeline, budget, questions..."
-                      className="w-full px-3 py-2.5 text-[13px] border border-[#E5E0D8] rounded-lg text-[#2C1E11] placeholder-[#2C1E11]/25 focus:outline-none focus:border-[#1B3B2B]/30 transition-colors resize-none"
+                      className="w-full px-3 py-2.5 text-[14px] border border-[#E5E0D8] rounded-lg text-[#2C1E11] placeholder-[#2C1E11]/25 focus:outline-none focus:border-[#1B3B2B]/30 transition-colors resize-none"
                     />
                   </div>
 
@@ -197,7 +197,7 @@ export default function ContactPage() {
 
                   <button
                     type="submit"
-                    className="w-full py-3.5 text-[13px] font-bold rounded-full bg-[#1B3B2B] text-[#F8F3EB] hover:bg-[#2a5540] transition-colors"
+                    className="w-full py-3.5 text-[14px] font-bold rounded-full bg-[#1B3B2B] text-[#F8F3EB] hover:bg-[#2a5540] transition-colors"
                   >
                     Send Message
                   </button>

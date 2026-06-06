@@ -47,7 +47,7 @@ export default function AboutSection({
           className={cn(isLuxury ? 'px-8 lg:px-16 xl:px-20 py-20 lg:py-28' : '')}
         >
           {isLuxury && (
-            <p className="text-[10px] tracking-[0.5em] uppercase text-template-accent mb-6 font-sans">
+            <p className="text-[12px] tracking-[0.5em] uppercase text-template-accent mb-6 font-sans">
               About
             </p>
           )}
@@ -62,7 +62,7 @@ export default function AboutSection({
           </h2>
 
           {title && (
-            <p className="text-[10px] tracking-[0.3em] uppercase text-template-accent mb-10 font-sans">
+            <p className="text-[12px] tracking-[0.3em] uppercase text-template-accent mb-10 font-sans">
               {title}
             </p>
           )}
@@ -80,7 +80,7 @@ export default function AboutSection({
 
           {credentials.length > 0 && (
             <div className={cn('pt-8 border-t mb-8', isLuxury ? 'border-white/10' : 'border-template-border')}>
-              <p className={cn('text-[9px] tracking-[0.35em] uppercase mb-4 font-sans', isLuxury ? 'text-white/30' : 'text-template-fg/40')}>
+              <p className={cn('text-[12px] tracking-[0.35em] uppercase mb-4 font-sans', isLuxury ? 'text-white/30' : 'text-template-fg/40')}>
                 Designations &amp; Memberships
               </p>
               <ul className="space-y-2.5">
@@ -99,7 +99,7 @@ export default function AboutSection({
               <Link
                 href={learnMoreHref}
                 className={cn(
-                  'inline-block px-8 py-3.5 text-[11px] tracking-[0.2em] uppercase font-semibold font-sans transition-colors',
+                  'inline-block px-8 py-3.5 text-[12px] tracking-[0.2em] uppercase font-semibold font-sans transition-colors',
                   isLuxury
                     ? 'bg-[#C9A96E] text-[#0A0A0A] hover:bg-[#b8935a]'
                     : 'bg-template-accent text-template-accent-fg hover:opacity-90',

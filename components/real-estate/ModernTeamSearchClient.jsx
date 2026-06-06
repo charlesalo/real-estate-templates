@@ -156,7 +156,7 @@ function ListRow({ listing }) {
         ) : (
           <div className="absolute inset-0 bg-[#EEF1F7]" />
         )}
-        <span className={`absolute top-2 left-2 px-2 py-0.5 text-[9px] tracking-[0.15em] uppercase font-semibold rounded ${STATUS_BADGE[listing.status] ?? STATUS_BADGE.Active}`}>
+        <span className={`absolute top-2 left-2 px-2 py-0.5 text-[12px] tracking-[0.15em] uppercase font-semibold rounded ${STATUS_BADGE[listing.status] ?? STATUS_BADGE.Active}`}>
           {listing.status}
         </span>
       </div>
@@ -170,7 +170,7 @@ function ListRow({ listing }) {
         </div>
       </div>
       <div className="hidden md:flex items-center pr-5">
-        <span className="text-[10px] tracking-[0.2em] uppercase text-[#9CA3AF] group-hover:text-[#1A2D5A] transition-colors font-sans">View →</span>
+        <span className="text-[12px] tracking-[0.2em] uppercase text-[#9CA3AF] group-hover:text-[#1A2D5A] transition-colors font-sans">View →</span>
       </div>
     </Link>
   )
@@ -182,7 +182,7 @@ function FilterDrawer({ filters, onApply, onClose }) {
   const [local, setLocal] = useState(filters)
   const set = (k, v) => setLocal(f => ({ ...f, [k]: v }))
 
-  const labelCls = 'block text-[10px] tracking-[0.2em] uppercase mb-3 text-[#4B6090] font-sans'
+  const labelCls = 'block text-[12px] tracking-[0.2em] uppercase mb-3 text-[#4B6090] font-sans'
   const pillCls  = active =>
     `px-3 py-1.5 text-xs border rounded-full transition-all cursor-pointer font-sans ${
       active
@@ -283,13 +283,13 @@ function FilterDrawer({ filters, onApply, onClose }) {
         <div className="px-6 py-5 border-t border-[#D5DBE9] flex gap-3">
           <button
             onClick={() => setLocal(Object.fromEntries(Object.keys(local).map(k => [k, k === 'sort' ? '-listdate' : ''])))}
-            className="flex-1 py-3 text-[11px] tracking-[0.15em] uppercase border border-[#D5DBE9] text-[#4B6090] rounded-lg hover:border-[#1A2D5A]/40 hover:text-[#1A2D5A] transition-all font-sans"
+            className="flex-1 py-3 text-[12px] tracking-[0.15em] uppercase border border-[#D5DBE9] text-[#4B6090] rounded-lg hover:border-[#1A2D5A]/40 hover:text-[#1A2D5A] transition-all font-sans"
           >
             Reset
           </button>
           <button
             onClick={() => onApply(local)}
-            className="flex-1 py-3 text-[11px] tracking-[0.15em] uppercase font-semibold bg-[#1A2D5A] text-white rounded-lg hover:bg-[#243870] transition-colors font-sans"
+            className="flex-1 py-3 text-[12px] tracking-[0.15em] uppercase font-semibold bg-[#1A2D5A] text-white rounded-lg hover:bg-[#243870] transition-colors font-sans"
           >
             Apply Filters
           </button>
@@ -485,9 +485,9 @@ export default function ModernTeamSearchClient({
               className="flex items-center gap-1.5 px-4 py-3 text-sm text-[#4B6090] hover:text-[#1A2D5A] transition-colors font-sans border-r border-[#D5DBE9]"
             >
               <SlidersHorizontal size={14} />
-              <span className="text-[11px] tracking-[0.1em] uppercase">Filters</span>
+              <span className="text-[12px] tracking-[0.1em] uppercase">Filters</span>
               {activeTags.length > 0 && (
-                <span className="w-4 h-4 text-[10px] flex items-center justify-center font-semibold bg-[#1A2D5A] text-white rounded-full">
+                <span className="w-4 h-4 text-[12px] flex items-center justify-center font-semibold bg-[#1A2D5A] text-white rounded-full">
                   {activeTags.length}
                 </span>
               )}
@@ -496,7 +496,7 @@ export default function ModernTeamSearchClient({
             {/* SEARCH — always visible */}
             <button
               onClick={() => apply(filters)}
-              className="px-6 py-3 text-[11px] tracking-[0.15em] uppercase font-semibold bg-[#1A2D5A] text-white hover:bg-[#243870] transition-colors font-sans flex-shrink-0"
+              className="px-6 py-3 text-[12px] tracking-[0.15em] uppercase font-semibold bg-[#1A2D5A] text-white hover:bg-[#243870] transition-colors font-sans flex-shrink-0"
             >
               Search
             </button>
@@ -509,12 +509,12 @@ export default function ModernTeamSearchClient({
                 <button
                   key={t.key}
                   onClick={() => clearOne(t.key)}
-                  className="flex items-center gap-1.5 px-3 py-1 text-[11px] border border-[#1A2D5A]/30 text-[#1A2D5A] rounded-full hover:bg-[#EEF1F7] transition-colors font-sans"
+                  className="flex items-center gap-1.5 px-3 py-1 text-[12px] border border-[#1A2D5A]/30 text-[#1A2D5A] rounded-full hover:bg-[#EEF1F7] transition-colors font-sans"
                 >
                   {t.label} <X size={10} />
                 </button>
               ))}
-              <button onClick={clearAll} className="text-[11px] text-[#9CA3AF] hover:text-[#111827] transition-colors font-sans">
+              <button onClick={clearAll} className="text-[12px] text-[#9CA3AF] hover:text-[#111827] transition-colors font-sans">
                 Clear all
               </button>
             </div>
@@ -557,7 +557,7 @@ export default function ModernTeamSearchClient({
               {/* Map toggle */}
               <button
                 onClick={() => setShowMap(v => !v)}
-                className="hidden lg:flex items-center gap-1.5 px-3 py-1.5 text-[11px] tracking-[0.1em] uppercase border border-[#D5DBE9] text-[#6B7280] rounded-lg transition-all font-sans cursor-pointer hover:border-[#1A2D5A]/40 hover:text-[#1A2D5A]"
+                className="hidden lg:flex items-center gap-1.5 px-3 py-1.5 text-[12px] tracking-[0.1em] uppercase border border-[#D5DBE9] text-[#6B7280] rounded-lg transition-all font-sans cursor-pointer hover:border-[#1A2D5A]/40 hover:text-[#1A2D5A]"
               >
                 <MapIcon size={13} />
                 {showMap ? 'Hide Map' : 'Show Map'}
@@ -579,7 +579,7 @@ export default function ModernTeamSearchClient({
                 <p className="text-sm text-[#6B7280] mb-8 font-sans">Try adjusting your filters.</p>
                 <button
                   onClick={clearAll}
-                  className="px-8 py-3 text-[11px] tracking-[0.15em] uppercase font-semibold bg-[#1A2D5A] text-white rounded-lg hover:bg-[#243870] transition-colors"
+                  className="px-8 py-3 text-[12px] tracking-[0.15em] uppercase font-semibold bg-[#1A2D5A] text-white rounded-lg hover:bg-[#243870] transition-colors"
                 >
                   Clear Filters
                 </button>
@@ -624,7 +624,7 @@ export default function ModernTeamSearchClient({
             )}
             {/* MLS Disclaimer */}
             <div className="mt-10 px-1 pb-6 border-t border-[#EEF1F7] pt-6">
-              <p className="text-[11px] text-[#9CA3AF] leading-relaxed font-sans">
+              <p className="text-[12px] text-[#9CA3AF] leading-relaxed font-sans">
                 <span className="font-semibold text-[#6B7280]">Listing data provided by SimplyRETS.</span>{' '}
                 The data relating to real estate for sale on this website comes in part from the Internet Data Exchange (IDX) program.
                 Real estate listings held by brokerage firms other than The Hargrove Group are marked with the IDX logo and detailed

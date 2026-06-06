@@ -1,0 +1,60 @@
+/* Press strip marquee — seamless infinite scroll of publication wordmarks.
+   The track holds two identical copies of the list; translating it by exactly
+   -50% lands the second copy where the first began, so the loop is seamless.
+   Pure CSS (no JS) and pauses on hover. */
+
+.viewport {
+  position: relative;
+  flex: 1 1 auto;
+  min-width: 0; /* allow the flex item to shrink so overflow can clip */
+  overflow: hidden;
+  /* Soft fade the logos in/out at both edges. */
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0,
+    #000 6%,
+    #000 94%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent 0,
+    #000 6%,
+    #000 94%,
+    transparent 100%
+  );
+}
+
+.track {
+  display: flex;
+  width: max-content;
+  animation: le-press-marquee 40s linear infinite;
+}
+
+.viewport:hover .track {
+  animation-play-state: paused;
+}
+
+.item {
+  flex: 0 0 auto;
+  /* Uniform spacing — including across the seam between the two copies — keeps
+     the loop visually even. */
+  padding: 0 1.5rem;
+}
+
+@keyframes le-press-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* Respect reduced motion: hold still. The duplicate copy stays clipped by
+   overflow, so it reads as a normal static, edge-faded press row. */
+@media (prefers-reduced-motion: reduce) {
+  .track {
+    animation: none;
+  }
+}

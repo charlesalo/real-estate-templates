@@ -94,7 +94,7 @@ export default function LuxuryNeighborhoodAmenities({ neighborhoodName, walkData
     <section className="bg-[#0D0D0D] border-t border-white/10 py-16 lg:py-24">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
 
-        <p className="text-[9px] tracking-[0.45em] uppercase text-[#C9A96E] mb-3 font-sans">
+        <p className="text-[12px] tracking-[0.45em] uppercase text-[#C9A96E] mb-3 font-sans">
           Lifestyle &amp; Amenities
         </p>
         <h2 className="font-heading text-2xl lg:text-3xl font-normal text-white mb-3">
@@ -118,7 +118,7 @@ export default function LuxuryNeighborhoodAmenities({ neighborhoodName, walkData
                   <ScoreRing score={s.score} />
                   <div>
                     <p className="font-sans text-sm font-medium text-white leading-tight">{s.description}</p>
-                    <p className="text-[9px] tracking-[0.25em] uppercase text-white/35 mt-1.5 font-sans">
+                    <p className="text-[12px] tracking-[0.25em] uppercase text-white/35 mt-1.5 font-sans">
                       {s.label}
                     </p>
                   </div>
@@ -145,7 +145,7 @@ export default function LuxuryNeighborhoodAmenities({ neighborhoodName, walkData
                   <button
                     key={tab.key}
                     onClick={() => { setActiveTab(tab.key); setShowAll(false) }}
-                    className={`px-4 py-2 text-[10px] tracking-[0.15em] uppercase font-sans font-medium transition-all duration-200 ${
+                    className={`px-4 py-2 text-[12px] tracking-[0.15em] uppercase font-sans font-medium transition-all duration-200 ${
                       activeTab === tab.key
                         ? 'bg-[#C9A96E] text-[#0A0A0A]'
                         : 'bg-white/5 text-white/45 border border-white/10 hover:border-white/20 hover:text-white/70'
@@ -155,7 +155,7 @@ export default function LuxuryNeighborhoodAmenities({ neighborhoodName, walkData
                   </button>
                 ))}
               </div>
-              <p className="text-[10px] text-white/20 font-sans">Data provided by Google Places</p>
+              <p className="text-[12px] text-white/20 font-sans">Data provided by Google Places</p>
             </div>
 
             {/* POI table */}
@@ -163,7 +163,7 @@ export default function LuxuryNeighborhoodAmenities({ neighborhoodName, walkData
               {/* Header — desktop */}
               <div className="hidden md:grid grid-cols-[1fr_160px_90px_180px] gap-4 px-6 py-3 bg-[#111111] border-b border-white/10">
                 {['Name', 'Category', 'Distance', 'Rating'].map(h => (
-                  <p key={h} className="text-[9px] tracking-[0.3em] uppercase text-[#C9A96E] font-sans">{h}</p>
+                  <p key={h} className="text-[12px] tracking-[0.3em] uppercase text-[#C9A96E] font-sans">{h}</p>
                 ))}
               </div>
 
@@ -183,7 +183,7 @@ export default function LuxuryNeighborhoodAmenities({ neighborhoodName, walkData
                           href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(place.name + ' ' + place.address)}`}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-white/30 hover:text-[#C9A96E] text-[11px] font-sans mt-0.5 leading-tight transition-colors block"
+                          className="text-white/30 hover:text-[#C9A96E] text-[12px] font-sans mt-0.5 leading-tight transition-colors block"
                         >
                           {place.address}
                         </a>
@@ -195,7 +195,7 @@ export default function LuxuryNeighborhoodAmenities({ neighborhoodName, walkData
                       {(() => {
                         const cat = placesData.categories.find(c => c.key === place.category)
                         return cat ? (
-                          <span className="inline-flex px-2.5 py-1 border border-white/10 text-white/50 text-[9px] tracking-[0.15em] uppercase font-sans">
+                          <span className="inline-flex px-2.5 py-1 border border-white/10 text-white/50 text-[12px] tracking-[0.15em] uppercase font-sans">
                             {cat.label}
                           </span>
                         ) : null
@@ -213,12 +213,12 @@ export default function LuxuryNeighborhoodAmenities({ neighborhoodName, walkData
                           <span className="text-xs font-semibold text-white/80 font-sans">
                             {place.rating.toFixed(1)}
                           </span>
-                          <span className="text-[11px] text-white/25 font-sans">
+                          <span className="text-[12px] text-white/25 font-sans">
                             · {place.reviewCount.toLocaleString()}
                           </span>
                         </div>
                       ) : (
-                        <span className="text-[11px] text-white/25 font-sans">No reviews</span>
+                        <span className="text-[12px] text-white/25 font-sans">No reviews</span>
                       )}
                     </div>
                   </div>
@@ -235,7 +235,7 @@ export default function LuxuryNeighborhoodAmenities({ neighborhoodName, walkData
               <div className="mt-8 text-center">
                 <button
                   onClick={() => setShowAll(true)}
-                  className="px-10 py-3.5 border border-[#C9A96E] text-[#C9A96E] text-[10px] tracking-[0.25em] uppercase font-sans hover:bg-[#C9A96E] hover:text-[#0A0A0A] transition-all"
+                  className="px-10 py-3.5 border border-[#C9A96E] text-[#C9A96E] text-[12px] tracking-[0.25em] uppercase font-sans hover:bg-[#C9A96E] hover:text-[#0A0A0A] transition-all"
                 >
                   Show More
                 </button>

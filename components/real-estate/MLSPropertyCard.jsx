@@ -76,7 +76,7 @@ export default function MLSPropertyCard({
             </p>
           )}
           {mlsId && (
-            <p className={cn('text-[10px] tracking-[0.15em] font-sans', isLuxury ? 'text-white/20' : 'text-template-fg/25')}>
+            <p className={cn('text-[12px] tracking-[0.15em] font-sans', isLuxury ? 'text-white/20' : 'text-template-fg/25')}>
               MLS# {mlsId}
             </p>
           )}

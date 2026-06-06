@@ -127,7 +127,7 @@ export default function ContactPage() {
                       <Icon size={16} className="text-[#1A2D5A]" />
                     </div>
                     <div>
-                      <p className="text-[10px] tracking-[0.2em] uppercase text-[#9CA3AF] font-sans mb-0.5">{label}</p>
+                      <p className="text-[12px] tracking-[0.2em] uppercase text-[#9CA3AF] font-sans mb-0.5">{label}</p>
                       {href ? (
                         <a href={href} className="text-sm text-[#111827] hover:text-[#1A2D5A] transition-colors font-sans whitespace-pre-line">
                           {value}
@@ -301,7 +301,7 @@ export default function ContactPage() {
                 {/* Text — bottom left */}
                 <div className="absolute bottom-0 left-0 right-0 p-7">
                   <div className="w-8 h-px bg-white/40 mb-4" />
-                  <p className="text-[10px] tracking-[0.3em] uppercase text-white/55 font-sans mb-2">
+                  <p className="text-[12px] tracking-[0.3em] uppercase text-white/55 font-sans mb-2">
                     {tile.sub}
                   </p>
                   <h3

@@ -53,7 +53,7 @@ function Gallery({ photos = [] }) {
               {isLast && (
                 <div className="absolute inset-0 bg-[#1A2D5A]/70 flex flex-col items-center justify-center">
                   <span className="text-white font-bold text-base">+{overflow}</span>
-                  <span className="text-white/80 text-[10px] tracking-[0.15em] uppercase mt-1 font-sans">View all</span>
+                  <span className="text-white/80 text-[12px] tracking-[0.15em] uppercase mt-1 font-sans">View all</span>
                 </div>
               )}
             </div>
@@ -65,7 +65,7 @@ function Gallery({ photos = [] }) {
         <div className="flex justify-end mt-2">
           <button
             onClick={() => setLightbox(0)}
-            className="text-[11px] tracking-[0.15em] uppercase font-semibold text-[#1A2D5A] hover:text-[#243870] transition-colors font-sans cursor-pointer"
+            className="text-[12px] tracking-[0.15em] uppercase font-semibold text-[#1A2D5A] hover:text-[#243870] transition-colors font-sans cursor-pointer"
           >
             View all {count} photos →
           </button>
@@ -113,7 +113,7 @@ function AgentCard({ agentName, agentBrokerage, agentPhoto, propertyImage, prope
             </div>
           )}
           <div>
-            <p className="text-[#111827] text-[17px] font-bold leading-snug font-sans">{agentName ?? 'Contact Agent'}</p>
+            <p className="text-[#111827] text-[18px] font-bold leading-snug font-sans">{agentName ?? 'Contact Agent'}</p>
             {agentBrokerage && <p className="text-[#9CA3AF] text-sm mt-0.5 font-sans">{agentBrokerage}</p>}
           </div>
         </div>
@@ -167,7 +167,7 @@ function DetailGrid({ items }) {
     <div className="grid grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-5">
       {filtered.map(({ label, value }) => (
         <div key={label}>
-          <p className="text-[10px] tracking-[0.15em] uppercase text-[#9CA3AF] font-sans mb-1">{label}</p>
+          <p className="text-[12px] tracking-[0.15em] uppercase text-[#9CA3AF] font-sans mb-1">{label}</p>
           <p className="text-sm text-[#111827] font-sans font-medium">{value}</p>
         </div>
       ))}
@@ -181,7 +181,7 @@ function FeaturePills({ items }) {
   return (
     <div className="flex flex-wrap gap-2">
       {items.map(f => (
-        <span key={f} className="px-3 py-1.5 text-[11px] bg-[#EEF1F7] text-[#1A2D5A] border border-[#D5DBE9] font-sans rounded-md font-medium">
+        <span key={f} className="px-3 py-1.5 text-[12px] bg-[#EEF1F7] text-[#1A2D5A] border border-[#D5DBE9] font-sans rounded-md font-medium">
           {f}
         </span>
       ))}
@@ -199,7 +199,7 @@ const STATUS_STYLES = {
 
 function StatusChip({ status }) {
   return (
-    <span className={`px-3 py-1 text-[10px] tracking-[0.15em] uppercase font-semibold rounded font-sans ${STATUS_STYLES[status] ?? STATUS_STYLES.Active}`}>
+    <span className={`px-3 py-1 text-[12px] tracking-[0.15em] uppercase font-semibold rounded font-sans ${STATUS_STYLES[status] ?? STATUS_STYLES.Active}`}>
       {status}
     </span>
   )
@@ -307,7 +307,7 @@ export default function ModernTeamPropertyDetail({
                   href={virtualTourUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 mt-3 text-[11px] tracking-[0.15em] uppercase font-semibold text-[#1A2D5A] hover:text-[#243870] transition-colors font-sans"
+                  className="inline-flex items-center gap-1.5 mt-3 text-[12px] tracking-[0.15em] uppercase font-semibold text-[#1A2D5A] hover:text-[#243870] transition-colors font-sans"
                 >
                   <ExternalLink size={12} /> Virtual Tour
                 </a>
@@ -358,7 +358,7 @@ export default function ModernTeamPropertyDetail({
               <Section title="Interior Features">
                 {additionalRooms.length > 0 && (
                   <div className="mb-4">
-                    <p className="text-[10px] tracking-[0.15em] uppercase text-[#9CA3AF] font-sans mb-2">Additional Rooms</p>
+                    <p className="text-[12px] tracking-[0.15em] uppercase text-[#9CA3AF] font-sans mb-2">Additional Rooms</p>
                     <FeaturePills items={additionalRooms} />
                   </div>
                 )}
@@ -382,7 +382,7 @@ export default function ModernTeamPropertyDetail({
                 ]} />
                 {laundryFeatures.length > 0 && (
                   <div className="mt-4">
-                    <p className="text-[10px] tracking-[0.15em] uppercase text-[#9CA3AF] font-sans mb-2">Laundry</p>
+                    <p className="text-[12px] tracking-[0.15em] uppercase text-[#9CA3AF] font-sans mb-2">Laundry</p>
                     <FeaturePills items={laundryFeatures} />
                   </div>
                 )}
@@ -399,7 +399,7 @@ export default function ModernTeamPropertyDetail({
                 ]} />
                 {geo?.directions && (
                   <div className="mt-4">
-                    <p className="text-[10px] tracking-[0.15em] uppercase text-[#9CA3AF] font-sans mb-1">Directions</p>
+                    <p className="text-[12px] tracking-[0.15em] uppercase text-[#9CA3AF] font-sans mb-1">Directions</p>
                     <p className="text-sm text-[#4B5563] font-sans leading-relaxed">{geo.directions}</p>
                   </div>
                 )}
@@ -427,7 +427,7 @@ export default function ModernTeamPropertyDetail({
                 ]} />
                 {hoaAmenities.length > 0 && (
                   <div className="mt-4">
-                    <p className="text-[10px] tracking-[0.15em] uppercase text-[#9CA3AF] font-sans mb-2">Amenities</p>
+                    <p className="text-[12px] tracking-[0.15em] uppercase text-[#9CA3AF] font-sans mb-2">Amenities</p>
                     <FeaturePills items={hoaAmenities} />
                   </div>
                 )}
@@ -451,7 +451,7 @@ export default function ModernTeamPropertyDetail({
               ]} />
               {showingInstructions && (
                 <div className="mt-4">
-                  <p className="text-[10px] tracking-[0.15em] uppercase text-[#9CA3AF] font-sans mb-1">Showing Instructions</p>
+                  <p className="text-[12px] tracking-[0.15em] uppercase text-[#9CA3AF] font-sans mb-1">Showing Instructions</p>
                   <p className="text-sm text-[#4B5563] font-sans leading-relaxed">{showingInstructions}</p>
                 </div>
               )}
@@ -522,7 +522,7 @@ export default function ModernTeamPropertyDetail({
                         className="object-cover transition-transform duration-500 group-hover:scale-105"
                       />
                     )}
-                    <div className="absolute top-3 left-3 px-2.5 py-1 bg-[#1A2D5A]/85 backdrop-blur-sm text-white text-[10px] font-semibold rounded-md tracking-wide uppercase font-sans">
+                    <div className="absolute top-3 left-3 px-2.5 py-1 bg-[#1A2D5A]/85 backdrop-blur-sm text-white text-[12px] font-semibold rounded-md tracking-wide uppercase font-sans">
                       {l.status ?? 'Active'}
                     </div>
                   </div>

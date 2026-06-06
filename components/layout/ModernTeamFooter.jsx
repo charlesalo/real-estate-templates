@@ -102,7 +102,7 @@ export default function ModernTeamFooter({
 
           {/* Col 2 — Quick Links */}
           <div>
-            <h3 className="text-[10px] font-semibold tracking-[0.3em] uppercase text-white/35 mb-6 font-sans">
+            <h3 className="text-[12px] font-semibold tracking-[0.3em] uppercase text-white/35 mb-6 font-sans">
               Quick Links
             </h3>
             <nav className="flex flex-col gap-3">
@@ -130,7 +130,7 @@ export default function ModernTeamFooter({
 
           {/* Col 3 — Neighborhoods */}
           <div>
-            <h3 className="text-[10px] font-semibold tracking-[0.3em] uppercase text-white/35 mb-6 font-sans">
+            <h3 className="text-[12px] font-semibold tracking-[0.3em] uppercase text-white/35 mb-6 font-sans">
               Neighborhoods
             </h3>
             <nav className="flex flex-col gap-3">
@@ -148,7 +148,7 @@ export default function ModernTeamFooter({
 
           {/* Col 4 — License info */}
           <div>
-            <h3 className="text-[10px] font-semibold tracking-[0.3em] uppercase text-white/35 mb-6 font-sans">
+            <h3 className="text-[12px] font-semibold tracking-[0.3em] uppercase text-white/35 mb-6 font-sans">
               Licensing
             </h3>
             {/* Broker firm */}

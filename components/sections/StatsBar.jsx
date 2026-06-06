@@ -73,7 +73,7 @@ export default function StatsBar({ stats = [], template = 'luxury-agent' }) {
               </div>
               <div
                 className={cn(
-                  'text-[10px] tracking-[0.3em] uppercase font-sans',
+                  'text-[12px] tracking-[0.3em] uppercase font-sans',
                   isLuxury ? 'text-template-accent' : 'text-template-accent',
                 )}
               >

@@ -89,7 +89,7 @@ export default function ModernTeamHome() {
               <div className="absolute inset-0 bg-gradient-to-t from-[#0F1E3E]/90 via-[#0F1E3E]/30 to-transparent" />
               <div className="absolute bottom-0 left-0 right-0 p-7">
                 <div className="w-8 h-px bg-white/40 mb-4" />
-                <p className="text-[10px] tracking-[0.3em] uppercase text-white/55 font-sans mb-2">Houston Homes For Sale</p>
+                <p className="text-[12px] tracking-[0.3em] uppercase text-white/55 font-sans mb-2">Houston Homes For Sale</p>
                 <h3 className="text-xl lg:text-2xl font-bold text-white leading-tight group-hover:text-white/85 transition-colors duration-300" style={{ fontFamily: 'var(--font-inter, system-ui)' }}>
                   Home Search
                 </h3>
@@ -111,7 +111,7 @@ export default function ModernTeamHome() {
               <div className="absolute inset-0 bg-gradient-to-t from-[#0F1E3E]/90 via-[#0F1E3E]/30 to-transparent" />
               <div className="absolute bottom-0 left-0 right-0 p-7">
                 <div className="w-8 h-px bg-white/40 mb-4" />
-                <p className="text-[10px] tracking-[0.3em] uppercase text-white/55 font-sans mb-2">What Is Your Home Worth?</p>
+                <p className="text-[12px] tracking-[0.3em] uppercase text-white/55 font-sans mb-2">What Is Your Home Worth?</p>
                 <h3 className="text-xl lg:text-2xl font-bold text-white leading-tight group-hover:text-white/85 transition-colors duration-300" style={{ fontFamily: 'var(--font-inter, system-ui)' }}>
                   Home Valuation
                 </h3>
@@ -130,7 +130,7 @@ export default function ModernTeamHome() {
               <div className="absolute inset-0 bg-gradient-to-t from-[#0F1E3E]/90 via-[#0F1E3E]/30 to-transparent" />
               <div className="absolute bottom-0 left-0 right-0 p-7">
                 <div className="w-8 h-px bg-white/40 mb-4" />
-                <p className="text-[10px] tracking-[0.3em] uppercase text-white/55 font-sans mb-2">Reach Out to Our Team</p>
+                <p className="text-[12px] tracking-[0.3em] uppercase text-white/55 font-sans mb-2">Reach Out to Our Team</p>
                 <h3 className="text-xl lg:text-2xl font-bold text-white leading-tight group-hover:text-white/85 transition-colors duration-300" style={{ fontFamily: 'var(--font-inter, system-ui)' }}>
                   Contact Us
                 </h3>
@@ -224,7 +224,7 @@ export default function ModernTeamHome() {
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                     className="object-cover transition-transform duration-500 group-hover:scale-105"
                   />
-                  <div className="absolute top-3 left-3 px-2.5 py-1 bg-[#1A2D5A]/85 backdrop-blur-sm text-white text-[10px] font-semibold rounded-md tracking-wide uppercase font-sans">
+                  <div className="absolute top-3 left-3 px-2.5 py-1 bg-[#1A2D5A]/85 backdrop-blur-sm text-white text-[12px] font-semibold rounded-md tracking-wide uppercase font-sans">
                     {listing.status}
                   </div>
                 </div>
@@ -248,7 +248,7 @@ export default function ModernTeamHome() {
                     <span className="flex items-center gap-1.5"><Square size={13} className="text-[#4B6090]" />{listing.sqft} sf</span>
                   </div>
                   <div className="pt-4 border-t border-[#F3F4F6] flex items-center justify-between">
-                    <span className="text-[10px] px-2.5 py-1 rounded-full border border-[#D5DBE9] text-[#4B6090] font-sans">{listing.type}</span>
+                    <span className="text-[12px] px-2.5 py-1 rounded-full border border-[#D5DBE9] text-[#4B6090] font-sans">{listing.type}</span>
                     <span className="inline-flex items-center gap-1 text-xs font-semibold text-[#1A2D5A] font-sans">View Details <span className="inline-block group-hover:translate-x-1 transition-transform duration-200">→</span></span>
                   </div>
                 </div>
@@ -337,11 +337,11 @@ export default function ModernTeamHome() {
                   <p className="text-white/60 text-sm leading-relaxed line-clamp-2 font-sans mb-4">{hood.tagline}</p>
                   <div className="flex items-center gap-4">
                     <div>
-                      <p className="text-[10px] text-white/40 uppercase tracking-wide font-sans">Median Price</p>
+                      <p className="text-[12px] text-white/40 uppercase tracking-wide font-sans">Median Price</p>
                       <p className="text-sm font-bold text-white">{hood.medianPrice}</p>
                     </div>
                     <div className="border-l border-white/20 pl-4">
-                      <p className="text-[10px] text-white/40 uppercase tracking-wide font-sans">Listings</p>
+                      <p className="text-[12px] text-white/40 uppercase tracking-wide font-sans">Listings</p>
                       <p className="text-sm font-bold text-white">{hood.activeListings}</p>
                     </div>
                     <span className="ml-auto inline-flex items-center gap-1 text-xs text-white/50 group-hover:text-white transition-colors duration-300 font-sans">
@@ -392,7 +392,7 @@ export default function ModernTeamHome() {
                 sizes="(max-width: 1024px) 100vw, 60vw"
                 className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
               />
-              <span className="absolute top-5 left-5 px-3 py-1.5 bg-[#1A2D5A] text-white text-[10px] tracking-[0.2em] uppercase rounded font-sans">
+              <span className="absolute top-5 left-5 px-3 py-1.5 bg-[#1A2D5A] text-white text-[12px] tracking-[0.2em] uppercase rounded font-sans">
                 Market Report
               </span>
             </div>
@@ -426,7 +426,7 @@ export default function ModernTeamHome() {
                 href={`/modern-team/blog/${post.slug}`}
                 className="group flex items-center gap-5 py-5 hover:bg-[#EEF1F7]/50 -mx-4 px-4 rounded-lg transition-colors duration-200"
               >
-                <span className="hidden sm:inline-block flex-shrink-0 text-[10px] px-2.5 py-1 rounded-full border border-[#D5DBE9] text-[#4B6090] font-sans whitespace-nowrap">
+                <span className="hidden sm:inline-block flex-shrink-0 text-[12px] px-2.5 py-1 rounded-full border border-[#D5DBE9] text-[#4B6090] font-sans whitespace-nowrap">
                   {post.category}
                 </span>
                 <h4 className="flex-1 text-sm font-semibold text-[#111827] group-hover:text-[#1A2D5A] transition-colors leading-snug">

@@ -19,14 +19,14 @@ export default function FieldNotesPage() {
   return (
     <section className="pt-[112px] pb-[64px] lg:pt-[144px] lg:pb-[80px]" style={{ backgroundColor: '#F8F3EB' }}>
       <div className="max-w-7xl mx-auto px-5 lg:px-8">
-        <p className="text-[9px] tracking-[0.4em] uppercase text-[#BA5B3E] mb-3">Chapter Two</p>
+        <p className="text-[12px] tracking-[0.4em] uppercase text-[#BA5B3E] mb-3">Chapter Two</p>
         <h1
-          className="text-[40px] lg:text-[54px] font-normal text-[#24180F] leading-[1.05] mb-4"
+          className="text-[43px] lg:text-[58px] font-normal text-[#24180F] leading-[1.05] mb-4"
           style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}
         >
           Nadia&apos;s Field Notes
         </h1>
-        <p className="text-[15px] text-[#2C1E11]/50 max-w-xl mb-12">
+        <p className="text-[16px] text-[#2C1E11]/50 max-w-xl mb-12">
           Forty-four notebooks. Fourteen years. The places that make a New York address feel like home.
           None of this is sponsored. All of it is walked.
         </p>
@@ -38,18 +38,18 @@ export default function FieldNotesPage() {
                 <Image src={note.image} alt={note.name} fill className="object-cover" />
               </div>
               <div className="p-5">
-                <span className={`inline-block text-[9px] font-semibold uppercase tracking-wider px-2.5 py-1 rounded-full mb-3 ${CATEGORY_COLORS[note.category] ?? 'bg-[#E5E0D8] text-[#2C1E11]/50'}`}>
+                <span className={`inline-block text-[12px] font-semibold uppercase tracking-wider px-2.5 py-1 rounded-full mb-3 ${CATEGORY_COLORS[note.category] ?? 'bg-[#E5E0D8] text-[#2C1E11]/50'}`}>
                   {note.category}
                 </span>
                 <h2
-                  className="text-[18px] font-normal text-[#24180F] mb-1"
+                  className="text-[19px] font-normal text-[#24180F] mb-1"
                   style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}
                 >
                   {note.name}
                 </h2>
-                <p className="text-[11px] text-[#2C1E11]/40 mb-3">{note.location} · {note.address}</p>
-                <p className="text-[15px] text-[#2C1E11]/60 leading-relaxed">{note.blurb}</p>
-                <p className="text-[10px] text-[#2C1E11]/30 mt-3">{note.walkMinutes} min walk from the West Village</p>
+                <p className="text-[12px] text-[#2C1E11]/40 mb-3">{note.location} · {note.address}</p>
+                <p className="text-[16px] text-[#2C1E11]/60 leading-relaxed">{note.blurb}</p>
+                <p className="text-[12px] text-[#2C1E11]/30 mt-3">{note.walkMinutes} min walk from the West Village</p>
               </div>
             </article>
           ))}

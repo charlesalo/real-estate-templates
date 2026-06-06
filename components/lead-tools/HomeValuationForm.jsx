@@ -63,7 +63,7 @@ export default function HomeValuationForm({ template = 'luxury-agent' }) {
     isLuxury ? '[&>option]:bg-[#1A1A1A]' : '',
   )
 
-  const labelClass = cn('block text-[10px] tracking-[0.2em] uppercase mb-2 font-sans', isLuxury ? 'text-white/40' : 'text-template-fg/50')
+  const labelClass = cn('block text-[12px] tracking-[0.2em] uppercase mb-2 font-sans', isLuxury ? 'text-white/40' : 'text-template-fg/50')
   const errorClass = 'text-red-400 text-xs mt-1'
 
   const stepLabels = ['Address', 'Property Details', 'Your Info']
@@ -205,7 +205,7 @@ export default function HomeValuationForm({ template = 'luxury-agent' }) {
             <button
               type="submit"
               className={cn(
-                'flex items-center gap-2 px-8 py-3 text-[11px] tracking-[0.2em] uppercase font-medium transition-opacity hover:opacity-90',
+                'flex items-center gap-2 px-8 py-3 text-[12px] tracking-[0.2em] uppercase font-medium transition-opacity hover:opacity-90',
                 isLuxury ? 'bg-template-accent text-[#0A0A0A]' : 'bg-template-accent text-template-accent-fg rounded-lg',
               )}
             >

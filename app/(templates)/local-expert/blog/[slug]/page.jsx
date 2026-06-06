@@ -26,15 +26,15 @@ export default function BlogPostPage({ params }) {
     <>
       <section className="pt-[112px] pb-[64px] lg:pt-[144px] lg:pb-[80px]" style={{ backgroundColor: '#F8F3EB' }}>
         <div className="max-w-3xl mx-auto px-5 lg:px-8">
-          <Link href="/local-expert/blog" className="inline-flex items-center gap-1.5 text-[12px] text-[#2C1E11]/45 hover:text-[#2C1E11] transition-colors mb-8">
+          <Link href="/local-expert/blog" className="inline-flex items-center gap-1.5 text-[13px] text-[#2C1E11]/45 hover:text-[#2C1E11] transition-colors mb-8">
             <ArrowLeft size={13} /> Back to journal
           </Link>
 
-          <p className="text-[9px] tracking-[0.3em] uppercase text-[#BA5B3E] mb-4">{post.category}</p>
-          <h1 className="text-[32px] lg:text-[42px] font-normal text-[#24180F] leading-tight mb-5" style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}>
+          <p className="text-[12px] tracking-[0.3em] uppercase text-[#BA5B3E] mb-4">{post.category}</p>
+          <h1 className="text-[34px] lg:text-[45px] font-normal text-[#24180F] leading-tight mb-5" style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}>
             {post.title}
           </h1>
-          <div className="flex items-center gap-4 text-[11px] text-[#24180F]/35 mb-8">
+          <div className="flex items-center gap-4 text-[12px] text-[#24180F]/35 mb-8">
             <span>{AGENT.name}</span>
             <span>·</span>
             <span>{formatDate(post.date)}</span>
@@ -80,10 +80,10 @@ export default function BlogPostPage({ params }) {
             <Image src={AGENT.photo} alt={AGENT.name} fill className="object-cover" />
           </div>
           <div>
-            <p className="text-[13px] font-bold text-[#2C1E11]">{AGENT.name}</p>
-            <p className="text-[11px] text-[#2C1E11]/40">{AGENT.title} · {AGENT.brokerage}</p>
+            <p className="text-[14px] font-bold text-[#2C1E11]">{AGENT.name}</p>
+            <p className="text-[12px] text-[#2C1E11]/40">{AGENT.title} · {AGENT.brokerage}</p>
           </div>
-          <Link href="/local-expert/contact" className="ml-auto px-5 py-2.5 text-[12px] font-bold rounded-full bg-[#1B3B2B] text-[#F8F3EB] hover:bg-[#2a5540] transition-colors whitespace-nowrap">
+          <Link href="/local-expert/contact" className="ml-auto px-5 py-2.5 text-[13px] font-bold rounded-full bg-[#1B3B2B] text-[#F8F3EB] hover:bg-[#2a5540] transition-colors whitespace-nowrap">
             Get in touch
           </Link>
         </div>

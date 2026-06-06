@@ -28,7 +28,7 @@ const NYS_LINKS = [
 
 function ColHeading({ children }) {
   return (
-    <h4 className="text-[9px] tracking-[0.4em] uppercase text-[#F8F3EB]/45 mb-5 font-medium">
+    <h4 className="text-[12px] tracking-[0.4em] uppercase text-[#F8F3EB]/45 mb-5 font-medium">
       {children}
     </h4>
   )
@@ -54,24 +54,24 @@ export default function LocalExpertFooter({ agent }) {
           <div>
             <div className="mb-5">
               <div
-                className="text-[26px] font-normal text-[#F8F3EB] leading-none"
+                className="text-[28px] font-normal text-[#F8F3EB] leading-none"
                 style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}
               >
                 {agent?.firstName ?? 'Nadia'}<span className="text-[#BA5B3E]">.</span>
               </div>
-              <div className="text-[9px] tracking-[0.35em] text-[#F8F3EB]/40 uppercase mt-1">NY Local</div>
+              <div className="text-[12px] tracking-[0.35em] text-[#F8F3EB]/40 uppercase mt-1">NY Local</div>
             </div>
 
-            <p className="text-[13px] text-[#F8F3EB]/50 leading-relaxed mb-6 max-w-xs">
+            <p className="text-[14px] text-[#F8F3EB]/50 leading-relaxed mb-6 max-w-xs">
               A licensed independent broker covering Manhattan, Brooklyn, and the neighborhoods in between since 2010.
             </p>
 
             <div className="space-y-1 mb-5">
-              <p className="text-[13px] font-medium text-[#F8F3EB]/70">{brokerage}</p>
-              <p className="text-[12px] text-[#F8F3EB]/45">{address}</p>
+              <p className="text-[14px] font-medium text-[#F8F3EB]/70">{brokerage}</p>
+              <p className="text-[13px] text-[#F8F3EB]/45">{address}</p>
             </div>
 
-            <p className="text-[12px] text-[#F8F3EB]/50">
+            <p className="text-[13px] text-[#F8F3EB]/50">
               <a href={`tel:${phone}`} className="hover:text-[#F8F3EB] transition-colors">{phone}</a>
               <span className="mx-2 text-[#F8F3EB]/25">·</span>
               <a href={`mailto:${email}`} className="hover:text-[#F8F3EB] transition-colors">{email}</a>
@@ -84,7 +84,7 @@ export default function LocalExpertFooter({ agent }) {
             <ul className="space-y-3">
               {EXPLORE_LINKS.map((l) => (
                 <li key={l.href}>
-                  <Link href={l.href} className="text-[13px] text-[#F8F3EB]/55 hover:text-[#F8F3EB] transition-colors">
+                  <Link href={l.href} className="text-[14px] text-[#F8F3EB]/55 hover:text-[#F8F3EB] transition-colors">
                     {l.label}
                   </Link>
                 </li>
@@ -97,8 +97,8 @@ export default function LocalExpertFooter({ agent }) {
             <ColHeading>Working With Us</ColHeading>
             <ul className="space-y-3">
               {WORKING_LINKS.map((l) => (
-                <li key={l.href}>
-                  <Link href={l.href} className="text-[13px] text-[#F8F3EB]/55 hover:text-[#F8F3EB] transition-colors">
+                <li key={l.label}>
+                  <Link href={l.href} className="text-[14px] text-[#F8F3EB]/55 hover:text-[#F8F3EB] transition-colors">
                     {l.label}
                   </Link>
                 </li>
@@ -116,7 +116,7 @@ export default function LocalExpertFooter({ agent }) {
                     href={l.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-start gap-1.5 text-[13px] text-[#F8F3EB]/55 hover:text-[#F8F3EB] transition-colors"
+                    className="flex items-start gap-1.5 text-[14px] text-[#F8F3EB]/55 hover:text-[#F8F3EB] transition-colors"
                   >
                     <ExternalLink size={11} className="flex-shrink-0 mt-[3px]" />
                     {l.label}
@@ -124,7 +124,7 @@ export default function LocalExpertFooter({ agent }) {
                 </li>
               ))}
             </ul>
-            <p className="text-[11px] text-[#F8F3EB]/30 leading-relaxed mt-5">
+            <p className="text-[12px] text-[#F8F3EB]/30 leading-relaxed mt-5">
               As required by New York State Department of State and REBNY, these notices are provided to every consumer engaging with this firm.
             </p>
           </div>
@@ -134,15 +134,15 @@ export default function LocalExpertFooter({ agent }) {
       {/* ── Bottom bar ───────────────────────────────────────────────────── */}
       <div className="border-t border-[#F8F3EB]/8">
         <div className="max-w-7xl mx-auto px-6 lg:px-8 py-5 flex flex-col md:flex-row items-start md:items-center justify-between gap-3">
-          <p className="text-[11px] text-[#F8F3EB]/30 leading-relaxed max-w-2xl">
+          <p className="text-[12px] text-[#F8F3EB]/30 leading-relaxed max-w-2xl">
             © {year} {brokerage}. Licensed Real Estate Broker in the State of New York ({license}). All information is deemed reliable but not guaranteed.
           </p>
           <div className="flex items-center gap-4 flex-shrink-0">
-            <Link href={`${BASE}/privacy`} className="text-[11px] text-[#F8F3EB]/35 hover:text-[#F8F3EB]/70 transition-colors">Privacy</Link>
+            <Link href={`${BASE}/privacy`} className="text-[12px] text-[#F8F3EB]/35 hover:text-[#F8F3EB]/70 transition-colors">Privacy</Link>
             <span className="text-[#F8F3EB]/20">|</span>
-            <Link href={`${BASE}/terms`} className="text-[11px] text-[#F8F3EB]/35 hover:text-[#F8F3EB]/70 transition-colors">Terms</Link>
+            <Link href={`${BASE}/terms`} className="text-[12px] text-[#F8F3EB]/35 hover:text-[#F8F3EB]/70 transition-colors">Terms</Link>
             <span className="text-[#F8F3EB]/20">|</span>
-            <Link href={`${BASE}/accessibility`} className="text-[11px] text-[#F8F3EB]/35 hover:text-[#F8F3EB]/70 transition-colors">Accessibility</Link>
+            <Link href={`${BASE}/accessibility`} className="text-[12px] text-[#F8F3EB]/35 hover:text-[#F8F3EB]/70 transition-colors">Accessibility</Link>
           </div>
         </div>
       </div>

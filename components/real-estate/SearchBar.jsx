@@ -153,7 +153,7 @@ export default function SearchBar({
         <button
           type="submit"
           className={cn(
-            'px-5 py-2 text-[11px] tracking-[0.15em] uppercase font-medium transition-all',
+            'px-5 py-2 text-[12px] tracking-[0.15em] uppercase font-medium transition-all',
             isLuxury
               ? 'bg-template-accent text-[#0A0A0A] hover:opacity-90'
               : 'bg-template-accent text-template-accent-fg rounded hover:opacity-90',

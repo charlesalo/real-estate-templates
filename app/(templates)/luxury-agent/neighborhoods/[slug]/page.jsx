@@ -181,7 +181,7 @@ export default async function NeighborhoodPage({ params }) {
         <Image src={hood.heroImage} alt={hood.name} fill className="object-cover" priority />
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-black/20" />
         <div className="absolute bottom-0 left-0 right-0 p-8 lg:p-12 max-w-7xl mx-auto">
-          <p className="text-[10px] tracking-[0.5em] uppercase text-[#C9A96E] mb-4 font-sans">Neighborhood Guide</p>
+          <p className="text-[12px] tracking-[0.5em] uppercase text-[#C9A96E] mb-4 font-sans">Neighborhood Guide</p>
           <h1 className="font-heading text-4xl lg:text-6xl font-normal text-white mb-5">{hood.name}</h1>
           <div className="w-12 h-px bg-[#C9A96E] mb-5" />
           <p className="text-white/60 text-lg">{hood.tagline}</p>
@@ -217,19 +217,19 @@ export default async function NeighborhoodPage({ params }) {
           {/* Stats sidebar */}
           <div className="space-y-6">
             <div className="bg-[#0D0D0D] border border-white/10 p-6">
-              <h3 className="text-[10px] tracking-[0.3em] uppercase text-[#C9A96E] mb-6 font-sans">
+              <h3 className="text-[12px] tracking-[0.3em] uppercase text-[#C9A96E] mb-6 font-sans">
                 Market Snapshot
               </h3>
               <div className="space-y-5">
                 {hood.stats.map((s, i) => (
                   <div key={i} className={i > 0 ? 'pt-5 border-t border-white/10' : ''}>
                     <div className="font-heading text-2xl font-normal text-white">{s.value}</div>
-                    <div className="text-[10px] tracking-widest uppercase text-white/35 mt-1 font-sans">{s.label}</div>
+                    <div className="text-[12px] tracking-widest uppercase text-white/35 mt-1 font-sans">{s.label}</div>
                   </div>
                 ))}
               </div>
             </div>
-            <ModalTrigger className="block w-full text-center py-4 border border-[#C9A96E] text-[#C9A96E] text-[11px] tracking-[0.2em] uppercase font-medium hover:bg-[#C9A96E] hover:text-[#0A0A0A] transition-all">
+            <ModalTrigger className="block w-full text-center py-4 border border-[#C9A96E] text-[#C9A96E] text-[12px] tracking-[0.2em] uppercase font-medium hover:bg-[#C9A96E] hover:text-[#0A0A0A] transition-all">
               Ask About This Area
             </ModalTrigger>
           </div>
@@ -243,7 +243,7 @@ export default async function NeighborhoodPage({ params }) {
 
             <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
               <div>
-                <p className="text-[9px] tracking-[0.45em] uppercase text-[#C9A96E] mb-3 font-sans">MLS Listings</p>
+                <p className="text-[12px] tracking-[0.45em] uppercase text-[#C9A96E] mb-3 font-sans">MLS Listings</p>
                 <h2 className="font-heading text-2xl lg:text-3xl font-normal text-white mb-3">
                   Properties in {hood.name}
                 </h2>
@@ -251,7 +251,7 @@ export default async function NeighborhoodPage({ params }) {
               </div>
               <Link
                 href={`/luxury-agent/listings?q=${encodeURIComponent(hood.name)}`}
-                className="shrink-0 px-8 py-3 border border-[#C9A96E] text-[#C9A96E] text-[10px] tracking-[0.25em] uppercase font-sans hover:bg-[#C9A96E] hover:text-[#0A0A0A] transition-all"
+                className="shrink-0 px-8 py-3 border border-[#C9A96E] text-[#C9A96E] text-[12px] tracking-[0.25em] uppercase font-sans hover:bg-[#C9A96E] hover:text-[#0A0A0A] transition-all"
               >
                 View All Listings
               </Link>
@@ -289,7 +289,7 @@ export default async function NeighborhoodPage({ params }) {
       <section className="bg-[#0D0D0D] border-t border-white/10 py-16 lg:py-24">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
 
-          <p className="text-[9px] tracking-[0.45em] uppercase text-[#C9A96E] mb-3 font-sans">Keep Exploring</p>
+          <p className="text-[12px] tracking-[0.45em] uppercase text-[#C9A96E] mb-3 font-sans">Keep Exploring</p>
           <h2 className="font-heading text-2xl lg:text-3xl font-normal text-white mb-3">
             Explore Other Neighborhoods
           </h2>
@@ -311,22 +311,22 @@ export default async function NeighborhoodPage({ params }) {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-black/10 group-hover:from-black/95 transition-all duration-500" />
                 <div className="absolute bottom-0 left-0 right-0 p-7">
-                  <p className="text-[9px] tracking-[0.4em] uppercase text-[#C9A96E] font-sans mb-3">Neighborhood</p>
+                  <p className="text-[12px] tracking-[0.4em] uppercase text-[#C9A96E] font-sans mb-3">Neighborhood</p>
                   <h3 className="font-heading text-2xl font-normal text-white leading-tight mb-3">{h.name}</h3>
                   <div className="w-6 h-px bg-[#C9A96E] mb-4" />
                   <p className="text-white/45 text-xs font-sans leading-relaxed line-clamp-2 mb-6">{h.tagline}</p>
                   <div className="flex items-end justify-between">
                     <div className="flex items-center gap-5">
                       <div>
-                        <p className="text-[9px] text-white/30 uppercase tracking-widest font-sans mb-1">Median Price</p>
+                        <p className="text-[12px] text-white/30 uppercase tracking-widest font-sans mb-1">Median Price</p>
                         <p className="text-sm font-sans font-medium text-white">{h.stats[0].value}</p>
                       </div>
                       <div className="border-l border-white/10 pl-5">
-                        <p className="text-[9px] text-white/30 uppercase tracking-widest font-sans mb-1">Listings</p>
+                        <p className="text-[12px] text-white/30 uppercase tracking-widest font-sans mb-1">Listings</p>
                         <p className="text-sm font-sans font-medium text-white">{h.stats[1].value}</p>
                       </div>
                     </div>
-                    <span className="text-[10px] tracking-[0.15em] uppercase text-white/30 group-hover:text-[#C9A96E] transition-colors font-sans inline-flex items-center gap-1.5">
+                    <span className="text-[12px] tracking-[0.15em] uppercase text-white/30 group-hover:text-[#C9A96E] transition-colors font-sans inline-flex items-center gap-1.5">
                       Explore <span className="inline-block group-hover:translate-x-1 transition-transform duration-300">→</span>
                     </span>
                   </div>
@@ -338,7 +338,7 @@ export default async function NeighborhoodPage({ params }) {
           <div className="mt-12 text-center">
             <Link
               href="/luxury-agent/neighborhoods"
-              className="inline-flex items-center gap-3 px-10 py-4 border border-[#C9A96E] text-[#C9A96E] text-[10px] tracking-[0.3em] uppercase font-sans hover:bg-[#C9A96E] hover:text-[#0A0A0A] transition-all duration-300"
+              className="inline-flex items-center gap-3 px-10 py-4 border border-[#C9A96E] text-[#C9A96E] text-[12px] tracking-[0.3em] uppercase font-sans hover:bg-[#C9A96E] hover:text-[#0A0A0A] transition-all duration-300"
             >
               View All Neighborhoods
             </Link>

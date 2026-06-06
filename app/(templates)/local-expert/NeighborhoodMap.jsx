@@ -156,29 +156,29 @@ function SidePanel({ neighborhoods, active, setActive }) {
               <div className="min-w-0 flex-1">
                 <div className="flex items-start justify-between gap-2">
                   <div>
-                    <p className="text-[10px] text-[#24180F]/40 uppercase tracking-wider mb-0.5">{n.borough}</p>
-                    <p className="text-[15px] font-bold text-[#24180F] leading-snug"
+                    <p className="text-[12px] text-[#24180F]/40 uppercase tracking-wider mb-0.5">{n.borough}</p>
+                    <p className="text-[16px] font-bold text-[#24180F] leading-snug"
                       style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}>
                       {n.name}
                     </p>
                   </div>
                   {isActive && <div className="w-2 h-2 rounded-full bg-[#1B3B2B] flex-shrink-0 mt-1.5" />}
                 </div>
-                <p className="text-[11px] text-[#2C1E11]/50 mt-1 leading-snug line-clamp-2">{n.tagline}</p>
+                <p className="text-[12px] text-[#2C1E11]/50 mt-1 leading-snug line-clamp-2">{n.tagline}</p>
                 <div className="flex items-center gap-3 mt-2">
-                  <span className="text-[10px] text-[#2C1E11]/50">From {n.medianPrice}</span>
+                  <span className="text-[12px] text-[#2C1E11]/50">From {n.medianPrice}</span>
                   <span className="text-[#2C1E11]/20">·</span>
-                  <span className="text-[10px] text-[#2C1E11]/50">{n.activeListings} listings</span>
+                  <span className="text-[12px] text-[#2C1E11]/50">{n.activeListings} listings</span>
                 </div>
               </div>
             </div>
             {isActive && (
               <div className="px-5 pb-4 bg-[#1B3B2B]/5">
-                <p className="text-[12px] text-[#2C1E11]/60 leading-relaxed mb-3">
+                <p className="text-[13px] text-[#2C1E11]/60 leading-relaxed mb-3">
                   {n.description.slice(0, 120)}…
                 </p>
                 <Link href={`/local-expert/neighborhoods/${n.slug}`}
-                  className="inline-flex items-center gap-1 text-[11px] font-semibold text-[#2C1E11] hover:opacity-70 transition-opacity"
+                  className="inline-flex items-center gap-1 text-[12px] font-semibold text-[#2C1E11] hover:opacity-70 transition-opacity"
                   onClick={(e) => e.stopPropagation()}>
                   Open the {n.name} guide <ArrowRight size={11} />
                 </Link>
@@ -196,7 +196,7 @@ function NoTokenFallback({ neighborhoods, active, setActive }) {
     <div className="flex flex-col lg:flex-row gap-0 rounded-2xl overflow-hidden border border-[#E5E0D8] shadow-sm" style={{ minHeight: 520 }}>
       <div className="lg:w-[58%] h-[300px] lg:h-[520px] bg-[#E5E0D8] flex flex-col items-center justify-center gap-3">
         <MapPin size={28} className="text-[#2C1E11]/30" />
-        <p className="text-[12px] text-[#2C1E11]/40 text-center px-8">
+        <p className="text-[13px] text-[#2C1E11]/40 text-center px-8">
           Add <code className="font-mono">NEXT_PUBLIC_MAPBOX_TOKEN</code> to .env.local to enable the interactive map.
         </p>
       </div>

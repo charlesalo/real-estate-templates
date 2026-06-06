@@ -161,7 +161,7 @@ function TestimonialCard({ item }) {
       {/* Top row */}
       <div className="flex items-start justify-between gap-4">
         <StarRating count={item.rating} />
-        <span className={`text-[10px] font-semibold tracking-[0.15em] uppercase px-2.5 py-1 rounded-full font-sans ${badge.bg} ${badge.text}`}>
+        <span className={`text-[12px] font-semibold tracking-[0.15em] uppercase px-2.5 py-1 rounded-full font-sans ${badge.bg} ${badge.text}`}>
           {item.source}
         </span>
       </div>
@@ -182,8 +182,8 @@ function TestimonialCard({ item }) {
           </p>
         </div>
         <div className="text-right flex-shrink-0">
-          <p className="text-[10px] text-[#9CA3AF] uppercase tracking-wide font-sans">{item.date}</p>
-          <p className="text-[10px] text-[#4B6090] font-sans mt-0.5">via {item.agent}</p>
+          <p className="text-[12px] text-[#9CA3AF] uppercase tracking-wide font-sans">{item.date}</p>
+          <p className="text-[12px] text-[#4B6090] font-sans mt-0.5">via {item.agent}</p>
         </div>
       </div>
     </article>

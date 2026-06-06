@@ -172,11 +172,11 @@ export default function NeighborhoodsPage() {
                 {/* Stats row */}
                 <div className="flex items-center gap-4">
                   <div>
-                    <p className="text-[10px] text-white/40 uppercase tracking-wide font-sans">Median Price</p>
+                    <p className="text-[12px] text-white/40 uppercase tracking-wide font-sans">Median Price</p>
                     <p className="text-sm font-bold text-white">{hood.medianPrice}</p>
                   </div>
                   <div className="border-l border-white/20 pl-4">
-                    <p className="text-[10px] text-white/40 uppercase tracking-wide font-sans">Listings</p>
+                    <p className="text-[12px] text-white/40 uppercase tracking-wide font-sans">Listings</p>
                     <p className="text-sm font-bold text-white">{hood.activeListings}</p>
                   </div>
                   <span className="ml-auto inline-flex items-center gap-1 text-xs text-white/50 group-hover:text-white transition-colors duration-300 font-sans">

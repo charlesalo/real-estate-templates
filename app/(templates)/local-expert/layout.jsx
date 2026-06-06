@@ -1,6 +1,7 @@
 import { Plus_Jakarta_Sans, Gelasio } from 'next/font/google'
 import LocalExpertShell from './LocalExpertShell'
 import { AGENT } from '@/lib/local-expert-data'
+import './page-transition.css'
 
 const plusJakarta = Plus_Jakarta_Sans({
   subsets: ['latin'],

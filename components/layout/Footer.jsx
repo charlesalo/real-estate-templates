@@ -65,7 +65,7 @@ export default function Footer({
                 {agentName}
               </div>
               {isLuxury && (
-                <div className="text-[9px] tracking-[0.35em] text-template-accent uppercase font-sans mt-1.5">
+                <div className="text-[12px] tracking-[0.35em] text-template-accent uppercase font-sans mt-1.5">
                   Real Estate
                 </div>
               )}
@@ -94,7 +94,7 @@ export default function Footer({
 
           {/* Quick links */}
           <div>
-            <h3 className={cn('text-[10px] tracking-[0.3em] uppercase font-medium mb-6', 'text-template-accent')}>
+            <h3 className={cn('text-[12px] tracking-[0.3em] uppercase font-medium mb-6', 'text-template-accent')}>
               Quick Links
             </h3>
             <nav className="flex flex-col gap-3">
@@ -122,7 +122,7 @@ export default function Footer({
 
           {/* Contact */}
           <div>
-            <h3 className="text-[10px] tracking-[0.3em] uppercase font-medium mb-6 text-template-accent">
+            <h3 className="text-[12px] tracking-[0.3em] uppercase font-medium mb-6 text-template-accent">
               Contact
             </h3>
             <div className="flex flex-col gap-4">

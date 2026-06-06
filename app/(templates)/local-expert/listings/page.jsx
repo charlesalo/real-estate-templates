@@ -32,14 +32,14 @@ export default function ListingsPage({ searchParams }) {
 
           {/* Header */}
           <div className="mb-10">
-            <p className="text-[9px] tracking-[0.4em] uppercase text-[#BA5B3E] mb-3">Chapter Three</p>
+            <p className="text-[12px] tracking-[0.4em] uppercase text-[#BA5B3E] mb-3">Chapter Three</p>
             <h1
-              className="text-[40px] lg:text-[54px] font-normal text-[#24180F] leading-[1.05] mb-4"
+              className="text-[43px] lg:text-[58px] font-normal text-[#24180F] leading-[1.05] mb-4"
               style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}
             >
               Curated Local Homes
             </h1>
-            <p className="text-[15px] text-[#2C1E11]/50 max-w-xl">
+            <p className="text-[16px] text-[#2C1E11]/50 max-w-xl">
               {filtered.length} active listing{filtered.length !== 1 ? 's' : ''} in neighborhoods I know block by block.
               {q && ` Showing results for "${searchParams.q}".`}
             </p>
@@ -59,7 +59,7 @@ export default function ListingsPage({ searchParams }) {
               <Link
                 key={f.label}
                 href={f.href}
-                className="px-4 py-2 text-[11px] font-medium rounded-full border border-[#E5E0D8] text-[#2C1E11]/60 hover:border-[#1B3B2B]/30 hover:text-[#2C1E11] transition-colors"
+                className="px-4 py-2 text-[12px] font-medium rounded-full border border-[#E5E0D8] text-[#2C1E11]/60 hover:border-[#1B3B2B]/30 hover:text-[#2C1E11] transition-colors"
               >
                 {f.label}
               </Link>
@@ -81,7 +81,7 @@ export default function ListingsPage({ searchParams }) {
 
           {/* Compliance */}
           <div className="mt-12 pt-8 border-t border-[#E5E0D8]">
-            <p className="text-[10px] text-[#2C1E11]/30 leading-relaxed">
+            <p className="text-[12px] text-[#2C1E11]/30 leading-relaxed">
               All listing information is deemed reliable but not guaranteed and should be independently reviewed
               and verified. All properties are subject to prior sale or withdrawal. Equal Housing Opportunity.
               Compass Real Estate LLC is a licensed real estate broker. NY Lic# 109802832.
@@ -107,32 +107,32 @@ function ListingCard({ listing }) {
             className="object-cover transition-transform duration-500 group-hover:scale-105"
           />
           <div className="absolute top-3 left-3 flex gap-2">
-            <span className="text-[9px] font-semibold uppercase tracking-wider px-2.5 py-1 rounded-full bg-white/92 text-[#2C1E11]">
+            <span className="text-[12px] font-semibold uppercase tracking-wider px-2.5 py-1 rounded-full bg-white/92 text-[#2C1E11]">
               {listing.type}
             </span>
           </div>
         </div>
         <div className="p-4">
           <div
-            className="text-[22px] font-normal text-[#24180F] leading-none mb-1"
+            className="text-[24px] font-normal text-[#24180F] leading-none mb-1"
             style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}
           >
             {formatPrice(listing.price)}
           </div>
-          <p className="text-[13px] font-semibold text-[#2C1E11] mt-1">{listing.address}</p>
-          <p className="text-[11px] text-[#2C1E11]/45">{listing.neighborhood}, {listing.city} {listing.zip}</p>
+          <p className="text-[14px] font-semibold text-[#2C1E11] mt-1">{listing.address}</p>
+          <p className="text-[12px] text-[#2C1E11]/45">{listing.neighborhood}, {listing.city} {listing.zip}</p>
           <div className="flex items-center gap-4 mt-3 pt-3 border-t border-[#E5E0D8]">
-            <span className="flex items-center gap-1 text-[11px] text-[#2C1E11]/50">
+            <span className="flex items-center gap-1 text-[12px] text-[#2C1E11]/50">
               <Bed size={12} /> {listing.beds} bd
             </span>
-            <span className="flex items-center gap-1 text-[11px] text-[#2C1E11]/50">
+            <span className="flex items-center gap-1 text-[12px] text-[#2C1E11]/50">
               <Bath size={12} /> {listing.baths} ba
             </span>
-            <span className="flex items-center gap-1 text-[11px] text-[#2C1E11]/50">
+            <span className="flex items-center gap-1 text-[12px] text-[#2C1E11]/50">
               <Square size={12} /> {listing.sqft.toLocaleString()} sf
             </span>
           </div>
-          <p className="text-[9px] text-[#2C1E11]/25 mt-2.5 leading-snug">
+          <p className="text-[12px] text-[#2C1E11]/25 mt-2.5 leading-snug">
             Listing Provided Courtesy of {listing.listingBrokerage} · {listing.mlsId}
           </p>
         </div>

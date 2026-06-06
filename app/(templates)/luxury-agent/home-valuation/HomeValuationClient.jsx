@@ -40,7 +40,7 @@ export default function HomeValuationClient({ googleMapsKey }) {
       {/* Content */}
       <div className="relative z-10 flex-1 flex flex-col items-center justify-center px-6 lg:px-8 pt-32 pb-20 text-center">
 
-        <p className="text-[10px] tracking-[0.5em] uppercase text-[#C9A96E] font-sans mb-6">
+        <p className="text-[12px] tracking-[0.5em] uppercase text-[#C9A96E] font-sans mb-6">
           Free Home Valuation
         </p>
 
@@ -59,7 +59,7 @@ export default function HomeValuationClient({ googleMapsKey }) {
           />
         </div>
 
-        <p className="mt-6 text-[11px] text-white/25 font-sans max-w-sm leading-relaxed">
+        <p className="mt-6 text-[12px] text-white/25 font-sans max-w-sm leading-relaxed">
           No obligation. Your information is kept strictly confidential.
         </p>
 

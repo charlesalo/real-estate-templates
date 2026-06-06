@@ -11,7 +11,7 @@ export default function StatusBadge({ status = 'Active' }) {
   return (
     <span
       className={cn(
-        'inline-block px-2.5 py-1 text-[9px] tracking-[0.2em] uppercase font-semibold backdrop-blur-sm',
+        'inline-block px-2.5 py-1 text-[12px] tracking-[0.2em] uppercase font-semibold backdrop-blur-sm',
         STATUS_STYLES[status] ?? STATUS_STYLES.Active,
       )}
     >

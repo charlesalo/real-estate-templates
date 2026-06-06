@@ -53,7 +53,7 @@ export default function TestimonialsSection({
             <div
               className={cn(
                 'font-heading leading-none mb-4 select-none',
-                'text-[64px] lg:text-[80px]',
+                'text-[68px] lg:text-[86px]',
                 isLuxury ? 'text-[#C9A96E]/55' : 'text-template-accent/40',
               )}
               aria-hidden="true"

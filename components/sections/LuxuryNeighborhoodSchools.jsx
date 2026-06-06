@@ -32,7 +32,7 @@ function GoldStars({ rating }) {
 function TypeBadge({ isPrivate, isCharter, isMagnet }) {
   const label = isPrivate ? 'Private' : isCharter ? 'Charter' : isMagnet ? 'Magnet' : 'Public'
   return (
-    <span className="inline-flex px-2.5 py-1 border border-white/10 text-white/45 text-[9px] tracking-[0.15em] uppercase font-sans">
+    <span className="inline-flex px-2.5 py-1 border border-white/10 text-white/45 text-[12px] tracking-[0.15em] uppercase font-sans">
       {label}
     </span>
   )
@@ -62,7 +62,7 @@ export default function LuxuryNeighborhoodSchools({ neighborhoodName, schools })
     <section className="bg-[#111111] border-t border-white/10 py-16 lg:py-24">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
 
-        <p className="text-[9px] tracking-[0.45em] uppercase text-[#C9A96E] mb-3 font-sans">Education</p>
+        <p className="text-[12px] tracking-[0.45em] uppercase text-[#C9A96E] mb-3 font-sans">Education</p>
         <h2 className="font-heading text-2xl lg:text-3xl font-normal text-white mb-3">
           Schools Near {neighborhoodName}
         </h2>
@@ -78,7 +78,7 @@ export default function LuxuryNeighborhoodSchools({ neighborhoodName, schools })
               <button
                 key={tab.key}
                 onClick={() => { setActiveTab(tab.key); setShowAll(false) }}
-                className={`px-4 py-2 text-[10px] tracking-[0.15em] uppercase font-sans font-medium transition-all duration-200 ${
+                className={`px-4 py-2 text-[12px] tracking-[0.15em] uppercase font-sans font-medium transition-all duration-200 ${
                   activeTab === tab.key
                     ? 'bg-[#C9A96E] text-[#0A0A0A]'
                     : 'bg-white/5 text-white/45 border border-white/10 hover:border-white/20 hover:text-white/70'
@@ -88,7 +88,7 @@ export default function LuxuryNeighborhoodSchools({ neighborhoodName, schools })
               </button>
             ))}
           </div>
-          <p className="text-[10px] text-white/20 font-sans">Data provided by SchoolDigger</p>
+          <p className="text-[12px] text-white/20 font-sans">Data provided by SchoolDigger</p>
         </div>
 
         {/* Table */}
@@ -97,7 +97,7 @@ export default function LuxuryNeighborhoodSchools({ neighborhoodName, schools })
           <div className="hidden md:grid grid-cols-[48px_1fr_130px_120px_160px] gap-4 px-6 py-3 bg-[#0D0D0D] border-b border-white/10">
             <div />
             {['Name', 'Category', 'Grades', 'School Rating'].map(h => (
-              <p key={h} className="text-[9px] tracking-[0.3em] uppercase text-[#C9A96E] font-sans">{h}</p>
+              <p key={h} className="text-[12px] tracking-[0.3em] uppercase text-[#C9A96E] font-sans">{h}</p>
             ))}
           </div>
 
@@ -132,7 +132,7 @@ export default function LuxuryNeighborhoodSchools({ neighborhoodName, schools })
                     href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(school.name + ' ' + school.address)}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-white/25 hover:text-[#C9A96E] text-[11px] font-sans mt-0.5 leading-tight transition-colors block"
+                    className="text-white/25 hover:text-[#C9A96E] text-[12px] font-sans mt-0.5 leading-tight transition-colors block"
                   >
                     {school.address}
                   </a>
@@ -154,7 +154,7 @@ export default function LuxuryNeighborhoodSchools({ neighborhoodName, schools })
                       <span className="text-xs text-white/60 font-sans">{school.rating}/5</span>
                     </div>
                   ) : (
-                    <span className="text-[11px] text-white/25 font-sans">Not rated</span>
+                    <span className="text-[12px] text-white/25 font-sans">Not rated</span>
                   )}
                 </div>
               </div>
@@ -167,7 +167,7 @@ export default function LuxuryNeighborhoodSchools({ neighborhoodName, schools })
           <div className="mt-8 text-center">
             <button
               onClick={() => setShowAll(true)}
-              className="px-10 py-3.5 border border-white/20 text-white/60 text-[10px] tracking-[0.25em] uppercase font-sans hover:border-[#C9A96E] hover:text-[#C9A96E] transition-colors"
+              className="px-10 py-3.5 border border-white/20 text-white/60 text-[12px] tracking-[0.25em] uppercase font-sans hover:border-[#C9A96E] hover:text-[#C9A96E] transition-colors"
             >
               Show More
             </button>

@@ -201,7 +201,7 @@ export default function ValuationHeroBar({ agentName = 'The Hargrove Group' }) {
                     </div>
                   ) : (
                     <>
-                      <p className="text-[10px] tracking-[0.4em] uppercase text-[#4B6090] font-sans mb-2">
+                      <p className="text-[12px] tracking-[0.4em] uppercase text-[#4B6090] font-sans mb-2">
                         Free Home Valuation
                       </p>
                       <h2 className="text-2xl font-bold text-[#111827] mb-2">
@@ -254,7 +254,7 @@ export default function ValuationHeroBar({ agentName = 'The Hargrove Group' }) {
                             type="checkbox"
                             className="mt-0.5 w-4 h-4 flex-shrink-0 accent-[#1A2D5A]"
                           />
-                          <span className="text-[11px] text-[#9CA3AF] font-sans leading-relaxed group-hover:text-[#6B7280] transition-colors">
+                          <span className="text-[12px] text-[#9CA3AF] font-sans leading-relaxed group-hover:text-[#6B7280] transition-colors">
                             I agree to be contacted by {agentName} regarding my home valuation request.
                           </span>
                         </label>
@@ -262,7 +262,7 @@ export default function ValuationHeroBar({ agentName = 'The Hargrove Group' }) {
 
                         <button
                           type="submit"
-                          className="w-full py-3.5 bg-[#1A2D5A] text-white text-[11px] tracking-[0.25em] uppercase font-bold rounded-lg hover:bg-[#243870] transition-colors mt-2"
+                          className="w-full py-3.5 bg-[#1A2D5A] text-white text-[12px] tracking-[0.25em] uppercase font-bold rounded-lg hover:bg-[#243870] transition-colors mt-2"
                         >
                           Unlock Your Free Valuation
                         </button>
@@ -285,7 +285,7 @@ export default function ValuationHeroBar({ agentName = 'The Hargrove Group' }) {
 
                   {/* Agent header */}
                   <div className="px-8 py-6 border-b border-[#D5DBE9]">
-                    <p className="text-[9px] tracking-[0.4em] uppercase text-[#4B6090] font-sans mb-1">
+                    <p className="text-[12px] tracking-[0.4em] uppercase text-[#4B6090] font-sans mb-1">
                       Prepared By
                     </p>
                     <p className="text-lg font-bold text-[#111827]">{agentName}</p>
@@ -312,7 +312,7 @@ export default function ValuationHeroBar({ agentName = 'The Hargrove Group' }) {
 
                   {/* Property address footer */}
                   <div className="px-8 py-5 border-t border-[#D5DBE9]">
-                    <p className="text-[9px] tracking-[0.35em] uppercase text-[#9CA3AF] font-sans mb-1.5">
+                    <p className="text-[12px] tracking-[0.35em] uppercase text-[#9CA3AF] font-sans mb-1.5">
                       Property Address
                     </p>
                     <p className="text-[#4B5563] text-sm font-sans leading-snug">

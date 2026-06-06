@@ -320,7 +320,7 @@ export default async function BlogPostPage({ params }) {
             <span className="group-hover:-translate-x-1 transition-transform duration-200">←</span>
             Blog
           </Link>
-          <span className="inline-block px-3 py-1 bg-[#1A2D5A]/80 backdrop-blur-sm text-white text-[10px] tracking-[0.15em] uppercase rounded font-sans mb-3">
+          <span className="inline-block px-3 py-1 bg-[#1A2D5A]/80 backdrop-blur-sm text-white text-[12px] tracking-[0.15em] uppercase rounded font-sans mb-3">
             {post.category}
           </span>
           <h1
@@ -382,7 +382,7 @@ export default async function BlogPostPage({ params }) {
                   {block.items.map((stat, j) => (
                     <div key={j} className="bg-white border border-[#D5DBE9] rounded-lg p-4 text-center">
                       <div className="text-xl font-bold text-[#1A2D5A]">{stat.value}</div>
-                      <div className="text-[10px] text-[#9CA3AF] mt-1 font-sans uppercase tracking-wide">{stat.label}</div>
+                      <div className="text-[12px] text-[#9CA3AF] mt-1 font-sans uppercase tracking-wide">{stat.label}</div>
                       <div className="text-xs text-[#4B6090] mt-0.5 font-sans">{stat.change}</div>
                     </div>
                   ))}
@@ -432,7 +432,7 @@ export default async function BlogPostPage({ params }) {
                     <Image src={r.heroImage} alt={r.title} fill className="object-cover transition-transform duration-500 group-hover:scale-[1.04]" />
                   </div>
                   <div className="py-4 pr-4 flex flex-col justify-center">
-                    <span className="text-[10px] uppercase tracking-wide text-[#4B6090] font-sans">{r.category}</span>
+                    <span className="text-[12px] uppercase tracking-wide text-[#4B6090] font-sans">{r.category}</span>
                     <h4 className="text-sm font-semibold text-[#111827] leading-snug mt-1 group-hover:text-[#1A2D5A] transition-colors line-clamp-2">
                       {r.title}
                     </h4>

@@ -76,7 +76,7 @@ export default function ContactModal({
   }
 
   const inputCls = 'w-full bg-transparent border-b border-white/20 text-white text-sm py-3 outline-none placeholder:text-white/25 focus:border-[#C9A96E] transition-colors'
-  const labelCls = 'block text-[9px] tracking-[0.35em] uppercase text-white/40 mb-2 font-sans'
+  const labelCls = 'block text-[12px] tracking-[0.35em] uppercase text-white/40 mb-2 font-sans'
   const errorCls = 'text-red-400 text-xs mt-1 font-sans'
 
   return (
@@ -128,7 +128,7 @@ export default function ContactModal({
                 </h2>
                 <div className="w-8 h-px bg-[#C9A96E] mb-8" />
 
-                <p className="text-[10px] tracking-[0.4em] uppercase text-[#C9A96E] mb-8 font-sans">
+                <p className="text-[12px] tracking-[0.4em] uppercase text-[#C9A96E] mb-8 font-sans">
                   {agentName}{agentDre ? ` | ${agentDre}` : ''}
                 </p>
 
@@ -141,7 +141,7 @@ export default function ContactModal({
                     <div key={label} className="flex items-start gap-4">
                       <Icon size={14} className="text-[#C9A96E] flex-shrink-0 mt-1" strokeWidth={1.5} />
                       <div>
-                        <p className="text-[9px] tracking-[0.35em] uppercase text-white/35 font-sans mb-1">{label}</p>
+                        <p className="text-[12px] tracking-[0.35em] uppercase text-white/35 font-sans mb-1">{label}</p>
                         {href ? (
                           <a href={href} className="text-sm text-white/65 hover:text-white transition-colors font-sans whitespace-pre-line">{value}</a>
                         ) : (
@@ -183,7 +183,7 @@ export default function ContactModal({
                     <p className="text-white/45 text-sm font-sans">
                       Victoria will be in touch within 24 hours.
                     </p>
-                    <button onClick={close} className="mt-8 text-[10px] tracking-[0.25em] uppercase text-white/30 hover:text-white font-sans transition-colors">
+                    <button onClick={close} className="mt-8 text-[12px] tracking-[0.25em] uppercase text-white/30 hover:text-white font-sans transition-colors">
                       Close
                     </button>
                   </div>
@@ -216,7 +216,7 @@ export default function ContactModal({
 
                     <div className="flex items-start gap-3">
                       <input type="checkbox" required id="consent" className="mt-0.5 accent-[#C9A96E]" />
-                      <label htmlFor="consent" className="text-[10px] text-white/30 font-sans leading-relaxed">
+                      <label htmlFor="consent" className="text-[12px] text-white/30 font-sans leading-relaxed">
                         I agree to be contacted by {agentName} via call, email, and text for real estate services. Message and data rates may apply.
                       </label>
                     </div>
@@ -224,7 +224,7 @@ export default function ContactModal({
                     <button
                       type="submit"
                       disabled={isSubmitting}
-                      className="w-full py-4 bg-[#C9A96E] text-[#0A0A0A] text-[11px] tracking-[0.25em] uppercase font-medium hover:opacity-90 transition-opacity disabled:opacity-50"
+                      className="w-full py-4 bg-[#C9A96E] text-[#0A0A0A] text-[12px] tracking-[0.25em] uppercase font-medium hover:opacity-90 transition-opacity disabled:opacity-50"
                     >
                       {isSubmitting ? 'Sending…' : 'Submit'}
                     </button>

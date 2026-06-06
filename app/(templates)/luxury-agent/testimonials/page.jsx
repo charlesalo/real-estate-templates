@@ -2,7 +2,7 @@ import ParallaxBanner from '@/components/sections/ParallaxBanner'
 import CTASection from '@/components/sections/CTASection'
 
 export const metadata = {
-  title: 'Testimonials',
+  title: 'Client Testimonials & Success Stories',
   description: 'What clients say about working with Victoria Sinclair — trusted luxury real estate advisor in Beverly Hills, Bel Air, and Holmby Hills.',
 }
 
@@ -57,7 +57,7 @@ export default function TestimonialsPage() {
 
       {/* Header */}
       <ParallaxBanner src="/images/luxury-agent/xtra10.jpg" priority>
-        <p className="text-[10px] tracking-[0.5em] uppercase text-[#C9A96E] mb-4 font-sans">
+        <p className="text-[12px] tracking-[0.5em] uppercase text-[#C9A96E] mb-4 font-sans">
           Success Stories
         </p>
         <h1 className="font-heading text-5xl lg:text-6xl font-normal text-white mb-5">
@@ -87,7 +87,7 @@ export default function TestimonialsPage() {
               {/* Result tag */}
               {t.result && (
                 <div className="inline-flex">
-                  <span className="px-3 py-1 text-[9px] tracking-[0.3em] uppercase border border-[#C9A96E]/30 text-[#C9A96E] font-sans">
+                  <span className="px-3 py-1 text-[12px] tracking-[0.3em] uppercase border border-[#C9A96E]/30 text-[#C9A96E] font-sans">
                     {t.result}
                   </span>
                 </div>

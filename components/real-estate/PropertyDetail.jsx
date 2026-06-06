@@ -60,7 +60,7 @@ function Gallery({ photos = [], template }) {
       </div>
       {count > 1 && (
         <div className="flex justify-end mt-2 px-1">
-          <button onClick={() => setLightbox(0)} className={cn('text-[11px] tracking-[0.2em] uppercase transition-colors font-sans', isLuxury ? 'text-white/30 hover:text-template-accent' : 'text-template-fg/40 hover:text-template-accent')}>
+          <button onClick={() => setLightbox(0)} className={cn('text-[12px] tracking-[0.2em] uppercase transition-colors font-sans', isLuxury ? 'text-white/30 hover:text-template-accent' : 'text-template-fg/40 hover:text-template-accent')}>
             View all {count} photos →
           </button>
         </div>
@@ -100,7 +100,7 @@ function ContactSidebar({ agentName, agentBrokerage, agentPhoto, agentPhone, age
               </div>
             )}
             <div>
-              <p className="text-[#111827] text-[17px] font-bold leading-snug">{agentName ?? 'Contact Agent'}</p>
+              <p className="text-[#111827] text-[18px] font-bold leading-snug">{agentName ?? 'Contact Agent'}</p>
               {agentBrokerage && <p className="text-[#9CA3AF] text-sm mt-0.5">{agentBrokerage}</p>}
             </div>
           </div>
@@ -142,7 +142,7 @@ function ContactSidebar({ agentName, agentBrokerage, agentPhoto, agentPhone, age
     <>
       <div className="sticky top-24 border p-6 bg-[#0D0D0D] border-white/[0.08]">
         {/* Agent info */}
-        <p className="text-[9px] tracking-[0.4em] uppercase text-[#C9A96E] font-sans mb-1">Listing Agent</p>
+        <p className="text-[12px] tracking-[0.4em] uppercase text-[#C9A96E] font-sans mb-1">Listing Agent</p>
         <div className="flex items-center gap-3 mb-6 pb-6 border-b border-white/[0.08]">
           {agentPhoto && (
             <div className="relative w-12 h-12 rounded-full overflow-hidden flex-shrink-0">
@@ -155,14 +155,14 @@ function ContactSidebar({ agentName, agentBrokerage, agentPhoto, agentPhone, age
             </p>
             <div className="flex items-center gap-3 mt-1.5">
               {agentPhone && (
-                <a href={`tel:${agentPhone}`} className="flex items-center gap-1 text-[11px] text-[#C9A96E] hover:text-white transition-colors font-sans">
+                <a href={`tel:${agentPhone}`} className="flex items-center gap-1 text-[12px] text-[#C9A96E] hover:text-white transition-colors font-sans">
                   <Phone size={11} strokeWidth={1.5} />
                   {agentPhone}
                 </a>
               )}
             </div>
             {agentEmail && (
-              <a href={`mailto:${agentEmail}`} className="flex items-center gap-1 mt-1 text-[11px] text-white/35 hover:text-[#C9A96E] transition-colors font-sans truncate">
+              <a href={`mailto:${agentEmail}`} className="flex items-center gap-1 mt-1 text-[12px] text-white/35 hover:text-[#C9A96E] transition-colors font-sans truncate">
                 <Mail size={11} strokeWidth={1.5} />
                 {agentEmail}
               </a>
@@ -175,7 +175,7 @@ function ContactSidebar({ agentName, agentBrokerage, agentPhoto, agentPhone, age
           {!isSoldOrClosed && (
             <button
               onClick={() => setTourOpen(true)}
-              className="w-full py-4 bg-[#C9A96E] text-[#0A0A0A] text-[11px] tracking-[0.2em] uppercase font-semibold font-sans hover:bg-[#b8935a] transition-colors cursor-pointer"
+              className="w-full py-4 bg-[#C9A96E] text-[#0A0A0A] text-[12px] tracking-[0.2em] uppercase font-semibold font-sans hover:bg-[#b8935a] transition-colors cursor-pointer"
             >
               Request a Tour
             </button>
@@ -183,7 +183,7 @@ function ContactSidebar({ agentName, agentBrokerage, agentPhoto, agentPhone, age
           <button
             type="button"
             onClick={() => window.dispatchEvent(new CustomEvent('contact:open'))}
-            className="w-full py-3.5 border border-white/15 text-white/50 text-[11px] tracking-[0.2em] uppercase font-sans hover:border-white/40 hover:text-white transition-all cursor-pointer"
+            className="w-full py-3.5 border border-white/15 text-white/50 text-[12px] tracking-[0.2em] uppercase font-sans hover:border-white/40 hover:text-white transition-all cursor-pointer"
           >
             Contact Agent
           </button>
@@ -220,7 +220,7 @@ function DetailGrid({ items }) {
     <div className="grid grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-4">
       {filtered.map(({ label, value }) => (
         <div key={label}>
-          <p className="text-[10px] tracking-[0.2em] uppercase text-white/30 font-sans mb-1">{label}</p>
+          <p className="text-[12px] tracking-[0.2em] uppercase text-white/30 font-sans mb-1">{label}</p>
           <p className="text-sm text-white/70 font-sans">{value}</p>
         </div>
       ))}
@@ -234,7 +234,7 @@ function FeaturePills({ items }) {
   return (
     <div className="flex flex-wrap gap-2">
       {items.map(f => (
-        <span key={f} className="px-3 py-1.5 text-[11px] border border-white/[0.08] text-white/50 font-sans">
+        <span key={f} className="px-3 py-1.5 text-[12px] border border-white/[0.08] text-white/50 font-sans">
           {f}
         </span>
       ))}
@@ -313,7 +313,7 @@ export default function PropertyDetail({ listing, similarListings = [], template
                 {fullAddress}{address?.city ? `, ${address.city}` : ''}{address?.state ? `, ${address.state}` : ''} {address?.postalCode}
               </div>
               {virtualTourUrl && (
-                <a href={virtualTourUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 mt-3 text-[11px] tracking-[0.2em] uppercase text-[#C9A96E] hover:text-white transition-colors font-sans">
+                <a href={virtualTourUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 mt-3 text-[12px] tracking-[0.2em] uppercase text-[#C9A96E] hover:text-white transition-colors font-sans">
                   <ExternalLink size={12} /> Virtual Tour
                 </a>
               )}
@@ -335,7 +335,7 @@ export default function PropertyDetail({ listing, similarListings = [], template
               ].filter(s => s.value != null && s.label).map((stat, i) => (
                 <div key={i} className="text-center">
                   <div className={cn('font-heading text-xl font-normal', isLuxury ? 'text-white' : 'text-template-fg')}>{stat.value}</div>
-                  <div className={cn('text-[10px] tracking-widest uppercase mt-1 font-sans', isLuxury ? 'text-white/35' : 'text-template-fg/50')}>{stat.label}</div>
+                  <div className={cn('text-[12px] tracking-widest uppercase mt-1 font-sans', isLuxury ? 'text-white/35' : 'text-template-fg/50')}>{stat.label}</div>
                 </div>
               ))}
             </div>
@@ -370,7 +370,7 @@ export default function PropertyDetail({ listing, similarListings = [], template
               <Section title="Interior Features">
                 {additionalRooms.length > 0 && (
                   <div className="mb-4">
-                    <p className="text-[10px] tracking-[0.2em] uppercase text-white/30 font-sans mb-2">Additional Rooms</p>
+                    <p className="text-[12px] tracking-[0.2em] uppercase text-white/30 font-sans mb-2">Additional Rooms</p>
                     <FeaturePills items={additionalRooms} />
                   </div>
                 )}
@@ -394,7 +394,7 @@ export default function PropertyDetail({ listing, similarListings = [], template
                 ]} />
                 {laundryFeatures.length > 0 && (
                   <div className="mt-4">
-                    <p className="text-[10px] tracking-[0.2em] uppercase text-white/30 font-sans mb-2">Laundry</p>
+                    <p className="text-[12px] tracking-[0.2em] uppercase text-white/30 font-sans mb-2">Laundry</p>
                     <FeaturePills items={laundryFeatures} />
                   </div>
                 )}
@@ -411,7 +411,7 @@ export default function PropertyDetail({ listing, similarListings = [], template
                 ]} />
                 {geo?.directions && (
                   <div className="mt-4">
-                    <p className="text-[10px] tracking-[0.2em] uppercase text-white/30 font-sans mb-1">Directions</p>
+                    <p className="text-[12px] tracking-[0.2em] uppercase text-white/30 font-sans mb-1">Directions</p>
                     <p className="text-sm text-white/50 font-sans leading-relaxed">{geo.directions}</p>
                   </div>
                 )}
@@ -439,7 +439,7 @@ export default function PropertyDetail({ listing, similarListings = [], template
                 ]} />
                 {hoaAmenities.length > 0 && (
                   <div className="mt-4">
-                    <p className="text-[10px] tracking-[0.2em] uppercase text-white/30 font-sans mb-2">Amenities</p>
+                    <p className="text-[12px] tracking-[0.2em] uppercase text-white/30 font-sans mb-2">Amenities</p>
                     <FeaturePills items={hoaAmenities} />
                   </div>
                 )}
@@ -463,7 +463,7 @@ export default function PropertyDetail({ listing, similarListings = [], template
               ]} />
               {showingInstructions && (
                 <div className="mt-4">
-                  <p className="text-[10px] tracking-[0.2em] uppercase text-white/30 font-sans mb-1">Showing Instructions</p>
+                  <p className="text-[12px] tracking-[0.2em] uppercase text-white/30 font-sans mb-1">Showing Instructions</p>
                   <p className="text-sm text-white/50 font-sans leading-relaxed">{showingInstructions}</p>
                 </div>
               )}

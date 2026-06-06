@@ -90,7 +90,7 @@ export default function PropertyCard({
         )}
         <span
           className={cn(
-            'ml-auto text-[10px] tracking-[0.15em] uppercase transition-colors duration-200',
+            'ml-auto text-[12px] tracking-[0.15em] uppercase transition-colors duration-200',
             isLuxury
               ? 'text-template-accent/50 group-hover:text-template-accent'
               : 'text-template-accent/60 group-hover:text-template-accent',

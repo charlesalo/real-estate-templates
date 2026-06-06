@@ -3,7 +3,7 @@ import { getListings } from '@/lib/simplyrets'
 
 export const metadata = {
   title: 'Listings',
-  description: 'Browse luxury properties in Beverly Hills, Bel Air, and Holmby Hills.',
+  description: 'Browse luxury homes for sale in Beverly Hills, Bel Air, and Holmby Hills. Find exclusive and off-market properties with Victoria Sinclair.',
 }
 
 export default async function ListingsPage({ searchParams }) {

@@ -160,8 +160,8 @@ export default function HomeValuationWidget({ agentName = 'Victoria Sinclair', g
             onClick={handleGetValue}
             disabled={!selectedPlace || phase === 'loading'}
             className={isLight
-              ? 'flex-shrink-0 px-6 lg:px-8 py-[18px] bg-[#1A2D5A] text-white text-[10px] lg:text-[11px] tracking-[0.2em] uppercase font-semibold font-sans transition-colors hover:bg-[#243870] disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-[#1A2D5A]'
-              : 'flex-shrink-0 px-6 lg:px-8 py-[18px] bg-[#C9A96E] text-[#0A0A0A] text-[10px] lg:text-[11px] tracking-[0.2em] uppercase font-semibold font-sans transition-colors hover:bg-[#b8935a] disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-[#C9A96E]'
+              ? 'flex-shrink-0 px-6 lg:px-8 py-[18px] bg-[#1A2D5A] text-white text-[12px] lg:text-[12px] tracking-[0.2em] uppercase font-semibold font-sans transition-colors hover:bg-[#243870] disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-[#1A2D5A]'
+              : 'flex-shrink-0 px-6 lg:px-8 py-[18px] bg-[#C9A96E] text-[#0A0A0A] text-[12px] lg:text-[12px] tracking-[0.2em] uppercase font-semibold font-sans transition-colors hover:bg-[#b8935a] disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-[#C9A96E]'
             }
           >
             Get Free Valuation
@@ -246,7 +246,7 @@ export default function HomeValuationWidget({ agentName = 'Victoria Sinclair', g
                       </motion.div>
                     ) : (
                       <>
-                        <p className={isLight ? 'text-[10px] tracking-[0.4em] uppercase text-[#4B6090] font-sans mb-2' : 'text-[10px] tracking-[0.45em] uppercase text-[#C9A96E] font-sans mb-3'}>
+                        <p className={isLight ? 'text-[12px] tracking-[0.4em] uppercase text-[#4B6090] font-sans mb-2' : 'text-[12px] tracking-[0.45em] uppercase text-[#C9A96E] font-sans mb-3'}>
                           Free Home Valuation
                         </p>
                         <h2 className={isLight ? 'text-2xl font-bold text-[#111827] mb-2' : 'font-heading text-2xl lg:text-3xl font-normal text-white mb-2'}>
@@ -318,8 +318,8 @@ export default function HomeValuationWidget({ agentName = 'Victoria Sinclair', g
                               className={isLight ? 'mt-0.5 w-4 h-4 flex-shrink-0 accent-[#1A2D5A]' : 'mt-0.5 flex-shrink-0 accent-[#C9A96E]'}
                             />
                             <span className={isLight
-                              ? 'text-[11px] text-[#9CA3AF] font-sans leading-relaxed group-hover:text-[#6B7280] transition-colors'
-                              : 'text-[11px] text-white/30 font-sans leading-relaxed group-hover:text-white/50 transition-colors'
+                              ? 'text-[12px] text-[#9CA3AF] font-sans leading-relaxed group-hover:text-[#6B7280] transition-colors'
+                              : 'text-[12px] text-white/30 font-sans leading-relaxed group-hover:text-white/50 transition-colors'
                             }>
                               I agree to be contacted by {agentName} regarding my home valuation request.
                             </span>
@@ -331,8 +331,8 @@ export default function HomeValuationWidget({ agentName = 'Victoria Sinclair', g
                           <button
                             type="submit"
                             className={isLight
-                              ? 'w-full py-3.5 bg-[#1A2D5A] text-white text-[11px] tracking-[0.25em] uppercase font-bold rounded-lg hover:bg-[#243870] transition-colors mt-2'
-                              : 'w-full bg-[#C9A96E] text-[#0A0A0A] py-4 text-[11px] tracking-[0.2em] uppercase font-semibold font-sans hover:bg-[#b8935a] transition-colors mt-2'
+                              ? 'w-full py-3.5 bg-[#1A2D5A] text-white text-[12px] tracking-[0.25em] uppercase font-bold rounded-lg hover:bg-[#243870] transition-colors mt-2'
+                              : 'w-full bg-[#C9A96E] text-[#0A0A0A] py-4 text-[12px] tracking-[0.2em] uppercase font-semibold font-sans hover:bg-[#b8935a] transition-colors mt-2'
                             }
                           >
                             Unlock Your Free Valuation
@@ -348,7 +348,7 @@ export default function HomeValuationWidget({ agentName = 'Victoria Sinclair', g
                     : 'flex flex-col bg-[#111] border-t lg:border-t-0 lg:border-l border-white/[0.06]'
                   }>
                     <div className={isLight ? 'px-8 py-6 border-b border-[#D5DBE9]' : 'px-8 py-6 border-b border-white/[0.07]'}>
-                      <p className={isLight ? 'text-[9px] tracking-[0.4em] uppercase text-[#4B6090] font-sans mb-1' : 'text-[9px] tracking-[0.4em] uppercase text-[#C9A96E] font-sans mb-1'}>
+                      <p className={isLight ? 'text-[12px] tracking-[0.4em] uppercase text-[#4B6090] font-sans mb-1' : 'text-[12px] tracking-[0.4em] uppercase text-[#C9A96E] font-sans mb-1'}>
                         Prepared By
                       </p>
                       <p className={isLight ? 'text-lg font-bold text-[#111827]' : 'font-heading text-xl text-white'}>{agentName}</p>
@@ -373,7 +373,7 @@ export default function HomeValuationWidget({ agentName = 'Victoria Sinclair', g
                     </div>
 
                     <div className={isLight ? 'px-8 py-5 border-t border-[#D5DBE9]' : 'px-8 py-5 border-t border-white/[0.07]'}>
-                      <p className={isLight ? 'text-[9px] tracking-[0.35em] uppercase text-[#9CA3AF] font-sans mb-1.5' : 'text-[9px] tracking-[0.35em] uppercase text-white/20 font-sans mb-1.5'}>
+                      <p className={isLight ? 'text-[12px] tracking-[0.35em] uppercase text-[#9CA3AF] font-sans mb-1.5' : 'text-[12px] tracking-[0.35em] uppercase text-white/20 font-sans mb-1.5'}>
                         Property Address
                       </p>
                       <p className={isLight ? 'text-[#4B5563] text-sm font-sans leading-snug' : 'text-white/55 text-sm font-sans leading-snug'}>

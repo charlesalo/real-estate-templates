@@ -228,7 +228,7 @@ export default function HeroSearchFocused({
                       </button>
 
                       <div className="px-5 pt-4 pb-3">
-                        <p className="text-[10px] font-semibold tracking-[0.25em] uppercase text-[#9CA3AF] mb-3 font-sans">
+                        <p className="text-[12px] font-semibold tracking-[0.25em] uppercase text-[#9CA3AF] mb-3 font-sans">
                           Popular Areas
                         </p>
                         <div className="flex flex-col">

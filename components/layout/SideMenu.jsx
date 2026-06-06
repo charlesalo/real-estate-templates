@@ -133,14 +133,14 @@ export default function SideMenu({ open, onClose, agentName, links = [], phone, 
             <div className="flex items-center justify-between px-8 py-7 border-b border-white/[0.07] flex-shrink-0">
               <div>
                 <div className="font-heading text-lg text-white leading-none">{agentName}</div>
-                <div className="text-[9px] tracking-[0.35em] uppercase text-[#C9A96E] font-sans mt-1">Real Estate</div>
+                <div className="text-[12px] tracking-[0.35em] uppercase text-[#C9A96E] font-sans mt-1">Real Estate</div>
               </div>
               <button
                 onClick={onClose}
                 className="flex items-center gap-2 text-white/30 hover:text-white transition-colors group"
                 aria-label="Close menu"
               >
-                <span className="text-[9px] tracking-[0.25em] uppercase font-sans group-hover:text-white/60">Close</span>
+                <span className="text-[12px] tracking-[0.25em] uppercase font-sans group-hover:text-white/60">Close</span>
                 <X size={18} strokeWidth={1.5} />
               </button>
             </div>
@@ -183,7 +183,7 @@ export default function SideMenu({ open, onClose, agentName, links = [], phone, 
                     </a>
                   ))}
                 </div>
-                <p className="text-[10px] text-white/20 font-sans">© {new Date().getFullYear()} {agentName}</p>
+                <p className="text-[12px] text-white/20 font-sans">© {new Date().getFullYear()} {agentName}</p>
               </div>
             </div>
           </motion.div>

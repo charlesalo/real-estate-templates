@@ -4,6 +4,7 @@ import { ArrowRight, Bed, Bath, Square } from 'lucide-react'
 import DualSearchWidget from './DualSearchWidget'
 import NeighborhoodMapClient from './NeighborhoodMapClient'
 import MarketReportForm from './MarketReportForm'
+import marquee from './press-marquee.module.css'
 import {
   AGENT,
   HERO_STATS,
@@ -20,6 +21,16 @@ function formatPrice(n) {
   if (n >= 1_000_000) return `$${(n / 1_000_000).toFixed(n % 1_000_000 === 0 ? 0 : 2)}M`
   return `$${n.toLocaleString()}`
 }
+
+const PRESS = [
+  'The New York Times',
+  'Curbed NY',
+  'Architectural Digest',
+  'Dwell',
+  'Brick Underground',
+  'Time Out New York',
+  'REBNY Member',
+]
 
 // ── Homepage ──────────────────────────────────────────────────────────────────
 
@@ -44,7 +55,7 @@ export default function LocalExpertHome() {
             <div>
               {/* Masthead label */}
               <div className="flex items-center gap-4 mb-6">
-                <span className="text-[9px] tracking-[0.45em] uppercase text-[#BA5B3E] font-medium whitespace-nowrap">
+                <span className="text-[12px] tracking-[0.45em] uppercase text-[#BA5B3E] font-medium whitespace-nowrap">
                   Vol. XIV · Autumn Edition
                 </span>
                 <div className="h-px flex-1 bg-[#BEB7A9]" />
@@ -52,7 +63,7 @@ export default function LocalExpertHome() {
 
               {/* Headline */}
               <h1
-                className="text-[52px] lg:text-[66px] font-normal leading-[1.06] tracking-tight text-[#24180F] mb-6"
+                className="text-[56px] lg:text-[70px] font-normal leading-[1.06] tracking-tight text-[#24180F] mb-6"
                 style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}
               >
                 Living in,<br />
@@ -62,7 +73,7 @@ export default function LocalExpertHome() {
               </h1>
 
               {/* Subheadline */}
-              <p className="text-[17px] text-[#2C1E11]/60 leading-relaxed mb-8">
+              <p className="text-[18px] text-[#2C1E11]/60 leading-relaxed mb-8">
                 Your master guide to the neighborhoods, culture, and homes of New York —
                 curated, walked, and written by a local broker who has called this city
                 home for fourteen years.
@@ -76,12 +87,12 @@ export default function LocalExpertHome() {
                 {HERO_STATS.map((stat) => (
                   <div key={stat.label}>
                     <div
-                      className="text-[22px] font-bold text-[#24180F] leading-none"
+                      className="text-[24px] font-bold text-[#24180F] leading-none"
                       style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}
                     >
                       {stat.value}
                     </div>
-                    <div className="text-[10px] text-[#2C1E11]/40 uppercase tracking-wider mt-1">
+                    <div className="text-[12px] text-[#2C1E11]/40 uppercase tracking-wider mt-1">
                       {stat.label}
                     </div>
                   </div>
@@ -102,8 +113,8 @@ export default function LocalExpertHome() {
 
                 {/* Credential badge — top left */}
                 <div className="absolute top-5 left-5 bg-white/95 backdrop-blur-sm rounded-xl px-4 py-3 shadow-sm">
-                  <p className="text-[8px] tracking-[0.3em] uppercase text-[#24180F]/40 mb-0.5">Licensed Broker</p>
-                  <p className="text-[13px] font-normal text-[#24180F]" style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}>
+                  <p className="text-[9px] tracking-[0.3em] uppercase text-[#24180F]/40 mb-0.5">Licensed Broker</p>
+                  <p className="text-[14px] font-normal text-[#24180F]" style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}>
                     NY DOS #{AGENT.license.replace('NY Lic# ', '')}
                   </p>
                 </div>
@@ -111,12 +122,12 @@ export default function LocalExpertHome() {
                 {/* Quote overlay — bottom */}
                 <div className="absolute bottom-0 left-0 right-0 px-6 py-6 bg-gradient-to-t from-[#1F3A29]/90 via-[#1F3A29]/40 to-transparent">
                   <p
-                    className="text-[15px] italic text-white/90 leading-snug mb-2"
+                    className="text-[16px] italic text-white/90 leading-snug mb-2"
                     style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}
                   >
                     &ldquo;Perry Street, just past Bleecker — the loveliest block I show all year.&rdquo;
                   </p>
-                  <p className="text-[8px] tracking-[0.3em] uppercase text-white/40">Field Note · West Village</p>
+                  <p className="text-[9px] tracking-[0.3em] uppercase text-white/40">Field Note · West Village</p>
                 </div>
               </div>
             </div>
@@ -125,29 +136,45 @@ export default function LocalExpertHome() {
 
       </section>
 
+      {/* ─── FAIR HOUSING ────────────────────────────────────────────── */}
+      <div style={{ backgroundColor: '#F8F3EB', borderTop: '1px solid #E5E0D8' }}>
+        <div className="max-w-7xl mx-auto px-5 lg:px-8 py-3 flex items-center justify-center">
+          <a
+            href="https://www.dos.ny.gov/licensing/docs/FairHousingNotice_new.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group flex items-center gap-2 text-[12px] text-[#2C1E11]/45 hover:text-[#2C1E11]/70 transition-colors text-center"
+          >
+            Every showing, every block, every borough — Nadia upholds the principles of all applicable{' '}
+            <span className="text-[11px] tracking-[0.32em] uppercase font-semibold text-[#2C1E11]/60 group-hover:text-[#2C1E11] transition-colors">
+              Fair Housing Laws.
+            </span>
+            <ArrowRight size={11} className="opacity-40 group-hover:opacity-70 transition-opacity flex-shrink-0" />
+          </a>
+        </div>
+      </div>
+
       {/* ─── AS FEATURED IN ──────────────────────────────────────────── */}
       <section style={{ backgroundColor: '#F3EDE3' }}>
-        <div className="max-w-7xl mx-auto px-5 lg:px-8 py-[24px] lg:py-[32px]">
-          <div className="flex flex-wrap lg:flex-nowrap items-center justify-center gap-x-6 gap-y-2">
-            <span className="text-[9px] tracking-[0.4em] uppercase text-[#BA5B3E] whitespace-nowrap">
+        <div className="max-w-7xl mx-auto px-5 lg:px-8 py-[20px] lg:py-[26px]">
+          <div className="flex flex-col lg:flex-row lg:items-center gap-3 lg:gap-7">
+            <span className="text-[12px] tracking-[0.4em] uppercase text-[#BA5B3E] whitespace-nowrap text-center lg:text-left lg:shrink-0">
               As featured in —
             </span>
-            {[
-              'The New York Times',
-              'Curbed NY',
-              'Architectural Digest',
-              'Dwell',
-              'Brick Underground',
-              'Time Out New York',
-              'REBNY Member',
-            ].map((pub) => (
-              <span
-                key={pub}
-                className="text-[9px] tracking-[0.28em] uppercase font-medium text-[#24180F]/55 whitespace-nowrap"
-              >
-                {pub}
-              </span>
-            ))}
+            {/* Seamless logo marquee — two copies of PRESS scroll as one loop */}
+            <div className={marquee.viewport}>
+              <div className={marquee.track}>
+                {[...PRESS, ...PRESS].map((pub, i) => (
+                  <span
+                    key={i}
+                    aria-hidden={i >= PRESS.length || undefined}
+                    className={`${marquee.item} text-[12px] tracking-[0.28em] uppercase font-medium text-[#24180F]/55 whitespace-nowrap`}
+                  >
+                    {pub}
+                  </span>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -158,25 +185,25 @@ export default function LocalExpertHome() {
 
           {/* Chapter label */}
           <div className="flex items-center gap-3 mb-3">
-            <span className="text-[9px] tracking-[0.4em] uppercase text-[#BA5B3E]">Chapter One</span>
+            <span className="text-[12px] tracking-[0.4em] uppercase text-[#BA5B3E]">Chapter One</span>
           </div>
 
           <div className="flex items-end justify-between gap-4 mb-3">
             <h2
-              className="text-[32px] lg:text-[42px] font-normal text-[#24180F] leading-tight"
+              className="text-[34px] lg:text-[45px] font-normal text-[#24180F] leading-tight"
               style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}
             >
               The Neighborhood Grid
             </h2>
             <Link
               href="/local-expert/neighborhoods"
-              className="hidden md:flex items-center gap-1.5 text-[12px] font-semibold text-[#2C1E11]/50 hover:text-[#2C1E11] transition-colors whitespace-nowrap"
+              className="hidden md:flex items-center gap-1.5 text-[13px] font-semibold text-[#2C1E11]/50 hover:text-[#2C1E11] transition-colors whitespace-nowrap"
             >
               View All Neighborhoods <ArrowRight size={13} />
             </Link>
           </div>
 
-          <p className="text-[15px] text-[#2C1E11]/50 max-w-xl mb-10">
+          <p className="text-[16px] text-[#2C1E11]/50 max-w-xl mb-10">
             Have a block in mind or look at the map. Click it for the market, the schools, the corner
             bakery — the things Zillow won&apos;t tell you.
           </p>
@@ -185,7 +212,7 @@ export default function LocalExpertHome() {
 
           <Link
             href="/local-expert/neighborhoods"
-            className="flex md:hidden items-center gap-1.5 text-[12px] font-semibold text-[#2C1E11]/50 hover:text-[#2C1E11] transition-colors mt-6"
+            className="flex md:hidden items-center gap-1.5 text-[13px] font-semibold text-[#2C1E11]/50 hover:text-[#2C1E11] transition-colors mt-6"
           >
             View All Neighborhoods <ArrowRight size={13} />
           </Link>
@@ -200,21 +227,21 @@ export default function LocalExpertHome() {
 
             {/* Sticky label column */}
             <div className="lg:pt-1">
-              <span className="text-[9px] tracking-[0.4em] uppercase text-[#BA5B3E]">Chapter Two</span>
+              <span className="text-[12px] tracking-[0.4em] uppercase text-[#BA5B3E]">Chapter Two</span>
               <h2
-                className="text-[32px] lg:text-[42px] font-normal text-[#24180F] leading-tight mt-2"
+                className="text-[34px] lg:text-[45px] font-normal text-[#24180F] leading-tight mt-2"
                 style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}
               >
                 Nadia&apos;s Field Notes
               </h2>
-              <p className="text-[15px] text-[#2C1E11]/50 leading-relaxed mt-4">
+              <p className="text-[16px] text-[#2C1E11]/50 leading-relaxed mt-4">
                 Forty-four notebooks. Fourteen years. The cafes, parks, bookstores, and quiet bars
                 that make a New York address feel like home. None of this is sponsored. All of it
                 is walked.
               </p>
               <Link
                 href="/local-expert/field-notes"
-                className="inline-flex items-center gap-1.5 mt-5 text-[12px] font-semibold text-[#2C1E11] hover:opacity-60 transition-opacity"
+                className="inline-flex items-center gap-1.5 mt-5 text-[13px] font-semibold text-[#2C1E11] hover:opacity-60 transition-opacity"
               >
                 Browse all notes <ArrowRight size={13} />
               </Link>
@@ -253,9 +280,9 @@ export default function LocalExpertHome() {
 
           <div className="flex items-end justify-between gap-4 mb-2">
             <div>
-              <span className="text-[9px] tracking-[0.4em] uppercase text-[#BA5B3E]">Chapter Three</span>
+              <span className="text-[12px] tracking-[0.4em] uppercase text-[#BA5B3E]">Chapter Three</span>
               <h2
-                className="text-[32px] lg:text-[42px] font-normal text-[#24180F] leading-tight mt-2"
+                className="text-[34px] lg:text-[45px] font-normal text-[#24180F] leading-tight mt-2"
                 style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}
               >
                 Curated Local Homes
@@ -263,13 +290,13 @@ export default function LocalExpertHome() {
             </div>
             <Link
               href="/local-expert/listings"
-              className="hidden md:flex items-center gap-1.5 text-[12px] font-semibold text-[#2C1E11]/50 hover:text-[#2C1E11] transition-colors whitespace-nowrap"
+              className="hidden md:flex items-center gap-1.5 text-[13px] font-semibold text-[#2C1E11]/50 hover:text-[#2C1E11] transition-colors whitespace-nowrap"
             >
               View all 37 active listings <ArrowRight size={13} />
             </Link>
           </div>
 
-          <p className="text-[14px] text-[#2C1E11]/40 mb-10 max-w-lg">
+          <p className="text-[15px] text-[#2C1E11]/40 mb-10 max-w-lg">
             Homes in neighborhoods I know block by block. Not just listed here — actually considered.
           </p>
 
@@ -280,7 +307,7 @@ export default function LocalExpertHome() {
           </div>
 
           {/* Compliance footer */}
-          <p className="text-[10px] text-[#2C1E11]/30 mt-8 leading-relaxed">
+          <p className="text-[12px] text-[#2C1E11]/30 mt-8 leading-relaxed">
             All listing information is deemed reliable but not guaranteed and should be independently reviewed
             and verified. All properties are subject to prior sale or withdrawal. Equal Housing Opportunity.
             Compass is a licensed real estate broker. NY Lic# 109802832.
@@ -288,7 +315,7 @@ export default function LocalExpertHome() {
 
           <Link
             href="/local-expert/listings"
-            className="flex md:hidden items-center gap-1.5 text-[12px] font-semibold text-[#2C1E11]/50 hover:text-[#2C1E11] transition-colors mt-6"
+            className="flex md:hidden items-center gap-1.5 text-[13px] font-semibold text-[#2C1E11]/50 hover:text-[#2C1E11] transition-colors mt-6"
           >
             View all 37 active listings <ArrowRight size={13} />
           </Link>
@@ -313,17 +340,17 @@ export default function LocalExpertHome() {
                   className="object-cover"
                 />
               </div>
-              <p className="text-[11px] tracking-[0.28em] uppercase text-[#2C1E11]/50 mt-4 leading-relaxed">
+              <p className="text-[12px] tracking-[0.28em] uppercase text-[#2C1E11]/50 mt-4 leading-relaxed">
                 {AGENT.name} · Licensed Associate Real Estate Broker
               </p>
             </div>
 
             {/* Bio content */}
             <div className="lg:pt-2">
-              <p className="text-[9px] tracking-[0.4em] uppercase text-[#BA5B3E] mb-5">A Note from the Broker</p>
+              <p className="text-[12px] tracking-[0.4em] uppercase text-[#BA5B3E] mb-5">A Note from the Broker</p>
 
               <h2
-                className="text-[40px] lg:text-[52px] font-normal text-[#24180F] leading-[1.08] mb-8"
+                className="text-[43px] lg:text-[56px] font-normal text-[#24180F] leading-[1.08] mb-8"
                 style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}
               >
                 I don&apos;t sell apartments.<br />
@@ -332,7 +359,7 @@ export default function LocalExpertHome() {
 
               <div className="space-y-5 mb-8">
                 {AGENT.bio.map((para, i) => (
-                  <p key={i} className="text-[15px] text-[#2C1E11]/60 leading-relaxed">
+                  <p key={i} className="text-[16px] text-[#2C1E11]/60 leading-relaxed">
                     {para}
                   </p>
                 ))}
@@ -341,13 +368,13 @@ export default function LocalExpertHome() {
               <div className="flex flex-wrap items-center gap-3">
                 <Link
                   href="/local-expert/contact"
-                  className="px-6 py-3 text-[13px] font-bold rounded-full bg-[#1B3B2B] text-[#F8F3EB] hover:bg-[#2a5540] transition-colors min-w-[170px] text-center"
+                  className="px-6 py-3 text-[14px] font-bold rounded-full bg-[#1B3B2B] text-[#F8F3EB] hover:bg-[#2a5540] transition-colors min-w-[170px] text-center"
                 >
                   Book a 20-minute call
                 </Link>
                 <Link
                   href="/local-expert/field-notes"
-                  className="px-6 py-3 text-[13px] font-bold rounded-full border border-[#1B3B2B]/30 text-[#1B3B2B]/70 bg-transparent hover:border-[#1B3B2B]/60 hover:text-[#1B3B2B] transition-all min-w-[170px] text-center"
+                  className="px-6 py-3 text-[14px] font-bold rounded-full border border-[#1B3B2B]/30 text-[#1B3B2B]/70 bg-transparent hover:border-[#1B3B2B]/60 hover:text-[#1B3B2B] transition-all min-w-[170px] text-center"
                 >
                   Read my story
                 </Link>
@@ -356,13 +383,13 @@ export default function LocalExpertHome() {
               {/* Testimonial — left-bordered blockquote */}
               <blockquote className="mt-12 pl-6 border-l-2 border-[#BA5B3E]">
                 <p
-                  className="text-[18px] italic text-[#24180F]/70 leading-relaxed mb-4"
+                  className="text-[19px] italic text-[#24180F]/70 leading-relaxed mb-4"
                   style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}
                 >
                   &ldquo;{TESTIMONIAL.quote}&rdquo;
                 </p>
                 <footer>
-                  <p className="text-[9px] tracking-[0.3em] uppercase text-[#2C1E11]/40">
+                  <p className="text-[12px] tracking-[0.3em] uppercase text-[#2C1E11]/40">
                     — {TESTIMONIAL.author}, {TESTIMONIAL.location}
                   </p>
                 </footer>
@@ -377,9 +404,9 @@ export default function LocalExpertHome() {
         <div className="max-w-7xl mx-auto px-5 lg:px-8">
           <div className="flex items-end justify-between gap-4 mb-10">
             <div>
-              <span className="text-[9px] tracking-[0.4em] uppercase text-[#BA5B3E]">From the Journal</span>
+              <span className="text-[12px] tracking-[0.4em] uppercase text-[#BA5B3E]">From the Journal</span>
               <h2
-                className="text-[32px] lg:text-[42px] font-normal text-[#24180F] mt-1"
+                className="text-[34px] lg:text-[45px] font-normal text-[#24180F] mt-1"
                 style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}
               >
                 Recent Writing
@@ -387,7 +414,7 @@ export default function LocalExpertHome() {
             </div>
             <Link
               href="/local-expert/blog"
-              className="text-[12px] font-semibold text-[#2C1E11]/40 hover:text-[#2C1E11] transition-colors"
+              className="text-[13px] font-semibold text-[#2C1E11]/40 hover:text-[#2C1E11] transition-colors"
             >
               All articles →
             </Link>
@@ -405,17 +432,17 @@ export default function LocalExpertHome() {
                       className="object-cover transition-transform duration-500 group-hover:scale-105"
                     />
                   </div>
-                  <p className="text-[9px] tracking-[0.3em] uppercase text-[#BA5B3E] mb-1">{post.category}</p>
+                  <p className="text-[12px] tracking-[0.3em] uppercase text-[#BA5B3E] mb-1">{post.category}</p>
                   <h3
-                    className="text-[18px] font-normal text-[#24180F] leading-snug group-hover:opacity-60 transition-opacity"
+                    className="text-[19px] font-normal text-[#24180F] leading-snug group-hover:opacity-60 transition-opacity"
                     style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}
                   >
                     {post.title}
                   </h3>
-                  <p className="text-[12px] text-[#2C1E11]/50 mt-2 leading-relaxed line-clamp-2">
+                  <p className="text-[13px] text-[#2C1E11]/50 mt-2 leading-relaxed line-clamp-2">
                     {post.excerpt}
                   </p>
-                  <p className="text-[10px] text-[#2C1E11]/40 mt-3">{post.readMinutes} min read</p>
+                  <p className="text-[12px] text-[#2C1E11]/40 mt-3">{post.readMinutes} min read</p>
                 </Link>
               </article>
             ))}
@@ -433,24 +460,24 @@ export default function LocalExpertHome() {
           className="object-cover object-center"
         />
         {/* Dark green overlay */}
-        <div className="absolute inset-0" style={{ backgroundColor: 'rgba(27,59,43,0.68)' }} />
+        <div className="absolute inset-0" style={{ backgroundColor: 'rgba(0,0,0,0.38)' }} />
 
         {/* Content */}
         <div className="relative max-w-3xl mx-auto px-5 lg:px-8 text-center">
-          <p className="text-[9px] tracking-[0.4em] uppercase text-[#F8F3EB] mb-4">Let&apos;s Work Together</p>
+          <p className="text-[12px] tracking-[0.4em] uppercase text-white mb-4">Let&apos;s Work Together</p>
           <h2
-            className="text-[36px] lg:text-[52px] font-normal text-[#F8F3EB] leading-tight mb-5"
+            className="text-[38px] lg:text-[56px] font-normal text-[#F8F3EB] leading-tight mb-5"
             style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}
           >
             The right home is a feeling.<br />I know how to find it.
           </h2>
-          <p className="text-[15px] text-[#F8F3EB]/60 mb-8 max-w-md mx-auto leading-relaxed">
+          <p className="text-[16px] text-white/80 mb-8 max-w-md mx-auto leading-relaxed">
             Not sure where to start? Tell me what you&apos;re looking for — or what you&apos;re running from.
             I know this city. I&apos;ll help.
           </p>
           <Link
             href="/local-expert/contact"
-            className="inline-flex items-center px-8 py-3.5 text-[13px] font-bold rounded-full bg-[#F8F3EB] text-[#1B3B2B] hover:bg-white transition-colors"
+            className="inline-flex items-center px-8 py-3.5 text-[14px] font-bold rounded-full bg-[#F8F3EB] text-[#1B3B2B] hover:bg-white transition-colors"
           >
             Start the conversation
           </Link>
@@ -476,11 +503,11 @@ function NoteCard({ note, aspectRatio, className = '' }) {
       />
       <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
       <div className="absolute bottom-0 left-0 right-0 p-4">
-        <div className="text-[8px] tracking-[0.3em] uppercase text-white/50 mb-1">{note.category}</div>
-        <p className="text-[13px] font-bold text-white leading-snug" style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}>
+        <div className="text-[9px] tracking-[0.3em] uppercase text-white/50 mb-1">{note.category}</div>
+        <p className="text-[14px] font-bold text-white leading-snug" style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}>
           {note.name}
         </p>
-        <p className="text-[10px] text-white/60 mt-0.5">{note.location}</p>
+        <p className="text-[12px] text-white/60 mt-0.5">{note.location}</p>
       </div>
     </article>
   )
@@ -501,7 +528,7 @@ function ListingCard({ listing }) {
             className="object-cover transition-transform duration-500 group-hover:scale-105"
           />
           <div className="absolute top-3 left-3">
-            <span className="text-[9px] font-semibold uppercase tracking-wider px-2.5 py-1 rounded-full bg-white/90 text-[#2C1E11]">
+            <span className="text-[12px] font-semibold uppercase tracking-wider px-2.5 py-1 rounded-full bg-white/90 text-[#2C1E11]">
               {listing.type}
             </span>
           </div>
@@ -510,28 +537,28 @@ function ListingCard({ listing }) {
         {/* Content */}
         <div className="p-4">
           <div
-            className="text-[22px] font-normal text-[#24180F] leading-none mb-1"
+            className="text-[24px] font-normal text-[#24180F] leading-none mb-1"
             style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}
           >
             {formatPrice(listing.price)}
           </div>
-          <p className="text-[13px] font-semibold text-[#2C1E11]">{listing.address}</p>
-          <p className="text-[11px] text-[#2C1E11]/45 mt-0.5">{listing.neighborhood}, {listing.city}</p>
+          <p className="text-[14px] font-semibold text-[#2C1E11]">{listing.address}</p>
+          <p className="text-[12px] text-[#2C1E11]/45 mt-0.5">{listing.neighborhood}, {listing.city}</p>
 
           <div className="flex items-center gap-4 mt-3 pt-3 border-t border-[#E5E0D8]">
-            <span className="flex items-center gap-1 text-[11px] text-[#2C1E11]/50">
+            <span className="flex items-center gap-1 text-[12px] text-[#2C1E11]/50">
               <Bed size={12} /> {listing.beds} bd
             </span>
-            <span className="flex items-center gap-1 text-[11px] text-[#2C1E11]/50">
+            <span className="flex items-center gap-1 text-[12px] text-[#2C1E11]/50">
               <Bath size={12} /> {listing.baths} ba
             </span>
-            <span className="flex items-center gap-1 text-[11px] text-[#2C1E11]/50">
+            <span className="flex items-center gap-1 text-[12px] text-[#2C1E11]/50">
               <Square size={12} /> {listing.sqft.toLocaleString()} sf
             </span>
           </div>
 
           {/* NY Compliance */}
-          <p className="text-[9px] text-[#2C1E11]/25 mt-2.5 leading-snug">
+          <p className="text-[12px] text-[#2C1E11]/25 mt-2.5 leading-snug">
             Listing Provided Courtesy of {listing.listingBrokerage} · {listing.mlsId}
           </p>
         </div>

@@ -99,7 +99,7 @@ function SoldCard({ listing, template, index }) {
 
           {/* Sold badge */}
           <div className="absolute top-4 left-4">
-            <span className="inline-block px-2.5 py-1 text-[9px] tracking-[0.25em] uppercase font-semibold bg-[#C9A96E]/55 text-[#0A0A0A] backdrop-blur-sm">
+            <span className="inline-block px-2.5 py-1 text-[12px] tracking-[0.25em] uppercase font-semibold bg-[#C9A96E]/55 text-[#0A0A0A] backdrop-blur-sm">
               Sold
             </span>
           </div>
@@ -120,7 +120,7 @@ function SoldCard({ listing, template, index }) {
           {listing.beds  != null && <span className="flex items-center gap-1.5"><Bed      size={11} strokeWidth={1.5} />{listing.beds} Beds</span>}
           {listing.baths != null && <span className="flex items-center gap-1.5"><Bath     size={11} strokeWidth={1.5} />{listing.baths} Baths</span>}
           {listing.sqft  != null && <span className="flex items-center gap-1.5"><Maximize2 size={11} strokeWidth={1.5} />{listing.sqft.toLocaleString()} sqft</span>}
-          <span className="ml-auto text-[10px] tracking-[0.15em] uppercase text-[#C9A96E]/50 group-hover:text-[#C9A96E] transition-colors">
+          <span className="ml-auto text-[12px] tracking-[0.15em] uppercase text-[#C9A96E]/50 group-hover:text-[#C9A96E] transition-colors">
             View →
           </span>
         </div>
@@ -216,7 +216,7 @@ export default function PastTransactionsClient({
 
       {/* ── Page header ───────────────────────────────────────── */}
       <ParallaxBanner src="/images/luxury-agent/xtra9.jpg" priority>
-        <p className="text-[10px] tracking-[0.5em] uppercase text-[#C9A96E] mb-4 font-sans">
+        <p className="text-[12px] tracking-[0.5em] uppercase text-[#C9A96E] mb-4 font-sans">
           Proven Track Record
         </p>
         <h1 className="font-heading text-5xl lg:text-6xl font-normal text-white mb-5">
@@ -242,7 +242,7 @@ export default function PastTransactionsClient({
             ].map((s, i) => (
               <div key={i} className={cn('text-center', i > 0 && 'border-l border-white/[0.07]')}>
                 <p className="font-heading text-3xl lg:text-5xl text-white mb-2">{s.value}</p>
-                <p className="text-[10px] tracking-[0.25em] uppercase text-[#C9A96E] font-sans">{s.label}</p>
+                <p className="text-[12px] tracking-[0.25em] uppercase text-[#C9A96E] font-sans">{s.label}</p>
               </div>
             ))}
           </div>
@@ -316,13 +316,13 @@ export default function PastTransactionsClient({
               className="md:hidden flex items-center gap-1.5 px-4 py-3 text-white/50 hover:text-white border-r border-white/10 transition-colors"
             >
               <SlidersHorizontal size={14} />
-              <span className="text-[11px] tracking-[0.1em] uppercase font-sans">Filters</span>
+              <span className="text-[12px] tracking-[0.1em] uppercase font-sans">Filters</span>
             </button>
 
             {/* Search button */}
             <button
               onClick={() => apply(filters)}
-              className="px-5 py-3 text-[11px] tracking-[0.15em] uppercase font-medium bg-[#C9A96E] text-[#0A0A0A] hover:opacity-90 transition-opacity ml-auto"
+              className="px-5 py-3 text-[12px] tracking-[0.15em] uppercase font-medium bg-[#C9A96E] text-[#0A0A0A] hover:opacity-90 transition-opacity ml-auto"
             >
               Search
             </button>
@@ -355,7 +355,7 @@ export default function PastTransactionsClient({
           {(filters.q || filters.type || filters.minprice || filters.maxprice) && (
             <button
               onClick={() => apply({ q: '', type: '', minprice: '', maxprice: '', sort: filters.sort })}
-              className="text-[11px] text-white/30 hover:text-white font-sans flex items-center gap-1 transition-colors"
+              className="text-[12px] text-white/30 hover:text-white font-sans flex items-center gap-1 transition-colors"
             >
               <X size={11} /> Clear filters
             </button>
@@ -374,7 +374,7 @@ export default function PastTransactionsClient({
             <p className="text-white/40 text-sm mb-8 font-sans">Try adjusting your filters.</p>
             <button
               onClick={() => apply({ q: '', type: '', minprice: '', maxprice: '', sort: '-listdate' })}
-              className="px-8 py-3 text-[11px] tracking-[0.2em] uppercase border border-[#C9A96E] text-[#C9A96E] hover:bg-[#C9A96E] hover:text-[#0A0A0A] transition-all"
+              className="px-8 py-3 text-[12px] tracking-[0.2em] uppercase border border-[#C9A96E] text-[#C9A96E] hover:bg-[#C9A96E] hover:text-[#0A0A0A] transition-all"
             >
               Clear Filters
             </button>
@@ -430,7 +430,7 @@ export default function PastTransactionsClient({
       <div className="max-w-7xl mx-auto px-6 lg:px-8 pb-20 lg:pb-28">
         <div className="border border-white/[0.07] bg-[#0D0D0D] px-8 py-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
           <div>
-            <p className="text-[10px] tracking-[0.4em] uppercase text-[#C9A96E] mb-2 font-sans">
+            <p className="text-[12px] tracking-[0.4em] uppercase text-[#C9A96E] mb-2 font-sans">
               Curious About Your Property?
             </p>
             <h2 className="font-heading text-2xl lg:text-3xl text-white font-normal">
@@ -442,7 +442,7 @@ export default function PastTransactionsClient({
           </div>
           <Link
             href={`/${template}/home-valuation`}
-            className="flex-shrink-0 flex items-center gap-2 px-7 py-3.5 text-[11px] tracking-[0.2em] uppercase border border-white/25 text-white/70 hover:border-white hover:text-white transition-all font-sans"
+            className="flex-shrink-0 flex items-center gap-2 px-7 py-3.5 text-[12px] tracking-[0.2em] uppercase border border-white/25 text-white/70 hover:border-white hover:text-white transition-all font-sans"
           >
             Get a Free Valuation <ChevronRight size={14} />
           </Link>

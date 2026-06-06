@@ -28,11 +28,11 @@ export default function PropertyContactForm({ listing, agent }) {
           <Image src={agent.photo} alt={agent.name} fill className="object-cover" />
         </div>
         <div>
-          <p className="text-[14px] font-bold text-[#24180F]" style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}>
+          <p className="text-[15px] font-bold text-[#24180F]" style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}>
             {agent.name}
           </p>
-          <p className="text-[10px] text-[#24180F]/40">{agent.brokerage}</p>
-          <a href={`tel:${agent.phone}`} className="flex items-center gap-1 text-[11px] text-[#2C1E11]/50 hover:text-[#2C1E11] transition-colors mt-0.5">
+          <p className="text-[12px] text-[#24180F]/40">{agent.brokerage}</p>
+          <a href={`tel:${agent.phone}`} className="flex items-center gap-1 text-[12px] text-[#2C1E11]/50 hover:text-[#2C1E11] transition-colors mt-0.5">
             <Phone size={10} /> {agent.phone}
           </a>
         </div>
@@ -43,14 +43,14 @@ export default function PropertyContactForm({ listing, agent }) {
         {sent ? (
           <div className="flex flex-col items-center gap-3 py-8 text-center">
             <CheckCircle size={32} className="text-[#8B9E8B]" />
-            <p className="text-[14px] font-bold text-[#24180F]" style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}>
+            <p className="text-[15px] font-bold text-[#24180F]" style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}>
               I&apos;ll be in touch soon.
             </p>
-            <p className="text-[12px] text-[#24180F]/45">Usually within a few hours.</p>
+            <p className="text-[13px] text-[#24180F]/45">Usually within a few hours.</p>
           </div>
         ) : (
           <form onSubmit={handleSubmit} className="space-y-3">
-            <p className="text-[13px] font-semibold text-[#2C1E11] mb-4">
+            <p className="text-[14px] font-semibold text-[#2C1E11] mb-4">
               Interested in this property?
             </p>
             <input
@@ -59,7 +59,7 @@ export default function PropertyContactForm({ listing, agent }) {
               value={form.name}
               onChange={handleChange}
               placeholder="Your name *"
-              className="w-full px-3 py-2.5 text-[12px] border border-[#E5E0D8] rounded-lg text-[#2C1E11] placeholder-[#2C1E11]/30 focus:outline-none focus:border-[#1B3B2B]/30 transition-colors"
+              className="w-full px-3 py-2.5 text-[13px] border border-[#E5E0D8] rounded-lg text-[#2C1E11] placeholder-[#2C1E11]/30 focus:outline-none focus:border-[#1B3B2B]/30 transition-colors"
             />
             <input
               name="email"
@@ -68,7 +68,7 @@ export default function PropertyContactForm({ listing, agent }) {
               value={form.email}
               onChange={handleChange}
               placeholder="Email *"
-              className="w-full px-3 py-2.5 text-[12px] border border-[#E5E0D8] rounded-lg text-[#2C1E11] placeholder-[#2C1E11]/30 focus:outline-none focus:border-[#1B3B2B]/30 transition-colors"
+              className="w-full px-3 py-2.5 text-[13px] border border-[#E5E0D8] rounded-lg text-[#2C1E11] placeholder-[#2C1E11]/30 focus:outline-none focus:border-[#1B3B2B]/30 transition-colors"
             />
             <input
               name="phone"
@@ -76,7 +76,7 @@ export default function PropertyContactForm({ listing, agent }) {
               value={form.phone}
               onChange={handleChange}
               placeholder="Phone"
-              className="w-full px-3 py-2.5 text-[12px] border border-[#E5E0D8] rounded-lg text-[#2C1E11] placeholder-[#2C1E11]/30 focus:outline-none focus:border-[#1B3B2B]/30 transition-colors"
+              className="w-full px-3 py-2.5 text-[13px] border border-[#E5E0D8] rounded-lg text-[#2C1E11] placeholder-[#2C1E11]/30 focus:outline-none focus:border-[#1B3B2B]/30 transition-colors"
             />
             <textarea
               name="message"
@@ -84,7 +84,7 @@ export default function PropertyContactForm({ listing, agent }) {
               value={form.message}
               onChange={handleChange}
               defaultValue={`I'm interested in ${listing.address}. Please send more information.`}
-              className="w-full px-3 py-2.5 text-[12px] border border-[#E5E0D8] rounded-lg text-[#2C1E11] placeholder-[#2C1E11]/30 focus:outline-none focus:border-[#1B3B2B]/30 transition-colors resize-none"
+              className="w-full px-3 py-2.5 text-[13px] border border-[#E5E0D8] rounded-lg text-[#2C1E11] placeholder-[#2C1E11]/30 focus:outline-none focus:border-[#1B3B2B]/30 transition-colors resize-none"
             />
             {/* NYS First Point of Contact */}
             <label className="flex items-start gap-2 cursor-pointer">
@@ -102,7 +102,7 @@ export default function PropertyContactForm({ listing, agent }) {
             </label>
             <button
               type="submit"
-              className="w-full py-3 text-[12px] font-bold rounded-full bg-[#1B3B2B] text-[#F8F3EB] hover:bg-[#2a5540] transition-colors"
+              className="w-full py-3 text-[13px] font-bold rounded-full bg-[#1B3B2B] text-[#F8F3EB] hover:bg-[#2a5540] transition-colors"
             >
               Request Information
             </button>

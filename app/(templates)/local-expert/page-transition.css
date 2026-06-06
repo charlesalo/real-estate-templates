@@ -1,0 +1,51 @@
+/* ============================================================================
+   Local Expert — "ink settle" page transition.
+
+   The incoming page fades up from a soft blur into sharp focus on every
+   navigation, like print settling onto paper. Driven purely by .le-page-enter
+   on the template wrapper, which remounts (and so replays this animation) on
+   each route change. Enter-only — no outgoing snapshot — so it behaves the same
+   on short and very tall pages.
+
+   `animation-fill-mode: backwards` is deliberate: it applies the 0% keyframe
+   immediately (no flash of un-animated content before the first frame) and
+   reverts to the element's natural styles once finished — so no transform or
+   filter lingers to create a containing block that could shift sticky/fixed
+   children inside a page.
+   ============================================================================ */
+
+@keyframes le-ink-settle {
+  0% {
+    opacity: 0;
+    filter: blur(6px);
+    transform: translateY(12px);
+  }
+  60% {
+    filter: blur(1.5px);
+  }
+  100% {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0);
+  }
+}
+
+.le-page-enter {
+  animation: le-ink-settle 520ms cubic-bezier(0.22, 0.61, 0.36, 1) backwards;
+}
+
+/* Reduced motion: keep a gentle fade, drop the blur and movement. */
+@keyframes le-ink-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .le-page-enter {
+    animation: le-ink-fade 200ms ease backwards;
+  }
+}

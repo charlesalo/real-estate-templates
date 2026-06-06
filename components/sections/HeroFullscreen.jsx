@@ -77,7 +77,7 @@ export default function HeroFullscreen({
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8, delay: 0.3 }}
-                  className="text-[10px] tracking-[0.5em] uppercase text-template-accent mb-7 font-sans"
+                  className="text-[12px] tracking-[0.5em] uppercase text-template-accent mb-7 font-sans"
                 >
                   {eyebrow}
                 </motion.p>
@@ -90,7 +90,7 @@ export default function HeroFullscreen({
                 className={cn(
                   'font-normal text-white leading-[1.04] tracking-tight mb-8',
                   isLuxury
-                    ? 'font-heading text-5xl md:text-6xl lg:text-7xl xl:text-[80px]'
+                    ? 'font-heading text-5xl md:text-6xl lg:text-7xl xl:text-[86px]'
                     : 'text-4xl md:text-5xl lg:text-6xl',
                 )}
               >
@@ -117,12 +117,12 @@ export default function HeroFullscreen({
                 {ctaPrimary && (
                   ctaPrimary.modal ? (
                     <button type="button" onClick={() => window.dispatchEvent(new CustomEvent('contact:open'))}
-                      className={cn('px-9 py-4 text-[11px] tracking-[0.2em] uppercase font-medium transition-opacity duration-200 hover:opacity-85', isLuxury ? 'bg-template-accent text-[#0A0A0A]' : 'bg-white text-black')}>
+                      className={cn('px-9 py-4 text-[12px] tracking-[0.2em] uppercase font-medium transition-opacity duration-200 hover:opacity-85', isLuxury ? 'bg-template-accent text-[#0A0A0A]' : 'bg-white text-black')}>
                       {ctaPrimary.label}
                     </button>
                   ) : (
                     <Link href={ctaPrimary.href}
-                      className={cn('px-9 py-4 text-[11px] tracking-[0.2em] uppercase font-medium transition-opacity duration-200 hover:opacity-85', isLuxury ? 'bg-template-accent text-[#0A0A0A]' : 'bg-white text-black')}>
+                      className={cn('px-9 py-4 text-[12px] tracking-[0.2em] uppercase font-medium transition-opacity duration-200 hover:opacity-85', isLuxury ? 'bg-template-accent text-[#0A0A0A]' : 'bg-white text-black')}>
                       {ctaPrimary.label}
                     </Link>
                   )
@@ -130,12 +130,12 @@ export default function HeroFullscreen({
                 {ctaSecondary && (
                   ctaSecondary.modal ? (
                     <button type="button" onClick={() => window.dispatchEvent(new CustomEvent('contact:open'))}
-                      className="px-9 py-4 text-[11px] tracking-[0.2em] uppercase font-medium text-white border border-white/35 hover:border-white/70 hover:bg-white/5 transition-all duration-200">
+                      className="px-9 py-4 text-[12px] tracking-[0.2em] uppercase font-medium text-white border border-white/35 hover:border-white/70 hover:bg-white/5 transition-all duration-200">
                       {ctaSecondary.label}
                     </button>
                   ) : (
                     <Link href={ctaSecondary.href}
-                      className="px-9 py-4 text-[11px] tracking-[0.2em] uppercase font-medium text-white border border-white/35 hover:border-white/70 hover:bg-white/5 transition-all duration-200">
+                      className="px-9 py-4 text-[12px] tracking-[0.2em] uppercase font-medium text-white border border-white/35 hover:border-white/70 hover:bg-white/5 transition-all duration-200">
                       {ctaSecondary.label}
                     </Link>
                   )
@@ -148,7 +148,7 @@ export default function HeroFullscreen({
         {/* Agent DRE compliance — aligned to grid, bottom */}
         {(agentName || agentDre) && (
           <div className="max-w-7xl mx-auto px-6 lg:px-8 w-full pb-10">
-            <p className="text-[9px] tracking-[0.35em] uppercase text-white/25 font-sans">
+            <p className="text-[12px] tracking-[0.35em] uppercase text-white/25 font-sans">
               {agentName}{agentName && agentDre ? '  ·  ' : ''}{agentDre}
             </p>
           </div>
