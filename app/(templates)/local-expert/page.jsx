@@ -257,15 +257,18 @@ export default function LocalExpertHome() {
       <section className="py-[96px] lg:py-[128px]" style={{ backgroundColor: '#F8F3EB' }}>
         <div className="max-w-7xl mx-auto px-5 lg:px-8">
 
-          <div className="flex items-end justify-between gap-4 mb-2">
+          <div className="flex items-end justify-between gap-4 mb-10">
             <div>
               <span className="text-[12px] tracking-[0.4em] uppercase text-[#BA5B3E]">Chapter Three</span>
               <h2
-                className="text-[34px] lg:text-[45px] font-normal text-[#24180F] leading-tight mt-2"
+                className="text-[34px] lg:text-[45px] font-normal text-[#24180F] leading-tight mt-2 mb-3"
                 style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}
               >
                 Curated Local Homes
               </h2>
+              <p className="text-[15px] text-[#2C1E11]/40 max-w-lg">
+                Homes in neighborhoods I know — not just listed here, but actually considered.
+              </p>
             </div>
             <Link
               href="/local-expert/listings"
@@ -274,10 +277,6 @@ export default function LocalExpertHome() {
               View all active listings <ArrowRight size={13} />
             </Link>
           </div>
-
-          <p className="text-[15px] text-[#2C1E11]/40 mb-10 max-w-lg">
-            Homes in neighborhoods I know block by block. Not just listed here — actually considered.
-          </p>
 
           {/* Asymmetric feature layout: hero left, two sidebar cards right */}
           <div className="grid grid-cols-1 lg:grid-cols-[3fr_2fr] gap-3 lg:h-[560px]">
@@ -381,21 +380,25 @@ export default function LocalExpertHome() {
             <div>
               <span className="text-[12px] tracking-[0.4em] uppercase text-[#BA5B3E]">From the Journal</span>
               <h2
-                className="text-[34px] lg:text-[45px] font-normal text-[#24180F] mt-1"
+                className="text-[34px] lg:text-[45px] font-normal text-[#24180F] mt-1 mb-3"
                 style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}
               >
                 Recent Writing
               </h2>
+              <p className="text-[16px] text-[#2C1E11]/50 max-w-xl">
+                No fluff, no sponsorships — market shifts, neighborhood deep-dives, and the honest
+                takes I&apos;d give a friend buying or selling in New York.
+              </p>
             </div>
             <Link
               href="/local-expert/blog"
-              className="text-[13px] font-semibold text-[#2C1E11] hover:opacity-60 transition-opacity"
+              className="hidden md:block text-[13px] font-semibold text-[#2C1E11] hover:opacity-60 transition-opacity whitespace-nowrap"
             >
               View all articles →
             </Link>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6 md:mb-0">
             {BLOG_POSTS.map((post) => (
               <article key={post.slug} className="group">
                 <Link href={`/local-expert/blog/${post.slug}`}>
@@ -421,6 +424,12 @@ export default function LocalExpertHome() {
                 </Link>
               </article>
             ))}
+          <Link
+            href="/local-expert/blog"
+            className="flex md:hidden items-center gap-1.5 text-[13px] font-semibold text-[#2C1E11] hover:opacity-60 transition-opacity"
+          >
+            View all articles <ArrowRight size={13} />
+          </Link>
           </div>
         </div>
       </section>
