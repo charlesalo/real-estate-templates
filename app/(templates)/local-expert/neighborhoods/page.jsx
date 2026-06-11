@@ -10,18 +10,35 @@ export const metadata = {
 
 export default function NeighborhoodsPage() {
   return (
-    <section className="pt-[112px] pb-[64px] lg:pt-[144px] lg:pb-[80px]" style={{ backgroundColor: '#F8F3EB' }}>
-      <div className="max-w-7xl mx-auto px-5 lg:px-8">
-        <p className="text-[12px] tracking-[0.4em] uppercase text-[#BA5B3E] mb-3">Chapter One</p>
-        <h1
-          className="text-[43px] lg:text-[58px] font-normal text-[#24180F] leading-[1.05] mb-4"
-          style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}
-        >
-          The Neighborhood Grid
-        </h1>
-        <p className="text-[16px] text-[#2C1E11]/50 max-w-xl mb-12">
-          Every neighborhood has a personality. These are the six I know well enough to tell you which block to live on.
-        </p>
+    <>
+      {/* ─── Header ─── */}
+      <section className="pt-[112px] pb-[96px] lg:pt-[144px] lg:pb-[128px]" style={{ backgroundColor: '#F8F3EB' }}>
+        <div className="max-w-7xl mx-auto px-5 lg:px-8">
+          {/* Eyebrow with rule */}
+          <div className="flex items-center gap-4 mb-6">
+            <span className="text-[12px] tracking-[0.4em] uppercase text-[#BA5B3E] whitespace-nowrap">
+              Neighborhood Guides
+            </span>
+            <div className="h-px flex-1 bg-[#BEB7A9]" />
+          </div>
+
+          <h1
+            className="text-[43px] lg:text-[58px] font-normal text-[#24180F] leading-[1.05] mb-5"
+            style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}
+          >
+            The blocks, walked<br />
+            <em className="text-[#1B3B2B]">one street at a time.</em>
+          </h1>
+          <p className="text-[16px] text-[#2C1E11]/50 max-w-xl leading-relaxed">
+            Neighborhood guides across Manhattan and Brooklyn — each one researched,
+            photographed and written in the field. The kind of intel Zillow won&apos;t give you.
+          </p>
+        </div>
+      </section>
+
+      {/* ─── Grid ─── */}
+      <section className="py-[96px] lg:py-[128px]" style={{ backgroundColor: '#F8F3EB' }}>
+        <div className="max-w-7xl mx-auto px-5 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {NEIGHBORHOODS.map((n) => (
             <Link key={n.slug} href={`/local-expert/neighborhoods/${n.slug}`} className="group block">
@@ -46,8 +63,9 @@ export default function NeighborhoodsPage() {
               </article>
             </Link>
           ))}
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </>
   )
 }

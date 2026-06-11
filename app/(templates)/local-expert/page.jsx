@@ -453,7 +453,7 @@ export default function LocalExpertHome() {
             className="text-[34px] lg:text-[45px] font-normal text-[#F8F3EB] leading-tight mb-5"
             style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}
           >
-            The right home is a feeling.<br />I know how to find it.
+            The right home<br className="sm:hidden" /> is a feeling.<br />I know how to find it.
           </h2>
           <p className="text-[16px] text-white/80 mb-8 max-w-md mx-auto leading-relaxed">
             Not sure where to start? Tell me what you&apos;re looking for — or what you&apos;re running from.

@@ -124,9 +124,9 @@ export default function LocalExpertFooter({ agent }) {
             </ul>
           </div>
 
-          {/* Working With Us */}
+          {/* Working With Me */}
           <div>
-            <ColHeading>Working With Us</ColHeading>
+            <ColHeading>Working With Me</ColHeading>
             <ul className="space-y-3">
               {WORKING_LINKS.map((l) => (
                 <li key={l.label}>
