@@ -30,7 +30,7 @@ export default function BlogPage() {
                   <Image src={post.image} alt={post.title} fill className="object-cover group-hover:scale-105 transition-transform duration-500" />
                 </div>
                 <p className="text-[12px] tracking-[0.3em] uppercase text-[#BA5B3E] mb-2">{post.category}</p>
-                <h2 className="text-[19px] font-normal text-[#24180F] leading-snug group-hover:opacity-60 transition-opacity mb-2" style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}>
+                <h2 className="text-[19px] font-normal text-[#24180F] leading-snug group-hover:text-[#BA5B3E] transition-colors mb-2" style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}>
                   {post.title}
                 </h2>
                 <p className="text-[16px] text-[#24180F]/50 leading-relaxed mb-3 line-clamp-3">{post.excerpt}</p>

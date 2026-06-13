@@ -60,7 +60,7 @@ export default function NeighborhoodsPage() {
                       href={`/local-expert/neighborhoods/${n.slug}`}
                       aria-hidden={dup || undefined}
                       tabIndex={dup ? -1 : undefined}
-                      className={`${marquee.item} text-[12px] tracking-[0.28em] uppercase font-medium text-[#24180F] hover:text-[#24180F]/55 transition-colors whitespace-nowrap`}
+                      className={`${marquee.item} text-[12px] tracking-[0.28em] uppercase font-medium text-[#24180F] hover:text-[#BA5B3E] transition-colors whitespace-nowrap`}
                     >
                       {n.name}
                     </Link>
@@ -139,7 +139,7 @@ export default function NeighborhoodsPage() {
 
               <Link
                 href={`/local-expert/neighborhoods/${lead.slug}`}
-                className="inline-flex items-center gap-1.5 mt-7 text-[13px] font-semibold text-[#2C1E11] hover:opacity-60 transition-opacity"
+                className="inline-flex items-center gap-1.5 mt-7 text-[13px] font-semibold text-[#2C1E11] hover:text-[#BA5B3E] transition-colors"
               >
                 Read the {lead.name} guide <ArrowRight size={13} />
               </Link>
@@ -206,7 +206,7 @@ export default function NeighborhoodsPage() {
                         <p className="text-[11px] tracking-[0.18em] uppercase text-[#2C1E11]/65">
                           From {n.medianPrice} · {n.activeListings} listings
                         </p>
-                        <ArrowRight size={14} className="text-[#2C1E11]/30 group-hover:text-[#2C1E11] transition-colors" />
+                        <ArrowRight size={14} className="text-[#2C1E11]/30 group-hover:text-[#BA5B3E] transition-colors" />
                       </div>
                     </div>
                   </article>

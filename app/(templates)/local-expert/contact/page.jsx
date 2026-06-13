@@ -43,13 +43,13 @@ export default function ContactPage() {
               </p>
 
               <div className="space-y-5">
-                <a href={`tel:${AGENT.phone}`} className="flex items-center gap-3 text-[16px] text-[#2C1E11] hover:opacity-60 transition-opacity">
+                <a href={`tel:${AGENT.phone}`} className="flex items-center gap-3 text-[16px] text-[#2C1E11] hover:text-[#BA5B3E] transition-colors">
                   <div className="w-10 h-10 rounded-full bg-[#1B3B2B]/8 flex items-center justify-center flex-shrink-0">
                     <Phone size={16} className="text-[#2C1E11]" />
                   </div>
                   {AGENT.phone}
                 </a>
-                <a href={`mailto:${AGENT.email}`} className="flex items-center gap-3 text-[16px] text-[#2C1E11] hover:opacity-60 transition-opacity">
+                <a href={`mailto:${AGENT.email}`} className="flex items-center gap-3 text-[16px] text-[#2C1E11] hover:text-[#BA5B3E] transition-colors">
                   <div className="w-10 h-10 rounded-full bg-[#1B3B2B]/8 flex items-center justify-center flex-shrink-0">
                     <Mail size={16} className="text-[#2C1E11]" />
                   </div>

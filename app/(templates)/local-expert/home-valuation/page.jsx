@@ -86,7 +86,7 @@ export default function HomeValuationPage() {
                 </div>
                 <Link
                   href="/local-expert"
-                  className="inline-flex items-center gap-2 text-[13px] font-semibold text-[#2C1E11]/40 hover:text-[#2C1E11] transition-colors"
+                  className="inline-flex items-center gap-2 text-[13px] font-semibold text-[#2C1E11]/55 hover:text-[#BA5B3E] transition-colors"
                 >
                   Back to home <ArrowRight size={12} />
                 </Link>

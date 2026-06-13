@@ -26,7 +26,7 @@ export default function BlogPostPage({ params }) {
     <>
       <section className="pt-[112px] pb-[64px] lg:pt-[144px] lg:pb-[80px]" style={{ backgroundColor: '#F8F3EB' }}>
         <div className="max-w-3xl mx-auto px-5 lg:px-8">
-          <Link href="/local-expert/blog" className="inline-flex items-center gap-1.5 text-[13px] text-[#2C1E11]/45 hover:text-[#2C1E11] transition-colors mb-8">
+          <Link href="/local-expert/blog" className="inline-flex items-center gap-1.5 text-[13px] text-[#2C1E11]/55 hover:text-[#BA5B3E] transition-colors mb-8">
             <ArrowLeft size={13} /> Back to journal
           </Link>
 

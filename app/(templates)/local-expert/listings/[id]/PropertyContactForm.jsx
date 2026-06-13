@@ -32,7 +32,7 @@ export default function PropertyContactForm({ listing, agent }) {
             {agent.name}
           </p>
           <p className="text-[12px] text-[#24180F]/40">{agent.brokerage}</p>
-          <a href={`tel:${agent.phone}`} className="flex items-center gap-1 text-[12px] text-[#2C1E11]/50 hover:text-[#2C1E11] transition-colors mt-0.5">
+          <a href={`tel:${agent.phone}`} className="flex items-center gap-1 text-[12px] text-[#2C1E11]/55 hover:text-[#BA5B3E] transition-colors mt-0.5">
             <Phone size={10} /> {agent.phone}
           </a>
         </div>

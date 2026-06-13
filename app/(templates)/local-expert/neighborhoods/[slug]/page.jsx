@@ -74,16 +74,38 @@ export default async function NeighborhoodDetailPage({ params }) {
         </div>
       </section>
 
-      {/* ─── Quick stats strip ─── */}
-      <section className="py-[22px] border-b border-[#E5E0D8]" style={{ backgroundColor: '#F4F0EA' }}>
-        <div className="max-w-7xl mx-auto px-5 lg:px-8 flex flex-wrap gap-x-10 gap-y-5">
-          <StripStat value={neighborhood.medianPrice} label="Median Price" />
-          <StripStat value={neighborhood.activeListings} label="Active Listings" />
-          {walk?.walk?.score != null && <StripStat value={walk.walk.score} label="Walk Score" />}
-          {walk?.transit?.score != null && <StripStat value={walk.transit.score} label="Transit Score" />}
-          {census?.population?.medianAge > 0 && <StripStat value={census.population.medianAge} label="Median Age" />}
-        </div>
-      </section>
+      {/* ─── Featured properties ─── */}
+      {localListings.length > 0 && (
+        <section className="py-[96px] lg:py-[128px]" style={{ backgroundColor: '#F4F0EA' }}>
+          <div className="max-w-7xl mx-auto px-5 lg:px-8">
+            <div className="flex items-end justify-between mb-10">
+              <SectionHeader eyebrow="On The Market" title={`Featured in ${neighborhood.name}`} />
+              <Link href={`/local-expert/listings?q=${encodeURIComponent(neighborhood.name)}`} className="text-[13px] font-semibold text-[#24180F]/55 hover:text-[#BA5B3E] transition-colors whitespace-nowrap">
+                View all →
+              </Link>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-x-8 gap-y-12">
+              {localListings.map((listing) => (
+                <Link key={listing.id} href={`/local-expert/listings/${listing.id}`} className="group block">
+                  <div className="relative aspect-[4/3] rounded-xl overflow-hidden mb-5">
+                    <Image src={listing.images[0]} alt={listing.address} fill className="object-cover transition-transform duration-700 group-hover:scale-[1.03]" />
+                  </div>
+                  <div className="text-[28px] font-normal text-[#24180F] leading-none transition-colors group-hover:text-[#BA5B3E]" style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}>
+                    {formatPrice(listing.price)}
+                  </div>
+                  <p className="text-[14px] text-[#24180F]/55 mt-2">{listing.address}</p>
+                  <div className="flex gap-5 mt-4 pt-4 border-t border-[#BEB7A9]/50 text-[11px] tracking-[0.16em] uppercase text-[#24180F]/50">
+                    <span className="flex items-center gap-1.5"><Bed size={12} /> {listing.beds} bd</span>
+                    <span className="flex items-center gap-1.5"><Bath size={12} /> {listing.baths} ba</span>
+                    <span className="flex items-center gap-1.5"><Square size={12} /> {listing.sqft.toLocaleString()} sqft</span>
+                  </div>
+                  <p className="text-[9px] text-[#2C1E11]/25 mt-3">Listing Provided Courtesy of {listing.listingBrokerage}</p>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* ─── Editorial intro ─── */}
       <section className="py-[96px] lg:py-[128px]" style={{ backgroundColor: '#F8F3EB' }}>
@@ -227,49 +249,16 @@ export default async function NeighborhoodDetailPage({ params }) {
         </section>
       )}
 
-      {/* ─── Homes in the neighborhood ─── */}
-      {localListings.length > 0 && (
-        <section className="py-[96px] lg:py-[128px]" style={{ backgroundColor: '#F4F0EA' }}>
-          <div className="max-w-7xl mx-auto px-5 lg:px-8">
-            <div className="flex items-end justify-between mb-10">
-              <SectionHeader eyebrow="On The Market" title={`Homes in ${neighborhood.name}`} />
-              <Link href={`/local-expert/listings?q=${encodeURIComponent(neighborhood.name)}`} className="text-[13px] font-semibold text-[#24180F]/45 hover:text-[#24180F] transition-colors whitespace-nowrap">
-                View all →
-              </Link>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {localListings.map((listing) => (
-                <Link key={listing.id} href={`/local-expert/listings/${listing.id}`} className="group block rounded-xl overflow-hidden border border-[#E5E0D8] bg-white hover:shadow-md transition-shadow">
-                  <div className="relative aspect-[4/3] overflow-hidden">
-                    <Image src={listing.images[0]} alt={listing.address} fill className="object-cover group-hover:scale-105 transition-transform duration-500" />
-                  </div>
-                  <div className="p-4">
-                    <div className="text-[24px] font-normal text-[#24180F]" style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}>{formatPrice(listing.price)}</div>
-                    <p className="text-[13px] text-[#24180F]/50 mt-0.5">{listing.address}</p>
-                    <div className="flex gap-3 mt-2 text-[12px] text-[#24180F]/40">
-                      <span className="flex items-center gap-1"><Bed size={10} /> {listing.beds}</span>
-                      <span className="flex items-center gap-1"><Bath size={10} /> {listing.baths}</span>
-                      <span className="flex items-center gap-1"><Square size={10} /> {listing.sqft.toLocaleString()}</span>
-                    </div>
-                    <p className="text-[8.5px] text-[#2C1E11]/25 mt-2">Listing Provided Courtesy of {listing.listingBrokerage}</p>
-                  </div>
-                </Link>
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
-
       {/* ─── Prev / Next navigation ─── */}
       <section className="py-[64px] border-t border-[#E5E0D8]" style={{ backgroundColor: '#F8F3EB' }}>
         <div className="max-w-7xl mx-auto px-5 lg:px-8 flex justify-between">
           {prev ? (
-            <Link href={`/local-expert/neighborhoods/${prev.slug}`} className="group flex items-center gap-2 text-[14px] text-[#2C1E11]/50 hover:text-[#2C1E11] transition-colors">
+            <Link href={`/local-expert/neighborhoods/${prev.slug}`} className="group flex items-center gap-2 text-[14px] text-[#2C1E11]/55 hover:text-[#BA5B3E] transition-colors">
               <ArrowLeft size={14} /> <span>{prev.name}</span>
             </Link>
           ) : <div />}
           {next ? (
-            <Link href={`/local-expert/neighborhoods/${next.slug}`} className="group flex items-center gap-2 text-[14px] text-[#2C1E11]/50 hover:text-[#2C1E11] transition-colors">
+            <Link href={`/local-expert/neighborhoods/${next.slug}`} className="group flex items-center gap-2 text-[14px] text-[#2C1E11]/55 hover:text-[#BA5B3E] transition-colors">
               <span>{next.name}</span> <ArrowRight size={14} />
             </Link>
           ) : <div />}
@@ -288,15 +277,6 @@ function SectionHeader({ eyebrow, title }) {
       <h2 className="text-[34px] lg:text-[45px] font-normal text-[#24180F] leading-tight" style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}>
         {title}
       </h2>
-    </div>
-  )
-}
-
-function StripStat({ value, label }) {
-  return (
-    <div>
-      <div className="text-[24px] font-normal text-[#24180F]" style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}>{value}</div>
-      <div className="text-[12px] uppercase tracking-wider text-[#24180F]/40 mt-0.5">{label}</div>
     </div>
   )
 }

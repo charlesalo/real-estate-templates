@@ -178,7 +178,7 @@ function SidePanel({ neighborhoods, active, setActive }) {
                   {n.description.slice(0, 120)}…
                 </p>
                 <Link href={`/local-expert/neighborhoods/${n.slug}`}
-                  className="inline-flex items-center gap-1 text-[12px] font-semibold text-[#2C1E11] hover:opacity-70 transition-opacity"
+                  className="inline-flex items-center gap-1 text-[12px] font-semibold text-[#2C1E11] hover:text-[#BA5B3E] transition-colors"
                   onClick={(e) => e.stopPropagation()}>
                   Open the {n.name} guide <ArrowRight size={11} />
                 </Link>

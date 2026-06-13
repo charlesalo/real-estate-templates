@@ -90,7 +90,7 @@ export default function LocalExpertHome() {
                   href="https://www.dos.ny.gov/licensing/docs/FairHousingNotice_new.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="font-medium text-[#2C1E11]/80 hover:text-[#2C1E11]/40 transition-colors"
+                  className="font-medium text-[#2C1E11]/80 hover:text-[#BA5B3E] transition-colors"
                 >
                   Fair Housing Laws.
                 </a>
@@ -181,7 +181,7 @@ export default function LocalExpertHome() {
             </div>
             <Link
               href="/local-expert/neighborhoods"
-              className="hidden md:flex items-center gap-1.5 text-[13px] font-semibold text-[#2C1E11] hover:opacity-60 transition-opacity whitespace-nowrap"
+              className="hidden md:flex items-center gap-1.5 text-[13px] font-semibold text-[#2C1E11] hover:text-[#BA5B3E] transition-colors whitespace-nowrap"
             >
               View All Neighborhoods <ArrowRight size={13} />
             </Link>
@@ -191,7 +191,7 @@ export default function LocalExpertHome() {
 
           <Link
             href="/local-expert/neighborhoods"
-            className="flex md:hidden items-center gap-1.5 text-[13px] font-semibold text-[#2C1E11] hover:opacity-60 transition-opacity mt-6"
+            className="flex md:hidden items-center gap-1.5 text-[13px] font-semibold text-[#2C1E11] hover:text-[#BA5B3E] transition-colors mt-6"
           >
             View All Neighborhoods <ArrowRight size={13} />
           </Link>
@@ -220,7 +220,7 @@ export default function LocalExpertHome() {
               </p>
               <Link
                 href="/local-expert/field-notes"
-                className="inline-flex items-center gap-1.5 mt-5 text-[13px] font-semibold text-[#2C1E11] hover:opacity-60 transition-opacity"
+                className="inline-flex items-center gap-1.5 mt-5 text-[13px] font-semibold text-[#2C1E11] hover:text-[#BA5B3E] transition-colors"
               >
                 Browse all notes <ArrowRight size={13} />
               </Link>
@@ -272,7 +272,7 @@ export default function LocalExpertHome() {
             </div>
             <Link
               href="/local-expert/listings"
-              className="hidden md:flex items-center gap-1.5 text-[13px] font-semibold text-[#2C1E11] hover:opacity-60 transition-opacity whitespace-nowrap"
+              className="hidden md:flex items-center gap-1.5 text-[13px] font-semibold text-[#2C1E11] hover:text-[#BA5B3E] transition-colors whitespace-nowrap"
             >
               View all active listings <ArrowRight size={13} />
             </Link>
@@ -289,7 +289,7 @@ export default function LocalExpertHome() {
 
           <Link
             href="/local-expert/listings"
-            className="flex md:hidden items-center gap-1.5 text-[13px] font-semibold text-[#2C1E11] hover:opacity-60 transition-opacity mt-6"
+            className="flex md:hidden items-center gap-1.5 text-[13px] font-semibold text-[#2C1E11] hover:text-[#BA5B3E] transition-colors mt-6"
           >
             View all active listings <ArrowRight size={13} />
           </Link>
@@ -392,7 +392,7 @@ export default function LocalExpertHome() {
             </div>
             <Link
               href="/local-expert/blog"
-              className="hidden md:block text-[13px] font-semibold text-[#2C1E11] hover:opacity-60 transition-opacity whitespace-nowrap"
+              className="hidden md:block text-[13px] font-semibold text-[#2C1E11] hover:text-[#BA5B3E] transition-colors whitespace-nowrap"
             >
               View all articles →
             </Link>
@@ -412,7 +412,7 @@ export default function LocalExpertHome() {
                   </div>
                   <p className="text-[12px] tracking-[0.3em] uppercase text-[#BA5B3E] mb-1">{post.category}</p>
                   <h3
-                    className="text-[19px] font-normal text-[#24180F] leading-snug group-hover:opacity-60 transition-opacity"
+                    className="text-[19px] font-normal text-[#24180F] leading-snug group-hover:text-[#BA5B3E] transition-colors"
                     style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}
                   >
                     {post.title}
@@ -426,7 +426,7 @@ export default function LocalExpertHome() {
             ))}
           <Link
             href="/local-expert/blog"
-            className="flex md:hidden items-center gap-1.5 text-[13px] font-semibold text-[#2C1E11] hover:opacity-60 transition-opacity"
+            className="flex md:hidden items-center gap-1.5 text-[13px] font-semibold text-[#2C1E11] hover:text-[#BA5B3E] transition-colors"
           >
             View all articles <ArrowRight size={13} />
           </Link>

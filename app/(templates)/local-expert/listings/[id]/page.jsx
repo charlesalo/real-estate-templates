@@ -36,7 +36,7 @@ export default async function PropertyDetailPage({ params }) {
 
         <Link
           href="/local-expert/listings"
-          className="inline-flex items-center gap-1.5 text-[13px] text-[#2C1E11]/45 hover:text-[#2C1E11] transition-colors mb-8"
+          className="inline-flex items-center gap-1.5 text-[13px] text-[#2C1E11]/55 hover:text-[#BA5B3E] transition-colors mb-8"
         >
           <ArrowLeft size={13} /> Back to listings
         </Link>
