@@ -1,12 +1,13 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { ArrowLeft, ArrowRight, Bed, Bath, Square, Star, Footprints, TramFront, Bike, Utensils, ShoppingBag, Dumbbell, Scissors, Wine } from 'lucide-react'
+import { ArrowLeft, ArrowRight, Bed, Bath, Square, Star, Footprints, TramFront, Bike } from 'lucide-react'
 import { NEIGHBORHOODS, LISTINGS } from '@/lib/local-expert-data'
 import { getCensusData } from '@/lib/census'
 import { getWalkScore } from '@/lib/walkscore'
 import { getNearbyPlaces } from '@/lib/places'
 import { getSchools } from '@/lib/schooldigger'
 import { notFound } from 'next/navigation'
+import NeighborhoodNearby from './NeighborhoodNearby'
 
 export async function generateStaticParams() {
   return NEIGHBORHOODS.map((n) => ({ slug: n.slug }))
@@ -25,14 +26,6 @@ export async function generateMetadata({ params }) {
 function formatPrice(n) {
   if (n >= 1_000_000) return `$${(n / 1_000_000).toFixed(n % 1_000_000 === 0 ? 0 : 2)}M`
   return `$${n.toLocaleString()}`
-}
-
-const PLACE_ICONS = {
-  restaurants: Utensils,
-  shopping: ShoppingBag,
-  active: Dumbbell,
-  beauty: Scissors,
-  nightlife: Wine,
 }
 
 export default async function NeighborhoodDetailPage({ params }) {
@@ -179,38 +172,7 @@ export default async function NeighborhoodDetailPage({ params }) {
         <section className="py-[96px] lg:py-[128px]" style={{ backgroundColor: '#F4F0EA' }}>
           <div className="max-w-7xl mx-auto px-5 lg:px-8">
             <SectionHeader eyebrow="The Field Guide" title="Around the block" />
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-12 mt-12">
-              {nearby.categories.map((cat) => {
-                const places = nearby.places[cat.key] ?? []
-                if (places.length === 0) return null
-                const Icon = PLACE_ICONS[cat.key]
-                return (
-                  <div key={cat.key}>
-                    <div className="flex items-center gap-2.5 pb-3 mb-4 border-b border-[#BEB7A9]/60">
-                      {Icon && <Icon size={15} style={{ color: cat.color }} />}
-                      <h3 className="text-[12px] tracking-[0.22em] uppercase text-[#24180F]/70">{cat.label}</h3>
-                    </div>
-                    <ul className="space-y-4">
-                      {places.slice(0, 5).map((p) => (
-                        <li key={p.id} className="flex items-baseline justify-between gap-3">
-                          <div className="min-w-0">
-                            <p className="text-[15px] text-[#24180F] leading-snug truncate">{p.name}</p>
-                            {p.rating != null && (
-                              <p className="text-[12px] text-[#2C1E11]/45 mt-0.5 flex items-center gap-1">
-                                <Star size={11} className="fill-[#BA5B3E] text-[#BA5B3E]" />
-                                {p.rating}
-                                <span className="text-[#2C1E11]/30">({p.reviewCount.toLocaleString()})</span>
-                              </p>
-                            )}
-                          </div>
-                          <span className="text-[12px] text-[#2C1E11]/40 whitespace-nowrap flex-shrink-0">{p.distance} mi</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                )
-              })}
-            </div>
+            <NeighborhoodNearby categories={nearby.categories} places={nearby.places} />
             <p className="text-[11px] text-[#2C1E11]/35 mt-12">Nearby places within roughly two miles, via Google Places.</p>
           </div>
         </section>
@@ -245,7 +207,15 @@ export default async function NeighborhoodDetailPage({ params }) {
                         {s.isMagnet && <SchoolTag>Magnet</SchoolTag>}
                       </div>
                       <p className="text-[13px] text-[#2C1E11]/50">
-                        Grades {s.gradeRange} · {s.address}
+                        Grades {s.gradeRange}
+                        {s.address && (
+                          <>
+                            {' · '}
+                            <a href={s.mapsUrl} target="_blank" rel="noopener noreferrer" className="hover:text-[#BA5B3E] transition-colors">
+                              {s.address}
+                            </a>
+                          </>
+                        )}
                       </p>
                     </div>
                     {s.rating != null && <StarRating value={s.rating} />}
@@ -388,11 +358,11 @@ function SchoolTag({ children }) {
   )
 }
 
-function StarRating({ value }) {
+function StarRating({ value, size = 15 }) {
   return (
     <div className="flex items-center gap-0.5" aria-label={`${value} out of 5 stars`}>
       {[1, 2, 3, 4, 5].map((i) => (
-        <Star key={i} size={15} className={i <= value ? 'fill-[#BA5B3E] text-[#BA5B3E]' : 'text-[#BEB7A9]'} />
+        <Star key={i} size={size} className={i <= value ? 'fill-[#BA5B3E] text-[#BA5B3E]' : 'fill-[#BEB7A9]/30 text-[#BEB7A9]'} />
       ))}
     </div>
   )
