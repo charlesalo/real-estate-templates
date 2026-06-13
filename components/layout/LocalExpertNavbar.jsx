@@ -32,7 +32,7 @@ export default function LocalExpertNavbar({ agentName, phone, onContactOpen }) {
     { label: 'Neighborhoods', href: `${BASE}/neighborhoods` },
     { label: 'Local Favorites', href: `${BASE}/field-notes` },
     { label: 'Homes', href: `${BASE}/listings` },
-    { label: 'Market Report', href: `${BASE}/home-valuation` },
+    { label: 'Home Valuation', href: `${BASE}/home-valuation` },
     { label: 'About', href: `${BASE}/about` },
   ]
 
@@ -41,7 +41,7 @@ export default function LocalExpertNavbar({ agentName, phone, onContactOpen }) {
     { label: 'Neighborhoods', href: `${BASE}/neighborhoods` },
     { label: 'Local Favorites', href: `${BASE}/field-notes` },
     { label: 'Homes for Sale', href: `${BASE}/listings` },
-    { label: 'Market Report', href: `${BASE}/home-valuation` },
+    { label: 'Home Valuation', href: `${BASE}/home-valuation` },
     { label: 'About Nadia', href: `${BASE}/about` },
     { label: 'Blog', href: `${BASE}/blog` },
     { label: 'Contact', href: `${BASE}/contact` },

@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import Link from 'next/link'
 import { ArrowRight, ArrowLeft, Check } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
@@ -54,6 +55,15 @@ export default function MarketReportForm() {
                 </li>
               ))}
             </ul>
+            <p className="mt-8 text-[14px] text-[#F8F3EB]/50">
+              Thinking of selling?{' '}
+              <Link
+                href="/local-expert/home-valuation"
+                className="inline-flex items-center gap-1.5 font-semibold text-[#F8F3EB] hover:opacity-60 transition-opacity"
+              >
+                Get a real home valuation <ArrowRight size={13} />
+              </Link>
+            </p>
           </div>
 
           {/* Right: multi-step card. All three steps are stacked in a single grid

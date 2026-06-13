@@ -10,7 +10,8 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }) {
-  const listing = LISTINGS.find((l) => l.id === params.id)
+  const { id } = await params
+  const listing = LISTINGS.find((l) => l.id === id)
   if (!listing) return {}
   return {
     title: `${listing.address} — ${listing.neighborhood}`,
@@ -22,8 +23,9 @@ function formatPrice(n) {
   return `$${n.toLocaleString()}`
 }
 
-export default function PropertyDetailPage({ params }) {
-  const listing = LISTINGS.find((l) => l.id === params.id)
+export default async function PropertyDetailPage({ params }) {
+  const { id } = await params
+  const listing = LISTINGS.find((l) => l.id === id)
   if (!listing) notFound()
 
   const similar = LISTINGS.filter((l) => l.id !== listing.id && l.neighborhood === listing.neighborhood).slice(0, 3)

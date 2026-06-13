@@ -31,7 +31,7 @@ const EXPLORE_LINKS = [
   { label: 'Neighborhoods', href: `${BASE}/neighborhoods` },
   { label: 'Active Listings', href: `${BASE}/listings` },
   { label: 'Field Notes', href: `${BASE}/field-notes` },
-  { label: 'Market Reports', href: `${BASE}/home-valuation` },
+  { label: 'Home Valuation', href: `${BASE}/home-valuation` },
   { label: 'Blog', href: `${BASE}/blog` },
 ]
 
