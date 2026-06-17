@@ -8,6 +8,7 @@ import { getNearbyPlaces } from '@/lib/places'
 import { getSchools } from '@/lib/schooldigger'
 import { notFound } from 'next/navigation'
 import NeighborhoodNearby from './NeighborhoodNearby'
+import NeighborhoodDetailMapClient from '../../NeighborhoodDetailMapClient'
 
 export async function generateStaticParams() {
   return NEIGHBORHOODS.map((n) => ({ slug: n.slug }))
@@ -36,6 +37,15 @@ export default async function NeighborhoodDetailPage({ params }) {
   const idx = NEIGHBORHOODS.findIndex((n) => n.slug === slug)
   const prev = NEIGHBORHOODS[idx - 1]
   const next = NEIGHBORHOODS[idx + 1]
+
+  // Two neighborhood cards for the editorial CTA. Prefer the adjacent guides;
+  // backfill from the rest of the list at the edges so we always show a pair.
+  const otherNeighborhoods = [prev, next].filter(Boolean)
+  for (const n of NEIGHBORHOODS) {
+    if (otherNeighborhoods.length >= 2) break
+    if (n.slug === slug || otherNeighborhoods.some((o) => o.slug === n.slug)) continue
+    otherNeighborhoods.push(n)
+  }
 
   const localListings = LISTINGS.filter((l) => l.neighborhood === neighborhood.name).slice(0, 3)
 
@@ -249,21 +259,99 @@ export default async function NeighborhoodDetailPage({ params }) {
         </section>
       )}
 
-      {/* ─── Prev / Next navigation ─── */}
-      <section className="py-[64px] border-t border-[#E5E0D8]" style={{ backgroundColor: '#F8F3EB' }}>
-        <div className="max-w-7xl mx-auto px-5 lg:px-8 flex justify-between">
-          {prev ? (
-            <Link href={`/local-expert/neighborhoods/${prev.slug}`} className="group flex items-center gap-2 text-[14px] text-[#2C1E11]/55 hover:text-[#BA5B3E] transition-colors">
-              <ArrowLeft size={14} /> <span>{prev.name}</span>
-            </Link>
-          ) : <div />}
-          {next ? (
-            <Link href={`/local-expert/neighborhoods/${next.slug}`} className="group flex items-center gap-2 text-[14px] text-[#2C1E11]/55 hover:text-[#BA5B3E] transition-colors">
-              <span>{next.name}</span> <ArrowRight size={14} />
-            </Link>
-          ) : <div />}
+      {/* ─── On the map ─── */}
+      <section className="py-[96px] lg:py-[128px]" style={{ backgroundColor: '#F4F0EA' }}>
+        <div className="max-w-7xl mx-auto px-5 lg:px-8">
+          <SectionHeader eyebrow="On The Map" title={`Where ${neighborhood.name} sits`} />
+          <div className="mt-12">
+            <NeighborhoodDetailMapClient neighborhood={neighborhood} />
+          </div>
+          <p className="text-[11px] text-[#2C1E11]/35 mt-8">
+            Boundary approximate, from NYC Open Data (2020 Neighborhood Tabulation Areas). Map © Mapbox © OpenStreetMap.
+          </p>
         </div>
       </section>
+
+      {/* ─── Explore nearby neighborhoods — editorial CTA ─── */}
+      <section className="py-[96px] lg:py-[128px] border-t border-[#E5E0D8]" style={{ backgroundColor: '#F2ECE1' }}>
+        <div className="max-w-7xl mx-auto px-5 lg:px-8">
+          <SectionHeader eyebrow="Keep Wandering" title="Explore nearby neighborhoods" />
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 mt-12">
+            {otherNeighborhoods.map((n) => (
+              <Link
+                key={n.slug}
+                href={`/local-expert/neighborhoods/${n.slug}`}
+                className="group relative block aspect-[16/10] lg:aspect-[3/2] rounded-2xl overflow-hidden"
+              >
+                <Image
+                  src={n.image}
+                  alt={n.name}
+                  fill
+                  className="object-cover transition-transform duration-700 group-hover:scale-[1.04]"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#1B3B2B]/90 via-[#1B3B2B]/20 to-transparent" />
+                <div className="absolute inset-x-0 bottom-0 p-6 lg:p-8">
+                  <p className="text-[11px] tracking-[0.28em] uppercase text-white/55 mb-2">
+                    {[n.borough, ...n.vibes].join(' · ')}
+                  </p>
+                  <div className="flex items-end justify-between gap-4">
+                    <h3
+                      className="text-[30px] lg:text-[34px] font-normal text-white leading-none"
+                      style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}
+                    >
+                      {n.name}
+                    </h3>
+                    <span className="flex-shrink-0 inline-flex items-center justify-center w-10 h-10 rounded-full border border-white/40 text-white transition-colors group-hover:bg-white group-hover:text-[#1B3B2B] group-hover:border-white">
+                      <ArrowRight size={16} />
+                    </span>
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </div>
+          <Link
+            href="/local-expert/neighborhoods"
+            className="inline-flex items-center gap-1.5 mt-10 text-[13px] font-semibold text-[#2C1E11] hover:text-[#BA5B3E] transition-colors"
+          >
+            View all neighborhood guides <ArrowRight size={13} />
+          </Link>
+        </div>
+      </section>
+
+      {/* ─── CONTACT TEASER ───────────────────────────────────────────── */}
+      <section className="relative py-[120px] lg:py-[168px] overflow-hidden">
+        {/* Full-bleed background */}
+        <Image
+          src="https://images.unsplash.com/photo-1440613905118-99b921706b5c?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+          alt="Dumbo Manhattan Bridge"
+          fill
+          className="object-cover object-center"
+        />
+        {/* Dark green overlay */}
+        <div className="absolute inset-0" style={{ backgroundColor: 'rgba(0,0,0,0.38)' }} />
+
+        {/* Content */}
+        <div className="relative max-w-3xl mx-auto px-5 lg:px-8 text-center">
+          <p className="text-[12px] tracking-[0.4em] uppercase text-white mb-4">Let&apos;s Work Together</p>
+          <h2
+            className="text-[34px] lg:text-[45px] font-normal text-[#F8F3EB] leading-tight mb-5"
+            style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}
+          >
+            The right home<br className="sm:hidden" /> is a feeling.<br />I know how to find it.
+          </h2>
+          <p className="text-[16px] text-white/80 mb-8 max-w-md mx-auto leading-relaxed">
+            Not sure where to start? Tell me what you&apos;re looking for — or what you&apos;re running from.
+            I know this city. I&apos;ll help.
+          </p>
+          <Link
+            href="/local-expert/contact"
+            className="inline-flex items-center px-8 py-3.5 text-[14px] font-bold rounded-full bg-[#F8F3EB] text-[#1B3B2B] hover:bg-white transition-colors"
+          >
+            Start the conversation
+          </Link>
+        </div>
+      </section>
+
     </>
   )
 }

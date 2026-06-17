@@ -1,9 +1,10 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { ArrowLeft, Bed, Bath, Square, MapPin, CheckCircle } from 'lucide-react'
-import { LISTINGS, AGENT } from '@/lib/local-expert-data'
+import { ArrowLeft, ArrowRight, Bed, Bath, Square, MapPin, CheckCircle, Footprints } from 'lucide-react'
+import { LISTINGS, AGENT, NEIGHBORHOODS } from '@/lib/local-expert-data'
 import { notFound } from 'next/navigation'
 import PropertyContactForm from './PropertyContactForm'
+import MortgageCalculator from './MortgageCalculator'
 
 export async function generateStaticParams() {
   return LISTINGS.map((l) => ({ id: l.id }))
@@ -29,6 +30,10 @@ export default async function PropertyDetailPage({ params }) {
   if (!listing) notFound()
 
   const similar = LISTINGS.filter((l) => l.id !== listing.id && l.neighborhood === listing.neighborhood).slice(0, 3)
+  const hood = NEIGHBORHOODS.find((n) => n.name === listing.neighborhood)
+
+  const excluded = new Set([listing.id, ...similar.map((s) => s.id)])
+  const featured = LISTINGS.filter((l) => !excluded.has(l.id)).slice(0, 3)
 
   return (
     <section className="pt-[112px] pb-[64px] lg:pt-[144px] lg:pb-[80px]" style={{ backgroundColor: '#F8F3EB' }}>
@@ -87,6 +92,73 @@ export default async function PropertyDetailPage({ params }) {
               ))}
             </div>
 
+            <h3 className="text-[19px] font-normal text-[#24180F] mb-4" style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}>Location</h3>
+            <div className="rounded-xl overflow-hidden border border-[#E5E0D8] aspect-[16/9] mb-10">
+              <iframe
+                title="Property location"
+                width="100%"
+                height="100%"
+                style={{ border: 0 }}
+                loading="lazy"
+                allowFullScreen
+                src={`https://maps.google.com/maps?q=${encodeURIComponent(`${listing.address}, ${listing.city}, ${listing.state} ${listing.zip}`)}&output=embed&z=15`}
+              />
+            </div>
+
+            {hood && (
+              <div className="mb-10">
+                <h3 className="text-[19px] font-normal text-[#24180F] mb-4" style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}>
+                  About {hood.name}
+                </h3>
+                <div className="rounded-xl overflow-hidden border border-[#E5E0D8] bg-white">
+                  <div className="relative aspect-[16/7]">
+                    <Image src={hood.image} alt={hood.name} fill className="object-cover" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#24180F]/70 via-transparent to-transparent" />
+                    <div className="absolute bottom-3 left-4 right-4">
+                      <p className="text-[11px] font-bold uppercase tracking-wider text-white/75">{hood.borough}</p>
+                      <p className="text-[22px] font-normal text-white leading-tight" style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}>{hood.name}</p>
+                    </div>
+                  </div>
+                  <div className="p-5">
+                    <p className="text-[14px] italic text-[#2C1E11]/70 mb-3">{hood.tagline}</p>
+                    <p className="text-[15px] text-[#24180F]/65 leading-relaxed mb-5">{hood.description}</p>
+
+                    <div className="grid grid-cols-3 gap-3 mb-5">
+                      <div className="rounded-lg bg-[#F4F0EA] p-3 text-center">
+                        <p className="text-[18px] font-normal text-[#24180F]" style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}>{hood.medianPrice}</p>
+                        <p className="text-[11px] uppercase tracking-wider text-[#2C1E11]/45 mt-0.5">Median Price</p>
+                      </div>
+                      <div className="rounded-lg bg-[#F4F0EA] p-3 text-center">
+                        <p className="flex items-center justify-center gap-1 text-[18px] font-normal text-[#24180F]" style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}>
+                          <Footprints size={15} className="text-[#8B9E8B]" />{hood.walkScore}
+                        </p>
+                        <p className="text-[11px] uppercase tracking-wider text-[#2C1E11]/45 mt-0.5">Walk Score</p>
+                      </div>
+                      <div className="rounded-lg bg-[#F4F0EA] p-3 text-center">
+                        <p className="text-[18px] font-normal text-[#24180F]" style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}>{hood.activeListings}</p>
+                        <p className="text-[11px] uppercase tracking-wider text-[#2C1E11]/45 mt-0.5">Active Listings</p>
+                      </div>
+                    </div>
+
+                    <div className="flex flex-wrap gap-2 mb-5">
+                      {hood.vibes.map((v) => (
+                        <span key={v} className="px-3 py-1 text-[12px] rounded-full border border-[#E5E0D8] text-[#2C1E11]/60">{v}</span>
+                      ))}
+                    </div>
+
+                    <Link
+                      href={`/local-expert/neighborhoods/${hood.slug}`}
+                      className="inline-flex items-center gap-1.5 text-[13px] font-semibold text-[#2C1E11] hover:text-[#BA5B3E] transition-colors"
+                    >
+                      Explore {hood.name} <ArrowRight size={14} />
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            <MortgageCalculator listPrice={listing.price} />
+
             <div className="p-4 rounded-xl border border-[#E5E0D8] bg-[#F4F0EA]">
               <p className="text-[12px] text-[#2C1E11]/35 leading-relaxed">
                 Listing Provided Courtesy of {listing.listingBrokerage}. MLS ID: {listing.mlsId}.
@@ -121,7 +193,153 @@ export default async function PropertyDetailPage({ params }) {
             </div>
           </div>
         )}
+
+        {featured.length >= 3 && (
+          <div className="mt-20 pt-10 border-t border-[#E5E0D8]">
+            <div className="flex items-end justify-between gap-4 mb-8">
+              <div>
+                <h2
+                  className="text-[34px] lg:text-[40px] font-normal text-[#24180F] leading-tight mb-2"
+                  style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}
+                >
+                  Featured Properties
+                </h2>
+                <p className="text-[15px] text-[#2C1E11]/40 max-w-lg">
+                  Homes in neighborhoods I know — not just listed here, but actually considered.
+                </p>
+              </div>
+              <Link
+                href="/local-expert/listings"
+                className="hidden md:flex items-center gap-1.5 text-[13px] font-semibold text-[#2C1E11] hover:text-[#BA5B3E] transition-colors whitespace-nowrap"
+              >
+                View all active listings <ArrowRight size={13} />
+              </Link>
+            </div>
+
+            {/* Asymmetric feature layout: hero left, two sidebar cards right */}
+            <div className="grid grid-cols-1 lg:grid-cols-[3fr_2fr] gap-3 lg:h-[560px]">
+              <HeroListingCard listing={featured[0]} />
+              <div className="flex flex-col gap-3 h-full">
+                <SideListingCard listing={featured[1]} />
+                <SideListingCard listing={featured[2]} />
+              </div>
+            </div>
+
+            <Link
+              href="/local-expert/listings"
+              className="flex md:hidden items-center gap-1.5 text-[13px] font-semibold text-[#2C1E11] hover:text-[#BA5B3E] transition-colors mt-6"
+            >
+              View all active listings <ArrowRight size={13} />
+            </Link>
+          </div>
+        )}
       </div>
     </section>
+  )
+}
+
+function HeroListingCard({ listing }) {
+  return (
+    <Link href={`/local-expert/listings/${listing.id}`} className="group block h-full">
+      <article className="relative rounded-2xl overflow-hidden h-full min-h-[420px] lg:min-h-0">
+        <Image
+          src={listing.images[0]}
+          alt={listing.address}
+          fill
+          className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+        />
+        <div className="absolute top-4 left-4">
+          <span className="text-[11px] font-semibold uppercase tracking-wider px-3 py-1.5 rounded-full bg-white/90 text-[#2C1E11]">
+            {listing.status}
+          </span>
+        </div>
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/25 to-transparent" />
+        <div className="absolute bottom-0 left-0 right-0 px-6 py-6 lg:px-8 lg:py-7">
+          <div
+            className="text-[36px] lg:text-[44px] font-normal text-white leading-none mb-1.5"
+            style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}
+          >
+            {formatPrice(listing.price)}
+          </div>
+          <p className="text-[13px] text-white/65">{listing.address}</p>
+          <p className="text-[10px] text-white/45 mt-1.5">
+            Listing Provided Courtesy of {listing.listingBrokerage} · {listing.mlsId}
+          </p>
+          {/* Details — collapsed by default, slide up to reveal on hover */}
+          <div className="grid grid-rows-[0fr] opacity-0 transition-all duration-500 ease-out group-hover:grid-rows-[1fr] group-hover:opacity-100">
+            <div className="overflow-hidden">
+              <div className="h-px w-full bg-white/25 my-3" />
+              <div className="flex items-center justify-between gap-4">
+                <div className="flex items-center gap-4">
+                  <span className="flex items-center gap-1 text-[12px] text-white/55">
+                    <Bed size={12} /> {listing.beds} bd
+                  </span>
+                  <span className="flex items-center gap-1 text-[12px] text-white/55">
+                    <Bath size={12} /> {listing.baths} ba
+                  </span>
+                  <span className="flex items-center gap-1 text-[12px] text-white/55">
+                    <Square size={12} /> {listing.sqft.toLocaleString()} sf
+                  </span>
+                </div>
+                <span className="text-[12px] uppercase tracking-wider text-white/55">{listing.type}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+    </Link>
+  )
+}
+
+function SideListingCard({ listing }) {
+  return (
+    <Link href={`/local-expert/listings/${listing.id}`} className="group block flex-1 min-h-[200px] lg:min-h-0">
+      <article className="relative rounded-xl overflow-hidden h-full">
+        <Image
+          src={listing.images[0]}
+          alt={listing.address}
+          fill
+          className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+        />
+        <div className="absolute top-3 left-3">
+          <span className="text-[11px] font-semibold uppercase tracking-wider px-2.5 py-1 rounded-full bg-white/90 text-[#2C1E11]">
+            {listing.status}
+          </span>
+        </div>
+        <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/15 to-transparent" />
+        <div className="absolute bottom-0 left-0 right-0 px-4 py-4">
+          <div
+            className="text-[22px] font-normal text-white leading-none"
+            style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}
+          >
+            {formatPrice(listing.price)}
+          </div>
+          <p className="text-[12px] text-white/65 mt-1 truncate">{listing.address}</p>
+          <p className="text-[10px] text-white/45 mt-1 truncate">
+            Listing Provided Courtesy of {listing.listingBrokerage} · {listing.mlsId}
+          </p>
+          {/* Details — collapsed by default, slide up to reveal on hover */}
+          <div className="grid grid-rows-[0fr] opacity-0 transition-all duration-500 ease-out group-hover:grid-rows-[1fr] group-hover:opacity-100">
+            <div className="overflow-hidden">
+              <div className="h-px w-full bg-white/25 my-2" />
+              <div className="flex items-center justify-between gap-3">
+                <div className="flex items-center gap-3">
+                  <span className="flex items-center gap-1 text-[11px] text-white/55">
+                    <Bed size={11} /> {listing.beds} bd
+                  </span>
+                  <span className="flex items-center gap-1 text-[11px] text-white/55">
+                    <Bath size={11} /> {listing.baths} ba
+                  </span>
+                  <span className="flex items-center gap-1 text-[11px] text-white/55">
+                    <Square size={11} /> {listing.sqft.toLocaleString()} sf
+                  </span>
+                </div>
+                <span className="text-[11px] uppercase tracking-wider text-white/55">{listing.type}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+    </Link>
   )
 }

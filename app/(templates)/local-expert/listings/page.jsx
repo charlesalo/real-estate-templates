@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { Bed, Bath, Square, SlidersHorizontal } from 'lucide-react'
+import { Bed, Bath, Square } from 'lucide-react'
 import { LISTINGS } from '@/lib/local-expert-data'
 
 export const metadata = {
@@ -45,25 +45,32 @@ export default function ListingsPage({ searchParams }) {
             </p>
           </div>
 
-          {/* Quick filters */}
-          <div className="flex flex-wrap gap-2 mb-10">
+          {/* Section tabs */}
+          <div className="flex flex-wrap items-center gap-x-7 gap-y-2 mb-12 pb-5 border-b border-[#BEB7A9]/50">
             {[
-              { label: 'All', href: '/local-expert/listings' },
-              { label: 'West Village', href: '?q=West+Village' },
-              { label: 'Tribeca', href: '?q=Tribeca' },
-              { label: 'Brooklyn Heights', href: '?q=Brooklyn+Heights' },
-              { label: 'DUMBO', href: '?q=DUMBO' },
-              { label: 'Park Slope', href: '?q=Park+Slope' },
-              { label: 'Upper East Side', href: '?q=Upper+East+Side' },
-            ].map((f) => (
-              <Link
-                key={f.label}
-                href={f.href}
-                className="px-4 py-2 text-[12px] font-medium rounded-full border border-[#E5E0D8] text-[#2C1E11]/60 hover:border-[#1B3B2B]/30 hover:text-[#2C1E11] transition-colors"
-              >
-                {f.label}
-              </Link>
-            ))}
+              { label: 'All', q: '' },
+              { label: 'West Village', q: 'West Village' },
+              { label: 'Tribeca', q: 'Tribeca' },
+              { label: 'Brooklyn Heights', q: 'Brooklyn Heights' },
+              { label: 'DUMBO', q: 'DUMBO' },
+              { label: 'Park Slope', q: 'Park Slope' },
+              { label: 'Upper East Side', q: 'Upper East Side' },
+            ].map((f) => {
+              const isActive = (searchParams?.q ?? '') === f.q
+              return (
+                <Link
+                  key={f.label}
+                  href={f.q ? `?q=${encodeURIComponent(f.q)}` : '/local-expert/listings'}
+                  className={`text-[12px] tracking-[0.18em] uppercase pb-1 border-b-2 transition-colors ${
+                    isActive
+                      ? 'text-[#1B3B2B] border-[#BA5B3E]'
+                      : 'text-[#2C1E11]/45 border-transparent hover:text-[#24180F]'
+                  }`}
+                >
+                  {f.label}
+                </Link>
+              )
+            })}
           </div>
 
           {/* Grid */}
@@ -72,11 +79,16 @@ export default function ListingsPage({ searchParams }) {
               <p className="text-[#2C1E11]/40">No listings match your search. <Link href="/local-expert/listings" className="underline">Clear filters</Link></p>
             </div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {filtered.map((listing) => (
-                <ListingCard key={listing.id} listing={listing} />
-              ))}
-            </div>
+            <>
+              <LeadListing listing={filtered[0]} />
+              {filtered.length > 1 && (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
+                  {filtered.slice(1).map((listing) => (
+                    <ListingCard key={listing.id} listing={listing} />
+                  ))}
+                </div>
+              )}
+            </>
           )}
 
           {/* Compliance */}
@@ -95,48 +107,75 @@ export default function ListingsPage({ searchParams }) {
   )
 }
 
-function ListingCard({ listing }) {
+function LeadListing({ listing }) {
   return (
-    <Link href={`/local-expert/listings/${listing.id}`} className="group block">
-      <article className="rounded-xl overflow-hidden border border-[#E5E0D8] bg-white hover:shadow-md transition-shadow">
-        <div className="relative aspect-[4/3] overflow-hidden">
+    <Link href={`/local-expert/listings/${listing.id}`} className="group block mb-16 lg:mb-20">
+      <div className="grid grid-cols-1 lg:grid-cols-[1.5fr_1fr] gap-8 lg:gap-12 items-center">
+        <div className="relative aspect-[3/2] rounded-2xl overflow-hidden">
           <Image
             src={listing.images[0]}
             alt={listing.address}
             fill
-            className="object-cover transition-transform duration-500 group-hover:scale-105"
+            priority
+            sizes="(min-width: 1024px) 60vw, 100vw"
+            className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
           />
-          <div className="absolute top-3 left-3 flex gap-2">
-            <span className="text-[12px] font-semibold uppercase tracking-wider px-2.5 py-1 rounded-full bg-white/92 text-[#2C1E11]">
-              {listing.type}
-            </span>
-          </div>
         </div>
-        <div className="p-4">
+        <div>
+          <p className="text-[11px] tracking-[0.3em] uppercase text-[#BA5B3E] mb-3">Featured · {listing.type}</p>
           <div
-            className="text-[24px] font-normal text-[#24180F] leading-none mb-1"
+            className="text-[44px] lg:text-[52px] font-normal text-[#24180F] leading-none transition-colors group-hover:text-[#BA5B3E]"
             style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}
           >
             {formatPrice(listing.price)}
           </div>
-          <p className="text-[14px] font-semibold text-[#2C1E11] mt-1">{listing.address}</p>
-          <p className="text-[12px] text-[#2C1E11]/45">{listing.neighborhood}, {listing.city} {listing.zip}</p>
-          <div className="flex items-center gap-4 mt-3 pt-3 border-t border-[#E5E0D8]">
-            <span className="flex items-center gap-1 text-[12px] text-[#2C1E11]/50">
-              <Bed size={12} /> {listing.beds} bd
-            </span>
-            <span className="flex items-center gap-1 text-[12px] text-[#2C1E11]/50">
-              <Bath size={12} /> {listing.baths} ba
-            </span>
-            <span className="flex items-center gap-1 text-[12px] text-[#2C1E11]/50">
-              <Square size={12} /> {listing.sqft.toLocaleString()} sf
-            </span>
+          <p className="text-[18px] text-[#24180F]/70 mt-4" style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}>
+            {listing.address}
+          </p>
+          <p className="text-[14px] text-[#24180F]/45 mt-1">{listing.neighborhood}, {listing.city} {listing.zip}</p>
+          <div className="flex gap-6 mt-6 pt-6 border-t border-[#BEB7A9]/50 text-[12px] tracking-[0.16em] uppercase text-[#24180F]/55">
+            <span className="flex items-center gap-1.5"><Bed size={13} /> {listing.beds} bd</span>
+            <span className="flex items-center gap-1.5"><Bath size={13} /> {listing.baths} ba</span>
+            <span className="flex items-center gap-1.5"><Square size={13} /> {listing.sqft.toLocaleString()} sqft</span>
           </div>
-          <p className="text-[12px] text-[#2C1E11]/25 mt-2.5 leading-snug">
+          <p className="text-[9px] text-[#2C1E11]/25 mt-4">
             Listing Provided Courtesy of {listing.listingBrokerage} · {listing.mlsId}
           </p>
         </div>
-      </article>
+      </div>
+    </Link>
+  )
+}
+
+function ListingCard({ listing }) {
+  return (
+    <Link href={`/local-expert/listings/${listing.id}`} className="group block">
+      <div className="relative aspect-[4/3] rounded-xl overflow-hidden mb-5">
+        <Image
+          src={listing.images[0]}
+          alt={listing.address}
+          fill
+          sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
+          className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+        />
+      </div>
+      <p className="text-[11px] tracking-[0.3em] uppercase text-[#BA5B3E] mb-2">{listing.type}</p>
+      <div
+        className="text-[28px] font-normal text-[#24180F] leading-none transition-colors group-hover:text-[#BA5B3E]"
+        style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}
+      >
+        {formatPrice(listing.price)}
+      </div>
+      <p className="text-[14px] text-[#24180F]/55 mt-2">{listing.address}</p>
+      <p className="text-[13px] text-[#24180F]/40">{listing.neighborhood}, {listing.city} {listing.zip}</p>
+      <div className="flex gap-5 mt-4 pt-4 border-t border-[#BEB7A9]/50 text-[11px] tracking-[0.16em] uppercase text-[#24180F]/50">
+        <span className="flex items-center gap-1.5"><Bed size={12} /> {listing.beds} bd</span>
+        <span className="flex items-center gap-1.5"><Bath size={12} /> {listing.baths} ba</span>
+        <span className="flex items-center gap-1.5"><Square size={12} /> {listing.sqft.toLocaleString()} sqft</span>
+      </div>
+      <p className="text-[9px] text-[#2C1E11]/25 mt-3">
+        Listing Provided Courtesy of {listing.listingBrokerage} · {listing.mlsId}
+      </p>
     </Link>
   )
 }
