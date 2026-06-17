@@ -36,7 +36,8 @@ export default async function PropertyDetailPage({ params }) {
   const featured = LISTINGS.filter((l) => !excluded.has(l.id)).slice(0, 3)
 
   return (
-    <section className="pt-[112px] pb-[64px] lg:pt-[144px] lg:pb-[80px]" style={{ backgroundColor: '#F8F3EB' }}>
+    <>
+    <section className="pt-[112px] pb-[96px] lg:pt-[144px] lg:pb-[128px]" style={{ backgroundColor: '#F8F3EB' }}>
       <div className="max-w-7xl mx-auto px-5 lg:px-8">
 
         <Link
@@ -106,54 +107,57 @@ export default async function PropertyDetailPage({ params }) {
             </div>
 
             {hood && (
-              <div className="mb-10">
-                <h3 className="text-[19px] font-normal text-[#24180F] mb-4" style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}>
-                  About {hood.name}
+              <div className="mb-10 mt-12 pt-10 border-t border-[#E5E0D8]">
+                <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#BA5B3E] mb-3">The Neighborhood</p>
+                <h3 className="text-[30px] lg:text-[34px] font-normal text-[#24180F] leading-tight mb-1" style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}>
+                  {hood.name}
                 </h3>
-                <div className="rounded-xl overflow-hidden border border-[#E5E0D8] bg-white">
-                  <div className="relative aspect-[16/7]">
-                    <Image src={hood.image} alt={hood.name} fill className="object-cover" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#24180F]/70 via-transparent to-transparent" />
-                    <div className="absolute bottom-3 left-4 right-4">
-                      <p className="text-[11px] font-bold uppercase tracking-wider text-white/75">{hood.borough}</p>
-                      <p className="text-[22px] font-normal text-white leading-tight" style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}>{hood.name}</p>
-                    </div>
+                <p className="text-[13px] uppercase tracking-wider text-[#2C1E11]/40 mb-6">{hood.borough}</p>
+
+                <div className="relative aspect-[16/8] rounded-sm overflow-hidden mb-6">
+                  <Image src={hood.image} alt={hood.name} fill className="object-cover" />
+                </div>
+
+                <p className="text-[19px] lg:text-[21px] font-normal text-[#24180F]/80 leading-snug italic mb-5" style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}>
+                  {hood.tagline}
+                </p>
+                <p className="text-[16px] text-[#24180F]/65 leading-relaxed mb-8 first-letter:text-[44px] first-letter:font-normal first-letter:text-[#24180F] first-letter:float-left first-letter:mr-2 first-letter:mt-1 first-letter:leading-[0.85] first-letter:[font-family:var(--font-gelasio,Georgia,serif)]">
+                  {hood.description}
+                </p>
+
+                <div className="flex flex-wrap items-baseline gap-x-10 gap-y-4 py-5 border-y border-[#E5E0D8] mb-6">
+                  <div>
+                    <p className="text-[24px] font-normal text-[#24180F] leading-none" style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}>{hood.medianPrice}</p>
+                    <p className="text-[11px] uppercase tracking-wider text-[#2C1E11]/45 mt-1.5">Median Price</p>
                   </div>
-                  <div className="p-5">
-                    <p className="text-[14px] italic text-[#2C1E11]/70 mb-3">{hood.tagline}</p>
-                    <p className="text-[15px] text-[#24180F]/65 leading-relaxed mb-5">{hood.description}</p>
-
-                    <div className="grid grid-cols-3 gap-3 mb-5">
-                      <div className="rounded-lg bg-[#F4F0EA] p-3 text-center">
-                        <p className="text-[18px] font-normal text-[#24180F]" style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}>{hood.medianPrice}</p>
-                        <p className="text-[11px] uppercase tracking-wider text-[#2C1E11]/45 mt-0.5">Median Price</p>
-                      </div>
-                      <div className="rounded-lg bg-[#F4F0EA] p-3 text-center">
-                        <p className="flex items-center justify-center gap-1 text-[18px] font-normal text-[#24180F]" style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}>
-                          <Footprints size={15} className="text-[#8B9E8B]" />{hood.walkScore}
-                        </p>
-                        <p className="text-[11px] uppercase tracking-wider text-[#2C1E11]/45 mt-0.5">Walk Score</p>
-                      </div>
-                      <div className="rounded-lg bg-[#F4F0EA] p-3 text-center">
-                        <p className="text-[18px] font-normal text-[#24180F]" style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}>{hood.activeListings}</p>
-                        <p className="text-[11px] uppercase tracking-wider text-[#2C1E11]/45 mt-0.5">Active Listings</p>
-                      </div>
-                    </div>
-
-                    <div className="flex flex-wrap gap-2 mb-5">
-                      {hood.vibes.map((v) => (
-                        <span key={v} className="px-3 py-1 text-[12px] rounded-full border border-[#E5E0D8] text-[#2C1E11]/60">{v}</span>
-                      ))}
-                    </div>
-
-                    <Link
-                      href={`/local-expert/neighborhoods/${hood.slug}`}
-                      className="inline-flex items-center gap-1.5 text-[13px] font-semibold text-[#2C1E11] hover:text-[#BA5B3E] transition-colors"
-                    >
-                      Explore {hood.name} <ArrowRight size={14} />
-                    </Link>
+                  <div>
+                    <p className="flex items-center gap-1.5 text-[24px] font-normal text-[#24180F] leading-none" style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}>
+                      <Footprints size={18} className="text-[#8B9E8B]" />{hood.walkScore}
+                    </p>
+                    <p className="text-[11px] uppercase tracking-wider text-[#2C1E11]/45 mt-1.5">Walk Score</p>
+                  </div>
+                  <div>
+                    <p className="text-[24px] font-normal text-[#24180F] leading-none" style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}>{hood.activeListings}</p>
+                    <p className="text-[11px] uppercase tracking-wider text-[#2C1E11]/45 mt-1.5">Active Listings</p>
                   </div>
                 </div>
+
+                <p className="text-[14px] text-[#2C1E11]/55 mb-6">
+                  Known for{' '}
+                  {hood.vibes.map((v, i) => (
+                    <span key={v}>
+                      <span className="text-[#24180F]/75">{v.toLowerCase()}</span>
+                      {i < hood.vibes.length - 1 && <span className="text-[#2C1E11]/30">{i === hood.vibes.length - 2 ? ' & ' : ', '}</span>}
+                    </span>
+                  ))}.
+                </p>
+
+                <Link
+                  href={`/local-expert/neighborhoods/${hood.slug}`}
+                  className="inline-flex items-center gap-1.5 text-[13px] font-semibold text-[#2C1E11] hover:text-[#BA5B3E] transition-colors"
+                >
+                  Explore {hood.name} <ArrowRight size={14} />
+                </Link>
               </div>
             )}
 
@@ -193,9 +197,12 @@ export default async function PropertyDetailPage({ params }) {
             </div>
           </div>
         )}
+      </div>
+    </section>
 
-        {featured.length >= 3 && (
-          <div className="mt-20 pt-10 border-t border-[#E5E0D8]">
+    {featured.length >= 3 && (
+      <section className="py-[96px] lg:py-[128px]" style={{ backgroundColor: '#F2ECE1' }}>
+        <div className="max-w-7xl mx-auto px-5 lg:px-8">
             <div className="flex items-end justify-between gap-4 mb-8">
               <div>
                 <h2
@@ -231,10 +238,44 @@ export default async function PropertyDetailPage({ params }) {
             >
               View all active listings <ArrowRight size={13} />
             </Link>
-          </div>
-        )}
+        </div>
+      </section>
+    )}
+
+    {/* ─── CONTACT TEASER ───────────────────────────────────────────── */}
+    <section className="relative py-[120px] lg:py-[168px] overflow-hidden">
+      {/* Full-bleed background */}
+      <Image
+        src="https://images.unsplash.com/photo-1440613905118-99b921706b5c?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+        alt="Dumbo Manhattan Bridge"
+        fill
+        className="object-cover object-center"
+      />
+      {/* Dark green overlay */}
+      <div className="absolute inset-0" style={{ backgroundColor: 'rgba(0,0,0,0.38)' }} />
+
+      {/* Content */}
+      <div className="relative max-w-3xl mx-auto px-5 lg:px-8 text-center">
+        <p className="text-[12px] tracking-[0.4em] uppercase text-white mb-4">Let&apos;s Work Together</p>
+        <h2
+          className="text-[34px] lg:text-[45px] font-normal text-[#F8F3EB] leading-tight mb-5"
+          style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}
+        >
+          The right home<br className="sm:hidden" /> is a feeling.<br />I know how to find it.
+        </h2>
+        <p className="text-[16px] text-white/80 mb-8 max-w-md mx-auto leading-relaxed">
+          Not sure where to start? Tell me what you&apos;re looking for — or what you&apos;re running from.
+          I know this city. I&apos;ll help.
+        </p>
+        <Link
+          href="/local-expert/contact"
+          className="inline-flex items-center px-8 py-3.5 text-[14px] font-bold rounded-full bg-[#F8F3EB] text-[#1B3B2B] hover:bg-white transition-colors"
+        >
+          Start the conversation
+        </Link>
       </div>
     </section>
+    </>
   )
 }
 
