@@ -135,6 +135,8 @@ export default function HomePage() {
 
       <Navbar />
 
+      <main id="main-content" tabIndex={-1} className="outline-none">
+
       {/* ── Hero ── */}
       <section className="relative min-h-screen flex items-center overflow-hidden">
         {/* Background video */}
@@ -152,7 +154,7 @@ export default function HomePage() {
         <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-t from-[#0d0d0d] to-transparent" />
 
         <div className="relative z-10 max-w-7xl mx-auto px-6 pt-16 pb-16 md:pt-24 md:pb-24 w-full">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/15 text-xs text-white/50 mb-8">
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/15 text-xs text-white/70 mb-8">
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
             Accepting new clients — USA nationwide
           </div>
@@ -165,7 +167,7 @@ export default function HomePage() {
             <em className="not-italic text-[#c4a882]">built to close.</em>
           </h1>
 
-          <p className="text-lg text-white/55 max-w-xl leading-relaxed mb-10">
+          <p className="text-lg text-white/75 max-w-xl leading-relaxed mb-10">
             I build fully custom real estate websites for agents and teams across the USA — MLS-connected,
             conversion-optimized, and fast enough to actually rank on Google. You work directly with me, start to finish.
           </p>
@@ -179,7 +181,7 @@ export default function HomePage() {
             </a>
             <OpenContactButton
               label="Get in Touch"
-              className="px-6 py-3 rounded-md border border-white/20 text-sm font-medium text-white/60 hover:text-white hover:border-white/40 transition-colors duration-200 min-w-[180px] text-center"
+              className="px-6 py-3 rounded-md border border-white/20 text-sm font-medium text-white/80 hover:text-white hover:border-white/40 transition-colors duration-200 min-w-[180px] text-center"
             />
           </div>
         </div>
@@ -204,7 +206,7 @@ export default function HomePage() {
 
           {/* Copy */}
           <div className="w-full lg:w-7/12">
-            <p className="text-xs text-[#555555] uppercase tracking-widest mb-4">Behind the Build</p>
+            <p className="text-xs text-[#8a8a8a] uppercase tracking-widest mb-4">Behind the Build</p>
             <h2
               className="text-3xl sm:text-4xl font-bold text-[#e2e2e2] leading-tight mb-6"
               style={{ fontFamily: 'var(--font-playfair), Georgia, serif' }}
@@ -253,7 +255,7 @@ export default function HomePage() {
       <div id="templates">
         {/* Section header */}
         <div className="max-w-7xl mx-auto px-6 pt-16 md:pt-24 pb-0">
-          <p className="text-xs text-[#555555] uppercase tracking-widest mb-3">Templates</p>
+          <p className="text-xs text-[#8a8a8a] uppercase tracking-widest mb-3">Templates</p>
           <h2
             className="text-3xl sm:text-4xl font-bold text-[#e2e2e2]"
             style={{ fontFamily: 'var(--font-playfair), Georgia, serif' }}
@@ -286,12 +288,12 @@ export default function HomePage() {
                     </div>
                   </div>
                 </Link>
-                <p className="text-xs text-[#555555] mt-3 text-center">Hover to scroll through the full page</p>
+                <p className="text-xs text-[#8a8a8a] mt-3 text-center">Hover to scroll through the full page</p>
               </div>
 
               {/* ── Info ── */}
               <div className="w-full lg:flex-1">
-                <p className="text-xs text-[#555555] uppercase tracking-widest mb-3">{t.badge}</p>
+                <p className="text-xs text-[#8a8a8a] uppercase tracking-widest mb-3">{t.badge}</p>
                 <h2
                   className="text-3xl sm:text-4xl font-bold text-[#e2e2e2] leading-tight mb-4"
                   style={{ fontFamily: 'var(--font-playfair), Georgia, serif' }}
@@ -320,7 +322,7 @@ export default function HomePage() {
       <section className="border-y border-[#2a2a2a] bg-[#0d0d0d]">
         <div className="max-w-7xl mx-auto px-6 py-16 md:py-24">
           <div className="mb-14">
-            <p className="text-xs text-[#555555] uppercase tracking-widest mb-3">Why Chavbuilds</p>
+            <p className="text-xs text-[#8a8a8a] uppercase tracking-widest mb-3">Why Chavbuilds</p>
             <h2
               className="text-3xl sm:text-4xl font-bold text-[#e2e2e2]"
               style={{ fontFamily: 'var(--font-playfair), Georgia, serif' }}
@@ -348,7 +350,7 @@ export default function HomePage() {
       {/* ── Past Work ── */}
       <section id="work" className="max-w-7xl mx-auto px-6 py-16 md:py-24">
         <div className="mb-10">
-          <p className="text-xs text-[#555555] uppercase tracking-widest mb-3">Past Work</p>
+          <p className="text-xs text-[#8a8a8a] uppercase tracking-widest mb-3">Past Work</p>
           <h2
             className="text-3xl sm:text-4xl font-bold text-[#e2e2e2]"
             style={{ fontFamily: 'var(--font-playfair), Georgia, serif' }}
@@ -363,7 +365,7 @@ export default function HomePage() {
       <section id="pricing" className="border-y border-[#2a2a2a] bg-[#0d0d0d]">
         <div className="max-w-7xl mx-auto px-6 py-16 md:py-24">
           <div className="text-center mb-14">
-            <p className="text-xs text-[#555555] uppercase tracking-widest mb-3">Pricing</p>
+            <p className="text-xs text-[#8a8a8a] uppercase tracking-widest mb-3">Pricing</p>
             <h2
               className="text-3xl sm:text-4xl font-bold text-[#e2e2e2]"
               style={{ fontFamily: 'var(--font-playfair), Georgia, serif' }}
@@ -380,7 +382,7 @@ export default function HomePage() {
                 className="rounded-xl border border-[#2a2a2a] bg-[#1c1c1c] p-8 flex flex-col"
               >
                 <div className="mb-6">
-                  <p className="text-xs text-[#555555] uppercase tracking-widest mb-2">{name}</p>
+                  <p className="text-xs text-[#8a8a8a] uppercase tracking-widest mb-2">{name}</p>
                   <div className="flex items-end gap-2 mb-1">
                     <span
                       className="text-4xl font-bold text-[#e2e2e2]"
@@ -388,7 +390,7 @@ export default function HomePage() {
                     >
                       {price}
                     </span>
-                    <span className="text-sm text-[#555555] pb-1">{note}</span>
+                    <span className="text-sm text-[#8a8a8a] pb-1">{note}</span>
                   </div>
                   <p className="text-xs text-[#c4a882] mb-3">+ {monthly} retainer</p>
                   <p className="text-sm text-[#8a8a8a]">{description}</p>
@@ -413,7 +415,7 @@ export default function HomePage() {
 
           {/* Included with every project */}
           <div className="mt-12 rounded-xl border border-[#2a2a2a] bg-[#1c1c1c] p-8">
-            <p className="text-xs text-[#555555] uppercase tracking-widest mb-6 text-center">Included With Every Project</p>
+            <p className="text-xs text-[#8a8a8a] uppercase tracking-widest mb-6 text-center">Included With Every Project</p>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-4 max-w-4xl mx-auto">
               {INCLUDED.map((item) => (
                 <div key={item} className="flex items-start gap-3 text-sm text-[#8a8a8a]">
@@ -424,7 +426,7 @@ export default function HomePage() {
             </div>
           </div>
 
-          <p className="text-center text-xs text-[#555555] mt-8">
+          <p className="text-center text-xs text-[#8a8a8a] mt-8">
             Need something custom? <OpenContactButton label="Email me" className="text-[#8a8a8a] hover:text-[#c4a882] transition-colors underline-offset-2 hover:underline" /> — all projects are scoped individually.
           </p>
         </div>
@@ -433,7 +435,7 @@ export default function HomePage() {
       {/* ── How It Works ── */}
       <section id="how-it-works" className="max-w-7xl mx-auto px-6 py-16 md:py-24">
         <div className="mb-14">
-          <p className="text-xs text-[#555555] uppercase tracking-widest mb-3">How It Works</p>
+          <p className="text-xs text-[#8a8a8a] uppercase tracking-widest mb-3">How It Works</p>
           <h2
             className="text-3xl sm:text-4xl font-bold text-[#e2e2e2]"
             style={{ fontFamily: 'var(--font-playfair), Georgia, serif' }}
@@ -449,6 +451,8 @@ export default function HomePage() {
       {/* ── Final CTA ── */}
       <CTASection />
 
+      </main>
+
       {/* ── Footer ── */}
       <footer className="border-t border-[#2a2a2a]">
         <div className="max-w-7xl mx-auto px-6 py-12">
@@ -461,21 +465,21 @@ export default function HomePage() {
                 height={36}
                 className="h-8 w-auto object-contain mb-3"
               />
-              <p className="text-xs text-[#555555] max-w-xs leading-relaxed">
+              <p className="text-xs text-[#8a8a8a] max-w-xs leading-relaxed">
                 Custom websites and web tools built for people who care about quality, speed, and results.
               </p>
             </div>
 
             <div className="flex flex-col sm:flex-row gap-10 text-sm">
               <div>
-                <p className="text-xs text-[#555555] uppercase tracking-widest mb-3">Templates</p>
+                <p className="text-xs text-[#8a8a8a] uppercase tracking-widest mb-3">Templates</p>
                 <div className="flex flex-col gap-2">
                   <Link href="/modern-team" className="text-[#8a8a8a] hover:text-[#e2e2e2] transition-colors">Modern Team</Link>
                   <Link href="/luxury-agent" className="text-[#8a8a8a] hover:text-[#e2e2e2] transition-colors">Luxury Agent</Link>
                 </div>
               </div>
               <div>
-                <p className="text-xs text-[#555555] uppercase tracking-widest mb-3">Company</p>
+                <p className="text-xs text-[#8a8a8a] uppercase tracking-widest mb-3">Company</p>
                 <div className="flex flex-col gap-2">
                   <a href="#work" className="text-[#8a8a8a] hover:text-[#e2e2e2] transition-colors">My Work</a>
                   <a href="#pricing" className="text-[#8a8a8a] hover:text-[#e2e2e2] transition-colors">Pricing</a>
@@ -486,8 +490,8 @@ export default function HomePage() {
           </div>
 
           <div className="border-t border-[#2a2a2a] pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-            <p className="text-xs text-[#555555]">© {new Date().getFullYear()} Chavbuilds. All rights reserved.</p>
-            <p className="text-xs text-[#555555]">Real estate websites for agents &amp; teams across the USA.</p>
+            <p className="text-xs text-[#8a8a8a]">© {new Date().getFullYear()} Chavbuilds. All rights reserved.</p>
+            <p className="text-xs text-[#8a8a8a]">Real estate websites for agents &amp; teams across the USA.</p>
           </div>
         </div>
       </footer>

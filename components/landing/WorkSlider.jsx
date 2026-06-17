@@ -187,7 +187,7 @@ export default function WorkSlider() {
       {/* CTA block */}
       <div className="mt-12 rounded-xl border border-[#2a2a2a] bg-[#1c1c1c] px-8 py-7 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
         <div>
-          <p className="text-xs text-[#555555] uppercase tracking-widest mb-2">Get in Touch</p>
+          <p className="text-xs text-[#8a8a8a] uppercase tracking-widest mb-2">Get in Touch</p>
           <h2 className="text-3xl sm:text-4xl font-bold text-[#e2e2e2] mb-2" style={{ fontFamily: 'var(--font-playfair), Georgia, serif' }}>Want a site like these?</h2>
           <p className="text-sm text-[#8a8a8a] max-w-xl">
             A few highlights from 500+ website builds and revisions (200+ drafts, 300+ revisions) delivered while contracting at Luxury Presence.

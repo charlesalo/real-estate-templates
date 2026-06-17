@@ -227,9 +227,37 @@
   display: none;
 }
 
+/* ─── Visible focus indicator (keyboard navigation) ───────────────────────── */
+/* Links and buttons get a gold outline. Form fields define their own         */
+/* compliant focus treatment (full-opacity gold border + ring) inline.        */
+@layer base {
+  a:focus-visible,
+  button:focus-visible,
+  [tabindex]:focus-visible {
+    outline: 2px solid #c4a882;
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+}
+
+/* ─── Respect reduced-motion preferences ──────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .template-preview-container:hover img {
+    transform: translateY(0) !important;
+  }
+}
+
 /* ─── Select placeholder color ─────────────────────────────────────────────── */
 select.cb-select:required:invalid {
-  color: #555555;
+  color: #8a8a8a;
 }
 
 /* ─── Template Preview Hover Scroll ────────────────────────────────────────── */

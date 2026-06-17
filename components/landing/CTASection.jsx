@@ -41,14 +41,14 @@ export default function CTASection() {
       <div className="absolute inset-0 bg-[#111111]/80" />
 
       <div className="relative z-10 max-w-3xl mx-auto px-6 py-16 md:py-24 text-center">
-        <p className="text-xs text-white/40 uppercase tracking-widest mb-6">Ready to get started?</p>
+        <p className="text-xs text-white/70 uppercase tracking-widest mb-6">Ready to get started?</p>
         <h2
           className="text-4xl sm:text-5xl font-bold text-white mb-5 leading-tight"
           style={{ fontFamily: 'var(--font-playfair), Georgia, serif' }}
         >
           Let&apos;s build your site.
         </h2>
-        <p className="text-white/55 mb-10 max-w-md mx-auto">
+        <p className="text-white/75 mb-10 max-w-md mx-auto">
           Tell me about your brand, your market, and your goals. I&apos;ll take it from there.
         </p>
         <CTAButton />
