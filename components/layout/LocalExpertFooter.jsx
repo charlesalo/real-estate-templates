@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { ExternalLink, MapPin, Phone, Mail } from 'lucide-react'
+import { ExternalLink, Mail, Phone, MapPin, Clock } from 'lucide-react'
 
 // ── Brand icons (lucide-react no longer ships brand logos) ──────────────────────
 function FacebookIcon({ size = 16 }) {
@@ -27,22 +27,6 @@ function LinkedinIcon({ size = 16 }) {
 
 const BASE = '/local-expert'
 
-const EXPLORE_LINKS = [
-  { label: 'Neighborhoods', href: `${BASE}/neighborhoods` },
-  { label: 'Active Listings', href: `${BASE}/listings` },
-  { label: 'Field Notes', href: `${BASE}/field-notes` },
-  { label: 'Home Valuation', href: `${BASE}/home-valuation` },
-  { label: 'Blog', href: `${BASE}/blog` },
-]
-
-const WORKING_LINKS = [
-  { label: 'Buyer Process', href: `${BASE}/about` },
-  { label: 'Seller Process', href: `${BASE}/about` },
-  { label: 'Relocation Guide', href: `${BASE}/about` },
-  { label: 'Investment Buyers', href: `${BASE}/about` },
-  { label: 'Contact', href: `${BASE}/contact` },
-]
-
 const NYS_LINKS = [
   { label: 'Fair Housing Notice', href: 'https://www.dos.ny.gov/licensing/docs/FairHousingNotice_new.pdf' },
   { label: 'Standard Operating Procedure', href: 'https://www.dos.ny.gov/licensing/re_salesperson/docs/StandardOperatingProcedures.pdf' },
@@ -54,14 +38,6 @@ const SOCIAL_LINKS = [
   { label: 'Instagram', href: '#', Icon: InstagramIcon },
   { label: 'LinkedIn', href: '#', Icon: LinkedinIcon },
 ]
-
-function ColHeading({ children }) {
-  return (
-    <h4 className="text-[12px] tracking-[0.4em] uppercase text-[#F8F3EB]/45 mb-5 font-medium">
-      {children}
-    </h4>
-  )
-}
 
 export default function LocalExpertFooter({ agent }) {
   const year = new Date().getFullYear()
@@ -75,91 +51,94 @@ export default function LocalExpertFooter({ agent }) {
 
       {/* ── Main grid ────────────────────────────────────────────────────── */}
       <div className="max-w-7xl mx-auto px-6 lg:px-8 py-[64px] lg:py-[80px]">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[2fr_1fr_1fr_1.5fr] gap-12 lg:gap-10">
+        <div>
 
           {/* Brand */}
           <div>
-            <div className="mb-5">
-              <div
-                className="text-[28px] font-normal text-[#F8F3EB] leading-none"
-                style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}
-              >
-                {agent?.firstName ?? 'Nadia'}<span className="text-[#BA5B3E]">.</span>
-              </div>
-              <div className="text-[12px] tracking-[0.35em] text-[#F8F3EB]/40 uppercase mt-1">NY Local</div>
+            <div className="mb-5 flex items-center" style={{ gap: '10px' }}>
+              <Image
+                src="/images/local-expert/Nadia Logo Light.png"
+                alt="Nadia."
+                height={28}
+                width={99}
+                style={{ height: '28px', width: 'auto' }}
+              />
+              <span className="text-[13px] font-medium tracking-[0.28em] uppercase text-[#F8F3EB]">
+                NY LOCAL
+              </span>
             </div>
 
-            <p className="text-[14px] text-[#F8F3EB]/50 leading-relaxed mb-6 max-w-xs">
+            <p className="text-[14px] text-[#F8F3EB]/50 leading-relaxed mb-6">
               A licensed independent broker covering Manhattan, Brooklyn, and the neighborhoods in between since 2010.
             </p>
 
-            <div className="space-y-2.5">
-              <p className="text-[14px] font-medium text-[#F8F3EB]/70">{brokerage}</p>
-              <p className="flex items-start gap-2 text-[13px] text-[#F8F3EB]/45">
-                <MapPin size={13} className="flex-shrink-0 mt-[1px] text-[#F8F3EB]/30" />
-                {address}
-              </p>
-              <a href={`tel:${phone}`} className="flex items-center gap-2 text-[13px] text-[#F8F3EB]/45 hover:text-[#F8F3EB] transition-colors">
-                <Phone size={13} className="flex-shrink-0 text-[#F8F3EB]/30" />
-                {phone}
-              </a>
-              <a href={`mailto:${email}`} className="flex items-center gap-2 text-[13px] text-[#F8F3EB]/45 hover:text-[#F8F3EB] transition-colors">
-                <Mail size={13} className="flex-shrink-0 text-[#F8F3EB]/30" />
-                {email}
-              </a>
-            </div>
-          </div>
-
-          {/* Explore */}
-          <div>
-            <ColHeading>Explore</ColHeading>
-            <ul className="space-y-3">
-              {EXPLORE_LINKS.map((l) => (
-                <li key={l.href}>
-                  <Link href={l.href} className="text-[14px] text-[#F8F3EB]/55 hover:text-[#F8F3EB] transition-colors">
-                    {l.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Working With Me */}
-          <div>
-            <ColHeading>Working With Me</ColHeading>
-            <ul className="space-y-3">
-              {WORKING_LINKS.map((l) => (
-                <li key={l.label}>
-                  <Link href={l.href} className="text-[14px] text-[#F8F3EB]/55 hover:text-[#F8F3EB] transition-colors">
-                    {l.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* NYS DOS Disclosures */}
-          <div>
-            <ColHeading>NYS DOS Disclosures</ColHeading>
-            <ul className="space-y-3">
+            {/* Brokerage + NYS DOS Disclosures */}
+            <div className="space-y-1 mb-6">
+              <Link href={BASE} className="block text-[14px] font-medium text-[#F8F3EB]/70 hover:text-[#F8F3EB] transition-colors w-fit">
+                {brokerage}
+              </Link>
               {NYS_LINKS.map((l) => (
-                <li key={l.href}>
-                  <a
-                    href={l.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-start gap-1.5 text-[14px] text-[#F8F3EB]/55 hover:text-[#F8F3EB] transition-colors"
-                  >
-                    <ExternalLink size={11} className="flex-shrink-0 mt-[3px]" />
-                    {l.label}
-                  </a>
-                </li>
+                <a
+                  key={l.href}
+                  href={l.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-start gap-1.5 text-[14px] text-[#F8F3EB]/55 hover:text-[#F8F3EB] transition-colors w-fit"
+                >
+                  <ExternalLink size={11} className="flex-shrink-0 mt-[4px]" />
+                  {l.label}
+                </a>
               ))}
-            </ul>
-            <p className="text-[12px] text-[#F8F3EB]/30 leading-relaxed mt-5">
+            </div>
+
+            {/* Contact row */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-10 gap-y-6 mb-6">
+              {/* Column 1 — Email + Address */}
+              <div className="space-y-6">
+                <div>
+                  <p className="flex items-center gap-1.5 text-[13px] text-[#F8F3EB]/40">
+                    <Mail size={13} className="flex-shrink-0 text-[#F8F3EB]/30" />
+                    Email
+                  </p>
+                  <a href={`mailto:${email}`} className="text-[14px] text-[#F8F3EB]/65 hover:text-[#F8F3EB] transition-colors">
+                    {email}
+                  </a>
+                </div>
+                <div>
+                  <p className="flex items-center gap-1.5 text-[13px] text-[#F8F3EB]/40">
+                    <MapPin size={13} className="flex-shrink-0 text-[#F8F3EB]/30" />
+                    Address:
+                  </p>
+                  <p className="text-[14px] text-[#F8F3EB]/65">{address}</p>
+                </div>
+              </div>
+
+              {/* Column 2 — Phone number + Office hours */}
+              <div className="space-y-6">
+                <div>
+                  <p className="flex items-center gap-1.5 text-[13px] text-[#F8F3EB]/40">
+                    <Phone size={13} className="flex-shrink-0 text-[#F8F3EB]/30" />
+                    Phone number:
+                  </p>
+                  <a href={`tel:${phone}`} className="text-[14px] text-[#F8F3EB]/65 hover:text-[#F8F3EB] transition-colors">
+                    {phone}
+                  </a>
+                </div>
+                <div>
+                  <p className="flex items-center gap-1.5 text-[13px] text-[#F8F3EB]/40">
+                    <Clock size={13} className="flex-shrink-0 text-[#F8F3EB]/30" />
+                    Office hours:
+                  </p>
+                  <p className="text-[14px] text-[#F8F3EB]/65">Mon–Fri 9am–6pm · Sat by appointment</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Disclaimers */}
+            <p className="text-[12px] text-[#F8F3EB]/40 leading-relaxed mb-4 mt-12">
               All information is deemed reliable but not guaranteed and should be independently reviewed and verified.
             </p>
-            <div className="flex items-center gap-4 mt-5">
+            <div className="flex items-center gap-4 mb-6">
               <Image
                 src="/images/Realtor Logo.png"
                 alt="REALTOR®"
@@ -175,6 +154,26 @@ export default function LocalExpertFooter({ agent }) {
                 className="h-9 w-auto brightness-0 invert opacity-45"
               />
             </div>
+            <p className="text-[12px] text-[#F8F3EB]/40 leading-relaxed">
+              Listing information for certain New York City properties provided courtesy of the Real Estate Board of New
+              York&rsquo;s Residential Listing Service (the &ldquo;RLS&rdquo;). The information contained in this listing
+              has not been verified by the RLS and should be verified by the consumer. The listing information provided
+              here is for the consumer&rsquo;s personal, non-commercial use. Retransmission, redistribution or copying of
+              this listing information is strictly prohibited except in connection with a consumer&rsquo;s consideration
+              of the purchase and/or sale of an individual property. This listing information is not verified for
+              authenticity or accuracy and is not guaranteed and may not reflect all real estate activity in the market.
+              &copy;{year} The Real Estate Board of New York, Inc., all rights reserved.
+            </p>
+
+            <div className="flex items-center gap-4 mt-3">
+              <Image
+                src="/images/RLS at REBNY.png"
+                alt="RLS at REBNY"
+                width={72}
+                height={40}
+                className="h-9 w-auto brightness-0 invert opacity-45"
+              />
+            </div>
           </div>
         </div>
       </div>
@@ -183,8 +182,7 @@ export default function LocalExpertFooter({ agent }) {
       <div className="border-t border-[#F8F3EB]/8">
         <div className="max-w-7xl mx-auto px-6 lg:px-8 py-5 flex flex-col md:flex-row items-start md:items-center justify-between gap-3">
           <p className="text-[12px] text-[#F8F3EB]/30 leading-relaxed max-w-2xl">
-            © {year}{' '}
-            <Link href={BASE} className="text-[#F8F3EB]/30 hover:text-[#F8F3EB]/60 transition-colors">{brokerage}</Link>.
+            © {year} {brokerage}.
             <span className="mx-2 text-[#F8F3EB]/20">|</span>
             <Link href={`${BASE}/privacy`} className="text-[#F8F3EB]/35 hover:text-[#F8F3EB]/70 transition-colors">Privacy Policy</Link>
           </p>
