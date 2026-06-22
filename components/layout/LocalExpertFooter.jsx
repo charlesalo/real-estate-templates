@@ -169,7 +169,7 @@ export default function LocalExpertFooter({ agent }) {
               <Image
                 src="/images/RLS at REBNY.png"
                 alt="RLS at REBNY"
-                width={72}
+                width={67}
                 height={40}
                 className="h-9 w-auto brightness-0 invert opacity-45"
               />

@@ -5,7 +5,13 @@ import Image from 'next/image'
 import { Phone, CheckCircle } from 'lucide-react'
 
 export default function PropertyContactForm({ listing, agent }) {
-  const [form, setForm] = useState({ name: '', email: '', phone: '', message: '', disclosure: false })
+  const [form, setForm] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    message: `I'm interested in ${listing.address}. Please send more information.`,
+    disclosure: false,
+  })
   const [sent, setSent] = useState(false)
 
   function handleChange(e) {
@@ -83,7 +89,6 @@ export default function PropertyContactForm({ listing, agent }) {
               rows={3}
               value={form.message}
               onChange={handleChange}
-              defaultValue={`I'm interested in ${listing.address}. Please send more information.`}
               className="w-full px-3 py-2.5 text-[13px] border border-[#E5E0D8] rounded-lg text-[#2C1E11] placeholder-[#2C1E11]/30 focus:outline-none focus:border-[#1B3B2B]/30 transition-colors resize-none"
             />
             {/* NYS First Point of Contact */}
