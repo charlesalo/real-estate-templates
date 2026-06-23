@@ -14,8 +14,10 @@ function formatPrice(n) {
   return `$${n.toLocaleString()}`
 }
 
-export default function ListingsPage({ searchParams }) {
-  const q = searchParams?.q?.toLowerCase() ?? ''
+export default async function ListingsPage({ searchParams }) {
+  const sp = await searchParams
+  const rawQ = sp?.q ?? ''
+  const q = rawQ.toLowerCase()
   const filtered = q
     ? LISTINGS.filter(
         (l) =>
@@ -41,54 +43,21 @@ export default function ListingsPage({ searchParams }) {
             </h1>
             <p className="text-[16px] text-[#2C1E11]/50 max-w-xl">
               {filtered.length} active listing{filtered.length !== 1 ? 's' : ''} in neighborhoods I know block by block.
-              {q && ` Showing results for "${searchParams.q}".`}
+              {q && ` Showing results for "${rawQ}".`}
             </p>
           </div>
 
-          {/* Section tabs */}
-          <div className="flex flex-wrap items-center gap-x-7 gap-y-2 mb-12 pb-5 border-b border-[#BEB7A9]/50">
-            {[
-              { label: 'All', q: '' },
-              { label: 'West Village', q: 'West Village' },
-              { label: 'Tribeca', q: 'Tribeca' },
-              { label: 'Brooklyn Heights', q: 'Brooklyn Heights' },
-              { label: 'DUMBO', q: 'DUMBO' },
-              { label: 'Park Slope', q: 'Park Slope' },
-              { label: 'Upper East Side', q: 'Upper East Side' },
-            ].map((f) => {
-              const isActive = (searchParams?.q ?? '') === f.q
-              return (
-                <Link
-                  key={f.label}
-                  href={f.q ? `?q=${encodeURIComponent(f.q)}` : '/local-expert/listings'}
-                  className={`text-[12px] tracking-[0.18em] uppercase pb-1 border-b-2 transition-colors ${
-                    isActive
-                      ? 'text-[#1B3B2B] border-[#BA5B3E]'
-                      : 'text-[#2C1E11]/45 border-transparent hover:text-[#24180F]'
-                  }`}
-                >
-                  {f.label}
-                </Link>
-              )
-            })}
-          </div>
-
-          {/* Grid */}
+          {/* Listings — alternating image/details rows */}
           {filtered.length === 0 ? (
             <div className="py-20 text-center">
               <p className="text-[#2C1E11]/40">No listings match your search. <Link href="/local-expert/listings" className="underline">Clear filters</Link></p>
             </div>
           ) : (
-            <>
-              <LeadListing listing={filtered[0]} />
-              {filtered.length > 1 && (
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
-                  {filtered.slice(1).map((listing) => (
-                    <ListingCard key={listing.id} listing={listing} />
-                  ))}
-                </div>
-              )}
-            </>
+            <div className="space-y-16 lg:space-y-24">
+              {filtered.map((listing, i) => (
+                <ListingRow key={listing.id} listing={listing} reverse={i % 2 === 1} priority={i === 0} />
+              ))}
+            </div>
           )}
 
           {/* Compliance */}
@@ -107,22 +76,25 @@ export default function ListingsPage({ searchParams }) {
   )
 }
 
-function LeadListing({ listing }) {
+function ListingRow({ listing, reverse = false, priority = false }) {
   return (
-    <Link href={`/local-expert/listings/${listing.id}`} className="group block mb-16 lg:mb-20">
-      <div className="grid grid-cols-1 lg:grid-cols-[1.5fr_1fr] gap-8 lg:gap-12 items-center">
-        <div className="relative aspect-[3/2] rounded-2xl overflow-hidden">
+    <Link href={`/local-expert/listings/${listing.id}`} className="group block">
+      <div className={`grid grid-cols-1 gap-8 lg:gap-12 items-center ${reverse ? 'lg:grid-cols-[1fr_640px]' : 'lg:grid-cols-[640px_1fr]'}`}>
+        <div className={`relative aspect-[3/2] w-full max-w-[640px] rounded-2xl overflow-hidden lg:row-start-1 ${reverse ? 'lg:col-start-2' : 'lg:col-start-1'}`}>
+          <span className="absolute top-4 left-4 z-10 px-3 py-1.5 text-[11px] font-bold uppercase tracking-wider rounded-full bg-[#24180F] text-[#F8F3EB]">
+            {listing.status}
+          </span>
           <Image
             src={listing.images[0]}
             alt={listing.address}
             fill
-            priority
-            sizes="(min-width: 1024px) 60vw, 100vw"
+            priority={priority}
+            sizes="(min-width: 1024px) 640px, 100vw"
             className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
           />
         </div>
-        <div>
-          <p className="text-[11px] tracking-[0.3em] uppercase text-[#BA5B3E] mb-3">Featured · {listing.type}</p>
+        <div className={`lg:row-start-1 ${reverse ? 'lg:col-start-1' : 'lg:col-start-2'}`}>
+          <p className="text-[11px] tracking-[0.3em] uppercase text-[#BA5B3E] mb-3">{listing.status} · {listing.type}</p>
           <div
             className="text-[44px] lg:text-[52px] font-normal text-[#24180F] leading-none transition-colors group-hover:text-[#BA5B3E]"
             style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}
@@ -133,49 +105,25 @@ function LeadListing({ listing }) {
             {listing.address}
           </p>
           <p className="text-[14px] text-[#24180F]/45 mt-1">{listing.neighborhood}, {listing.city} {listing.zip}</p>
-          <div className="flex gap-6 mt-6 pt-6 border-t border-[#BEB7A9]/50 text-[12px] tracking-[0.16em] uppercase text-[#24180F]/55">
-            <span className="flex items-center gap-1.5"><Bed size={13} /> {listing.beds} bd</span>
-            <span className="flex items-center gap-1.5"><Bath size={13} /> {listing.baths} ba</span>
-            <span className="flex items-center gap-1.5"><Square size={13} /> {listing.sqft.toLocaleString()} sqft</span>
+          <div className="flex items-center justify-between gap-6 mt-6 pt-6 border-t border-[#BEB7A9]/50 text-[12px] tracking-[0.16em] uppercase text-[#24180F]/55">
+            <div className="flex items-center gap-6">
+              <span className="flex items-center gap-1.5"><Bed size={13} /> {listing.beds} bd</span>
+              <span className="flex items-center gap-1.5"><Bath size={13} /> {listing.baths} ba</span>
+              <span className="flex items-center gap-1.5"><Square size={13} /> {listing.sqft.toLocaleString()} sqft</span>
+            </div>
+            <Image
+              src="/images/RLS at REBNY.png"
+              alt="RLS at REBNY"
+              width={40}
+              height={24}
+              className="h-6 w-auto flex-shrink-0"
+            />
           </div>
           <p className="text-[9px] text-[#2C1E11]/25 mt-4">
             Listing Provided Courtesy of {listing.listingBrokerage} · {listing.mlsId}
           </p>
         </div>
       </div>
-    </Link>
-  )
-}
-
-function ListingCard({ listing }) {
-  return (
-    <Link href={`/local-expert/listings/${listing.id}`} className="group block">
-      <div className="relative aspect-[4/3] rounded-xl overflow-hidden mb-5">
-        <Image
-          src={listing.images[0]}
-          alt={listing.address}
-          fill
-          sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
-          className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
-        />
-      </div>
-      <p className="text-[11px] tracking-[0.3em] uppercase text-[#BA5B3E] mb-2">{listing.type}</p>
-      <div
-        className="text-[28px] font-normal text-[#24180F] leading-none transition-colors group-hover:text-[#BA5B3E]"
-        style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}
-      >
-        {formatPrice(listing.price)}
-      </div>
-      <p className="text-[14px] text-[#24180F]/55 mt-2">{listing.address}</p>
-      <p className="text-[13px] text-[#24180F]/40">{listing.neighborhood}, {listing.city} {listing.zip}</p>
-      <div className="flex gap-5 mt-4 pt-4 border-t border-[#BEB7A9]/50 text-[11px] tracking-[0.16em] uppercase text-[#24180F]/50">
-        <span className="flex items-center gap-1.5"><Bed size={12} /> {listing.beds} bd</span>
-        <span className="flex items-center gap-1.5"><Bath size={12} /> {listing.baths} ba</span>
-        <span className="flex items-center gap-1.5"><Square size={12} /> {listing.sqft.toLocaleString()} sqft</span>
-      </div>
-      <p className="text-[9px] text-[#2C1E11]/25 mt-3">
-        Listing Provided Courtesy of {listing.listingBrokerage} · {listing.mlsId}
-      </p>
     </Link>
   )
 }
