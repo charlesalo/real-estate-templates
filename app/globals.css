@@ -260,6 +260,12 @@ select.cb-select:required:invalid {
   color: #8a8a8a;
 }
 
+/* ─── Home Valuation: step-transition loading bar ─────────────────────────── */
+@keyframes valuation-loading-bar {
+  from { width: 0%; }
+  to { width: 100%; }
+}
+
 /* ─── Template Preview Hover Scroll ────────────────────────────────────────── */
 .template-preview-container {
   position: relative;
