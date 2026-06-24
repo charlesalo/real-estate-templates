@@ -3,10 +3,15 @@
 import { useState, useRef, useEffect, useCallback } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { CheckCircle, ArrowRight, MapPin, X } from 'lucide-react'
+import { CheckCircle, ArrowRight, ArrowLeft, MapPin, X } from 'lucide-react'
 import { AGENT } from '@/lib/local-expert-data'
 
 const STEPS = ['Address', 'Property Details', 'Contact Info']
+const STEP_DESCRIPTIONS = [
+  "Enter the property you'd like valued — I'll pull recent, comparable sales nearby to anchor the estimate.",
+  'A few specifics on the unit help sharpen the number — bedrooms, size, and condition all move the estimate.',
+  "Last step. I'll have your personalized valuation ready within 24 hours — here's where to send it.",
+]
 
 export default function HomeValuationPage() {
   const [step, setStep] = useState(0)
@@ -23,6 +28,7 @@ export default function HomeValuationPage() {
   })
   const [done, setDone] = useState(false)
   const [predictions, setPredictions] = useState([])
+  const [addressValid, setAddressValid] = useState(false)
   const [showPredictions, setShowPredictions] = useState(false)
   const [expanded, setExpanded] = useState(false)
   const [advancing, setAdvancing] = useState(false)
@@ -71,12 +77,14 @@ export default function HomeValuationPage() {
   function handleAddressChange(e) {
     const value = e.target.value
     setData(prev => ({ ...prev, address: value }))
+    setAddressValid(false)
     setShowPredictions(true)
     fetchPredictions(value)
   }
 
   function handlePredictionSelect(prediction) {
     setData(prev => ({ ...prev, address: prediction.description }))
+    setAddressValid(true)
     setPredictions([])
     setShowPredictions(false)
   }
@@ -109,8 +117,8 @@ export default function HomeValuationPage() {
     setStep(0)
   }
 
-  const formCard = (
-    <div className="rounded-2xl border border-[#E5E0D8] shadow-2xl ring-1 ring-black/5 overflow-hidden bg-white">
+  const formCardContent = (
+    <>
       {done ? (
         <div className="flex flex-col items-center gap-5 p-12 text-center">
           <CheckCircle size={40} className="text-[#8B9E8B]" />
@@ -136,17 +144,18 @@ export default function HomeValuationPage() {
         <form onSubmit={step === 2 ? handleSubmit : handleContinue}>
           {/* Step indicator */}
           <div className="relative px-7 pt-7 pb-5 border-b border-[#E5E0D8] overflow-hidden">
-            <div className="flex items-center gap-2 mb-1">
-              {STEPS.map((s, i) => (
-                <div key={s} className="flex items-center gap-2">
-                  <div className={`w-5 h-5 rounded-full flex items-center justify-center text-[12px] font-bold transition-colors ${i <= step ? 'bg-[#1B3B2B] text-white' : 'bg-[#E5E0D8] text-[#2C1E11]/30'}`}>
-                    {i < step ? '✓' : i + 1}
-                  </div>
-                  {i < STEPS.length - 1 && <div className={`h-px w-8 transition-colors ${i < step ? 'bg-[#1B3B2B]' : 'bg-[#E5E0D8]'}`} />}
-                </div>
-              ))}
+            <div className="flex items-center gap-3">
+              <span className="text-[12px] tracking-[0.35em] uppercase font-medium text-[#BA5B3E]">
+                Step {step + 1} of {STEPS.length}
+              </span>
+              <div className="flex gap-1.5">
+                {STEPS.map((s, i) => (
+                  <div key={s} className={`h-[2px] w-7 rounded-full transition-colors ${i <= step ? 'bg-[#BA5B3E]' : 'bg-[#2C1E11]/12'}`} />
+                ))}
+              </div>
             </div>
             <p className="text-[14px] font-bold text-[#2C1E11] mt-3">{STEPS[step]}</p>
+            <p className="text-[13px] text-[#2C1E11]/50 leading-relaxed mt-2">{STEP_DESCRIPTIONS[step]}</p>
             {advancing && (
               <div className="absolute bottom-0 left-0 h-[2px] bg-[#1B3B2B] animate-[valuation-loading-bar_650ms_ease-out_forwards]" />
             )}
@@ -250,21 +259,28 @@ export default function HomeValuationPage() {
             )}
 
             <div className="flex gap-3 pt-2">
-              {step > 0 && (
-                <button type="button" onClick={handleBack} className="px-5 py-3 text-[13px] text-[#2C1E11]/50 hover:text-[#2C1E11] transition-colors">
-                  ← Back
-                </button>
-              )}
               <button
                 type="submit"
-                className="flex-1 py-3 text-[14px] font-bold rounded-full bg-[#1B3B2B] text-[#F8F3EB] hover:bg-[#2a5540] transition-colors"
+                disabled={step === 0 && !addressValid}
+                className="flex-1 py-3 text-[14px] font-bold rounded-full bg-[#1B3B2B] text-[#F8F3EB] hover:bg-[#2a5540] disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:bg-[#1B3B2B] transition-colors"
               >
                 {step < 2 ? 'Continue →' : 'Get My Estimate'}
               </button>
             </div>
+            {step > 0 && (
+              <button type="button" onClick={handleBack} className="flex items-center justify-center gap-1.5 w-full text-[13px] text-[#2C1E11]/40 hover:text-[#2C1E11]/70 transition-colors">
+                <ArrowLeft size={13} /> Back
+              </button>
+            )}
           </div>
         </form>
       )}
+    </>
+  )
+
+  const formCard = (
+    <div className="rounded-2xl border border-[#E5E0D8] shadow-2xl ring-1 ring-black/5 bg-white">
+      {formCardContent}
     </div>
   )
 
@@ -311,32 +327,34 @@ export default function HomeValuationPage() {
       </div>
     </section>
 
-    {/* ─── FULL-SCREEN STEP: form + live map ──────────────────────────── */}
+    {/* ─── MODAL STEP: form + live map ──────────────────────────── */}
     {expanded && (
-      <div className="fixed inset-0 z-[100] bg-[#F8F3EB] grid grid-cols-1 lg:grid-cols-2">
-        <div className="relative flex items-center justify-center p-6 lg:p-16 overflow-y-auto">
+      <div className="fixed inset-0 z-[100] bg-black/50 backdrop-blur-sm flex items-center justify-center p-4 lg:p-8">
+        <div className="relative w-full max-w-6xl h-[85vh] max-h-[760px] bg-white rounded-2xl shadow-2xl overflow-hidden grid grid-cols-1 lg:grid-cols-2">
           <button
             type="button"
             onClick={handleClose}
             aria-label="Close"
-            className="absolute top-5 right-5 lg:top-8 lg:right-8 flex items-center justify-center w-9 h-9 rounded-full border border-[#E5E0D8] text-[#2C1E11]/50 hover:text-[#2C1E11] hover:border-[#2C1E11]/30 transition-colors z-10"
+            className="absolute top-4 right-4 flex items-center justify-center w-9 h-9 rounded-full border border-[#E5E0D8] bg-white text-[#2C1E11]/50 hover:text-[#2C1E11] hover:border-[#2C1E11]/30 transition-colors z-20"
           >
             <X size={16} />
           </button>
-          <div className="w-full max-w-md">
-            {formCard}
+          <div className="relative flex items-center justify-center p-6 lg:p-12 overflow-y-auto">
+            <div className="w-full max-w-md">
+              {formCardContent}
+            </div>
           </div>
-        </div>
-        <div className="relative hidden lg:block">
-          <iframe
-            title="Property location"
-            width="100%"
-            height="100%"
-            style={{ border: 0 }}
-            loading="lazy"
-            allowFullScreen
-            src={`https://maps.google.com/maps?q=${encodeURIComponent(data.address || 'New York, NY')}&output=embed&z=15`}
-          />
+          <div className="relative hidden lg:block">
+            <iframe
+              title="Property location"
+              width="100%"
+              height="100%"
+              style={{ border: 0 }}
+              loading="lazy"
+              allowFullScreen
+              src={`https://maps.google.com/maps?q=${encodeURIComponent(data.address || 'New York, NY')}&output=embed&z=15`}
+            />
+          </div>
         </div>
       </div>
     )}
