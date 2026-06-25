@@ -177,7 +177,7 @@ export default function HomeValuationPage() {
             <p className="text-[14px] font-bold text-[#2C1E11] mt-3">{STEPS[step]}</p>
             <p className="text-[13px] text-[#2C1E11]/50 leading-relaxed mt-2">{STEP_DESCRIPTIONS[step]}</p>
             {advancing && (
-              <div className="absolute bottom-0 left-0 h-[2px] bg-[#1B3B2B] animate-[valuation-loading-bar_650ms_ease-out_forwards]" />
+              <div className="absolute bottom-0 left-0 h-[2px] bg-[#BA5B3E] animate-[valuation-loading-bar_650ms_ease-out_forwards]" />
             )}
           </div>
 
@@ -306,7 +306,7 @@ export default function HomeValuationPage() {
 
   return (
     <>
-    <section className="pt-[112px] pb-[64px] lg:pt-[144px] lg:pb-[80px]" style={{ backgroundColor: '#F8F3EB' }}>
+    <section className="pt-[112px] pb-[96px] lg:pt-[144px] lg:pb-[128px]" style={{ backgroundColor: '#F8F3EB' }}>
       <div className="max-w-7xl mx-auto px-5 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_520px] gap-16 lg:gap-24 items-start">
 
@@ -451,7 +451,7 @@ export default function HomeValuationPage() {
           >
             <X size={16} />
           </button>
-          <div className="relative flex items-center justify-center p-6 lg:p-12 overflow-y-auto">
+          <div className="relative flex items-center justify-center p-6 lg:p-12">
             <div className="w-full max-w-md">
               {formCardContent}
             </div>
