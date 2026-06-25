@@ -401,22 +401,23 @@ export default function HomeValuationPage() {
 
         <div className="flex items-end justify-between gap-4 mb-10">
           <div>
-            <span className="text-[12px] tracking-[0.4em] uppercase text-[#BA5B3E]">Recently Closed</span>
+            <span className="text-[12px] tracking-[0.4em] uppercase text-[#BA5B3E]">Proven Track Record</span>
             <h2
               className="text-[34px] lg:text-[45px] font-normal text-[#24180F] leading-tight mt-2 mb-3"
               style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}
             >
-              Homes I&apos;ve Actually Sold
+              Recent Sales
             </h2>
             <p className="text-[15px] text-[#2C1E11]/40 max-w-lg">
-              Not listings — these are the same closed comps that go into every valuation I send.
+              Fourteen years and 240 closings in these blocks — these are the comps I&apos;d actually
+              point to, not the ones a script would pick.
             </p>
           </div>
           <Link
             href="/local-expert/listings"
             className="hidden md:flex items-center gap-1.5 text-[13px] font-semibold text-[#2C1E11] hover:text-[#BA5B3E] transition-colors whitespace-nowrap"
           >
-            View all active listings <ArrowRight size={13} />
+            View all properties <ArrowRight size={13} />
           </Link>
         </div>
 
@@ -433,7 +434,7 @@ export default function HomeValuationPage() {
           href="/local-expert/listings"
           className="flex md:hidden items-center gap-1.5 text-[13px] font-semibold text-[#2C1E11] hover:text-[#BA5B3E] transition-colors mt-6"
         >
-          View all active listings <ArrowRight size={13} />
+          View all properties <ArrowRight size={13} />
         </Link>
       </div>
     </section>
