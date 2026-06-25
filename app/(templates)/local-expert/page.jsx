@@ -523,9 +523,18 @@ function HeroListingCard({ listing }) {
             {formatPrice(listing.price)}
           </div>
           <p className="text-[13px] text-white/65">{listing.address}</p>
-          <p className="text-[10px] text-white/45 mt-1.5">
-            Listing Provided Courtesy of {listing.listingBrokerage} · {listing.mlsId}
-          </p>
+          <div className="flex items-center justify-between gap-3 mt-1.5">
+            <p className="text-[10px] text-white/45 flex-1">
+              Listing Provided Courtesy of {listing.listingBrokerage} · {listing.mlsId}
+            </p>
+            <Image
+              src="/images/RLS at REBNY.png"
+              alt="RLS at REBNY"
+              width={40}
+              height={24}
+              className="h-4 w-auto flex-shrink-0"
+            />
+          </div>
           {/* Details — collapsed by default, slide up to reveal on hover */}
           <div className="grid grid-rows-[0fr] opacity-0 transition-all duration-500 ease-out group-hover:grid-rows-[1fr] group-hover:opacity-100">
             <div className="overflow-hidden">
@@ -576,9 +585,18 @@ function SideListingCard({ listing }) {
             {formatPrice(listing.price)}
           </div>
           <p className="text-[12px] text-white/65 mt-1 truncate">{listing.address}</p>
-          <p className="text-[10px] text-white/45 mt-1 truncate">
-            Listing Provided Courtesy of {listing.listingBrokerage} · {listing.mlsId}
-          </p>
+          <div className="flex items-center justify-between gap-2 mt-1">
+            <p className="text-[10px] text-white/45 truncate min-w-0 flex-1">
+              Listing Provided Courtesy of {listing.listingBrokerage} · {listing.mlsId}
+            </p>
+            <Image
+              src="/images/RLS at REBNY.png"
+              alt="RLS at REBNY"
+              width={40}
+              height={24}
+              className="h-3.5 w-auto flex-shrink-0"
+            />
+          </div>
           {/* Details — collapsed by default, slide up to reveal on hover */}
           <div className="grid grid-rows-[0fr] opacity-0 transition-all duration-500 ease-out group-hover:grid-rows-[1fr] group-hover:opacity-100">
             <div className="overflow-hidden">

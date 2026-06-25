@@ -395,28 +395,28 @@ export default function HomeValuationPage() {
       </div>
     </section>
 
-    {/* ─── RECENT SALES ───────────────────────────────────────────────── */}
+    {/* ─── RECENTLY CLOSED ────────────────────────────────────────────── */}
     <section className="py-[96px] lg:py-[128px]" style={{ backgroundColor: '#F8F3EB' }}>
       <div className="max-w-7xl mx-auto px-5 lg:px-8">
-        <div className="flex items-end justify-between gap-4 mb-12 lg:mb-16">
-          <div className="max-w-2xl">
-            <p className="text-[12px] tracking-[0.4em] uppercase text-[#BA5B3E] mb-4">Proof, Not Promises</p>
+
+        <div className="flex items-end justify-between gap-4 mb-10">
+          <div>
+            <span className="text-[12px] tracking-[0.4em] uppercase text-[#BA5B3E]">Recently Closed</span>
             <h2
-              className="text-[34px] lg:text-[45px] font-normal text-[#24180F] leading-tight mb-5"
+              className="text-[34px] lg:text-[45px] font-normal text-[#24180F] leading-tight mt-2 mb-3"
               style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}
             >
-              Recent Sales
+              Homes I&apos;ve Actually Sold
             </h2>
-            <p className="text-[16px] text-[#2C1E11]/55 leading-relaxed text-balance">
-              A few of the homes I&apos;ve closed in the last few months — the same comps that go into
-              every valuation I send.
+            <p className="text-[15px] text-[#2C1E11]/40 max-w-lg">
+              Not listings — these are the same closed comps that go into every valuation I send.
             </p>
           </div>
           <Link
             href="/local-expert/listings"
             className="hidden md:flex items-center gap-1.5 text-[13px] font-semibold text-[#2C1E11] hover:text-[#BA5B3E] transition-colors whitespace-nowrap"
           >
-            View all properties <ArrowRight size={13} />
+            View all active listings <ArrowRight size={13} />
           </Link>
         </div>
 
@@ -433,7 +433,7 @@ export default function HomeValuationPage() {
           href="/local-expert/listings"
           className="flex md:hidden items-center gap-1.5 text-[13px] font-semibold text-[#2C1E11] hover:text-[#BA5B3E] transition-colors mt-6"
         >
-          View all properties <ArrowRight size={13} />
+          View all active listings <ArrowRight size={13} />
         </Link>
       </div>
     </section>
@@ -533,6 +533,18 @@ function SoldHeroCard({ sale }) {
         <p className="text-[10px] text-white/45 mt-1.5">
           Closed {sale.soldDate} · {sale.daysOnMarket} days on market
         </p>
+        <div className="flex items-center justify-between gap-3 mt-1">
+          <p className="text-[10px] text-white/45 flex-1">
+            Listing Provided Courtesy of {sale.listingBrokerage} · {sale.mlsId}
+          </p>
+          <Image
+            src="/images/RLS at REBNY.png"
+            alt="RLS at REBNY"
+            width={40}
+            height={24}
+            className="h-4 w-auto flex-shrink-0"
+          />
+        </div>
         {/* Details — collapsed by default, slide up to reveal on hover */}
         <div className="grid grid-rows-[0fr] opacity-0 transition-all duration-500 ease-out group-hover:grid-rows-[1fr] group-hover:opacity-100">
           <div className="overflow-hidden">
@@ -584,6 +596,18 @@ function SoldSideCard({ sale }) {
         <p className="text-[10px] text-white/45 mt-1 truncate">
           Closed {sale.soldDate} · {sale.daysOnMarket} days on market
         </p>
+        <div className="flex items-center justify-between gap-2 mt-1">
+          <p className="text-[10px] text-white/45 truncate min-w-0 flex-1">
+            Listing Provided Courtesy of {sale.listingBrokerage} · {sale.mlsId}
+          </p>
+          <Image
+            src="/images/RLS at REBNY.png"
+            alt="RLS at REBNY"
+            width={40}
+            height={24}
+            className="h-3.5 w-auto flex-shrink-0"
+          />
+        </div>
         {/* Details — collapsed by default, slide up to reveal on hover */}
         <div className="grid grid-rows-[0fr] opacity-0 transition-all duration-500 ease-out group-hover:grid-rows-[1fr] group-hover:opacity-100">
           <div className="overflow-hidden">
