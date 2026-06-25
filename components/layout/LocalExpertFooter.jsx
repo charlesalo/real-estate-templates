@@ -166,13 +166,15 @@ export default function LocalExpertFooter({ agent }) {
             </p>
 
             <div className="flex items-center gap-4 mt-3">
-              <Image
-                src="/images/RLS at REBNY.png"
-                alt="RLS at REBNY"
-                width={67}
-                height={40}
-                className="h-9 w-auto brightness-0 invert opacity-45"
-              />
+              <div className="bg-white rounded px-2 py-1.5 inline-flex items-center">
+                <Image
+                  src="/images/RLS at REBNY.png"
+                  alt="RLS at REBNY"
+                  width={67}
+                  height={40}
+                  className="h-9 w-auto"
+                />
+              </div>
             </div>
           </div>
         </div>

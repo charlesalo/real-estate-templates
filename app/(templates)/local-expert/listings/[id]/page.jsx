@@ -81,6 +81,19 @@ export default async function PropertyDetailPage({ params }) {
               <span className="flex items-center gap-1.5 text-[16px] text-[#24180F]/70"><Square size={16} className="text-[#24180F]/40" /> <strong>{listing.sqft.toLocaleString()}</strong> sq ft</span>
             </div>
 
+            <div className="flex items-center justify-between gap-3 mb-8">
+              <p className="text-[12px] text-[#2C1E11]/40">
+                Listing Provided Courtesy of {listing.listingBrokerage} · {listing.mlsId}
+              </p>
+              <Image
+                src="/images/RLS at REBNY.png"
+                alt="RLS at REBNY"
+                width={40}
+                height={24}
+                className="h-4 w-auto flex-shrink-0"
+              />
+            </div>
+
             <h2 className="text-[19px] font-bold text-[#24180F] mb-3" style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}>About this home</h2>
             <p className="text-[16px] text-[#24180F]/65 leading-relaxed mb-8">{listing.description}</p>
 

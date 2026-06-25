@@ -537,13 +537,15 @@ function SoldHeroCard({ sale }) {
           <p className="text-[10px] text-white/45 flex-1">
             Listing Provided Courtesy of {sale.listingBrokerage} · {sale.mlsId}
           </p>
-          <Image
-            src="/images/RLS at REBNY.png"
-            alt="RLS at REBNY"
-            width={40}
-            height={24}
-            className="h-4 w-auto flex-shrink-0"
-          />
+          <div className="bg-white rounded px-1.5 py-1 flex-shrink-0 inline-flex items-center">
+            <Image
+              src="/images/RLS at REBNY.png"
+              alt="RLS at REBNY"
+              width={40}
+              height={24}
+              className="h-4 w-auto"
+            />
+          </div>
         </div>
         {/* Details — collapsed by default, slide up to reveal on hover */}
         <div className="grid grid-rows-[0fr] opacity-0 transition-all duration-500 ease-out group-hover:grid-rows-[1fr] group-hover:opacity-100">
@@ -600,13 +602,15 @@ function SoldSideCard({ sale }) {
           <p className="text-[10px] text-white/45 truncate min-w-0 flex-1">
             Listing Provided Courtesy of {sale.listingBrokerage} · {sale.mlsId}
           </p>
-          <Image
-            src="/images/RLS at REBNY.png"
-            alt="RLS at REBNY"
-            width={40}
-            height={24}
-            className="h-3.5 w-auto flex-shrink-0"
-          />
+          <div className="bg-white rounded px-1.5 py-0.5 flex-shrink-0 inline-flex items-center">
+            <Image
+              src="/images/RLS at REBNY.png"
+              alt="RLS at REBNY"
+              width={40}
+              height={24}
+              className="h-3.5 w-auto"
+            />
+          </div>
         </div>
         {/* Details — collapsed by default, slide up to reveal on hover */}
         <div className="grid grid-rows-[0fr] opacity-0 transition-all duration-500 ease-out group-hover:grid-rows-[1fr] group-hover:opacity-100">
