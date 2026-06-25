@@ -62,8 +62,16 @@ export default function GoogleOneTap({ clientId, onSuccess }) {
         cancel_on_tap_outside: true,
         context: 'signin',
         itp_support: true,
+        use_fedcm_for_prompt: true,
       })
-      window.google?.accounts.id.prompt()
+      window.google?.accounts.id.prompt((notification) => {
+        if (process.env.NODE_ENV === 'production') return
+        if (notification.isNotDisplayed()) {
+          console.warn('[GoogleOneTap] not displayed:', notification.getNotDisplayedReason())
+        } else if (notification.isSkippedMoment()) {
+          console.warn('[GoogleOneTap] skipped:', notification.getSkippedReason())
+        }
+      })
     }
 
     return () => {

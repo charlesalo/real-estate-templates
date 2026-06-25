@@ -5,6 +5,7 @@ import Navbar from '@/components/landing/Navbar'
 import CTASection from '@/components/landing/CTASection'
 import OpenContactButton from '@/components/landing/OpenContactButton'
 import HowItWorksSteps from '@/components/landing/HowItWorksSteps'
+import GoogleOneTap from '@/components/auth/GoogleOneTap'
 
 // ─── Data ────────────────────────────────────────────────────────────────────
 
@@ -134,6 +135,7 @@ export default function HomePage() {
     <div className="min-h-screen bg-[#111111] text-[#e2e2e2]" style={{ fontFamily: 'var(--font-geist-sans), system-ui, sans-serif' }}>
 
       <Navbar />
+      <GoogleOneTap clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID} />
 
       <main id="main-content" tabIndex={-1} className="outline-none">
 
