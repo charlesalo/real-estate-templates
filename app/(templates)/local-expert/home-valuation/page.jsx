@@ -3,14 +3,34 @@
 import { useState, useRef, useEffect, useCallback } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { CheckCircle, ArrowRight, ArrowLeft, MapPin, X } from 'lucide-react'
-import { AGENT } from '@/lib/local-expert-data'
+import { CheckCircle, ArrowRight, ArrowLeft, MapPin, X, Bed, Bath, Square } from 'lucide-react'
+import { TESTIMONIAL, SOLD_LISTINGS } from '@/lib/local-expert-data'
+
+function formatPrice(n) {
+  if (n >= 1_000_000) return `$${(n / 1_000_000).toFixed(n % 1_000_000 === 0 ? 0 : 2)}M`
+  return `$${n.toLocaleString()}`
+}
 
 const STEPS = ['Address', 'Property Details', 'Contact Info']
 const STEP_DESCRIPTIONS = [
   "Enter the property you'd like valued — I'll pull recent, comparable sales nearby to anchor the estimate.",
   'A few specifics on the unit help sharpen the number — bedrooms, size, and condition all move the estimate.',
   "Last step. I'll have your personalized valuation ready within 24 hours — here's where to send it.",
+]
+
+const VALUATION_FAQS = [
+  {
+    q: "What you're actually getting",
+    a: "Not a range pulled from a script — a specific number, backed by the three to five sales I'd point to if a buyer asked why your price makes sense.",
+  },
+  {
+    q: 'How I calculate it',
+    a: "Closed comps from the last 90 days, adjusted for unit line, light, renovation, and — for co-ops — board flexibility, then checked against what's actually in contract right now, not just what's listed.",
+  },
+  {
+    q: 'Why the online number is usually off',
+    a: "Automated estimators don't know your kitchen was gutted in 2022, that the unit next door was combined into yours, or that your board caps subletting. They average. I adjust.",
+  },
 ]
 
 export default function HomeValuationPage() {
@@ -327,6 +347,97 @@ export default function HomeValuationPage() {
       </div>
     </section>
 
+    {/* ─── BEHIND THE NUMBER ──────────────────────────────────────────── */}
+    <section className="py-[96px] lg:py-[128px] bg-white">
+      <div className="max-w-7xl mx-auto px-5 lg:px-8">
+        <div className="max-w-2xl mb-12 lg:mb-16">
+          <p className="text-[12px] tracking-[0.4em] uppercase text-[#BA5B3E] mb-4">Behind The Number</p>
+          <h2
+            className="text-[34px] lg:text-[45px] font-normal text-[#24180F] leading-tight mb-5"
+            style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}
+          >
+            What a valuation actually <br className="hidden lg:block" />tells you
+          </h2>
+          <p className="text-[16px] text-[#2C1E11]/55 leading-relaxed">
+            A real valuation isn&apos;t a single number — it&apos;s the reasoning behind it: which comps
+            matter, which don&apos;t, and what a buyer would actually pay this month. Here&apos;s what
+            goes into the one I&apos;ll send you.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {VALUATION_FAQS.map((item, i) => (
+            <div key={item.q} className="rounded-2xl border border-[#E5E0D8] bg-[#FDFAF6] p-7">
+              <span className="text-[12px] font-bold text-[#BA5B3E]">{`0${i + 1}`}</span>
+              <h3 className="text-[16px] font-bold text-[#24180F] mt-3 mb-2">{item.q}</h3>
+              <p className="text-[14px] text-[#2C1E11]/55 leading-relaxed">{item.a}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    {/* ─── TESTIMONIAL ────────────────────────────────────────────────── */}
+    <section className="py-[96px] lg:py-[128px]" style={{ backgroundColor: '#1B3B2B' }}>
+      <div className="max-w-3xl mx-auto px-5 lg:px-8 text-center">
+        <blockquote>
+          <p
+            className="text-[24px] lg:text-[28px] font-normal italic text-[#F8F3EB] leading-snug"
+            style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}
+          >
+            &ldquo;{TESTIMONIAL.quote}&rdquo;
+          </p>
+          <footer className="mt-6">
+            <p className="text-[14px] font-semibold text-[#8B9E8B]">{TESTIMONIAL.author}</p>
+            <p className="text-[12px] text-[#F8F3EB]/30 mt-0.5">{TESTIMONIAL.location}</p>
+          </footer>
+        </blockquote>
+      </div>
+    </section>
+
+    {/* ─── RECENT SALES ───────────────────────────────────────────────── */}
+    <section className="py-[96px] lg:py-[128px]" style={{ backgroundColor: '#F8F3EB' }}>
+      <div className="max-w-7xl mx-auto px-5 lg:px-8">
+        <div className="flex items-end justify-between gap-4 mb-12 lg:mb-16">
+          <div className="max-w-2xl">
+            <p className="text-[12px] tracking-[0.4em] uppercase text-[#BA5B3E] mb-4">Proof, Not Promises</p>
+            <h2
+              className="text-[34px] lg:text-[45px] font-normal text-[#24180F] leading-tight mb-5"
+              style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}
+            >
+              Recent Sales
+            </h2>
+            <p className="text-[16px] text-[#2C1E11]/55 leading-relaxed text-balance">
+              A few of the homes I&apos;ve closed in the last few months — the same comps that go into
+              every valuation I send.
+            </p>
+          </div>
+          <Link
+            href="/local-expert/listings"
+            className="hidden md:flex items-center gap-1.5 text-[13px] font-semibold text-[#2C1E11] hover:text-[#BA5B3E] transition-colors whitespace-nowrap"
+          >
+            View all properties <ArrowRight size={13} />
+          </Link>
+        </div>
+
+        {/* Asymmetric feature layout: hero left, two sidebar cards right */}
+        <div className="grid grid-cols-1 lg:grid-cols-[3fr_2fr] gap-3 lg:h-[560px]">
+          <SoldHeroCard sale={SOLD_LISTINGS[0]} />
+          <div className="flex flex-col gap-3 h-full">
+            <SoldSideCard sale={SOLD_LISTINGS[1]} />
+            <SoldSideCard sale={SOLD_LISTINGS[2]} />
+          </div>
+        </div>
+
+        <Link
+          href="/local-expert/listings"
+          className="flex md:hidden items-center gap-1.5 text-[13px] font-semibold text-[#2C1E11] hover:text-[#BA5B3E] transition-colors mt-6"
+        >
+          View all properties <ArrowRight size={13} />
+        </Link>
+      </div>
+    </section>
+
     {/* ─── MODAL STEP: form + live map ──────────────────────────── */}
     {expanded && (
       <div className="fixed inset-0 z-[100] bg-black/50 backdrop-blur-sm flex items-center justify-center p-4 lg:p-8">
@@ -393,5 +504,107 @@ export default function HomeValuationPage() {
       </div>
     </section>
     </>
+  )
+}
+
+function SoldHeroCard({ sale }) {
+  return (
+    <article className="group relative rounded-2xl overflow-hidden h-full min-h-[420px] lg:min-h-0">
+      <Image
+        src={sale.image}
+        alt={sale.address}
+        fill
+        className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+      />
+      <div className="absolute top-4 left-4">
+        <span className="text-[11px] font-semibold uppercase tracking-wider px-3 py-1.5 rounded-full bg-white/90 text-[#2C1E11]">
+          Sold
+        </span>
+      </div>
+      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/25 to-transparent" />
+      <div className="absolute bottom-0 left-0 right-0 px-6 py-6 lg:px-8 lg:py-7">
+        <div
+          className="text-[36px] lg:text-[44px] font-normal text-white leading-none mb-1.5"
+          style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}
+        >
+          {formatPrice(sale.soldPrice)}
+        </div>
+        <p className="text-[13px] text-white/65">{sale.address}</p>
+        <p className="text-[10px] text-white/45 mt-1.5">
+          Closed {sale.soldDate} · {sale.daysOnMarket} days on market
+        </p>
+        {/* Details — collapsed by default, slide up to reveal on hover */}
+        <div className="grid grid-rows-[0fr] opacity-0 transition-all duration-500 ease-out group-hover:grid-rows-[1fr] group-hover:opacity-100">
+          <div className="overflow-hidden">
+            <div className="h-px w-full bg-white/25 my-3" />
+            <div className="flex items-center justify-between gap-4">
+              <div className="flex items-center gap-4">
+                <span className="flex items-center gap-1 text-[12px] text-white/55">
+                  <Bed size={12} /> {sale.beds} bd
+                </span>
+                <span className="flex items-center gap-1 text-[12px] text-white/55">
+                  <Bath size={12} /> {sale.baths} ba
+                </span>
+                <span className="flex items-center gap-1 text-[12px] text-white/55">
+                  <Square size={12} /> {sale.sqft.toLocaleString()} sf
+                </span>
+              </div>
+              <span className="text-[12px] uppercase tracking-wider text-white/55">{sale.type}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+  )
+}
+
+function SoldSideCard({ sale }) {
+  return (
+    <article className="group relative flex-1 min-h-[200px] lg:min-h-0 rounded-xl overflow-hidden">
+      <Image
+        src={sale.image}
+        alt={sale.address}
+        fill
+        className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+      />
+      <div className="absolute top-3 left-3">
+        <span className="text-[11px] font-semibold uppercase tracking-wider px-2.5 py-1 rounded-full bg-white/90 text-[#2C1E11]">
+          Sold
+        </span>
+      </div>
+      <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/15 to-transparent" />
+      <div className="absolute bottom-0 left-0 right-0 px-4 py-4">
+        <div
+          className="text-[22px] font-normal text-white leading-none"
+          style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}
+        >
+          {formatPrice(sale.soldPrice)}
+        </div>
+        <p className="text-[12px] text-white/65 mt-1 truncate">{sale.address}</p>
+        <p className="text-[10px] text-white/45 mt-1 truncate">
+          Closed {sale.soldDate} · {sale.daysOnMarket} days on market
+        </p>
+        {/* Details — collapsed by default, slide up to reveal on hover */}
+        <div className="grid grid-rows-[0fr] opacity-0 transition-all duration-500 ease-out group-hover:grid-rows-[1fr] group-hover:opacity-100">
+          <div className="overflow-hidden">
+            <div className="h-px w-full bg-white/25 my-2" />
+            <div className="flex items-center justify-between gap-3">
+              <div className="flex items-center gap-3">
+                <span className="flex items-center gap-1 text-[11px] text-white/55">
+                  <Bed size={11} /> {sale.beds} bd
+                </span>
+                <span className="flex items-center gap-1 text-[11px] text-white/55">
+                  <Bath size={11} /> {sale.baths} ba
+                </span>
+                <span className="flex items-center gap-1 text-[11px] text-white/55">
+                  <Square size={11} /> {sale.sqft.toLocaleString()} sf
+                </span>
+              </div>
+              <span className="text-[11px] uppercase tracking-wider text-white/55">{sale.type}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
   )
 }
