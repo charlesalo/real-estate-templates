@@ -155,8 +155,8 @@ export default function HomePage() {
         {/* Bottom fade into next section */}
         <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-t from-[#0d0d0d] to-transparent" />
 
-        <div className="relative z-10 max-w-7xl mx-auto px-6 pt-16 pb-16 md:pt-24 md:pb-24 w-full">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/15 text-xs text-white/70 mb-8">
+        <div className="relative z-10 max-w-7xl mx-auto px-6 pt-28 pb-16 md:pt-24 md:pb-24 w-full">
+          <div className="hidden sm:inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/15 text-xs text-white/70 mb-8">
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
             Accepting new clients — USA nationwide
           </div>
@@ -174,16 +174,16 @@ export default function HomePage() {
             conversion-optimized, and fast enough to actually rank on Google. You work directly with me, start to finish.
           </p>
 
-          <div className="flex flex-wrap gap-4">
+          <div className="flex flex-col min-[480px]:flex-row flex-wrap gap-4">
             <a
               href="#templates"
-              className="px-6 py-3 rounded-md bg-[#c4a882] text-[#111111] text-sm font-semibold hover:bg-[#b8976e] transition-colors duration-200 min-w-[180px] text-center"
+              className="px-6 py-3 rounded-md bg-[#c4a882] text-[#111111] text-sm font-semibold hover:bg-[#b8976e] transition-colors duration-200 text-center min-[480px]:min-w-[180px]"
             >
               Browse Templates
             </a>
             <OpenContactButton
               label="Get in Touch"
-              className="px-6 py-3 rounded-md border border-white/20 text-sm font-medium text-white/80 hover:text-white hover:border-white/40 transition-colors duration-200 min-w-[180px] text-center"
+              className="px-6 py-3 rounded-md border border-white/20 text-sm font-medium text-white/80 hover:text-white hover:border-white/40 transition-colors duration-200 text-center min-[480px]:min-w-[180px]"
             />
           </div>
         </div>
@@ -236,14 +236,14 @@ export default function HomePage() {
               </p>
             </div>
 
-            <div className="flex flex-wrap gap-4">
+            <div className="flex flex-col min-[480px]:flex-row flex-wrap gap-4">
               <OpenContactButton
                 label="Start a Project"
-                className="px-6 py-3 rounded-md bg-[#c4a882] text-[#111111] text-sm font-semibold hover:bg-[#b8976e] transition-colors duration-200"
+                className="px-6 py-3 rounded-md bg-[#c4a882] text-[#111111] text-sm font-semibold hover:bg-[#b8976e] transition-colors duration-200 text-center"
               />
               <a
                 href="#work"
-                className="px-6 py-3 rounded-md border border-white/20 text-sm font-medium text-white/60 hover:text-white hover:border-white/40 transition-colors duration-200"
+                className="px-6 py-3 rounded-md border border-white/20 text-sm font-medium text-white/60 hover:text-white hover:border-white/40 transition-colors duration-200 text-center"
               >
                 See My Work
               </a>
@@ -308,7 +308,7 @@ export default function HomePage() {
                 <div className="flex flex-wrap items-center gap-4">
                   <Link
                     href={`/${t.slug}`}
-                    className="px-6 py-3 rounded-md bg-[#c4a882] text-[#111111] text-sm font-semibold hover:bg-[#b8976e] transition-colors duration-200"
+                    className="w-full min-[480px]:w-auto px-6 py-3 rounded-md bg-[#c4a882] text-[#111111] text-sm font-semibold hover:bg-[#b8976e] transition-colors duration-200 text-center"
                   >
                     View Live Template
                   </Link>

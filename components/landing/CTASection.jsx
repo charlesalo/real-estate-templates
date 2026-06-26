@@ -43,7 +43,7 @@ export default function CTASection() {
       <div className="relative z-10 max-w-3xl mx-auto px-6 py-16 md:py-24 text-center">
         <p className="text-xs text-white/70 uppercase tracking-widest mb-6">Ready to get started?</p>
         <h2
-          className="text-4xl sm:text-5xl font-bold text-white mb-5 leading-tight"
+          className="text-4xl sm:text-5xl font-bold text-white mb-5 leading-tight text-balance"
           style={{ fontFamily: 'var(--font-playfair), Georgia, serif' }}
         >
           Let&apos;s build your site.
