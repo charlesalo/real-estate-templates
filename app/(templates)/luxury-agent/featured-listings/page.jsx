@@ -208,13 +208,13 @@ function ListingCard({ listing }) {
       </Link>
 
       {/* CTA — outside Link to avoid nested interactive elements */}
-      <div className="bg-[#0D0D0D] px-6 pb-6 flex items-center justify-between">
-        <ShowingTrigger listing={listing} className="px-6 py-3 text-[12px] tracking-[0.2em] uppercase border border-[#C9A96E] text-[#C9A96E] hover:bg-[#C9A96E] hover:text-[#0A0A0A] transition-all font-sans">
+      <div className="bg-[#0D0D0D] px-6 pb-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <ShowingTrigger listing={listing} className="w-full sm:w-auto text-center px-6 py-3 text-[12px] tracking-[0.2em] uppercase border border-[#C9A96E] text-[#C9A96E] hover:bg-[#C9A96E] hover:text-[#0A0A0A] transition-all font-sans">
           Request a Showing
         </ShowingTrigger>
         <Link
           href={`/luxury-agent/featured-listings/${listing.id}`}
-          className="text-[12px] tracking-[0.2em] uppercase text-white/25 hover:text-white/60 transition-colors font-sans"
+          className="text-center text-[12px] tracking-[0.2em] uppercase text-white/25 hover:text-white/60 transition-colors font-sans"
         >
           View Details →
         </Link>
