@@ -119,14 +119,6 @@ const PRICING = [
   },
 ]
 
-const INCLUDED = [
-  'Fully custom-coded — no WordPress',
-  'No page-builder lock-in',
-  'Fast, SEO-friendly architecture',
-  'Direct access to the developer building your site',
-  'Custom API integrations available',
-  'Transparent pricing — no sales-call quotes',
-]
 
 // ─── Page ─────────────────────────────────────────────────────────────────────
 
@@ -374,7 +366,7 @@ export default function HomePage() {
             >
               Transparent, <span className="text-[#c4a882]">straightforward</span> pricing
             </h2>
-            <p className="mt-3 text-[#8a8a8a]">One-time setup fee to build and launch. Monthly retainer covers hosting, support, and updates.</p>
+            <p className="mt-3 text-[#8a8a8a]">One-time setup fee to build and launch. Monthly retainer covers hosting, support, and updates. No sales calls, no surprise quotes.</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -413,19 +405,6 @@ export default function HomePage() {
                 />
               </div>
             ))}
-          </div>
-
-          {/* Included with every project */}
-          <div className="mt-12 rounded-xl border border-[#2a2a2a] bg-[#1c1c1c] p-8">
-            <p className="text-xs text-[#8a8a8a] uppercase tracking-widest mb-6 text-center">Included With Every Project</p>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-4 max-w-4xl mx-auto">
-              {INCLUDED.map((item) => (
-                <div key={item} className="flex items-start gap-3 text-sm text-[#8a8a8a]">
-                  <span className="text-[#c4a882] mt-0.5 shrink-0">✓</span>
-                  {item}
-                </div>
-              ))}
-            </div>
           </div>
 
           <p className="text-center text-xs text-[#8a8a8a] mt-8">
