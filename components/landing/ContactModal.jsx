@@ -1,13 +1,15 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 
 export default function ContactModal({ isOpen, onClose }) {
   const dialogRef = useRef(null);
+  const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
 
   useEffect(() => {
-    if (!isOpen) return;
+    if (!isOpen) { setSubmitted(false); return; }
 
     // Remember what had focus so we can restore it when the modal closes.
     const previouslyFocused = document.activeElement;
@@ -58,6 +60,22 @@ export default function ContactModal({ isOpen, onClose }) {
       if (previouslyFocused instanceof HTMLElement) previouslyFocused.focus();
     };
   }, [isOpen, onClose]);
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+    setSubmitting(true);
+    const data = Object.fromEntries(new FormData(e.target));
+    try {
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({ access_key: process.env.NEXT_PUBLIC_WEB3FORMS_KEY ?? '', ...data }),
+      });
+      if (res.ok) setSubmitted(true);
+    } finally {
+      setSubmitting(false);
+    }
+  }
 
   if (!isOpen) return null;
 
@@ -120,13 +138,34 @@ export default function ContactModal({ isOpen, onClose }) {
             </p>
           </div>
 
-          {/* Form */}
+          {/* Success state */}
+          {submitted ? (
+            <div className="flex flex-col items-center justify-center px-8 py-20 text-center">
+              <div className="w-14 h-14 rounded-full bg-[#c4a882]/15 flex items-center justify-center mb-6">
+                <svg className="w-7 h-7 text-[#c4a882]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
+              <h3 className="text-2xl font-bold text-[#e2e2e2] mb-3" style={{ fontFamily: 'var(--font-playfair), Georgia, serif' }}>
+                Got it — I&apos;ll be in touch soon.
+              </h3>
+              <p className="text-sm text-[#8a8a8a] max-w-xs leading-relaxed">
+                Thanks for reaching out. I personally review every inquiry and typically respond within 24 hours.
+              </p>
+              <button
+                onClick={onClose}
+                className="mt-8 px-8 py-3 rounded-lg bg-[#c4a882] text-[#111111] text-sm font-semibold hover:bg-[#b8976e] transition-colors duration-200"
+              >
+                Close
+              </button>
+            </div>
+          ) : (
+
+          /* Form */
           <form
-            action="https://api.web3forms.com/submit"
-            method="POST"
+            onSubmit={handleSubmit}
             className="px-8 py-7 space-y-5"
           >
-            <input type="hidden" name="access_key" value={process.env.NEXT_PUBLIC_WEB3FORMS_KEY ?? ''} />
             <input type="hidden" name="subject" value="New inquiry from chavbuilds.com" />
             <input type="checkbox" name="botcheck" className="hidden" tabIndex={-1} aria-hidden="true" />
 
@@ -253,11 +292,13 @@ export default function ContactModal({ isOpen, onClose }) {
             {/* Submit */}
             <button
               type="submit"
-              className="w-full py-3.5 rounded-lg bg-[#c4a882] text-[#111111] text-sm font-semibold hover:bg-[#b8976e] transition-colors duration-200"
+              disabled={submitting}
+              className="w-full py-3.5 rounded-lg bg-[#c4a882] text-[#111111] text-sm font-semibold hover:bg-[#b8976e] disabled:opacity-60 transition-colors duration-200"
             >
-              Get Started Now
+              {submitting ? 'Sending…' : 'Get Started Now'}
             </button>
           </form>
+          )}
         </div>
 
       </div>
