@@ -39,11 +39,11 @@ export default function HomeValuationCompact({ googleMapsKey = '' }) {
           Free Home Valuation
         </p>
 
-        <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-normal text-white mb-4 leading-tight whitespace-nowrap">
+        <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-normal text-white mb-4 leading-tight text-balance">
           How Much is Your Home Worth?
         </h2>
 
-        <p className="text-white/50 font-sans text-sm lg:text-base mb-8 leading-relaxed whitespace-nowrap">
+        <p className="text-white/50 font-sans text-sm lg:text-base mb-8 leading-relaxed max-w-md">
           Get a free, accurate valuation based on current market data and local expertise.
         </p>
 

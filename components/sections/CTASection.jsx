@@ -74,7 +74,7 @@ export default function CTASection({
                 type="button"
                 onClick={() => window.dispatchEvent(new CustomEvent('contact:open'))}
                 className={cn(
-                  'inline-block px-10 py-4 text-[12px] tracking-[0.2em] uppercase font-medium transition-all duration-200',
+                  'block min-[480px]:inline-block w-full min-[480px]:w-auto text-center px-10 py-4 text-[12px] tracking-[0.2em] uppercase font-medium transition-all duration-200',
                   isLuxury
                     ? 'bg-template-accent text-[#0A0A0A] hover:opacity-90'
                     : 'bg-white text-template-accent hover:bg-white/90 rounded-md',
@@ -86,7 +86,7 @@ export default function CTASection({
               <Link
                 href={cta.href}
                 className={cn(
-                  'inline-block px-10 py-4 text-[12px] tracking-[0.2em] uppercase font-medium transition-all duration-200',
+                  'block min-[480px]:inline-block w-full min-[480px]:w-auto text-center px-10 py-4 text-[12px] tracking-[0.2em] uppercase font-medium transition-all duration-200',
                   isLuxury
                     ? 'bg-template-accent text-[#0A0A0A] hover:opacity-90'
                     : 'bg-white text-template-accent hover:bg-white/90 rounded-md',

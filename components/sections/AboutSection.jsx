@@ -99,7 +99,7 @@ export default function AboutSection({
               <Link
                 href={learnMoreHref}
                 className={cn(
-                  'inline-block px-8 py-3.5 text-[12px] tracking-[0.2em] uppercase font-semibold font-sans transition-colors',
+                  'block min-[480px]:inline-block text-center px-8 py-3.5 text-[12px] tracking-[0.2em] uppercase font-semibold font-sans transition-colors',
                   isLuxury
                     ? 'bg-[#C9A96E] text-[#0A0A0A] hover:bg-[#b8935a]'
                     : 'bg-template-accent text-template-accent-fg hover:opacity-90',

@@ -141,7 +141,7 @@ export default function HomeValuationWidget({ agentName = 'Victoria Sinclair', g
 
       {/* Address bar + loading bar */}
       <div className="w-full max-w-2xl mx-auto">
-        <div className="flex bg-white">
+        <div className="flex flex-col min-[480px]:flex-row bg-white">
           <div className="flex flex-1 items-center px-5 gap-3 min-w-0">
             <MapPin size={15} className={isLight ? 'text-[#4B6090] flex-shrink-0' : 'text-[#C9A96E] flex-shrink-0'} />
             <input
@@ -160,8 +160,8 @@ export default function HomeValuationWidget({ agentName = 'Victoria Sinclair', g
             onClick={handleGetValue}
             disabled={!selectedPlace || phase === 'loading'}
             className={isLight
-              ? 'flex-shrink-0 px-6 lg:px-8 py-[18px] bg-[#1A2D5A] text-white text-[12px] lg:text-[12px] tracking-[0.2em] uppercase font-semibold font-sans transition-colors hover:bg-[#243870] disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-[#1A2D5A]'
-              : 'flex-shrink-0 px-6 lg:px-8 py-[18px] bg-[#C9A96E] text-[#0A0A0A] text-[12px] lg:text-[12px] tracking-[0.2em] uppercase font-semibold font-sans transition-colors hover:bg-[#b8935a] disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-[#C9A96E]'
+              ? 'px-6 lg:px-8 py-4 min-[480px]:py-[18px] bg-[#1A2D5A] text-white text-[12px] tracking-[0.2em] uppercase font-semibold font-sans transition-colors hover:bg-[#243870] disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-[#1A2D5A]'
+              : 'px-6 lg:px-8 py-4 min-[480px]:py-[18px] bg-[#C9A96E] text-[#0A0A0A] text-[12px] tracking-[0.2em] uppercase font-semibold font-sans transition-colors hover:bg-[#b8935a] disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-[#C9A96E]'
             }
           >
             Get Free Valuation
@@ -219,7 +219,7 @@ export default function HomeValuationWidget({ agentName = 'Victoria Sinclair', g
                   onClick={handleClose}
                   className={isLight
                     ? 'absolute top-4 right-4 z-10 w-8 h-8 flex items-center justify-center rounded-full bg-[#F3F4F6] hover:bg-[#E5E7EB] text-[#6B7280] hover:text-[#111827] transition-all'
-                    : 'absolute top-4 right-4 z-10 flex items-center justify-center w-8 h-8 text-white/30 hover:text-white transition-colors'
+                    : 'absolute top-4 right-4 z-10 flex items-center justify-center w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 text-white/70 hover:text-white transition-all'
                   }
                   aria-label="Close"
                 >
@@ -249,7 +249,7 @@ export default function HomeValuationWidget({ agentName = 'Victoria Sinclair', g
                         <p className={isLight ? 'text-[12px] tracking-[0.4em] uppercase text-[#4B6090] font-sans mb-2' : 'text-[12px] tracking-[0.45em] uppercase text-[#C9A96E] font-sans mb-3'}>
                           Free Home Valuation
                         </p>
-                        <h2 className={isLight ? 'text-2xl font-bold text-[#111827] mb-2' : 'font-heading text-2xl lg:text-3xl font-normal text-white mb-2'}>
+                        <h2 className={isLight ? 'text-2xl font-bold text-[#111827] mb-2 text-balance' : 'font-heading text-2xl lg:text-3xl font-normal text-white mb-2 text-balance'}>
                           Unlock Your Home's Value
                         </h2>
                         <p className={isLight ? 'text-[#6B7280] text-sm font-sans mb-6 leading-relaxed' : 'text-white/40 text-sm font-sans mb-8 leading-relaxed'}>

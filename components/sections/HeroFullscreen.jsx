@@ -63,8 +63,8 @@ export default function HeroFullscreen({
         style={{ opacity: contentOpacity }}
         className="relative h-full flex flex-col"
       >
-        {/* Headline — vertically centered */}
-        <div className="flex-1 flex items-center">
+        {/* Headline — vertically centered; pt-20 on mobile clears the fixed navbar */}
+        <div className="flex-1 flex items-center pt-20 md:pt-0">
           <div className="max-w-7xl mx-auto px-6 lg:px-8 w-full">
             <motion.div
               initial={{ opacity: 0, y: 50 }}
@@ -77,7 +77,7 @@ export default function HeroFullscreen({
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8, delay: 0.3 }}
-                  className="text-[12px] tracking-[0.5em] uppercase text-template-accent mb-7 font-sans"
+                  className="hidden min-[390px]:block text-[12px] tracking-[0.5em] uppercase text-template-accent mb-7 font-sans"
                 >
                   {eyebrow}
                 </motion.p>
@@ -90,8 +90,8 @@ export default function HeroFullscreen({
                 className={cn(
                   'font-normal text-white leading-[1.04] tracking-tight mb-8',
                   isLuxury
-                    ? 'font-heading text-5xl md:text-6xl lg:text-7xl xl:text-[86px]'
-                    : 'text-4xl md:text-5xl lg:text-6xl',
+                    ? 'font-heading text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-[86px]'
+                    : 'text-3xl sm:text-4xl md:text-5xl lg:text-6xl',
                 )}
               >
                 {headline}
@@ -112,17 +112,17 @@ export default function HeroFullscreen({
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.8 }}
-                className="flex flex-wrap gap-4"
+                className="flex flex-col min-[480px]:flex-row flex-wrap gap-4"
               >
                 {ctaPrimary && (
                   ctaPrimary.modal ? (
                     <button type="button" onClick={() => window.dispatchEvent(new CustomEvent('contact:open'))}
-                      className={cn('px-9 py-4 text-[12px] tracking-[0.2em] uppercase font-medium transition-opacity duration-200 hover:opacity-85', isLuxury ? 'bg-template-accent text-[#0A0A0A]' : 'bg-white text-black')}>
+                      className={cn('w-full min-[480px]:w-auto text-center px-9 py-4 text-[12px] tracking-[0.2em] uppercase font-medium transition-opacity duration-200 hover:opacity-85', isLuxury ? 'bg-template-accent text-[#0A0A0A]' : 'bg-white text-black')}>
                       {ctaPrimary.label}
                     </button>
                   ) : (
                     <Link href={ctaPrimary.href}
-                      className={cn('px-9 py-4 text-[12px] tracking-[0.2em] uppercase font-medium transition-opacity duration-200 hover:opacity-85', isLuxury ? 'bg-template-accent text-[#0A0A0A]' : 'bg-white text-black')}>
+                      className={cn('w-full min-[480px]:w-auto text-center px-9 py-4 text-[12px] tracking-[0.2em] uppercase font-medium transition-opacity duration-200 hover:opacity-85', isLuxury ? 'bg-template-accent text-[#0A0A0A]' : 'bg-white text-black')}>
                       {ctaPrimary.label}
                     </Link>
                   )
@@ -130,12 +130,12 @@ export default function HeroFullscreen({
                 {ctaSecondary && (
                   ctaSecondary.modal ? (
                     <button type="button" onClick={() => window.dispatchEvent(new CustomEvent('contact:open'))}
-                      className="px-9 py-4 text-[12px] tracking-[0.2em] uppercase font-medium text-white border border-white/35 hover:border-white/70 hover:bg-white/5 transition-all duration-200">
+                      className="w-full min-[480px]:w-auto text-center px-9 py-4 text-[12px] tracking-[0.2em] uppercase font-medium text-white border border-white/35 hover:border-white/70 hover:bg-white/5 transition-all duration-200">
                       {ctaSecondary.label}
                     </button>
                   ) : (
                     <Link href={ctaSecondary.href}
-                      className="px-9 py-4 text-[12px] tracking-[0.2em] uppercase font-medium text-white border border-white/35 hover:border-white/70 hover:bg-white/5 transition-all duration-200">
+                      className="w-full min-[480px]:w-auto text-center px-9 py-4 text-[12px] tracking-[0.2em] uppercase font-medium text-white border border-white/35 hover:border-white/70 hover:bg-white/5 transition-all duration-200">
                       {ctaSecondary.label}
                     </Link>
                   )
@@ -160,7 +160,7 @@ export default function HeroFullscreen({
         type="button"
         onClick={() => ref.current?.nextElementSibling?.scrollIntoView({ behavior: 'smooth' })}
         style={{ opacity: contentOpacity }}
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1.5 cursor-pointer"
+        className="hidden sm:flex absolute bottom-10 left-1/2 -translate-x-1/2 flex-col items-center gap-1.5 cursor-pointer"
         aria-label="Scroll down"
       >
         <motion.div

@@ -32,7 +32,7 @@ const DEMO_STATS = [
   { numericValue: 270, suffix: '+', label: 'Homes Sold' },
   { numericValue: 500, prefix: '$', suffix: 'M+', label: 'Transaction Volume' },
   { numericValue: 98, suffix: '%', label: 'List-to-Sale Ratio' },
-  { numericValue: 19, suffix: ' Days', label: 'Avg. Days on Market' },
+  { numericValue: 19, label: 'Avg. Days on Market' },
 ]
 
 const DEMO_TESTIMONIALS = [
@@ -257,7 +257,7 @@ export default function LuxuryAgentHome() {
           <div className="flex justify-center mt-10">
             <a
               href="/luxury-agent/neighborhoods"
-              className="inline-block px-10 py-4 text-[12px] tracking-[0.2em] uppercase font-medium border border-[#C9A96E] text-[#C9A96E] hover:bg-[#C9A96E] hover:text-[#0A0A0A] transition-all duration-300 font-sans"
+              className="block min-[480px]:inline-block w-full min-[480px]:w-auto text-center px-10 py-4 text-[12px] tracking-[0.2em] uppercase font-medium border border-[#C9A96E] text-[#C9A96E] hover:bg-[#C9A96E] hover:text-[#0A0A0A] transition-all duration-300 font-sans"
             >
               View All Neighborhoods
             </a>
