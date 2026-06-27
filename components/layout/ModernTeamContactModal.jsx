@@ -33,8 +33,9 @@ export default function ModernTeamContactModal({
   address     = '1700 Post Oak Blvd, Suite 600\nHouston, TX 77056',
   socialLinks = {},
 }) {
-  const [open, setOpen] = useState(false)
-  const [sent, setSent]  = useState(false)
+  const [open, setOpen]               = useState(false)
+  const [sent, setSent]               = useState(false)
+  const [submitError, setSubmitError] = useState('')
 
   const { register, handleSubmit, formState: { errors, isSubmitting }, reset } = useForm({
     resolver: zodResolver(schema),
@@ -57,18 +58,34 @@ export default function ModernTeamContactModal({
     return () => window.removeEventListener('keydown', handler)
   }, [])
 
-  const close = () => { setOpen(false); setTimeout(() => { setSent(false); reset() }, 400) }
+  const close = () => {
+    setOpen(false)
+    setTimeout(() => { setSent(false); setSubmitError(''); reset() }, 400)
+  }
 
   const onSubmit = async (data) => {
+    setSubmitError('')
     try {
-      const res = await fetch('https://api.web3forms.com/submit', {
+      const res = await fetch('/api/leads/capture', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ access_key: process.env.NEXT_PUBLIC_WEB3FORMS_KEY, ...data }),
+        body: JSON.stringify({
+          firstName: data.firstName,
+          lastName:  data.lastName,
+          email:     data.email,
+          phone:     data.phone,
+          message:   data.message,
+        }),
       })
       const json = await res.json()
-      if (json.success) setSent(true)
-    } catch {}
+      if (json.success) {
+        setSent(true)
+      } else {
+        setSubmitError(json.error ?? 'Something went wrong. Please try again.')
+      }
+    } catch {
+      setSubmitError('Something went wrong. Please try again.')
+    }
   }
 
   const inputCls =
@@ -114,7 +131,7 @@ export default function ModernTeamContactModal({
                   <CheckCircle size={48} className="text-[#1A2D5A] mx-auto mb-5" strokeWidth={1.25} />
                   <h3 className="text-xl font-semibold text-[#1A2D5A] mb-2">Message Sent!</h3>
                   <p className="text-[#6B7280] text-sm font-sans">
-                    We'll be in touch within 24 hours.
+                    Thanks! I'll be in touch within 24 hours.
                   </p>
                   <button
                     onClick={close}
@@ -176,6 +193,10 @@ export default function ModernTeamContactModal({
                       I agree to be contacted by {agentName} via call, email, and text for real estate services. Message and data rates may apply.
                     </label>
                   </div>
+
+                  {submitError && (
+                    <p className="text-red-500 text-xs font-sans text-center">{submitError}</p>
+                  )}
 
                   <button
                     type="submit"

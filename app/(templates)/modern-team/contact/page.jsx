@@ -50,22 +50,35 @@ const TEAM_MEMBERS = [
 ]
 
 export default function ContactPage() {
-  const [sent, setSent] = useState(false)
+  const [sent, setSent]               = useState(false)
+  const [submitError, setSubmitError] = useState('')
 
   const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm({
     resolver: zodResolver(schema),
   })
 
   const onSubmit = async (data) => {
+    setSubmitError('')
     try {
-      const res = await fetch('https://api.web3forms.com/submit', {
+      const res = await fetch('/api/leads/capture', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ access_key: process.env.NEXT_PUBLIC_WEB3FORMS_KEY, ...data }),
+        body: JSON.stringify({
+          name:    data.fullName,
+          email:   data.email,
+          phone:   data.phone,
+          message: data.message,
+        }),
       })
       const json = await res.json()
-      if (json.success) setSent(true)
-    } catch {}
+      if (json.success) {
+        setSent(true)
+      } else {
+        setSubmitError(json.error ?? 'Something went wrong. Please try again.')
+      }
+    } catch {
+      setSubmitError('Something went wrong. Please try again.')
+    }
   }
 
   const inputCls = 'w-full px-4 py-3 text-sm border border-[#D5DBE9] rounded-lg bg-white text-[#111827] placeholder:text-[#9CA3AF] outline-none focus:border-[#1A2D5A] transition-colors'
@@ -193,7 +206,7 @@ export default function ContactPage() {
                   <CheckCircle size={48} className="text-[#1A2D5A] mx-auto mb-5" strokeWidth={1.5} />
                   <h3 className="text-xl font-bold text-[#111827] mb-3">Message Received!</h3>
                   <p className="text-[#6B7280] font-sans text-sm leading-relaxed max-w-xs mx-auto">
-                    Thank you for reaching out. A member of the Hargrove Group will be in touch within 24 hours.
+                    Thanks! I'll be in touch within 24 hours.
                   </p>
                 </div>
               ) : (
@@ -244,6 +257,10 @@ export default function ContactPage() {
                       I agree to be contacted by the Hargrove Group via call, email, and text for real estate services. TX Lic# 0624531. Message and data rates may apply.
                     </label>
                   </div>
+
+                  {submitError && (
+                    <p className="text-red-500 text-sm font-sans text-center">{submitError}</p>
+                  )}
 
                   <button
                     type="submit"
