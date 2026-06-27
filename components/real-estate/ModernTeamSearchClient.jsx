@@ -409,10 +409,10 @@ export default function ModernTeamSearchClient({
         <div className="px-4 lg:px-6 py-3">
 
           {/* Main filter row */}
-          <div className="flex items-stretch border border-[#D5DBE9] rounded-xl overflow-hidden">
+          <div className="flex flex-col gap-2 md:flex-row md:gap-0 md:items-stretch md:border md:border-[#D5DBE9] md:rounded-xl md:overflow-hidden">
 
             {/* Search */}
-            <div className="flex items-center gap-2 px-4 py-3 flex-1 min-w-[160px] border-r border-[#D5DBE9]">
+            <div className="flex items-center gap-2 px-4 py-3 flex-1 min-w-0 border border-[#D5DBE9] rounded-xl md:border-0 md:rounded-none md:border-r md:border-[#D5DBE9]">
               <Search size={14} className="text-[#1A2D5A] flex-shrink-0" />
               <input
                 type="text"
@@ -429,8 +429,8 @@ export default function ModernTeamSearchClient({
               )}
             </div>
 
-            {/* Status dropdown */}
-            <div className="px-4 py-3 border-r border-[#D5DBE9]">
+            {/* Status dropdown — desktop only */}
+            <div className="hidden md:block px-4 py-3 border-r border-[#D5DBE9]">
               <select value={filters.status} onChange={e => apply({ ...filters, status: e.target.value })} className={selCls}>
                 <option value="">All Status</option>
                 {STATUSES.map(s => <option key={s.value} value={s.value}>{s.label}</option>)}
@@ -479,10 +479,10 @@ export default function ModernTeamSearchClient({
               </select>
             </div>
 
-            {/* All Filters */}
+            {/* All Filters — desktop */}
             <button
               onClick={() => setShowDrawer(true)}
-              className="flex items-center gap-1.5 px-4 py-3 text-sm text-[#4B6090] hover:text-[#1A2D5A] transition-colors font-sans border-r border-[#D5DBE9]"
+              className="hidden md:flex items-center gap-1.5 px-4 py-3 text-sm text-[#4B6090] hover:text-[#1A2D5A] transition-colors font-sans border-r border-[#D5DBE9]"
             >
               <SlidersHorizontal size={14} />
               <span className="text-[12px] tracking-[0.1em] uppercase">Filters</span>
@@ -493,13 +493,35 @@ export default function ModernTeamSearchClient({
               )}
             </button>
 
-            {/* SEARCH — always visible */}
+            {/* SEARCH — desktop */}
             <button
               onClick={() => apply(filters)}
-              className="px-6 py-3 text-[12px] tracking-[0.15em] uppercase font-semibold bg-[#1A2D5A] text-white hover:bg-[#243870] transition-colors font-sans flex-shrink-0"
+              className="hidden md:block px-6 py-3 text-[12px] tracking-[0.15em] uppercase font-semibold bg-[#1A2D5A] text-white hover:bg-[#243870] transition-colors font-sans flex-shrink-0"
             >
               Search
             </button>
+
+            {/* Mobile row 2: Filters + Search */}
+            <div className="flex md:hidden border border-[#D5DBE9] rounded-xl overflow-hidden">
+              <button
+                onClick={() => setShowDrawer(true)}
+                className="flex-1 flex items-center justify-center gap-1.5 px-4 py-3 text-sm text-[#4B6090] hover:text-[#1A2D5A] transition-colors font-sans border-r border-[#D5DBE9]"
+              >
+                <SlidersHorizontal size={14} />
+                <span className="text-[12px] tracking-[0.1em] uppercase">Filters</span>
+                {activeTags.length > 0 && (
+                  <span className="w-4 h-4 text-[12px] flex items-center justify-center font-semibold bg-[#1A2D5A] text-white rounded-full">
+                    {activeTags.length}
+                  </span>
+                )}
+              </button>
+              <button
+                onClick={() => apply(filters)}
+                className="flex-1 py-3 text-[12px] tracking-[0.15em] uppercase font-semibold bg-[#1A2D5A] text-white hover:bg-[#243870] transition-colors font-sans"
+              >
+                Search
+              </button>
+            </div>
           </div>
 
           {/* Active filter tags */}
