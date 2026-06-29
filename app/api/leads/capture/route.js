@@ -4,7 +4,11 @@ const HUBSPOT_URL = 'https://api.hubapi.com/crm/v3/objects/contacts'
 const OWNER_ID    = '94414048'
 const FROM        = 'notifications@chavbuilds.com'
 
-const resend = new Resend(process.env.RESEND_API_KEY)
+let resend
+function getResend() {
+  if (!resend) resend = new Resend(process.env.RESEND_API_KEY)
+  return resend
+}
 
 function splitName(name = '') {
   const parts = name.trim().split(/\s+/)
@@ -142,7 +146,7 @@ async function sendAgentNotification({ firstname, lastname, email, phone, messag
     timeStyle: 'short',
   })
   try {
-    await resend.emails.send({
+    await getResend().emails.send({
       from:    FROM,
       to:      process.env.AGENT_EMAIL,
       subject: `New Demo Lead: ${leadSource} - ${firstname} ${lastname}`.trim(),
@@ -173,7 +177,7 @@ async function sendAgentNotification({ firstname, lastname, email, phone, messag
 async function sendLeadAutoReply({ firstname, email, message, formType, neighborhood }) {
   const template = AUTO_REPLY[formType] ?? AUTO_REPLY.contact
   try {
-    await resend.emails.send({
+    await getResend().emails.send({
       from:    FROM,
       to:      email,
       subject: template.subject({ firstname, neighborhood }),
