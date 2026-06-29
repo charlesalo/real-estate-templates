@@ -2,7 +2,7 @@ import { Resend } from 'resend'
 
 const HUBSPOT_URL = 'https://api.hubapi.com/crm/v3/objects/contacts'
 const OWNER_ID    = '94414048'
-const FROM        = 'notifications@chavbuilds.com' // replace with verified domain once set up
+const FROM        = 'notifications@chavbuilds.com'
 
 const resend = new Resend(process.env.RESEND_API_KEY)
 
@@ -14,9 +14,128 @@ function splitName(name = '') {
   }
 }
 
+// ── Lead auto-reply copy, by form type ─────────────────────────────────────────
+
+const AUTO_REPLY = {
+  contact: {
+    subject: () => 'Thanks for checking out this template!',
+    body: ({ firstname }) => `
+      <p style="color:#374151;font-size:14px;line-height:1.6">Hi ${firstname || 'there'},</p>
+      <p style="color:#374151;font-size:14px;line-height:1.6">
+        Thanks for reaching out through this demo site.
+      </p>
+      <p style="color:#374151;font-size:14px;line-height:1.6">
+        Just to clarify — this is a showcase template built by <strong>chavbuilds</strong>, a web
+        development studio for real estate professionals. If you're a homebuyer or seller, this
+        particular site isn't an active listing service.
+      </p>
+      <p style="color:#374151;font-size:14px;line-height:1.6">
+        If you're a real estate agent exploring what your own website could look like, this exact
+        lead capture system — connected to your own CRM — comes standard with every site I build.
+      </p>
+      <p style="color:#374151;font-size:14px;line-height:1.6">
+        Want to talk about building one for your business? Reply here or reach me at
+        <a href="mailto:charlesalo@chavbuilds.com" style="color:#1A2D5A">charlesalo@chavbuilds.com</a>.
+      </p>
+      <p style="color:#374151;font-size:14px;line-height:1.6">— Charles</p>
+    `,
+  },
+  valuation: {
+    subject: () => 'About your home valuation request',
+    body: ({ firstname }) => `
+      <p style="color:#374151;font-size:14px;line-height:1.6">Hi ${firstname || 'there'},</p>
+      <p style="color:#374151;font-size:14px;line-height:1.6">
+        Thanks for trying out the home valuation tool on this demo site!
+      </p>
+      <p style="color:#374151;font-size:14px;line-height:1.6">
+        A quick note — this is a showcase template, so this particular request won't generate a
+        real property estimate.
+      </p>
+      <p style="color:#374151;font-size:14px;line-height:1.6">
+        If you're an agent and curious how this tool would work on your own live website — pulling
+        real market data and routing leads straight to your CRM — that's exactly what comes
+        standard when you become a client.
+      </p>
+      <p style="color:#374151;font-size:14px;line-height:1.6">
+        Want to see it in action with your own listings? Reply here or reach me at
+        <a href="mailto:charlesalo@chavbuilds.com" style="color:#1A2D5A">charlesalo@chavbuilds.com</a>.
+      </p>
+      <p style="color:#374151;font-size:14px;line-height:1.6">— Charles</p>
+    `,
+  },
+  showing: {
+    subject: () => 'About your showing request',
+    body: ({ firstname }) => `
+      <p style="color:#374151;font-size:14px;line-height:1.6">Hi ${firstname || 'there'},</p>
+      <p style="color:#374151;font-size:14px;line-height:1.6">
+        Thanks for trying the showing request feature on this demo site!
+      </p>
+      <p style="color:#374151;font-size:14px;line-height:1.6">
+        Just to clarify — this is a showcase template, so no actual showing has been scheduled
+        (the property shown isn't real either!).
+      </p>
+      <p style="color:#374151;font-size:14px;line-height:1.6">
+        If you're a real estate agent evaluating templates, this exact feature — fully connected
+        to your calendar and CRM — is included in every chavbuilds website.
+      </p>
+      <p style="color:#374151;font-size:14px;line-height:1.6">
+        Curious what this would look like for your listings? Reply here or reach me at
+        <a href="mailto:charlesalo@chavbuilds.com" style="color:#1A2D5A">charlesalo@chavbuilds.com</a>.
+      </p>
+      <p style="color:#374151;font-size:14px;line-height:1.6">— Charles</p>
+    `,
+  },
+  'market-report': {
+    subject: ({ neighborhood }) => neighborhood ? `Your ${neighborhood} market report request` : 'Your market report request',
+    body: ({ firstname }) => `
+      <p style="color:#374151;font-size:14px;line-height:1.6">Hi ${firstname || 'there'},</p>
+      <p style="color:#374151;font-size:14px;line-height:1.6">
+        Thanks for requesting a market report on this demo site!
+      </p>
+      <p style="color:#374151;font-size:14px;line-height:1.6">
+        Just a quick note — this is a showcase template, so the "beautifully designed,
+        hand-annotated PDF" won't actually be landing in your inbox this time around.
+      </p>
+      <p style="color:#374151;font-size:14px;line-height:1.6">
+        But if you're a real estate agent who loved this feature — this exact market report
+        tool, pulling real comps and building-type data for your own neighborhoods, is built
+        into every chavbuilds website. Built monthly. Never generic. Exactly like the demo.
+      </p>
+      <p style="color:#374151;font-size:14px;line-height:1.6">
+        Curious what this would look like for your market? Reply here or reach me directly at
+        <a href="mailto:charlesalo@chavbuilds.com" style="color:#1A2D5A">charlesalo@chavbuilds.com</a>.
+      </p>
+      <p style="color:#374151;font-size:14px;line-height:1.6">— Charles</p>
+    `,
+  },
+  'mortgage-cta': {
+    subject: () => 'About your pre-approval request',
+    body: ({ firstname }) => `
+      <p style="color:#374151;font-size:14px;line-height:1.6">Hi ${firstname || 'there'},</p>
+      <p style="color:#374151;font-size:14px;line-height:1.6">
+        Thanks for trying out the mortgage calculator on this demo site!
+      </p>
+      <p style="color:#374151;font-size:14px;line-height:1.6">
+        Just to clarify — this is a showcase template, so this particular pre-approval request
+        won't be routed to a real lender.
+      </p>
+      <p style="color:#374151;font-size:14px;line-height:1.6">
+        If you're a real estate agent evaluating templates, this exact calculator — complete with
+        instant lead capture and CRM routing — comes standard on every chavbuilds website. Buyers
+        get the numbers, you get the lead.
+      </p>
+      <p style="color:#374151;font-size:14px;line-height:1.6">
+        Want to see it live with your own branding? Reply here or reach me directly at
+        <a href="mailto:charlesalo@chavbuilds.com" style="color:#1A2D5A">charlesalo@chavbuilds.com</a>.
+      </p>
+      <p style="color:#374151;font-size:14px;line-height:1.6">— Charles</p>
+    `,
+  },
+}
+
 // ── Email: agent notification ─────────────────────────────────────────────────
 
-async function sendAgentNotification({ firstname, lastname, email, phone, message }) {
+async function sendAgentNotification({ firstname, lastname, email, phone, message, leadSource }) {
   const timestamp = new Date().toLocaleString('en-US', {
     timeZone:  'America/Chicago',
     dateStyle: 'full',
@@ -26,11 +145,11 @@ async function sendAgentNotification({ firstname, lastname, email, phone, messag
     await resend.emails.send({
       from:    FROM,
       to:      process.env.AGENT_EMAIL,
-      subject: `New Lead: ${firstname} ${lastname}`.trim(),
+      subject: `New Demo Lead: ${leadSource} - ${firstname} ${lastname}`.trim(),
       html: `
         <div style="font-family:sans-serif;max-width:560px;margin:0 auto;color:#111827">
-          <h2 style="color:#1A2D5A;margin-bottom:4px">New Contact Form Submission</h2>
-          <p style="color:#6B7280;font-size:13px;margin-top:0">Source: Modern Team Contact Form</p>
+          <h2 style="color:#1A2D5A;margin-bottom:4px">New Lead Captured</h2>
+          <p style="color:#6B7280;font-size:13px;margin-top:0">Source: ${leadSource}</p>
           <hr style="border:none;border-top:1px solid #E5E7EB;margin:16px 0"/>
           <table style="width:100%;border-collapse:collapse;font-size:14px">
             <tr><td style="padding:8px 0;color:#6B7280;width:110px">Name</td><td style="padding:8px 0;font-weight:600">${firstname} ${lastname}</td></tr>
@@ -51,36 +170,14 @@ async function sendAgentNotification({ firstname, lastname, email, phone, messag
 
 // ── Email: lead auto-reply ────────────────────────────────────────────────────
 
-async function sendLeadAutoReply({ firstname, email, message }) {
+async function sendLeadAutoReply({ firstname, email, message, formType, neighborhood }) {
+  const template = AUTO_REPLY[formType] ?? AUTO_REPLY.contact
   try {
     await resend.emails.send({
       from:    FROM,
       to:      email,
-      subject: "Got your message — let's talk about your project",
-      html: `
-        <div style="font-family:sans-serif;max-width:560px;margin:0 auto;color:#111827">
-          <h2 style="color:#1A2D5A;margin-bottom:4px">Thanks for reaching out, ${firstname}!</h2>
-          <p style="color:#374151;font-size:14px;line-height:1.6">
-            I received your message and wanted to confirm it came through:
-          </p>
-          <blockquote style="background:#F9FAFB;border-left:3px solid #1A2D5A;padding:12px 16px;margin:16px 0;font-size:14px;color:#374151">
-            ${message || '—'}
-          </blockquote>
-          <p style="color:#374151;font-size:14px;line-height:1.6">
-            I'll review your project details and get back to you within 24 hours with next steps.
-            If anything is urgent, feel free to call or text me directly at ${process.env.AGENT_PHONE}.
-          </p>
-          <p style="color:#374151;font-size:14px;line-height:1.6">
-            In the meantime, feel free to take a look at some of the real estate website templates I've built:
-            <a href="https://re-templates.chavbuilds.com" style="color:#1A2D5A">re-templates.chavbuilds.com</a>
-          </p>
-          <p style="color:#374151;font-size:14px">
-            Talk soon,<br/>
-            ${process.env.AGENT_NAME}<br/>
-            <span style="color:#6B7280;font-size:13px">chavbuilds</span>
-          </p>
-        </div>
-      `,
+      subject: template.subject({ firstname, neighborhood }),
+      html: `<div style="font-family:sans-serif;max-width:560px;margin:0 auto;color:#111827">${template.body({ firstname, message })}</div>`,
     })
     return true
   } catch (err) {
@@ -124,7 +221,12 @@ async function upsertHubSpotContact(properties) {
 export async function POST(request) {
   try {
     const body = await request.json()
-    const { name, firstName: rawFirst, lastName: rawLast, email, phone, message } = body
+    const {
+      name, firstName: rawFirst, lastName: rawLast,
+      email, phone, message, neighborhood,
+      leadSource = 'Unknown Source',
+      formType   = 'contact',
+    } = body
 
     if (!email) {
       return Response.json({ success: false, error: 'Email is required.' }, { status: 400 })
@@ -137,12 +239,14 @@ export async function POST(request) {
     }
 
     // HubSpot property internal names:
-    // email, firstname, lastname, phone, inquiry_message, hubspot_owner_id
+    // email, firstname, lastname, phone, inquiry_message, hubspot_owner_id, lead_source, is_demo_lead
     const properties = {
       email,
       firstname,
       lastname,
       hubspot_owner_id: OWNER_ID,
+      lead_source:      leadSource,
+      is_demo_lead:     true,
     }
     if (phone)   properties.phone           = phone
     if (message) properties.inquiry_message = message
@@ -153,8 +257,8 @@ export async function POST(request) {
     const [hubspotResult, emailsResult] = await Promise.allSettled([
       upsertHubSpotContact(properties),
       Promise.all([
-        sendAgentNotification({ firstname, lastname, email, phone, message }),
-        sendLeadAutoReply({ firstname, email, message }),
+        sendAgentNotification({ firstname, lastname, email, phone, message, leadSource }),
+        sendLeadAutoReply({ firstname, email, message, formType, neighborhood }),
       ]),
     ])
 

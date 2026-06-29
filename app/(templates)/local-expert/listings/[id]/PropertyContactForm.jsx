@@ -13,17 +13,42 @@ export default function PropertyContactForm({ listing, agent }) {
     disclosure: false,
   })
   const [sent, setSent] = useState(false)
+  const [submitting, setSubmitting] = useState(false)
+  const [submitError, setSubmitError] = useState('')
 
   function handleChange(e) {
     const { name, value, type, checked } = e.target
     setForm(prev => ({ ...prev, [name]: type === 'checkbox' ? checked : value }))
   }
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault()
-    // Phase 1: console.log — Phase 2: POST /api/contact + Resend
-    console.log('[LocalExpert] Property inquiry:', { listing: listing.id, ...form })
-    setSent(true)
+    setSubmitting(true)
+    setSubmitError('')
+    try {
+      const res = await fetch('/api/leads/capture', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name:       form.name,
+          email:      form.email,
+          phone:      form.phone,
+          message:    `Property: ${listing.address}\n\n${form.message}`,
+          leadSource: 'Local Expert - Property Inquiry',
+          formType:   'contact',
+        }),
+      })
+      const json = await res.json()
+      if (json.success) {
+        setSent(true)
+      } else {
+        setSubmitError(json.error ?? 'Something went wrong. Please try again.')
+      }
+    } catch {
+      setSubmitError('Something went wrong. Please try again.')
+    } finally {
+      setSubmitting(false)
+    }
   }
 
   return (
@@ -105,11 +130,16 @@ export default function PropertyContactForm({ listing, agent }) {
                 I acknowledge receipt of the NYS Disclosure Form for Buyers and Sellers (First Point of Contact — required by NYS DOS). *
               </span>
             </label>
+            {submitError && (
+              <p className="text-red-500 text-[13px]">{submitError}</p>
+            )}
+
             <button
               type="submit"
-              className="w-full py-3 text-[13px] font-bold rounded-full bg-[#1B3B2B] text-[#F8F3EB] hover:bg-[#2a5540] transition-colors"
+              disabled={submitting}
+              className="w-full py-3 text-[13px] font-bold rounded-full bg-[#1B3B2B] text-[#F8F3EB] hover:bg-[#2a5540] transition-colors disabled:opacity-50"
             >
-              Request Information
+              {submitting ? 'Sending…' : 'Request Information'}
             </button>
           </form>
         )}

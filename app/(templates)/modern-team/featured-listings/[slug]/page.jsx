@@ -4,7 +4,7 @@ import { notFound } from 'next/navigation'
 import { use, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { MapPin, Bed, Bath, Square, Calendar, Home, Phone, Mail, Check } from 'lucide-react'
+import { MapPin, Bed, Bath, Square, Calendar, Home, Phone, Mail, Check, X, CheckCircle } from 'lucide-react'
 import ModalTrigger from '@/components/ui/ModalTrigger'
 import { FEATURED_LISTINGS } from '../data'
 
@@ -47,6 +47,110 @@ const NEIGHBORHOOD_PREVIEWS = {
   },
 }
 
+// ── Get Pre-Approved modal ──────────────────────────────────────────────────────
+
+function GetPreApprovedModal({ open, onClose, monthlyPayment, loanAmount }) {
+  const [form, setForm] = useState({ name: '', email: '', phone: '' })
+  const [submitting, setSubmitting] = useState(false)
+  const [submitted, setSubmitted] = useState(false)
+  const [submitError, setSubmitError] = useState('')
+
+  if (!open) return null
+
+  const handleClose = () => {
+    onClose()
+    setTimeout(() => {
+      setForm({ name: '', email: '', phone: '' })
+      setSubmitted(false)
+      setSubmitError('')
+    }, 300)
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    setSubmitting(true)
+    setSubmitError('')
+    try {
+      const res = await fetch('/api/leads/capture', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name:       form.name,
+          email:      form.email,
+          phone:      form.phone,
+          message:    `Loan Amount: ${fmtCurrency(loanAmount)} | Est. Monthly Payment: ${fmtCurrency(monthlyPayment)}/mo`,
+          leadSource: 'Modern Team - Mortgage Calculator CTA',
+          formType:   'mortgage-cta',
+        }),
+      })
+      const json = await res.json()
+      if (json.success) {
+        setSubmitted(true)
+      } else {
+        setSubmitError(json.error ?? 'Something went wrong. Please try again.')
+      }
+    } catch {
+      setSubmitError('Something went wrong. Please try again.')
+    } finally {
+      setSubmitting(false)
+    }
+  }
+
+  const inputCls = 'w-full px-4 py-3 text-sm border border-[#D5DBE9] rounded-lg bg-white text-[#111827] placeholder:text-[#9CA3AF] outline-none focus:border-[#1A2D5A] transition-colors'
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+      <div className="absolute inset-0 bg-[#0F1E3E]/60 backdrop-blur-sm" onClick={handleClose} />
+      <div className="relative w-full max-w-md bg-white rounded-2xl shadow-2xl p-8" onClick={e => e.stopPropagation()}>
+        <button
+          onClick={handleClose}
+          aria-label="Close"
+          className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full bg-[#F3F4F6] hover:bg-[#E5E7EB] text-[#6B7280] hover:text-[#111827] transition-all"
+        >
+          <X size={16} strokeWidth={2} />
+        </button>
+
+        {submitted ? (
+          <div className="py-6 text-center">
+            <CheckCircle size={48} className="text-[#1A2D5A] mx-auto mb-5" strokeWidth={1.5} />
+            <h3 className="text-xl font-bold text-[#111827] mb-2">Request Received!</h3>
+            <p className="text-[#6B7280] font-sans text-sm leading-relaxed">
+              I'll connect you with a lender and follow up within 24 hours.
+            </p>
+          </div>
+        ) : (
+          <>
+            <p className="text-[12px] tracking-[0.3em] uppercase text-[#4B6090] font-sans mb-2">Mortgage Pre-Approval</p>
+            <h3 className="text-xl font-bold text-[#111827] mb-2" style={{ fontFamily: 'var(--font-inter, system-ui)' }}>
+              Get Pre-Approved
+            </h3>
+            <p className="text-[#6B7280] text-sm font-sans mb-6 leading-relaxed">
+              Tell us how to reach you and we'll connect you with a trusted lender.
+            </p>
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <input required value={form.name} onChange={e => setForm(v => ({ ...v, name: e.target.value }))} type="text" placeholder="Full Name" className={inputCls} />
+              <input required value={form.email} onChange={e => setForm(v => ({ ...v, email: e.target.value }))} type="email" placeholder="Email Address" className={inputCls} />
+              <input value={form.phone} onChange={e => setForm(v => ({ ...v, phone: e.target.value }))} type="tel" placeholder="Phone Number" className={inputCls} />
+              {submitError && <p className="text-red-500 text-sm">{submitError}</p>}
+              <button
+                type="submit"
+                disabled={submitting}
+                className="w-full py-3.5 bg-[#1A2D5A] text-white text-[12px] tracking-[0.25em] uppercase font-semibold rounded-lg hover:bg-[#243870] transition-colors disabled:opacity-50"
+              >
+                {submitting ? 'Submitting…' : 'Get Pre-Approved'}
+              </button>
+            </form>
+          </>
+        )}
+      </div>
+    </div>
+  )
+}
+
+function fmtCurrency(n) {
+  return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(n)
+}
+
 // ── Mortgage Calculator ───────────────────────────────────────────────────────
 
 function MortgageCalculator({ listPrice }) {
@@ -55,6 +159,7 @@ function MortgageCalculator({ listPrice }) {
   const [down,     setDown]     = useState(20)
   const [rate,     setRate]     = useState(7.25)
   const [term,     setTerm]     = useState(30)
+  const [showPreApproval, setShowPreApproval] = useState(false)
 
   const principal = price * (1 - down / 100)
   const monthly   = rate === 0
@@ -141,6 +246,20 @@ function MortgageCalculator({ listPrice }) {
           <p>Down: {fmt(price * down / 100)}</p>
         </div>
       </div>
+
+      <button
+        onClick={() => setShowPreApproval(true)}
+        className="w-full mt-4 py-3 text-[12px] tracking-[0.15em] uppercase font-semibold border border-[#1A2D5A] text-[#1A2D5A] rounded-lg hover:bg-[#1A2D5A] hover:text-white transition-colors font-sans"
+      >
+        Get Pre-Approved →
+      </button>
+
+      <GetPreApprovedModal
+        open={showPreApproval}
+        onClose={() => setShowPreApproval(false)}
+        loanAmount={principal}
+        monthlyPayment={monthly}
+      />
     </div>
   )
 }

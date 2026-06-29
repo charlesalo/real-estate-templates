@@ -70,11 +70,13 @@ export default function ModernTeamContactModal({
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          firstName: data.firstName,
-          lastName:  data.lastName,
-          email:     data.email,
-          phone:     data.phone,
-          message:   data.message,
+          firstName:  data.firstName,
+          lastName:   data.lastName,
+          email:      data.email,
+          phone:      data.phone,
+          message:    data.message,
+          leadSource: 'Modern Team - Contact Modal',
+          formType:   'contact',
         }),
       })
       const json = await res.json()

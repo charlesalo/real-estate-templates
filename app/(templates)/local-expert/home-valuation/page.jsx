@@ -52,6 +52,8 @@ export default function HomeValuationPage() {
   const [showPredictions, setShowPredictions] = useState(false)
   const [expanded, setExpanded] = useState(false)
   const [advancing, setAdvancing] = useState(false)
+  const [submitting, setSubmitting] = useState(false)
+  const [submitError, setSubmitError] = useState('')
   const addressBoxRef = useRef(null)
   const debounceRef = useRef(null)
 
@@ -109,11 +111,34 @@ export default function HomeValuationPage() {
     setShowPredictions(false)
   }
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault()
-    // Phase 1: console.log — Phase 2: POST /api/valuation + Resend
-    console.log('[LocalExpert] Home valuation:', data)
-    setDone(true)
+    setSubmitting(true)
+    setSubmitError('')
+    try {
+      const res = await fetch('/api/leads/capture', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name:       data.name,
+          email:      data.email,
+          phone:      data.phone,
+          message:    `Address: ${data.address} | Beds: ${data.beds} | Baths: ${data.baths} | Sqft: ${data.sqft} | Condition: ${data.condition}`,
+          leadSource: 'Local Expert - Home Valuation',
+          formType:   'valuation',
+        }),
+      })
+      const json = await res.json()
+      if (json.success) {
+        setDone(true)
+      } else {
+        setSubmitError(json.error ?? 'Something went wrong. Please try again.')
+      }
+    } catch {
+      setSubmitError('Something went wrong. Please try again.')
+    } finally {
+      setSubmitting(false)
+    }
   }
 
   function handleContinue(e) {
@@ -278,13 +303,17 @@ export default function HomeValuationPage() {
               </>
             )}
 
+            {step === 2 && submitError && (
+              <p className="text-red-500 text-[13px]">{submitError}</p>
+            )}
+
             <div className="flex gap-3 pt-2">
               <button
                 type="submit"
-                disabled={step === 0 && !addressValid}
+                disabled={(step === 0 && !addressValid) || submitting}
                 className="flex-1 py-3 text-[14px] font-bold rounded-full bg-[#1B3B2B] text-[#F8F3EB] hover:bg-[#2a5540] disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:bg-[#1B3B2B] transition-colors"
               >
-                {step < 2 ? 'Continue →' : 'Get My Estimate'}
+                {step < 2 ? 'Continue →' : submitting ? 'Submitting…' : 'Get My Estimate'}
               </button>
             </div>
             {step > 0 && (

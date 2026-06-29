@@ -25,6 +25,7 @@ export default function ValuationHeroBar({ agentName = 'The Hargrove Group' }) {
   const [phase, setPhase] = useState('idle') // idle | loading | modal
   const [submitted, setSubmitted] = useState(false)
   const [mapError, setMapError] = useState(false)
+  const [submitError, setSubmitError] = useState('')
 
   const staticMapUrl = selectedPlace?.geometry && GOOGLE_MAPS_KEY
     ? (() => {
@@ -33,7 +34,7 @@ export default function ValuationHeroBar({ agentName = 'The Hargrove Group' }) {
       })()
     : null
 
-  const { register, handleSubmit, formState: { errors }, reset } = useForm({
+  const { register, handleSubmit, formState: { errors, isSubmitting }, reset } = useForm({
     resolver: zodResolver(schema),
     defaultValues: { consent: false },
   })
@@ -68,19 +69,36 @@ export default function ValuationHeroBar({ agentName = 'The Hargrove Group' }) {
   }
 
   const onSubmit = async (data) => {
+    setSubmitError('')
+    const address = selectedPlace?.formatted_address ?? inputValue
     try {
-      await fetch('/api/valuation', {
+      const res = await fetch('/api/leads/capture', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...data, address: selectedPlace?.formatted_address }),
+        body: JSON.stringify({
+          name:       data.fullName,
+          email:      data.email,
+          phone:      data.phone,
+          message:    `Property Address: ${address}`,
+          leadSource: 'Modern Team - Home Valuation',
+          formType:   'valuation',
+        }),
       })
-    } catch {}
-    setSubmitted(true)
+      const json = await res.json()
+      if (json.success) {
+        setSubmitted(true)
+      } else {
+        setSubmitError(json.error ?? 'Something went wrong. Please try again.')
+      }
+    } catch {
+      setSubmitError('Something went wrong. Please try again.')
+    }
   }
 
   const handleClose = () => {
     setPhase('idle')
     setSubmitted(false)
+    setSubmitError('')
     reset()
   }
 
@@ -260,11 +278,16 @@ export default function ValuationHeroBar({ agentName = 'The Hargrove Group' }) {
                         </label>
                         {errors.consent && <p className="text-red-500 text-xs">{errors.consent.message}</p>}
 
+                        {submitError && (
+                          <p className="text-red-500 text-sm text-center">{submitError}</p>
+                        )}
+
                         <button
                           type="submit"
-                          className="w-full py-3.5 bg-[#1A2D5A] text-white text-[12px] tracking-[0.25em] uppercase font-bold rounded-lg hover:bg-[#243870] transition-colors mt-2"
+                          disabled={isSubmitting}
+                          className="w-full py-3.5 bg-[#1A2D5A] text-white text-[12px] tracking-[0.25em] uppercase font-bold rounded-lg hover:bg-[#243870] transition-colors mt-2 disabled:opacity-50"
                         >
-                          Unlock Your Free Valuation
+                          {isSubmitting ? 'Submitting…' : 'Unlock Your Free Valuation'}
                         </button>
                       </form>
                     </>

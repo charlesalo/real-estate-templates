@@ -10,17 +10,42 @@ export default function ContactPage() {
     name: '', email: '', phone: '', message: '', interest: '', disclosure: false,
   })
   const [sent, setSent] = useState(false)
+  const [submitting, setSubmitting] = useState(false)
+  const [submitError, setSubmitError] = useState('')
 
   function handleChange(e) {
     const { name, value, type, checked } = e.target
     setForm(prev => ({ ...prev, [name]: type === 'checkbox' ? checked : value }))
   }
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault()
-    // Phase 1: console.log — Phase 2: POST /api/contact + Resend
-    console.log('[LocalExpert] Contact:', form)
-    setSent(true)
+    setSubmitting(true)
+    setSubmitError('')
+    try {
+      const res = await fetch('/api/leads/capture', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name:       form.name,
+          email:      form.email,
+          phone:      form.phone,
+          message:    form.interest ? `Interested in: ${form.interest}\n\n${form.message}` : form.message,
+          leadSource: 'Local Expert - Contact Form',
+          formType:   'contact',
+        }),
+      })
+      const json = await res.json()
+      if (json.success) {
+        setSent(true)
+      } else {
+        setSubmitError(json.error ?? 'Something went wrong. Please try again.')
+      }
+    } catch {
+      setSubmitError('Something went wrong. Please try again.')
+    } finally {
+      setSubmitting(false)
+    }
   }
 
   return (
@@ -195,11 +220,16 @@ export default function ContactPage() {
                     </span>
                   </label>
 
+                  {submitError && (
+                    <p className="text-red-500 text-sm">{submitError}</p>
+                  )}
+
                   <button
                     type="submit"
-                    className="w-full py-3.5 text-[14px] font-bold rounded-full bg-[#1B3B2B] text-[#F8F3EB] hover:bg-[#2a5540] transition-colors"
+                    disabled={submitting}
+                    className="w-full py-3.5 text-[14px] font-bold rounded-full bg-[#1B3B2B] text-[#F8F3EB] hover:bg-[#2a5540] transition-colors disabled:opacity-50"
                   >
-                    Send Message
+                    {submitting ? 'Sending…' : 'Send Message'}
                   </button>
                 </form>
               )}

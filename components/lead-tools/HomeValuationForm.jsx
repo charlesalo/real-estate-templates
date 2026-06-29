@@ -25,11 +25,19 @@ const step3Schema = z.object({
 
 const SCHEMAS = [step1Schema, step2Schema, step3Schema]
 
+const TEMPLATE_LABELS = {
+  'luxury-agent': 'Luxury Agent',
+  'modern-team':  'Modern Team',
+  'local-expert': 'Local Expert',
+}
+
 export default function HomeValuationForm({ template = 'luxury-agent' }) {
   const isLuxury = template === 'luxury-agent'
   const [step, setStep] = useState(0)
   const [allData, setAllData] = useState({})
   const [submitted, setSubmitted] = useState(false)
+  const [submitting, setSubmitting] = useState(false)
+  const [submitError, setSubmitError] = useState('')
 
   const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: zodResolver(SCHEMAS[step]),
@@ -40,14 +48,34 @@ export default function HomeValuationForm({ template = 'luxury-agent' }) {
     setAllData(merged)
     if (step < 2) {
       setStep(s => s + 1)
-    } else {
-      await fetch('/api/valuation', {
+      return
+    }
+
+    setSubmitting(true)
+    setSubmitError('')
+    try {
+      const res = await fetch('/api/leads/capture', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(merged),
+        body: JSON.stringify({
+          name:       merged.fullName,
+          email:      merged.email,
+          phone:      merged.phone,
+          message:    `Address: ${merged.address} | Bedrooms: ${merged.bedrooms} | Bathrooms: ${merged.bathrooms} | Sqft: ${merged.sqft} | Condition: ${merged.condition}`,
+          leadSource: `${TEMPLATE_LABELS[template] ?? template} - Home Valuation`,
+          formType:   'valuation',
+        }),
       })
-      console.log('Valuation submission:', merged)
-      setSubmitted(true)
+      const json = await res.json()
+      if (json.success) {
+        setSubmitted(true)
+      } else {
+        setSubmitError(json.error ?? 'Something went wrong. Please try again.')
+      }
+    } catch {
+      setSubmitError('Something went wrong. Please try again.')
+    } finally {
+      setSubmitting(false)
     }
   }
 
@@ -192,6 +220,10 @@ export default function HomeValuationForm({ template = 'luxury-agent' }) {
             </>
           )}
 
+          {step === 2 && submitError && (
+            <p className="text-red-400 text-sm">{submitError}</p>
+          )}
+
           <div className="flex justify-between items-center pt-2">
             {step > 0 ? (
               <button
@@ -204,12 +236,13 @@ export default function HomeValuationForm({ template = 'luxury-agent' }) {
             ) : <div />}
             <button
               type="submit"
+              disabled={submitting}
               className={cn(
-                'flex items-center gap-2 px-8 py-3 text-[12px] tracking-[0.2em] uppercase font-medium transition-opacity hover:opacity-90',
+                'flex items-center gap-2 px-8 py-3 text-[12px] tracking-[0.2em] uppercase font-medium transition-opacity hover:opacity-90 disabled:opacity-50',
                 isLuxury ? 'bg-template-accent text-[#0A0A0A]' : 'bg-template-accent text-template-accent-fg rounded-lg',
               )}
             >
-              {step < 2 ? 'Next' : 'Get My Estimate'}
+              {step < 2 ? 'Next' : submitting ? 'Submitting…' : 'Get My Estimate'}
               <ChevronRight size={14} />
             </button>
           </div>

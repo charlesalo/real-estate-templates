@@ -64,10 +64,12 @@ export default function ContactPage() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          name:    data.fullName,
-          email:   data.email,
-          phone:   data.phone,
-          message: data.message,
+          name:       data.fullName,
+          email:      data.email,
+          phone:      data.phone,
+          message:    data.message,
+          leadSource: 'Modern Team - Contact Form',
+          formType:   'contact',
         }),
       })
       const json = await res.json()

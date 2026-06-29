@@ -7,6 +7,8 @@ import { X, Phone, Mail, CheckSquare } from 'lucide-react'
 export default function LocalExpertContactModal({ agent, open, onClose }) {
   const [form, setForm] = useState({ name: '', email: '', phone: '', message: '', disclosure: false })
   const [sent, setSent] = useState(false)
+  const [submitting, setSubmitting] = useState(false)
+  const [submitError, setSubmitError] = useState('')
 
   useEffect(() => {
     if (open) document.body.style.overflow = 'hidden'
@@ -19,11 +21,34 @@ export default function LocalExpertContactModal({ agent, open, onClose }) {
     setForm(prev => ({ ...prev, [name]: type === 'checkbox' ? checked : value }))
   }
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault()
-    // Phase 1: log — Phase 2: POST /api/contact + Resend
-    console.log('[LocalExpert] Contact form:', form)
-    setSent(true)
+    setSubmitting(true)
+    setSubmitError('')
+    try {
+      const res = await fetch('/api/leads/capture', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name:       form.name,
+          email:      form.email,
+          phone:      form.phone,
+          message:    form.message,
+          leadSource: 'Local Expert - Contact Modal',
+          formType:   'contact',
+        }),
+      })
+      const json = await res.json()
+      if (json.success) {
+        setSent(true)
+      } else {
+        setSubmitError(json.error ?? 'Something went wrong. Please try again.')
+      }
+    } catch {
+      setSubmitError('Something went wrong. Please try again.')
+    } finally {
+      setSubmitting(false)
+    }
   }
 
   return (
@@ -155,11 +180,16 @@ export default function LocalExpertContactModal({ agent, open, onClose }) {
                       </span>
                     </label>
 
+                    {submitError && (
+                      <p className="text-red-500 text-sm">{submitError}</p>
+                    )}
+
                     <button
                       type="submit"
-                      className="w-full py-3 text-[14px] font-semibold bg-[#1B3B2B] text-[#F8F3EB] rounded-full hover:bg-[#2a5540] transition-colors mt-1"
+                      disabled={submitting}
+                      className="w-full py-3 text-[14px] font-semibold bg-[#1B3B2B] text-[#F8F3EB] rounded-full hover:bg-[#2a5540] transition-colors mt-1 disabled:opacity-50"
                     >
-                      Send Message
+                      {submitting ? 'Sending…' : 'Send Message'}
                     </button>
                   </form>
                 )}

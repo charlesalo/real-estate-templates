@@ -23,13 +23,40 @@ export default function MarketReportForm() {
   const [step, setStep] = useState(1)
   const [neighborhood, setNeighborhood] = useState(null)
   const [form, setForm] = useState({ firstName: '', lastName: '', email: '', timeline: '' })
+  const [submitting, setSubmitting] = useState(false)
+  const [submitError, setSubmitError] = useState('')
 
   const copy = LEFT_COPY
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault()
-    console.log('[MarketReport]', { neighborhood, ...form })
-    setStep(3)
+    setSubmitting(true)
+    setSubmitError('')
+    try {
+      const res = await fetch('/api/leads/capture', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          firstName:  form.firstName,
+          lastName:   form.lastName,
+          email:      form.email,
+          message:    `Neighborhood: ${neighborhood} | Timeline: ${form.timeline || 'Not specified'}`,
+          neighborhood,
+          leadSource: 'Local Expert - Market Report',
+          formType:   'market-report',
+        }),
+      })
+      const json = await res.json()
+      if (json.success) {
+        setStep(3)
+      } else {
+        setSubmitError(json.error ?? 'Something went wrong. Please try again.')
+      }
+    } catch {
+      setSubmitError('Something went wrong. Please try again.')
+    } finally {
+      setSubmitting(false)
+    }
   }
 
   return (
@@ -88,7 +115,7 @@ export default function MarketReportForm() {
               )}
               inert={step !== 2}
             >
-              <StepTwo neighborhood={neighborhood} form={form} setForm={setForm} onBack={() => setStep(1)} onSubmit={handleSubmit} />
+              <StepTwo neighborhood={neighborhood} form={form} setForm={setForm} onBack={() => setStep(1)} onSubmit={handleSubmit} submitting={submitting} submitError={submitError} />
             </div>
             <div
               className={cn(
@@ -160,7 +187,7 @@ function StepOne({ neighborhood, setNeighborhood, onNext }) {
   )
 }
 
-function StepTwo({ neighborhood, form, setForm, onBack, onSubmit }) {
+function StepTwo({ neighborhood, form, setForm, onBack, onSubmit, submitting, submitError }) {
   const inputCls = 'w-full px-4 py-3 text-[14px] rounded-xl border border-[#E5E0D8] bg-[#F8F3EB] text-[#2C1E11] placeholder:text-[#2C1E11]/35 focus:outline-none focus:border-[#1B3B2B]/40 transition-colors'
   return (
     <div className="flex-1 flex flex-col rounded-2xl p-7 lg:p-8" style={{ backgroundColor: '#FDFAF6' }}>
@@ -211,6 +238,10 @@ function StepTwo({ neighborhood, form, setForm, onBack, onSubmit }) {
             <path d="M1 1L5.5 6L10 1" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
         </div>
+        {submitError && (
+          <p className="text-red-500 text-[13px]">{submitError}</p>
+        )}
+
         <div className="flex items-center justify-between pt-4">
           <button
             type="button" onClick={onBack}
@@ -220,9 +251,10 @@ function StepTwo({ neighborhood, form, setForm, onBack, onSubmit }) {
           </button>
           <button
             type="submit"
-            className="flex items-center gap-2 px-5 py-3 text-[13px] font-bold rounded-full bg-[#1B3B2B] text-[#F8F3EB] hover:bg-[#2a5540] transition-colors"
+            disabled={submitting}
+            className="flex items-center gap-2 px-5 py-3 text-[13px] font-bold rounded-full bg-[#1B3B2B] text-[#F8F3EB] hover:bg-[#2a5540] transition-colors disabled:opacity-50"
           >
-            Send me the {neighborhood} report <ArrowRight size={13} />
+            {submitting ? 'Sending…' : `Send me the ${neighborhood} report`} <ArrowRight size={13} />
           </button>
         </div>
       </form>

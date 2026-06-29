@@ -36,6 +36,8 @@ export default function ScheduleTourModal({
   const [selectedTime, setTime]   = useState(null)
   const [form, setForm]           = useState({ name: '', email: '', phone: '' })
   const [submitted, setSubmitted] = useState(false)
+  const [submitting, setSubmitting] = useState(false)
+  const [submitError, setSubmitError] = useState('')
 
   const dates = getUpcomingDates(14)
 
@@ -46,24 +48,39 @@ export default function ScheduleTourModal({
       setDate(null); setTime(null)
       setForm({ name: '', email: '', phone: '' })
       setSubmitted(false)
+      setSubmitError('')
     }, 350)
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    setSubmitting(true)
+    setSubmitError('')
+    const dateLabel = selectedDate ? `${DAY_ABBR[selectedDate.getDay()]}, ${MONTH_ABBR[selectedDate.getMonth()]} ${selectedDate.getDate()}` : ''
     try {
-      await fetch('/api/tour', {
+      const res = await fetch('/api/leads/capture', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          ...form, tourType,
-          date: selectedDate?.toDateString(),
-          time: selectedTime,
-          property: propertyAddress,
+          name:       form.name,
+          email:      form.email,
+          phone:      form.phone,
+          message:    `Tour Type: ${tourType === 'in-person' ? 'In Person' : 'Virtual'} | Date: ${dateLabel} | Time: ${selectedTime} | Property: ${propertyAddress}`,
+          leadSource: 'Luxury Agent - Private Showing Request',
+          formType:   'showing',
         }),
       })
-    } catch {}
-    setSubmitted(true)
+      const json = await res.json()
+      if (json.success) {
+        setSubmitted(true)
+      } else {
+        setSubmitError(json.error ?? 'Something went wrong. Please try again.')
+      }
+    } catch {
+      setSubmitError('Something went wrong. Please try again.')
+    } finally {
+      setSubmitting(false)
+    }
   }
 
   const inputCls = 'w-full bg-transparent border-b border-white/10 focus:border-[#C9A96E] py-3 text-white text-sm placeholder:text-white/25 outline-none transition-colors font-sans'
@@ -265,16 +282,20 @@ export default function ScheduleTourModal({
                           <input value={form.phone} onChange={e => setForm(v => ({ ...v, phone: e.target.value }))} type="tel" placeholder="Phone Number" className={inputCls} />
                         </div>
 
+                        {submitError && (
+                          <p className="text-red-400 text-sm">{submitError}</p>
+                        )}
+
                         <div className="flex items-center justify-between pt-2">
                           <button type="button" onClick={() => setStep(1)} className="text-sm text-white/30 hover:text-white transition-colors font-sans">
                             ← Back
                           </button>
                           <button
                             type="submit"
-                            disabled={!form.name || !form.email}
+                            disabled={!form.name || !form.email || submitting}
                             className="px-8 py-3 bg-[#C9A96E] text-[#0A0A0A] text-[12px] tracking-[0.2em] uppercase font-semibold font-sans hover:bg-[#b8935a] transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
                           >
-                            Confirm Tour
+                            {submitting ? 'Submitting…' : 'Confirm Tour'}
                           </button>
                         </div>
                       </form>
