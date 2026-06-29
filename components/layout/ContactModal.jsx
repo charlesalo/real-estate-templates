@@ -36,6 +36,7 @@ export default function ContactModal({
 }) {
   const [open, setOpen] = useState(false)
   const [sent, setSent]  = useState(false)
+  const [submitError, setSubmitError] = useState('')
 
   const { register, handleSubmit, formState: { errors, isSubmitting }, reset } = useForm({
     resolver: zodResolver(schema),
@@ -61,18 +62,35 @@ export default function ContactModal({
     return () => window.removeEventListener('keydown', handler)
   }, [])
 
-  const close = () => { setOpen(false); setTimeout(() => { setSent(false); reset() }, 400) }
+  const close = () => {
+    setOpen(false)
+    setTimeout(() => { setSent(false); setSubmitError(''); reset() }, 400)
+  }
 
   const onSubmit = async (data) => {
+    setSubmitError('')
     try {
-      const res = await fetch('https://api.web3forms.com/submit', {
+      const res = await fetch('/api/leads/capture', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ access_key: process.env.NEXT_PUBLIC_WEB3FORMS_KEY, ...data }),
+        body: JSON.stringify({
+          name:       data.fullName,
+          email:      data.email,
+          phone:      data.phone,
+          message:    data.message,
+          leadSource: 'Luxury Agent - Contact Modal',
+          formType:   'contact',
+        }),
       })
       const json = await res.json()
-      if (json.success) setSent(true)
-    } catch {}
+      if (json.success) {
+        setSent(true)
+      } else {
+        setSubmitError(json.error ?? 'Something went wrong. Please try again.')
+      }
+    } catch {
+      setSubmitError('Something went wrong. Please try again.')
+    }
   }
 
   const inputCls = 'w-full bg-transparent border-b border-white/20 text-white text-sm py-3 outline-none placeholder:text-white/25 focus:border-[#C9A96E] transition-colors'
@@ -220,6 +238,10 @@ export default function ContactModal({
                         I agree to be contacted by {agentName} via call, email, and text for real estate services. Message and data rates may apply.
                       </label>
                     </div>
+
+                    {submitError && (
+                      <p className="text-red-400 text-sm font-sans">{submitError}</p>
+                    )}
 
                     <button
                       type="submit"
