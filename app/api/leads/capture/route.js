@@ -2,7 +2,7 @@ import { Resend } from 'resend'
 
 const HUBSPOT_URL = 'https://api.hubapi.com/crm/v3/objects/contacts'
 const OWNER_ID    = '94414048'
-const FROM        = 'notifications@resend.dev' // replace with verified domain once set up
+const FROM        = 'notifications@chavbuilds.com' // replace with verified domain once set up
 
 const resend = new Resend(process.env.RESEND_API_KEY)
 
