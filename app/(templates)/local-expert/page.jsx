@@ -35,12 +35,6 @@ const PRESS = [
 
 // ── Homepage ──────────────────────────────────────────────────────────────────
 
-export const metadata = {
-  title: 'Nadia Osei | Living in, Working in, and Loving New York',
-  description:
-    'Your guide to NYC\'s best neighborhoods — curated by Nadia Osei, a licensed NYC real estate broker who has called New York home for fourteen years.',
-}
-
 export default function LocalExpertHome() {
   return (
     <>

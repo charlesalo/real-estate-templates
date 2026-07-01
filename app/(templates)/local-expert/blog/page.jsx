@@ -3,8 +3,8 @@ import Link from 'next/link'
 import { BLOG_POSTS } from '@/lib/local-expert-data'
 
 export const metadata = {
-  title: 'Journal',
-  description: 'Market reports, buyer guides, and neighborhood stories from Nadia Osei.',
+  title: { absolute: 'Manhattan & Brooklyn Real Estate Blog | Nadia Osei' },
+  description: 'Manhattan and Brooklyn real estate insights: market reports, buyer guides, and neighborhood stories from Nadia Osei, your trusted NYC real estate agent.',
 }
 
 function formatDate(iso) {

@@ -4,9 +4,8 @@ import { ArrowLeft, ArrowRight, Bed, Bath, Square } from 'lucide-react'
 import { LISTINGS, SOLD_LISTINGS } from '@/lib/local-expert-data'
 
 export const metadata = {
-  title: 'Homes for Sale',
-  description:
-    'Curated NYC homes for sale — West Village, Tribeca, Brooklyn Heights, DUMBO, Park Slope, and the Upper East Side.',
+  title: { absolute: 'New York Homes for Sale & Real Estate Listings | Nadia Osei' },
+  description: 'Browse curated homes for sale across Manhattan and Brooklyn. Find co-ops, condos, and townhouses in West Village, Tribeca, Brooklyn Heights, and more.',
 }
 
 const PER_PAGE = 3

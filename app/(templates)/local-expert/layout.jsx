@@ -17,23 +17,69 @@ const gelasio = Gelasio({
   display: 'swap',
 })
 
+const NADIA_TITLE = 'Nadia Osei | Your Manhattan & Brooklyn Real Estate Expert'
+const NADIA_DESCRIPTION =
+  'Discover Manhattan and Brooklyn real estate with Nadia Osei. Expert guidance on neighborhoods, market trends, and finding your perfect New York home.'
+
 export const metadata = {
   title: {
-    default: 'Nadia Osei | New York Real Estate',
+    default: NADIA_TITLE,
     template: '%s | Nadia Osei',
   },
-  description:
-    'Your guide to living in, working in, and loving New York — curated by Nadia Osei, Licensed Associate RE Salesperson with Compass Real Estate.',
+  description: NADIA_DESCRIPTION,
+  alternates: {
+    canonical: '/local-expert',
+  },
   icons: {
     icon: '/images/local-expert/nadia-favicon.png',
     apple: '/images/local-expert/nadia-favicon.png',
   },
+  openGraph: {
+    title: NADIA_TITLE,
+    description: NADIA_DESCRIPTION,
+    url: '/local-expert',
+    siteName: 'Nadia Osei Real Estate',
+    images: ['/images/landing-page/local-expert-full-page-preview.png'],
+    locale: 'en_US',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: NADIA_TITLE,
+    description: NADIA_DESCRIPTION,
+    images: ['/images/landing-page/local-expert-full-page-preview.png'],
+  },
+}
+
+const JSON_LD = {
+  '@context': 'https://schema.org',
+  '@type': 'RealEstateAgent',
+  name: 'Nadia Osei',
+  description: NADIA_DESCRIPTION,
+  telephone: '(212) 555-0194',
+  email: 'nadia@nadiaosei.com',
+  url: 'https://re-templates.chavbuilds.com/local-expert',
+  image: 'https://re-templates.chavbuilds.com/images/landing-page/local-expert-full-page-preview.png',
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: '90 5th Avenue',
+    addressLocality: 'New York',
+    addressRegion: 'NY',
+    postalCode: '10011',
+    addressCountry: 'US',
+  },
+  areaServed: ['Manhattan', 'Brooklyn'],
 }
 
 export default function LocalExpertLayout({ children }) {
   return (
-    <div
-      className={`local-expert ${plusJakarta.variable} ${gelasio.variable}`}
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(JSON_LD) }}
+      />
+      <div
+        className={`local-expert ${plusJakarta.variable} ${gelasio.variable}`}
       style={{
         '--font-heading': `var(${gelasio.variable}), Georgia, serif`,
         '--font-body': `var(${plusJakarta.variable}), system-ui, sans-serif`,
@@ -53,6 +99,7 @@ export default function LocalExpertLayout({ children }) {
       <LocalExpertShell agent={AGENT}>
         {children}
       </LocalExpertShell>
-    </div>
+      </div>
+    </>
   )
 }

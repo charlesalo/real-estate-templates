@@ -2,8 +2,8 @@ import Image from 'next/image'
 import { FIELD_NOTES } from '@/lib/local-expert-data'
 
 export const metadata = {
-  title: 'Local Favorites',
-  description: "Nadia's Field Notes — curated cafes, parks, bookstores, and local gems across NYC.",
+  title: { absolute: 'New York Local Favorites | Nadia Osei Real Estate Agent' },
+  description: "Discover Nadia's favorite NYC spots: coffee shops, bookstores, parks, and local gems across Manhattan and Brooklyn curated for residents.",
 }
 
 const CATEGORY_COLORS = {

@@ -6,8 +6,8 @@ import { NEIGHBORHOODS } from '@/lib/local-expert-data'
 import marquee from '../press-marquee.module.css'
 
 export const metadata = {
-  title: 'Neighborhoods',
-  description: 'Explore NYC neighborhoods — West Village, Tribeca, SoHo, Chelsea, Brooklyn Heights, DUMBO, Park Slope, and more.',
+  title: { absolute: 'Comprehensive Guide to New York Neighborhoods | Nadia Osei' },
+  description: 'Explore Manhattan and Brooklyn neighborhoods: West Village, Tribeca, Upper East Side, Brooklyn Heights, DUMBO, Park Slope, SoHo, Chelsea, and beyond.',
 }
 
 export default function NeighborhoodsPage() {

@@ -4,9 +4,8 @@ import { ArrowRight } from 'lucide-react'
 import { AGENT, AGENT_STATS, NEIGHBORHOODS, TESTIMONIAL } from '@/lib/local-expert-data'
 
 export const metadata = {
-  title: 'About Nadia Osei',
-  description:
-    'Fourteen years in New York. Three boroughs. One trusted advisor. Meet Nadia Osei — Licensed Associate RE Salesperson with Compass Real Estate.',
+  title: { absolute: 'Nadia Osei | Real Estate Agent Serving Manhattan & Brooklyn' },
+  description: 'Meet Nadia Osei, a licensed NYC real estate agent with 14 years experience helping buyers and sellers navigate Manhattan and Brooklyn neighborhoods.',
 }
 
 const TIMELINE = [
