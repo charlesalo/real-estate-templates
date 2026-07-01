@@ -2,8 +2,8 @@ import ModernTeamSearchClient from '@/components/real-estate/ModernTeamSearchCli
 import { getListings } from '@/lib/simplyrets'
 
 export const metadata = {
-  title: 'Search Homes',
-  description: 'Search homes for sale across Greater Houston — The Heights, River Oaks, Memorial, Sugar Land, The Woodlands, and more.',
+  title: { absolute: 'Search Houston Homes for Sale | The Hargrove Group' },
+  description: 'Search homes for sale across Greater Houston — The Heights, River Oaks, Memorial, Sugar Land & The Woodlands — updated with live MLS listings.',
 }
 
 export default async function ListingsPage({ searchParams }) {

@@ -7,8 +7,8 @@ import ModalTrigger from '@/components/ui/ModalTrigger'
 import { TEAM_MEMBERS } from '../agents/data'
 
 export const metadata = {
-  title: 'Our Team',
-  description: "Meet the Hargrove Group — Houston's trusted real estate team helping buyers and sellers across Greater Houston.",
+  title: { absolute: 'The Hargrove Group | Real Estate Agents Serving Houston' },
+  description: "Meet the Hargrove Group — Houston's trusted real estate team helping buyers and sellers navigate Greater Houston with confidence and local expertise.",
 }
 
 

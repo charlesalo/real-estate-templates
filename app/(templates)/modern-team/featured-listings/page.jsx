@@ -5,7 +5,7 @@ import ModalTrigger from '@/components/ui/ModalTrigger'
 import { FEATURED_LISTINGS } from './data'
 
 export const metadata = {
-  title: 'Featured Listings',
+  title: { absolute: 'Explore Properties for Sale in Texas | The Hargrove Group' },
   description: "Browse the Hargrove Group's hand-picked active listings across Greater Houston — curated properties available for sale right now.",
 }
 

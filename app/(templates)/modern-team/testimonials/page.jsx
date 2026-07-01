@@ -3,7 +3,7 @@ import ModalTrigger from '@/components/ui/ModalTrigger'
 import TestimonialsGrid from './TestimonialsGrid'
 
 export const metadata = {
-  title: 'Client Testimonials',
+  title: { absolute: 'Client Testimonials & Success Stories | The Hargrove Group' },
   description: 'See what Houston buyers and sellers say about working with the Hargrove Group — real reviews from real clients across Greater Houston.',
 }
 

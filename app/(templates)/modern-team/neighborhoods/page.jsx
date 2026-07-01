@@ -3,8 +3,8 @@ import Link from 'next/link'
 import ModalTrigger from '@/components/ui/ModalTrigger'
 
 export const metadata = {
-  title: 'Houston Neighborhoods',
-  description: 'Explore Houston\'s best neighborhoods — The Heights, River Oaks, Montrose, Memorial, Sugar Land, The Woodlands, Downtown Houston, and more.',
+  title: { absolute: 'Find Your Texas Dream Neighborhood | The Hargrove Group' },
+  description: 'Explore Houston\'s best neighborhoods — The Heights, River Oaks, Montrose, Memorial, Sugar Land & The Woodlands — with local market insights.',
 }
 
 const NEIGHBORHOODS = [

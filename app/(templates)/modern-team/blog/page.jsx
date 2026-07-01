@@ -4,8 +4,8 @@ import ModalTrigger from '@/components/ui/ModalTrigger'
 import ModernTeamNewsletterForm from '@/components/layout/ModernTeamNewsletterForm'
 
 export const metadata = {
-  title: 'Houston Market Blog',
-  description: 'Houston real estate market reports, neighborhood guides, and buyer/seller tips from the Hargrove Group.',
+  title: { absolute: 'Houston Real Estate & Community Blog | The Hargrove Group' },
+  description: "Houston real estate market reports, neighborhood guides, and buyer/seller tips from the Hargrove Group's team of local agents.",
 }
 
 const POSTS = [

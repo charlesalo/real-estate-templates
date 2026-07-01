@@ -70,11 +70,11 @@ const MENU_LINKS = [
 
 export const metadata = {
   title: {
-    default: 'The Hargrove Group | Houston Real Estate',
+    default: 'The Hargrove Group | Top Houston Real Estate Agents',
     template: '%s | The Hargrove Group',
   },
   description:
-    'The Hargrove Group — Houston\'s trusted real estate team. Helping buyers and sellers across Greater Houston, River Oaks, The Heights, Memorial, and The Woodlands.',
+    'The Hargrove Group — Houston\'s trusted real estate team, helping buyers & sellers in River Oaks, The Heights, Memorial & The Woodlands.',
   icons: {
     icon: '/images/modern-team/favicon-modern-team.png',
     apple: '/images/modern-team/favicon-modern-team.png',
