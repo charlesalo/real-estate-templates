@@ -197,15 +197,16 @@ export default function MortgageCalculator({
             ))}
           </div>
 
-          <a
-            href="/luxury-agent/contact"
+          <button
+            type="button"
+            onClick={() => window.dispatchEvent(new CustomEvent('contact:open'))}
             className={cn(
               'block w-full text-center py-3 text-[12px] tracking-[0.2em] uppercase font-medium transition-opacity hover:opacity-90',
               isLuxury ? 'border border-template-accent text-template-accent' : 'bg-template-accent text-template-accent-fg rounded',
             )}
           >
             Get Pre-Approved →
-          </a>
+          </button>
         </div>
       </div>
     </div>
