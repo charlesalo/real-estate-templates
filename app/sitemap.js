@@ -90,6 +90,60 @@ const MODERN_TEAM_PAST_TRANSACTION_SLUGS = [
   '6118-chevy-chase-dr',
 ]
 
+const LOCAL_EXPERT_STATIC_ROUTES = [
+  { path: '/local-expert',                  changeFrequency: 'weekly',  priority: 1.0 },
+  { path: '/local-expert/about',            changeFrequency: 'monthly', priority: 0.8 },
+  { path: '/local-expert/listings',         changeFrequency: 'daily',   priority: 0.9 },
+  { path: '/local-expert/neighborhoods',    changeFrequency: 'monthly', priority: 0.8 },
+  { path: '/local-expert/blog',             changeFrequency: 'weekly',  priority: 0.7 },
+  { path: '/local-expert/field-notes',      changeFrequency: 'monthly', priority: 0.7 },
+  { path: '/local-expert/contact',          changeFrequency: 'yearly',  priority: 0.6 },
+  { path: '/local-expert/home-valuation',   changeFrequency: 'monthly', priority: 0.8 },
+]
+
+const LOCAL_EXPERT_NEIGHBORHOOD_SLUGS = [
+  'west-village',
+  'tribeca',
+  'upper-east-side',
+  'brooklyn-heights',
+  'dumbo',
+  'park-slope',
+  'soho',
+  'cobble-hill',
+  'chelsea',
+]
+
+const LOCAL_EXPERT_LISTING_IDS = [
+  'le-1',
+  'le-2',
+  'le-3',
+  'le-4',
+  'le-5',
+  'le-6',
+]
+
+const LOCAL_EXPERT_SOLD_LISTING_IDS = [
+  'sl-1',
+  'sl-2',
+  'sl-3',
+  'sl-4',
+]
+
+const LOCAL_EXPERT_BLOG_SLUGS = [
+  'brooklyn-heights-market-update-2024',
+  'what-1-8m-buys-in-nyc-2024',
+  'co-op-vs-condo-nyc-explained',
+]
+
+const LOCAL_EXPERT_FIELD_NOTE_IDS = [
+  'fn-1',
+  'fn-2',
+  'fn-3',
+  'fn-4',
+  'fn-5',
+  'fn-6',
+]
+
 export default function sitemap() {
   const now = new Date()
 
@@ -163,6 +217,48 @@ export default function sitemap() {
     priority: 0.6,
   }))
 
+  const localExpertStaticEntries = LOCAL_EXPERT_STATIC_ROUTES.map(({ path, changeFrequency, priority }) => ({
+    url: `${BASE_URL}${path}`,
+    lastModified: now,
+    changeFrequency,
+    priority,
+  }))
+
+  const localExpertNeighborhoodEntries = LOCAL_EXPERT_NEIGHBORHOOD_SLUGS.map(slug => ({
+    url: `${BASE_URL}/local-expert/neighborhoods/${slug}`,
+    lastModified: now,
+    changeFrequency: 'monthly',
+    priority: 0.7,
+  }))
+
+  const localExpertListingEntries = LOCAL_EXPERT_LISTING_IDS.map(id => ({
+    url: `${BASE_URL}/local-expert/listings/${id}`,
+    lastModified: now,
+    changeFrequency: 'weekly',
+    priority: 0.8,
+  }))
+
+  const localExpertSoldListingEntries = LOCAL_EXPERT_SOLD_LISTING_IDS.map(id => ({
+    url: `${BASE_URL}/local-expert/sold/${id}`,
+    lastModified: now,
+    changeFrequency: 'monthly',
+    priority: 0.6,
+  }))
+
+  const localExpertBlogEntries = LOCAL_EXPERT_BLOG_SLUGS.map(slug => ({
+    url: `${BASE_URL}/local-expert/blog/${slug}`,
+    lastModified: now,
+    changeFrequency: 'monthly',
+    priority: 0.6,
+  }))
+
+  const localExpertFieldNoteEntries = LOCAL_EXPERT_FIELD_NOTE_IDS.map(id => ({
+    url: `${BASE_URL}/local-expert/field-notes/${id}`,
+    lastModified: now,
+    changeFrequency: 'monthly',
+    priority: 0.6,
+  }))
+
   return [
     ...staticEntries,
     ...neighborhoodEntries,
@@ -174,5 +270,11 @@ export default function sitemap() {
     ...modernTeamAgentEntries,
     ...modernTeamFeaturedListingEntries,
     ...modernTeamPastTransactionEntries,
+    ...localExpertStaticEntries,
+    ...localExpertNeighborhoodEntries,
+    ...localExpertListingEntries,
+    ...localExpertSoldListingEntries,
+    ...localExpertBlogEntries,
+    ...localExpertFieldNoteEntries,
   ]
 }
