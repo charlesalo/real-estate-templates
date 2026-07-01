@@ -18,6 +18,7 @@ const playfair = Playfair_Display({
 });
 
 export const metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? 'https://re-templates.chavbuilds.com'),
   title: 'Chavbuilds — Real Estate Websites for Agents & Teams',
   description:
     'Custom-coded real estate websites with live MLS data, lead capture, and conversion-focused design. Built for agents and teams across the USA.',

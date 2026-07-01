@@ -28,6 +28,68 @@ const BLOG_SLUGS = [
   'bel-air-vs-holmby-hills',
 ]
 
+const MODERN_TEAM_STATIC_ROUTES = [
+  { path: '/modern-team',                   changeFrequency: 'weekly',  priority: 1.0 },
+  { path: '/modern-team/about',             changeFrequency: 'monthly', priority: 0.8 },
+  { path: '/modern-team/featured-listings', changeFrequency: 'weekly',  priority: 0.9 },
+  { path: '/modern-team/listings',          changeFrequency: 'daily',   priority: 0.9 },
+  { path: '/modern-team/neighborhoods',     changeFrequency: 'monthly', priority: 0.8 },
+  { path: '/modern-team/home-valuation',    changeFrequency: 'monthly', priority: 0.8 },
+  { path: '/modern-team/blog',              changeFrequency: 'weekly',  priority: 0.7 },
+  { path: '/modern-team/past-transactions', changeFrequency: 'monthly', priority: 0.7 },
+  { path: '/modern-team/testimonials',      changeFrequency: 'monthly', priority: 0.6 },
+  { path: '/modern-team/contact',           changeFrequency: 'yearly',  priority: 0.6 },
+]
+
+const MODERN_TEAM_NEIGHBORHOOD_SLUGS = [
+  'the-heights',
+  'river-oaks',
+  'montrose',
+  'memorial',
+  'sugar-land',
+  'the-woodlands',
+  'katy',
+  'midtown',
+  'downtown-houston',
+]
+
+const MODERN_TEAM_BLOG_SLUGS = [
+  'houston-real-estate-market-report-2024',
+  'heights-vs-montrose-guide',
+  'first-time-buyer-houston-guide',
+  'houston-suburbs-compared-2024',
+  'sell-houston-home-fast',
+  'houston-property-taxes-explained',
+]
+
+const MODERN_TEAM_AGENT_SLUGS = [
+  'sarah-hargrove',
+  'michael-hargrove',
+  'jessica-chen',
+  'carlos-rivera',
+]
+
+const MODERN_TEAM_FEATURED_LISTING_SLUGS = [
+  '2814-wroxton-rd',
+  '408-avondale-st',
+  '1011-tulane-st',
+  '5510-fairdale-ln',
+  '22-greenbay-st',
+  '3703-inker-st',
+]
+
+const MODERN_TEAM_PAST_TRANSACTION_SLUGS = [
+  '3412-roseland-st',
+  '1827-kirby-dr-1402',
+  '526-w-24th-st',
+  '14-briar-hollow-ln',
+  '2209-dunlavy-st',
+  '9802-emerald-glen-dr',
+  '4430-merwin-st',
+  '17-grand-regency-cir',
+  '6118-chevy-chase-dr',
+]
+
 export default function sitemap() {
   const now = new Date()
 
@@ -59,5 +121,58 @@ export default function sitemap() {
     priority: 0.8,
   }))
 
-  return [...staticEntries, ...neighborhoodEntries, ...blogEntries, ...listingEntries]
+  const modernTeamStaticEntries = MODERN_TEAM_STATIC_ROUTES.map(({ path, changeFrequency, priority }) => ({
+    url: `${BASE_URL}${path}`,
+    lastModified: now,
+    changeFrequency,
+    priority,
+  }))
+
+  const modernTeamNeighborhoodEntries = MODERN_TEAM_NEIGHBORHOOD_SLUGS.map(slug => ({
+    url: `${BASE_URL}/modern-team/neighborhoods/${slug}`,
+    lastModified: now,
+    changeFrequency: 'monthly',
+    priority: 0.7,
+  }))
+
+  const modernTeamBlogEntries = MODERN_TEAM_BLOG_SLUGS.map(slug => ({
+    url: `${BASE_URL}/modern-team/blog/${slug}`,
+    lastModified: now,
+    changeFrequency: 'monthly',
+    priority: 0.6,
+  }))
+
+  const modernTeamAgentEntries = MODERN_TEAM_AGENT_SLUGS.map(slug => ({
+    url: `${BASE_URL}/modern-team/agents/${slug}`,
+    lastModified: now,
+    changeFrequency: 'monthly',
+    priority: 0.6,
+  }))
+
+  const modernTeamFeaturedListingEntries = MODERN_TEAM_FEATURED_LISTING_SLUGS.map(slug => ({
+    url: `${BASE_URL}/modern-team/featured-listings/${slug}`,
+    lastModified: now,
+    changeFrequency: 'weekly',
+    priority: 0.8,
+  }))
+
+  const modernTeamPastTransactionEntries = MODERN_TEAM_PAST_TRANSACTION_SLUGS.map(slug => ({
+    url: `${BASE_URL}/modern-team/past-transactions/${slug}`,
+    lastModified: now,
+    changeFrequency: 'monthly',
+    priority: 0.6,
+  }))
+
+  return [
+    ...staticEntries,
+    ...neighborhoodEntries,
+    ...blogEntries,
+    ...listingEntries,
+    ...modernTeamStaticEntries,
+    ...modernTeamNeighborhoodEntries,
+    ...modernTeamBlogEntries,
+    ...modernTeamAgentEntries,
+    ...modernTeamFeaturedListingEntries,
+    ...modernTeamPastTransactionEntries,
+  ]
 }

@@ -68,16 +68,60 @@ const MENU_LINKS = [
   { label: 'Contact Us', href: '/modern-team/contact' },
 ]
 
+const MODERN_TEAM_TITLE = 'The Hargrove Group | Top Houston Real Estate Agents'
+const MODERN_TEAM_DESCRIPTION =
+  'The Hargrove Group — Houston\'s trusted real estate team, helping buyers & sellers in River Oaks, The Heights, Memorial & The Woodlands.'
+
 export const metadata = {
   title: {
-    default: 'The Hargrove Group | Top Houston Real Estate Agents',
+    default: MODERN_TEAM_TITLE,
     template: '%s | The Hargrove Group',
   },
-  description:
-    'The Hargrove Group — Houston\'s trusted real estate team, helping buyers & sellers in River Oaks, The Heights, Memorial & The Woodlands.',
+  description: MODERN_TEAM_DESCRIPTION,
+  alternates: {
+    canonical: '/modern-team',
+  },
   icons: {
     icon: '/images/modern-team/favicon-modern-team.png',
     apple: '/images/modern-team/favicon-modern-team.png',
+  },
+  openGraph: {
+    title: MODERN_TEAM_TITLE,
+    description: MODERN_TEAM_DESCRIPTION,
+    url: '/modern-team',
+    siteName: TEAM.name,
+    images: ['/images/landing-page/modern-team-full-page-preview.png'],
+    locale: 'en_US',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: MODERN_TEAM_TITLE,
+    description: MODERN_TEAM_DESCRIPTION,
+    images: ['/images/landing-page/modern-team-full-page-preview.png'],
+  },
+}
+
+const JSON_LD = {
+  '@context': 'https://schema.org',
+  '@type': 'RealEstateAgent',
+  name: TEAM.name,
+  description: MODERN_TEAM_DESCRIPTION,
+  telephone: TEAM.phone,
+  email: TEAM.email,
+  url: 'https://re-templates.chavbuilds.com/modern-team',
+  image: 'https://re-templates.chavbuilds.com/images/landing-page/modern-team-full-page-preview.png',
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: '1700 Post Oak Blvd Ste 600',
+    addressLocality: 'Houston',
+    addressRegion: 'TX',
+    postalCode: '77056',
+    addressCountry: 'US',
+  },
+  areaServed: {
+    '@type': 'City',
+    name: 'Houston',
   },
 }
 
@@ -94,6 +138,10 @@ export default function ModernTeamLayout({ children }) {
         minHeight: '100vh',
       }}
     >
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(JSON_LD) }}
+      />
       <ModernTeamNavbar
         logo={{ text: TEAM.name }}
         links={NAV_LINKS}
