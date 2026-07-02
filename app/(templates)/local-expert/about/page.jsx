@@ -1,11 +1,23 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
-import { AGENT, AGENT_STATS, NEIGHBORHOODS, TESTIMONIAL } from '@/lib/local-expert-data'
+import PortableText from '@/components/sanity/PortableText'
+import { resolveImageSrc } from '@/lib/sanity/image'
+import { withFallback, isPortableText } from '@/lib/sanity/utils'
+import { getAgent, getTestimonials } from '@/lib/sanity/queries'
+import {
+  AGENT as AGENT_FALLBACK,
+  AGENT_STATS,
+  TESTIMONIAL as TESTIMONIAL_FALLBACK,
+} from '@/lib/local-expert-data'
 
-export const metadata = {
-  title: { absolute: 'Nadia Osei | Real Estate Agent Serving Manhattan & Brooklyn' },
-  description: 'Meet Nadia Osei, a licensed NYC real estate agent with 14 years experience helping buyers and sellers navigate Manhattan and Brooklyn neighborhoods.',
+export async function generateMetadata() {
+  const agentDoc = await getAgent()
+  const name = agentDoc?.name ?? AGENT_FALLBACK.name
+  return {
+    title: { absolute: `${name} | Real Estate Agent Serving Manhattan & Brooklyn` },
+    description: `Meet ${name}, a licensed NYC real estate agent helping buyers and sellers navigate Manhattan and Brooklyn neighborhoods.`,
+  }
 }
 
 const TIMELINE = [
@@ -17,7 +29,12 @@ const TIMELINE = [
   { year: '2024', event: '$184M in sales volume. 240+ families placed. Still walking every block.' },
 ]
 
-export default function AboutPage() {
+export default async function AboutPage() {
+  const [agentDoc, testimonials] = await Promise.all([getAgent(), getTestimonials()])
+  const agent = agentDoc ? { ...AGENT_FALLBACK, ...agentDoc } : AGENT_FALLBACK
+  const stats = withFallback(agent.stats, AGENT_STATS)
+  const TESTIMONIAL = withFallback(testimonials, [TESTIMONIAL_FALLBACK])[0]
+
   return (
     <>
       {/* Hero */}
@@ -40,8 +57,8 @@ export default function AboutPage() {
             </div>
             <div className="relative aspect-[3/4] rounded-2xl overflow-hidden">
               <Image
-                src={AGENT.photo}
-                alt={AGENT.name}
+                src={resolveImageSrc(agent.photo)}
+                alt={agent.name}
                 fill
                 className="object-cover"
                 priority
@@ -55,13 +72,13 @@ export default function AboutPage() {
       <section className="py-[24px] border-y border-[#E5E0D8]" style={{ backgroundColor: '#F4F0EA' }}>
         <div className="max-w-7xl mx-auto px-5 lg:px-8">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-            {AGENT_STATS.map((stat) => (
+            {stats.map((stat) => (
               <div key={stat.label}>
                 <div
                   className="text-[34px] font-normal text-[#24180F] leading-none"
                   style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}
                 >
-                  {stat.prefix ?? ''}{stat.numericValue}{stat.suffix ?? ''}
+                  {stat.value ?? `${stat.prefix ?? ''}${stat.numericValue}${stat.suffix ?? ''}`}
                 </div>
                 <div className="text-[12px] uppercase tracking-wider text-[#2C1E11]/40 mt-1">{stat.label}</div>
               </div>
@@ -73,17 +90,17 @@ export default function AboutPage() {
       {/* Full bio */}
       <section className="py-[96px] lg:py-[128px]" style={{ backgroundColor: '#F8F3EB' }}>
         <div className="max-w-3xl mx-auto px-5 lg:px-8">
-          <div className="space-y-6">
-            {AGENT.bio.map((para, i) => (
-              <p key={i} className="text-[16px] text-[#2C1E11]/65 leading-relaxed">
-                {para}
-              </p>
-            ))}
-            <p className="text-[16px] text-[#2C1E11]/65 leading-relaxed">
-              The areas I focus on — West Village, Tribeca, Brooklyn Heights, DUMBO, Park Slope,
-              and the Upper East Side — are neighborhoods I know the way you know a friend&apos;s face.
-              I know which buildings have good boards and which ones stall on approvals. I know where the
-              light is in the afternoon. I know which crosstown blocks actually feel different.
+          <div className="space-y-6 [&_p]:text-[16px] [&_p]:text-[#2C1E11]/65 [&_p]:leading-relaxed">
+            {isPortableText(agent.bio) ? (
+              <PortableText value={agent.bio} />
+            ) : (
+              agent.bio.map((para, i) => <p key={i}>{para}</p>)
+            )}
+            <p>
+              The areas I focus on — {(agent.areas ?? []).join(', ')} — are neighborhoods I know the way
+              you know a friend&apos;s face. I know which buildings have good boards and which ones stall
+              on approvals. I know where the light is in the afternoon. I know which crosstown blocks
+              actually feel different.
             </p>
           </div>
 
@@ -91,10 +108,10 @@ export default function AboutPage() {
           <div className="mt-12 p-6 rounded-2xl border border-[#E5E0D8]">
             <p className="text-[12px] uppercase tracking-wider text-[#2C1E11]/30 mb-4">Credentials</p>
             <div className="space-y-2">
-              <p className="text-[15px] text-[#2C1E11]">{AGENT.title}</p>
-              <p className="text-[14px] text-[#2C1E11]/50">{AGENT.license}</p>
-              <p className="text-[14px] text-[#2C1E11]/50">{AGENT.brokerage} · {AGENT.brokerageLicense}</p>
-              <p className="text-[14px] text-[#2C1E11]/40">{AGENT.brokerageAddress}</p>
+              <p className="text-[15px] text-[#2C1E11]">{agent.title}</p>
+              <p className="text-[14px] text-[#2C1E11]/50">{agent.license}</p>
+              <p className="text-[14px] text-[#2C1E11]/50">{agent.brokerage} · {agent.brokerageLicense}</p>
+              <p className="text-[14px] text-[#2C1E11]/40">{agent.brokerageAddress}</p>
             </div>
           </div>
         </div>

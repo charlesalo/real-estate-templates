@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowLeft, ArrowRight, Bed, Bath, Square, Star, Footprints, TramFront, Bike } from 'lucide-react'
-import { NEIGHBORHOODS, LISTINGS } from '@/lib/local-expert-data'
+import { NEIGHBORHOODS as NEIGHBORHOODS_FALLBACK, LISTINGS } from '@/lib/local-expert-data'
 import { getCensusData } from '@/lib/census'
 import { getWalkScore } from '@/lib/walkscore'
 import { getNearbyPlaces } from '@/lib/places'
@@ -9,14 +9,37 @@ import { getSchools } from '@/lib/schooldigger'
 import { notFound } from 'next/navigation'
 import NeighborhoodNearby from './NeighborhoodNearby'
 import NeighborhoodDetailMapClient from '../../NeighborhoodDetailMapClient'
+import PortableText from '@/components/sanity/PortableText'
+import { resolveImageSrc } from '@/lib/sanity/image'
+import { withFallback, isPortableText } from '@/lib/sanity/utils'
+import { getNeighborhoods } from '@/lib/sanity/queries'
+
+// Normalizes a Sanity `neighborhood` doc (or fallback demo data) to the
+// plain shape this page's presentational helpers already render.
+function normalizeNeighborhood(n) {
+  if (!n) return n
+  return {
+    ...n,
+    slug: n.slug?.current ?? n.slug,
+    borough: n.borough ?? n.region,
+    image: resolveImageSrc(n.image),
+  }
+}
+
+async function getAllNeighborhoods() {
+  const neighborhoods = await getNeighborhoods()
+  return withFallback(neighborhoods, NEIGHBORHOODS_FALLBACK).map(normalizeNeighborhood)
+}
 
 export async function generateStaticParams() {
-  return NEIGHBORHOODS.map((n) => ({ slug: n.slug }))
+  const neighborhoods = await getAllNeighborhoods()
+  return neighborhoods.map((n) => ({ slug: n.slug }))
 }
 
 export async function generateMetadata({ params }) {
   const { slug } = await params
-  const n = NEIGHBORHOODS.find((n) => n.slug === slug)
+  const neighborhoods = await getAllNeighborhoods()
+  const n = neighborhoods.find((n) => n.slug === slug)
   if (!n) return {}
   return {
     title: `${n.name} — NYC Neighborhood Guide`,
@@ -31,6 +54,7 @@ function formatPrice(n) {
 
 export default async function NeighborhoodDetailPage({ params }) {
   const { slug } = await params
+  const NEIGHBORHOODS = await getAllNeighborhoods()
   const neighborhood = NEIGHBORHOODS.find((n) => n.slug === slug)
   if (!neighborhood) notFound()
 
@@ -131,7 +155,13 @@ export default async function NeighborhoodDetailPage({ params }) {
             </p>
           </blockquote>
 
-          <p className="text-[17px] text-[#24180F]/70 leading-relaxed">{neighborhood.description}</p>
+          <div className="text-[17px] text-[#24180F]/70 leading-relaxed [&_p]:mb-4 last:[&_p]:mb-0">
+            {isPortableText(neighborhood.description) ? (
+              <PortableText value={neighborhood.description} />
+            ) : (
+              <p>{neighborhood.description}</p>
+            )}
+          </div>
 
           <div className="mt-12">
             <h2 className="text-[20px] font-normal text-[#24180F] mb-5" style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}>

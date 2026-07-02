@@ -2,15 +2,30 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
 import { cn } from '@/lib/utils'
-import { NEIGHBORHOODS } from '@/lib/local-expert-data'
+import { resolveImageSrc } from '@/lib/sanity/image'
+import { withFallback, formatCompactPrice } from '@/lib/sanity/utils'
+import { getNeighborhoods, getSiteSettings } from '@/lib/sanity/queries'
+import { NEIGHBORHOODS as NEIGHBORHOODS_FALLBACK } from '@/lib/local-expert-data'
 import marquee from '../press-marquee.module.css'
 
-export const metadata = {
-  title: { absolute: 'Comprehensive Guide to New York Neighborhoods | Nadia Osei' },
-  description: 'Explore Manhattan and Brooklyn neighborhoods: West Village, Tribeca, Upper East Side, Brooklyn Heights, DUMBO, Park Slope, SoHo, Chelsea, and beyond.',
+export async function generateMetadata() {
+  const settings = await getSiteSettings()
+  const name = settings?.businessName ?? 'Nadia Osei'
+  return {
+    title: { absolute: `Comprehensive Guide to New York Neighborhoods | ${name}` },
+    description: 'Explore Manhattan and Brooklyn neighborhoods: West Village, Tribeca, Upper East Side, Brooklyn Heights, DUMBO, Park Slope, SoHo, Chelsea, and beyond.',
+  }
 }
 
-export default function NeighborhoodsPage() {
+export default async function NeighborhoodsPage() {
+  const neighborhoods = await getNeighborhoods()
+  const NEIGHBORHOODS = withFallback(neighborhoods, NEIGHBORHOODS_FALLBACK).map((n) => ({
+    ...n,
+    slug: n.slug?.current ?? n.slug,
+    borough: n.borough ?? n.region,
+    image: resolveImageSrc(n.image),
+    medianPrice: formatCompactPrice(n.medianPrice),
+  }))
   const [lead, second, third, ...rest] = NEIGHBORHOODS
   const alsoInThisIssue = [second, third]
 

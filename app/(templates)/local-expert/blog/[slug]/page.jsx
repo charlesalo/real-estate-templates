@@ -1,15 +1,27 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowLeft } from 'lucide-react'
-import { BLOG_POSTS, AGENT } from '@/lib/local-expert-data'
+import { BLOG_POSTS as BLOG_POSTS_FALLBACK, AGENT as AGENT_FALLBACK } from '@/lib/local-expert-data'
 import { notFound } from 'next/navigation'
+import PortableText from '@/components/sanity/PortableText'
+import { resolveImageSrc } from '@/lib/sanity/image'
+import { getPostBySlug, getPostSlugs } from '@/lib/sanity/queries'
+
+async function findPost(slug) {
+  const post = await getPostBySlug(slug)
+  if (post) return { ...post, slug: post.slug?.current ?? post.slug, image: resolveImageSrc(post.image) }
+  return BLOG_POSTS_FALLBACK.find((p) => p.slug === slug) ?? null
+}
 
 export async function generateStaticParams() {
-  return BLOG_POSTS.map((p) => ({ slug: p.slug }))
+  const slugs = await getPostSlugs()
+  if (slugs?.length) return slugs.map(({ slug }) => ({ slug }))
+  return BLOG_POSTS_FALLBACK.map((p) => ({ slug: p.slug }))
 }
 
 export async function generateMetadata({ params }) {
-  const post = BLOG_POSTS.find((p) => p.slug === params.slug)
+  const { slug } = await params
+  const post = await findPost(slug)
   if (!post) return {}
   return { title: post.title, description: post.excerpt }
 }
@@ -18,9 +30,14 @@ function formatDate(iso) {
   return new Date(iso).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })
 }
 
-export default function BlogPostPage({ params }) {
-  const post = BLOG_POSTS.find((p) => p.slug === params.slug)
+export default async function BlogPostPage({ params }) {
+  const { slug } = await params
+  const post = await findPost(slug)
   if (!post) notFound()
+
+  const author = post.author
+    ? { name: post.author.name, photo: post.author.photo, title: AGENT_FALLBACK.title, brokerage: AGENT_FALLBACK.brokerage }
+    : AGENT_FALLBACK
 
   return (
     <>
@@ -35,7 +52,7 @@ export default function BlogPostPage({ params }) {
             {post.title}
           </h1>
           <div className="flex items-center gap-4 text-[12px] text-[#24180F]/35 mb-8">
-            <span>{AGENT.name}</span>
+            <span>{author.name}</span>
             <span>·</span>
             <span>{formatDate(post.date)}</span>
             <span>·</span>
@@ -46,29 +63,19 @@ export default function BlogPostPage({ params }) {
             <Image src={post.image} alt={post.title} fill className="object-cover" priority />
           </div>
 
-          {/* Demo article body */}
           <div className="prose prose-stone max-w-none" style={{ fontFamily: 'var(--font-plus-jakarta, system-ui)', color: 'rgba(27,59,43,0.7)', fontSize: '16px', lineHeight: '1.75' }}>
-            <p>{post.excerpt}</p>
-            <p>
-              This is a demo blog post for the Local Expert template. In a live deployment, this content would be
-              managed through Sanity CMS, allowing the agent to write and publish market reports, neighborhood
-              stories, and buyer guides without touching any code.
-            </p>
-            <p>
-              The Local Expert template is designed for agents who position themselves as neighborhood authorities —
-              people who don&apos;t just sell homes but genuinely know their markets. Long-form content like this
-              builds search authority (Google ranks it) and client trust (buyers share it).
-            </p>
-            <h2 style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)', color: '#1B3B2B', fontWeight: 900, fontSize: '22px', marginTop: '2rem', marginBottom: '0.75rem' }}>
-              What to replace with real content
-            </h2>
-            <p>
-              Replace this placeholder body with actual market analysis. The{' '}
-              <code style={{ backgroundColor: '#F4F0EA', padding: '2px 6px', borderRadius: 4, fontSize: 14 }}>BLOG_POSTS</code>{' '}
-              array in <code style={{ backgroundColor: '#F4F0EA', padding: '2px 6px', borderRadius: 4, fontSize: 14 }}>lib/local-expert-data.js</code>{' '}
-              holds the demo content — each post maps <code style={{ fontSize: 14 }}>slug → page route</code>.
-              Connect to Sanity CMS in Phase 2 for full editorial control.
-            </p>
+            {post.body ? (
+              <PortableText value={post.body} />
+            ) : (
+              <>
+                <p>{post.excerpt}</p>
+                <p>
+                  This is a demo blog post for the Local Expert template. Publish the full article in Sanity Studio
+                  under this post&apos;s <code style={{ backgroundColor: '#F4F0EA', padding: '2px 6px', borderRadius: 4, fontSize: 14 }}>body</code>{' '}
+                  field to replace this placeholder.
+                </p>
+              </>
+            )}
           </div>
         </div>
       </section>
@@ -77,11 +84,11 @@ export default function BlogPostPage({ params }) {
       <section className="py-[64px] border-t border-[#E5E0D8]" style={{ backgroundColor: '#F4F0EA' }}>
         <div className="max-w-3xl mx-auto px-5 lg:px-8 flex items-center gap-5">
           <div className="relative w-14 h-14 rounded-full overflow-hidden flex-shrink-0">
-            <Image src={AGENT.photo} alt={AGENT.name} fill className="object-cover" />
+            <Image src={resolveImageSrc(author.photo)} alt={author.name} fill className="object-cover" />
           </div>
           <div>
-            <p className="text-[14px] font-bold text-[#2C1E11]">{AGENT.name}</p>
-            <p className="text-[12px] text-[#2C1E11]/40">{AGENT.title} · {AGENT.brokerage}</p>
+            <p className="text-[14px] font-bold text-[#2C1E11]">{author.name}</p>
+            <p className="text-[12px] text-[#2C1E11]/40">{author.title} · {author.brokerage}</p>
           </div>
           <Link href="/local-expert/contact" className="ml-auto px-5 py-2.5 text-[13px] font-bold rounded-full bg-[#1B3B2B] text-[#F8F3EB] hover:bg-[#2a5540] transition-colors whitespace-nowrap">
             Get in touch

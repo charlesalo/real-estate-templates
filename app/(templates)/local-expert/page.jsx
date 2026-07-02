@@ -5,15 +5,25 @@ import DualSearchWidget from './DualSearchWidget'
 import HeroStats from './HeroStats'
 import NeighborhoodMapClient from './NeighborhoodMapClient'
 import MarketReportForm from './MarketReportForm'
+import PortableText from '@/components/sanity/PortableText'
 import marquee from './press-marquee.module.css'
+import { resolveImageSrc } from '@/lib/sanity/image'
+import { withFallback, isPortableText, toExcerpt, formatCompactPrice } from '@/lib/sanity/utils'
 import {
-  AGENT,
+  getAgent,
+  getNeighborhoods,
+  getFieldNotes,
+  getTestimonials,
+  getPosts,
+} from '@/lib/sanity/queries'
+import {
+  AGENT as AGENT_FALLBACK,
   HERO_STATS,
-  NEIGHBORHOODS,
+  NEIGHBORHOODS as NEIGHBORHOODS_FALLBACK,
   HOMEPAGE_LISTINGS,
-  FIELD_NOTES,
-  TESTIMONIAL,
-  BLOG_POSTS,
+  FIELD_NOTES as FIELD_NOTES_FALLBACK,
+  TESTIMONIAL as TESTIMONIAL_FALLBACK,
+  BLOG_POSTS as BLOG_POSTS_FALLBACK,
 } from '@/lib/local-expert-data'
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
@@ -35,7 +45,37 @@ const PRESS = [
 
 // ── Homepage ──────────────────────────────────────────────────────────────────
 
-export default function LocalExpertHome() {
+export default async function LocalExpertHome() {
+  const [agentDoc, neighborhoods, fieldNotes, testimonials, posts] = await Promise.all([
+    getAgent(),
+    getNeighborhoods(),
+    getFieldNotes(),
+    getTestimonials(),
+    getPosts(),
+  ])
+
+  const agent = agentDoc ? { ...AGENT_FALLBACK, ...agentDoc } : AGENT_FALLBACK
+  const heroStats = withFallback(agent.heroStats, HERO_STATS)
+  // NeighborhoodMap.jsx expects plain strings for image/slug/borough/description
+  // (it slices description and uses slug as a lookup key), so normalize Sanity's
+  // richer field shapes down to what that component already renders.
+  const NEIGHBORHOODS = withFallback(neighborhoods, NEIGHBORHOODS_FALLBACK).map((n) => ({
+    ...n,
+    slug: n.slug?.current ?? n.slug,
+    borough: n.borough ?? n.region,
+    image: resolveImageSrc(n.image),
+    medianPrice: formatCompactPrice(n.medianPrice),
+    description: toExcerpt(n.description),
+  }))
+  const FIELD_NOTES = withFallback(fieldNotes, FIELD_NOTES_FALLBACK).map((n) => ({
+    ...n,
+    image: resolveImageSrc(n.image),
+  }))
+  const TESTIMONIAL = withFallback(testimonials, [TESTIMONIAL_FALLBACK])[0]
+  const BLOG_POSTS = withFallback(posts, BLOG_POSTS_FALLBACK)
+    .slice(0, 3)
+    .map((p) => ({ ...p, slug: p.slug?.current ?? p.slug, image: resolveImageSrc(p.image) }))
+
   return (
     <>
       {/* ─── HERO ──────────────────────────────────────────────────────── */}
@@ -92,7 +132,7 @@ export default function LocalExpertHome() {
 
               {/* Stats row */}
               <div className="grid grid-cols-2 gap-x-8 gap-y-10 lg:flex lg:flex-wrap lg:items-center lg:gap-8 mt-6 pt-8 border-t border-[#1B3B2B]/10">
-                <HeroStats stats={HERO_STATS} />
+                <HeroStats stats={heroStats} />
               </div>
             </div>
 
@@ -302,14 +342,14 @@ export default function LocalExpertHome() {
             <div>
               <div className="relative aspect-[3/4] rounded-2xl overflow-hidden">
                 <Image
-                  src={AGENT.photo}
-                  alt={AGENT.name}
+                  src={resolveImageSrc(agent.photo)}
+                  alt={agent.name}
                   fill
                   className="object-cover"
                 />
               </div>
               <p className="text-[12px] tracking-[0.28em] uppercase text-[#2C1E11]/50 mt-4 leading-relaxed">
-                {AGENT.name} · Licensed Associate Real Estate Broker · NY DOS #{AGENT.license.replace('NY Lic# ', '')}
+                {agent.name} · Licensed Associate Real Estate Broker · NY DOS #{agent.license?.replace('NY Lic# ', '')}
               </p>
             </div>
 
@@ -325,12 +365,12 @@ export default function LocalExpertHome() {
                 <em className="text-[#1B3B2B] lg:whitespace-nowrap">I introduce people to blocks.</em>
               </h2>
 
-              <div className="space-y-5 mb-8">
-                {AGENT.bio.map((para, i) => (
-                  <p key={i} className="text-[16px] text-[#2C1E11]/60 leading-relaxed">
-                    {para}
-                  </p>
-                ))}
+              <div className="space-y-5 mb-8 [&_p]:text-[16px] [&_p]:text-[#2C1E11]/60 [&_p]:leading-relaxed">
+                {isPortableText(agent.bio) ? (
+                  <PortableText value={agent.bio} />
+                ) : (
+                  agent.bio.map((para, i) => <p key={i}>{para}</p>)
+                )}
               </div>
 
               <div className="flex flex-wrap items-center gap-3">

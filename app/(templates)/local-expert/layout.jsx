@@ -1,6 +1,7 @@
 import { Plus_Jakarta_Sans, Gelasio } from 'next/font/google'
 import LocalExpertShell from './LocalExpertShell'
-import { AGENT } from '@/lib/local-expert-data'
+import { getAgent, getSiteSettings } from '@/lib/sanity/queries'
+import { AGENT as AGENT_FALLBACK } from '@/lib/local-expert-data'
 import './page-transition.css'
 
 const plusJakarta = Plus_Jakarta_Sans({
@@ -17,66 +18,84 @@ const gelasio = Gelasio({
   display: 'swap',
 })
 
-const NADIA_TITLE = 'Nadia Osei | Your Manhattan & Brooklyn Real Estate Expert'
-const NADIA_DESCRIPTION =
-  'Discover Manhattan and Brooklyn real estate with Nadia Osei. Expert guidance on neighborhoods, market trends, and finding your perfect New York home.'
+// Combines the `agent` (personal profile) and `siteSettings` (business/legal
+// identity) Sanity documents into the single `agent` shape LocalExpertShell
+// and its children already expect, falling back to the demo data file when
+// Sanity hasn't been populated for this deployment yet.
+async function getResolvedAgent() {
+  const [agentDoc, settings] = await Promise.all([getAgent(), getSiteSettings()])
+  if (!agentDoc && !settings) return AGENT_FALLBACK
 
-export const metadata = {
-  title: {
-    default: NADIA_TITLE,
-    template: '%s | Nadia Osei',
-  },
-  description: NADIA_DESCRIPTION,
-  alternates: {
-    canonical: '/local-expert',
-  },
-  icons: {
-    icon: '/images/local-expert/nadia-favicon.png',
-    apple: '/images/local-expert/nadia-favicon.png',
-  },
-  openGraph: {
-    title: NADIA_TITLE,
-    description: NADIA_DESCRIPTION,
-    url: '/local-expert',
-    siteName: 'Nadia Osei Real Estate',
-    images: ['/images/landing-page/local-expert-full-page-preview.png'],
-    locale: 'en_US',
-    type: 'website',
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: NADIA_TITLE,
-    description: NADIA_DESCRIPTION,
-    images: ['/images/landing-page/local-expert-full-page-preview.png'],
-  },
+  return {
+    ...AGENT_FALLBACK,
+    ...agentDoc,
+    phone: settings?.phone ?? agentDoc?.phone ?? AGENT_FALLBACK.phone,
+    email: settings?.email ?? agentDoc?.email ?? AGENT_FALLBACK.email,
+    brokerage: settings?.brokerage?.name ?? AGENT_FALLBACK.brokerage,
+    brokerageLicense: settings?.brokerage?.license ?? AGENT_FALLBACK.brokerageLicense,
+    brokerageAddress: settings?.brokerageAddress ?? AGENT_FALLBACK.brokerageAddress,
+  }
 }
 
-const JSON_LD = {
-  '@context': 'https://schema.org',
-  '@type': 'RealEstateAgent',
-  name: 'Nadia Osei',
-  description: NADIA_DESCRIPTION,
-  telephone: '(212) 555-0194',
-  email: 'nadia@nadiaosei.com',
-  url: 'https://re-templates.chavbuilds.com/local-expert',
-  image: 'https://re-templates.chavbuilds.com/images/landing-page/local-expert-full-page-preview.png',
-  address: {
-    '@type': 'PostalAddress',
-    streetAddress: '90 5th Avenue',
-    addressLocality: 'New York',
-    addressRegion: 'NY',
-    postalCode: '10011',
-    addressCountry: 'US',
-  },
-  areaServed: ['Manhattan', 'Brooklyn'],
+export async function generateMetadata() {
+  const settings = await getSiteSettings()
+  const name = settings?.businessName ?? AGENT_FALLBACK.name
+  const title = settings?.seo?.metaTitle ?? `${name} | Your Manhattan & Brooklyn Real Estate Expert`
+  const description =
+    settings?.seo?.metaDescription ??
+    `Discover Manhattan and Brooklyn real estate with ${name}. Expert guidance on neighborhoods, market trends, and finding your perfect New York home.`
+
+  return {
+    title: { default: title, template: `%s | ${name}` },
+    description,
+    alternates: { canonical: '/local-expert' },
+    icons: {
+      icon: '/images/local-expert/nadia-favicon.png',
+      apple: '/images/local-expert/nadia-favicon.png',
+    },
+    openGraph: {
+      title,
+      description,
+      url: '/local-expert',
+      siteName: `${name} Real Estate`,
+      images: ['/images/landing-page/local-expert-full-page-preview.png'],
+      locale: 'en_US',
+      type: 'website',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      images: ['/images/landing-page/local-expert-full-page-preview.png'],
+    },
+  }
 }
 
-export default function LocalExpertLayout({ children }) {
+export default async function LocalExpertLayout({ children }) {
+  const agent = await getResolvedAgent()
+  const settings = await getSiteSettings()
+
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'RealEstateAgent',
+    name: agent.name,
+    description: settings?.seo?.metaDescription ?? agent.tagline,
+    telephone: agent.phone,
+    email: agent.email,
+    url: 'https://re-templates.chavbuilds.com/local-expert',
+    image: 'https://re-templates.chavbuilds.com/images/landing-page/local-expert-full-page-preview.png',
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: agent.brokerageAddress,
+    },
+    areaServed: agent.areas,
+  }
+
   return (
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(JSON_LD) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <div
         className={`local-expert ${plusJakarta.variable} ${gelasio.variable}`}
@@ -96,7 +115,7 @@ export default function LocalExpertLayout({ children }) {
         minHeight: '100vh',
       }}
     >
-      <LocalExpertShell agent={AGENT}>
+      <LocalExpertShell agent={agent}>
         {children}
       </LocalExpertShell>
       </div>

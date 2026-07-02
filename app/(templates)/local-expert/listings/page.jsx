@@ -1,7 +1,16 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowLeft, ArrowRight, Bed, Bath, Square } from 'lucide-react'
-import { LISTINGS, SOLD_LISTINGS } from '@/lib/local-expert-data'
+import { LISTINGS, SOLD_LISTINGS as SOLD_LISTINGS_FALLBACK } from '@/lib/local-expert-data'
+import { resolveImageSrc } from '@/lib/sanity/image'
+import { withFallback } from '@/lib/sanity/utils'
+import { getPastTransactions } from '@/lib/sanity/queries'
+
+function formatSoldDate(value) {
+  if (!value) return value
+  if (!value.includes('-')) return value // already "May 2026"-style
+  return new Date(value).toLocaleDateString('en-US', { month: 'long', year: 'numeric' })
+}
 
 export const metadata = {
   title: { absolute: 'New York Homes for Sale & Real Estate Listings | Nadia Osei' },
@@ -51,6 +60,14 @@ export default async function ListingsPage({ searchParams }) {
   const totalPages = Math.max(1, Math.ceil(filtered.length / PER_PAGE))
   const page = clampPage(sp?.page, totalPages)
   const paginated = filtered.slice((page - 1) * PER_PAGE, page * PER_PAGE)
+
+  const pastTransactions = await getPastTransactions()
+  const SOLD_LISTINGS = withFallback(pastTransactions, SOLD_LISTINGS_FALLBACK).map((t) => ({
+    ...t,
+    id: t.id ?? t._id,
+    image: resolveImageSrc(t.image ?? t.images?.[0]),
+    soldDate: formatSoldDate(t.soldDate),
+  }))
 
   const soldTotalPages = Math.max(1, Math.ceil(SOLD_LISTINGS.length / PER_PAGE))
   const soldPage = clampPage(sp?.soldPage, soldTotalPages)

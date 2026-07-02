@@ -1,17 +1,31 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { BLOG_POSTS } from '@/lib/local-expert-data'
+import { resolveImageSrc } from '@/lib/sanity/image'
+import { withFallback } from '@/lib/sanity/utils'
+import { getPosts, getSiteSettings } from '@/lib/sanity/queries'
+import { BLOG_POSTS as BLOG_POSTS_FALLBACK } from '@/lib/local-expert-data'
 
-export const metadata = {
-  title: { absolute: 'Manhattan & Brooklyn Real Estate Blog | Nadia Osei' },
-  description: 'Manhattan and Brooklyn real estate insights: market reports, buyer guides, and neighborhood stories from Nadia Osei, your trusted NYC real estate agent.',
+export async function generateMetadata() {
+  const settings = await getSiteSettings()
+  const name = settings?.businessName ?? 'Nadia Osei'
+  return {
+    title: { absolute: `Manhattan & Brooklyn Real Estate Blog | ${name}` },
+    description: `Manhattan and Brooklyn real estate insights: market reports, buyer guides, and neighborhood stories from ${name}, your trusted NYC real estate agent.`,
+  }
 }
 
 function formatDate(iso) {
   return new Date(iso).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })
 }
 
-export default function BlogPage() {
+export default async function BlogPage() {
+  const posts = await getPosts()
+  const BLOG_POSTS = withFallback(posts, BLOG_POSTS_FALLBACK).map((p) => ({
+    ...p,
+    slug: p.slug?.current ?? p.slug,
+    image: resolveImageSrc(p.image),
+  }))
+
   return (
     <section className="pt-[112px] pb-[64px] lg:pt-[144px] lg:pb-[80px]" style={{ backgroundColor: '#F8F3EB' }}>
       <div className="max-w-7xl mx-auto px-5 lg:px-8">

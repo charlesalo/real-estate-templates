@@ -1,9 +1,16 @@
 import Image from 'next/image'
-import { FIELD_NOTES } from '@/lib/local-expert-data'
+import { resolveImageSrc } from '@/lib/sanity/image'
+import { withFallback } from '@/lib/sanity/utils'
+import { getFieldNotes, getSiteSettings } from '@/lib/sanity/queries'
+import { FIELD_NOTES as FIELD_NOTES_FALLBACK } from '@/lib/local-expert-data'
 
-export const metadata = {
-  title: { absolute: 'New York Local Favorites | Nadia Osei Real Estate Agent' },
-  description: "Discover Nadia's favorite NYC spots: coffee shops, bookstores, parks, and local gems across Manhattan and Brooklyn curated for residents.",
+export async function generateMetadata() {
+  const settings = await getSiteSettings()
+  const name = settings?.businessName ?? 'Nadia Osei'
+  return {
+    title: { absolute: `New York Local Favorites | ${name} Real Estate Agent` },
+    description: `Discover ${name}'s favorite NYC spots: coffee shops, bookstores, parks, and local gems across Manhattan and Brooklyn curated for residents.`,
+  }
 }
 
 const CATEGORY_COLORS = {
@@ -15,7 +22,14 @@ const CATEGORY_COLORS = {
   Market: 'bg-[#C4A882]/20 text-[#7A6040]',
 }
 
-export default function FieldNotesPage() {
+export default async function FieldNotesPage() {
+  const fieldNotes = await getFieldNotes()
+  const FIELD_NOTES = withFallback(fieldNotes, FIELD_NOTES_FALLBACK).map((n) => ({
+    ...n,
+    id: n.id ?? n._id,
+    image: resolveImageSrc(n.image),
+  }))
+
   return (
     <section className="pt-[112px] pb-[64px] lg:pt-[144px] lg:pb-[80px]" style={{ backgroundColor: '#F8F3EB' }}>
       <div className="max-w-7xl mx-auto px-5 lg:px-8">
