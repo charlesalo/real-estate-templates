@@ -1,18 +1,8 @@
 export const apiVersion = process.env.NEXT_PUBLIC_SANITY_API_VERSION || '2026-07-02'
 
-export const dataset = assertValue(
-  process.env.NEXT_PUBLIC_SANITY_DATASET,
-  'Missing environment variable: NEXT_PUBLIC_SANITY_DATASET'
-)
+// Left unset for deployments that don't have a client-specific Sanity
+// project yet (e.g. this template's own showcase site) — lib/sanity/client.js
+// falls back to demo data instead of hitting the network when these are empty.
+export const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET || ''
 
-export const projectId = assertValue(
-  process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
-  'Missing environment variable: NEXT_PUBLIC_SANITY_PROJECT_ID'
-)
-
-function assertValue(v, errorMessage) {
-  if (v === undefined || v === '') {
-    throw new Error(errorMessage)
-  }
-  return v
-}
+export const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || ''
