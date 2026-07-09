@@ -18,6 +18,14 @@ function splitName(name = '') {
   }
 }
 
+function escapeHtml(str = '') {
+  return str
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+}
+
 // ── Lead auto-reply copy, by form type ─────────────────────────────────────────
 
 const AUTO_REPLY = {
@@ -135,6 +143,29 @@ const AUTO_REPLY = {
       <p style="color:#374151;font-size:14px;line-height:1.6">— Charles</p>
     `,
   },
+  'landing-contact': {
+    subject: () => "Got your message — let's talk about your project",
+    body: ({ firstname, message }) => `
+      <p style="color:#374151;font-size:14px;line-height:1.6">Hi ${firstname || 'there'},</p>
+      <p style="color:#374151;font-size:14px;line-height:1.6">
+        Thanks for reaching out. I received your message and wanted to confirm it came through:
+      </p>
+      <p style="color:#374151;font-size:14px;line-height:1.6;font-style:italic">
+        "${escapeHtml(message) || '—'}"
+      </p>
+      <p style="color:#374151;font-size:14px;line-height:1.6">
+        I'll review your project details and get back to you within 24 hours with next steps.
+        If anything is urgent, feel free to call or text me directly at
+        <a href="tel:+639561865327" style="color:#1A2D5A">+63 956 186 5327</a>.
+      </p>
+      <p style="color:#374151;font-size:14px;line-height:1.6">
+        In the meantime, feel free to take a look at some of the real estate website templates
+        I've built:
+        <a href="https://re-templates.chavbuilds.com" style="color:#1A2D5A">https://re-templates.chavbuilds.com</a>
+      </p>
+      <p style="color:#374151;font-size:14px;line-height:1.6">Talk soon,<br/>Charles Alo<br/>chavbuilds</p>
+    `,
+  },
 }
 
 // ── Email: agent notification ─────────────────────────────────────────────────
@@ -228,8 +259,9 @@ export async function POST(request) {
     const {
       name, firstName: rawFirst, lastName: rawLast,
       email, phone, message, neighborhood,
-      leadSource = 'Unknown Source',
-      formType   = 'contact',
+      leadSource  = 'Unknown Source',
+      formType    = 'contact',
+      isDemoLead  = true,
     } = body
 
     if (!email) {
@@ -250,7 +282,7 @@ export async function POST(request) {
       lastname,
       hubspot_owner_id: OWNER_ID,
       lead_source:      leadSource,
-      is_demo_lead:     true,
+      is_demo_lead:     isDemoLead,
     }
     if (phone)   properties.phone           = phone
     if (message) properties.inquiry_message = message

@@ -3,13 +3,28 @@
 import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 
+const CLIENT_TYPE_LABELS = {
+  solo_agent: 'Solo Agent',
+  team: 'Real Estate Team',
+  brokerage: 'Brokerage',
+  unsure: 'Not sure yet',
+};
+
+const TEMPLATE_INTEREST_LABELS = {
+  luxury_agent: 'Luxury Agent',
+  modern_team: 'Modern Team',
+  custom: 'Custom Design',
+  open: 'Open to recommendations',
+};
+
 export default function ContactModal({ isOpen, onClose }) {
   const dialogRef = useRef(null);
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState('');
 
   useEffect(() => {
-    if (!isOpen) { setSubmitted(false); return; }
+    if (!isOpen) { setSubmitted(false); setSubmitError(''); return; }
 
     // Remember what had focus so we can restore it when the modal closes.
     const previouslyFocused = document.activeElement;
@@ -63,15 +78,52 @@ export default function ContactModal({ isOpen, onClose }) {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    setSubmitting(true);
     const data = Object.fromEntries(new FormData(e.target));
+
+    // Honeypot — bots fill every field, real users never see this one.
+    if (data.botcheck) {
+      setSubmitted(true);
+      return;
+    }
+
+    setSubmitting(true);
+    setSubmitError('');
+
+    const currentWebsite = data.current_website?.trim();
+    const normalizedWebsite = currentWebsite && !/^https?:\/\//i.test(currentWebsite)
+      ? `https://${currentWebsite}`
+      : currentWebsite;
+
+    const message = [
+      `Client type: ${CLIENT_TYPE_LABELS[data.client_type] ?? data.client_type}`,
+      `Template interest: ${TEMPLATE_INTEREST_LABELS[data.template_interest] ?? data.template_interest}`,
+      normalizedWebsite ? `Current website: ${normalizedWebsite}` : null,
+      data.message ? `Message: ${data.message}` : null,
+    ].filter(Boolean).join(' | ');
+
     try {
-      const res = await fetch('https://api.web3forms.com/submit', {
+      const res = await fetch('/api/leads/capture', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-        body: JSON.stringify({ access_key: process.env.NEXT_PUBLIC_WEB3FORMS_KEY ?? '', ...data }),
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          firstName: data.first_name,
+          lastName: data.last_name,
+          email: data.email,
+          phone: data.phone,
+          message,
+          leadSource: 'Landing Page - Contact Modal',
+          formType: 'landing-contact',
+          isDemoLead: false,
+        }),
       });
-      if (res.ok) setSubmitted(true);
+      const json = await res.json();
+      if (json.success) {
+        setSubmitted(true);
+      } else {
+        setSubmitError(json.error ?? 'Something went wrong. Please try again.');
+      }
+    } catch {
+      setSubmitError('Something went wrong. Please try again.');
     } finally {
       setSubmitting(false);
     }
@@ -166,7 +218,6 @@ export default function ContactModal({ isOpen, onClose }) {
             onSubmit={handleSubmit}
             className="px-8 py-7 space-y-5"
           >
-            <input type="hidden" name="subject" value="New inquiry from chavbuilds.com" />
             <input type="checkbox" name="botcheck" className="hidden" tabIndex={-1} aria-hidden="true" />
 
             {/* Name */}
@@ -269,9 +320,9 @@ export default function ContactModal({ isOpen, onClose }) {
               </label>
               <input
                 id="cm-current-website"
-                type="url"
+                type="text"
                 name="current_website"
-                placeholder="https://"
+                placeholder="chavbuilds.com"
                 className="w-full bg-[#111111] border border-[#2a2a2a] rounded-lg px-4 py-2.5 text-sm text-[#e2e2e2] placeholder:text-[#8a8a8a] focus:outline-none focus:border-[#c4a882] focus:ring-2 focus:ring-[#c4a882]/40 transition-colors duration-200"
               />
             </div>
@@ -288,6 +339,10 @@ export default function ContactModal({ isOpen, onClose }) {
                 className="w-full bg-[#111111] border border-[#2a2a2a] rounded-lg px-4 py-2.5 text-sm text-[#e2e2e2] placeholder:text-[#8a8a8a] focus:outline-none focus:border-[#c4a882] focus:ring-2 focus:ring-[#c4a882]/40 transition-colors duration-200 resize-none"
               />
             </div>
+
+            {submitError && (
+              <p className="text-sm text-red-400" role="alert">{submitError}</p>
+            )}
 
             {/* Submit */}
             <button
