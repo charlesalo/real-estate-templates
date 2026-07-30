@@ -7,6 +7,7 @@ import { usePathname } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ChevronDown } from 'lucide-react'
 import ModernTeamSideMenu from './ModernTeamSideMenu'
+import AccountMenu from '@/components/auth/AccountMenu'
 import { cn } from '@/lib/utils'
 
 // ── Sub-nav dropdown ─────────────────────────────────────────────────────────
@@ -79,6 +80,12 @@ export default function ModernTeamNavbar({
   // Pages with a light background (no dark hero) need the solid navbar from the start
   const forceSolid = /\/modern-team\/listings\/.+/.test(pathname)
   const solid = scrolled || forceSolid
+
+  // Sign-in is only relevant where the registration wall actually applies —
+  // the search page and individual listing pages. Keep it off the rest of the
+  // site so the navbar doesn't advertise an account system on pages that have
+  // nothing gated.
+  const onListingsPage = pathname === '/modern-team/listings' || pathname.startsWith('/modern-team/listings/')
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 72)
@@ -154,6 +161,10 @@ export default function ModernTeamNavbar({
                   </Link>
                 )
               })}
+
+              {onListingsPage && (
+                <AccountMenu solid={solid} savedSearchesHref="/modern-team/saved-searches" />
+              )}
             </nav>
 
             {/* ── Hamburger ──────────────────────────────────────── */}

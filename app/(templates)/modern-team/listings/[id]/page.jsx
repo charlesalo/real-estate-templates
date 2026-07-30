@@ -1,6 +1,8 @@
 import { notFound } from 'next/navigation'
 import ModernTeamPropertyDetail from '@/components/real-estate/ModernTeamPropertyDetail'
+import ModernTeamGatedListing from '@/components/real-estate/ModernTeamGatedListing'
 import { getListingById, getFeaturedListings } from '@/lib/simplyrets'
+import { previewListing, resolveGate } from '@/lib/gating'
 
 // Light, neutral interior photos — suitable for the modern-team aesthetic
 const DEMO_INTERIORS = [
@@ -51,6 +53,18 @@ export default async function PropertyDetailPage({ params }) {
     listing = await getListingById(id)
   } catch {
     notFound()
+  }
+
+  // Signed-out visitors get the teaser only. generateMetadata above still runs
+  // on the full listing, so the page keeps its title/description for search
+  // engines and link previews — only the page body is withheld.
+  const { gated } = await resolveGate()
+  if (gated) {
+    return (
+      <div className="pt-20">
+        <ModernTeamGatedListing listing={previewListing(listing)} teamName={AGENT.name} />
+      </div>
+    )
   }
 
   // Pad photos for demo credentials

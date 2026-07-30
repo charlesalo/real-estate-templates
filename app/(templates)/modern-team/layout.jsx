@@ -4,6 +4,8 @@ import ModernTeamFooter from '@/components/layout/ModernTeamFooter'
 import ContactModal from '@/components/layout/ModernTeamContactModal'
 import ModernTeamExitIntentPopup from '@/components/layout/ModernTeamExitIntentPopup'
 import GoogleOneTap from '@/components/auth/GoogleOneTap'
+import AuthProvider from '@/components/auth/AuthProvider'
+import AuthModal from '@/components/auth/AuthModal'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -142,15 +144,21 @@ export default function ModernTeamLayout({ children }) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(JSON_LD) }}
       />
-      <ModernTeamNavbar
-        logo={{ text: TEAM.name }}
-        links={NAV_LINKS}
-        menuLinks={MENU_LINKS}
-        agentEmail={TEAM.email}
-        socialLinks={TEAM.socialLinks}
-      />
-      <GoogleOneTap clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID} />
-      <main>{children}</main>
+      <AuthProvider>
+        <ModernTeamNavbar
+          logo={{ text: TEAM.name }}
+          links={NAV_LINKS}
+          menuLinks={MENU_LINKS}
+          agentEmail={TEAM.email}
+          socialLinks={TEAM.socialLinks}
+        />
+        {/* supabaseAuth: this template is behind the registration wall, so the
+            One Tap credential has to become a real session — otherwise the
+            visitor signs in with Google and stays gated. */}
+        <GoogleOneTap clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID} supabaseAuth />
+        <main>{children}</main>
+        <AuthModal teamName={TEAM.name} template="modern-team" />
+      </AuthProvider>
       <ModernTeamExitIntentPopup teamName={TEAM.name} />
       <ContactModal
         agentName={TEAM.name}

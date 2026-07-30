@@ -143,6 +143,32 @@ const AUTO_REPLY = {
       <p style="color:#374151;font-size:14px;line-height:1.6">— Charles</p>
     `,
   },
+  'gated-search-signup': {
+    subject: () => 'Your home search account is ready',
+    body: ({ firstname }) => `
+      <p style="color:#374151;font-size:14px;line-height:1.6">Hi ${firstname || 'there'},</p>
+      <p style="color:#374151;font-size:14px;line-height:1.6">
+        Thanks for creating an account to search listings! You now have access to the full
+        results and every listing detail page.
+      </p>
+      <p style="color:#374151;font-size:14px;line-height:1.6">
+        One quick note — this is a showcase template built by <strong>chavbuilds</strong>, a web
+        development studio for real estate professionals. The listings you're browsing come from a
+        demo MLS feed, so they aren't homes you can actually tour.
+      </p>
+      <p style="color:#374151;font-size:14px;line-height:1.6">
+        If you're a real estate agent, though — this is exactly the point. Every visitor who wants
+        to see past the first few results creates an account, and that contact lands in your CRM
+        automatically. This exact registration wall, connected to your own MLS feed and CRM, comes
+        standard with every site I build.
+      </p>
+      <p style="color:#374151;font-size:14px;line-height:1.6">
+        Want to see it running on your own listings? Reply here or reach me at
+        <a href="mailto:charlesalo@chavbuilds.com" style="color:#1A2D5A">charlesalo@chavbuilds.com</a>.
+      </p>
+      <p style="color:#374151;font-size:14px;line-height:1.6">— Charles</p>
+    `,
+  },
   'landing-contact': {
     subject: () => "Got your message — let's talk about your project",
     body: ({ firstname, message }) => `

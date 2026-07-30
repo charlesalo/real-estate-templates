@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useCallback } from 'react'
+import { useState, useCallback, useEffect, useRef } from 'react'
 import { useRouter } from 'next/navigation'
 import dynamic from 'next/dynamic'
 import Image from 'next/image'
@@ -8,10 +8,11 @@ import Link from 'next/link'
 import {
   Search, SlidersHorizontal, X, LayoutGrid, List,
   Map as MapIcon, ChevronLeft, ChevronRight,
-  Bed, Bath, Maximize2,
+  Bed, Bath, Maximize2, Lock, Heart, Check,
 } from 'lucide-react'
 import ModernTeamPropertyCard from './ModernTeamPropertyCard'
 import { formatPrice } from './PriceTag'
+import { useAuth } from '@/components/auth/AuthProvider'
 
 const MapView = dynamic(() => import('./MapView'), { ssr: false, loading: () => null })
 
@@ -176,6 +177,104 @@ function ListRow({ listing }) {
   )
 }
 
+// ─── Registration wall ────────────────────────────────────────────────────────
+
+// Decorative stand-ins for the withheld results. The real listings never reach
+// the browser — these are empty shells, not blurred data.
+function LockedCard() {
+  return (
+    <div aria-hidden="true" className="relative bg-white border border-[#D5DBE9] rounded-xl overflow-hidden select-none">
+      <div className="aspect-[4/3] bg-gradient-to-br from-[#EEF1F7] to-[#D5DBE9]" />
+      <div className="p-4 space-y-2.5">
+        <div className="h-5 w-2/5 rounded bg-[#EEF1F7]" />
+        <div className="h-3.5 w-4/5 rounded bg-[#EEF1F7]" />
+        <div className="flex gap-3 pt-1.5">
+          <div className="h-3 w-12 rounded bg-[#EEF1F7]" />
+          <div className="h-3 w-12 rounded bg-[#EEF1F7]" />
+          <div className="h-3 w-16 rounded bg-[#EEF1F7]" />
+        </div>
+      </div>
+      <div className="absolute inset-0 bg-white/45 backdrop-blur-[3px] flex items-center justify-center">
+        <div className="w-10 h-10 rounded-full bg-[#1A2D5A]/10 flex items-center justify-center">
+          <Lock size={15} className="text-[#1A2D5A]" strokeWidth={1.75} />
+        </div>
+      </div>
+    </div>
+  )
+}
+
+function GateCTA({ hiddenCount, totalCount, approximate, onSignUp }) {
+  // "+" whenever the MLS feed only gave us a floor rather than an exact count.
+  const plus  = approximate ? '+' : ''
+  const total = `${totalCount.toLocaleString()}${plus}`
+
+  const headline = hiddenCount > 0
+    ? `${hiddenCount.toLocaleString()}${plus} more ${hiddenCount === 1 && !approximate ? 'property matches' : 'properties match'} your search`
+    : 'See every property that matches your search'
+
+  return (
+    <div className="mt-8 rounded-2xl bg-[#1A2D5A] px-8 py-10 sm:px-12 sm:py-12 text-center">
+      <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center mx-auto mb-6">
+        <Lock size={18} className="text-[#7B93C5]" strokeWidth={1.75} />
+      </div>
+      <p className="text-[12px] tracking-[0.3em] uppercase text-[#7B93C5] font-sans mb-3">
+        Free Account Required
+      </p>
+      <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight leading-tight max-w-xl mx-auto">
+        {headline}
+      </h2>
+      <p className="text-sm text-white/55 font-sans mt-4 max-w-md mx-auto leading-relaxed">
+        Create a free account to unlock all {total} results, open full listing details, and save
+        this search for later.
+      </p>
+      <button
+        onClick={onSignUp}
+        className="mt-8 px-10 py-3.5 bg-white text-[#1A2D5A] text-[12px] tracking-[0.25em] uppercase font-semibold rounded-lg hover:bg-[#EEF1F7] transition-colors"
+      >
+        Sign Up to See All {total} Results
+      </button>
+      <p className="text-[12px] text-white/30 font-sans mt-5">
+        Always free · Takes about 20 seconds
+      </p>
+    </div>
+  )
+}
+
+// ─── Save search ──────────────────────────────────────────────────────────────
+
+// Remounted by the parent whenever the filters change (via `key`), which resets
+// "Saved" back to "Save Search" — a new set of filters is a new search.
+function SaveSearchButton({ filters, gated, onGatedClick }) {
+  const [state, setState] = useState('idle') // idle | saving | saved | error
+
+  const save = async () => {
+    if (gated) { onGatedClick(); return }
+    setState('saving')
+    try {
+      const res = await fetch('/api/saved-searches', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ template: 'modern-team', criteria: filters }),
+      })
+      setState(res.ok ? 'saved' : 'error')
+    } catch {
+      setState('error')
+    }
+  }
+
+  return (
+    <button
+      onClick={save}
+      disabled={state === 'saving' || state === 'saved'}
+      className="flex items-center gap-1.5 px-3 py-1.5 text-[12px] tracking-[0.1em] uppercase border border-[#D5DBE9] text-[#6B7280] rounded-lg transition-all font-sans cursor-pointer hover:border-[#1A2D5A]/40 hover:text-[#1A2D5A] disabled:cursor-default disabled:opacity-70"
+    >
+      {state === 'saved'
+        ? <><Check size={13} strokeWidth={2} /> Saved</>
+        : <><Heart size={13} strokeWidth={1.75} /> {state === 'saving' ? 'Saving…' : state === 'error' ? 'Try again' : 'Save Search'}</>}
+    </button>
+  )
+}
+
 // ─── Filter drawer ────────────────────────────────────────────────────────────
 
 function FilterDrawer({ filters, onApply, onClose }) {
@@ -306,8 +405,12 @@ export default function ModernTeamSearchClient({
   initialTotal    = 0,
   initialHasMore  = false,
   initialFilters  = {},
+  initialGated    = false,
+  initialHidden   = 0,
+  initialApproximate = false,
 }) {
   const router = useRouter()
+  const { user, openAuth } = useAuth()
 
   const [filters, setFilters] = useState({
     q:        initialFilters.q        ?? '',
@@ -329,6 +432,11 @@ export default function ModernTeamSearchClient({
   const [view,       setView]       = useState('grid')
   const [showMap,    setShowMap]    = useState(true)
   const [showDrawer, setShowDrawer] = useState(false)
+  // Mirrors the server's decision. The API re-derives it on every request, so
+  // this only drives what the UI shows — it is not what enforces the wall.
+  const [gated,      setGated]      = useState(initialGated)
+  const [hiddenCount, setHiddenCount] = useState(initialHidden)
+  const [approximate, setApproximate]  = useState(initialApproximate)
   // tracks the q value that was last submitted, so the second row only
   // appears when the user has typed something new (not on page refresh)
 
@@ -345,11 +453,14 @@ export default function ModernTeamSearchClient({
       Object.entries(f).forEach(([k, v]) => { if (v) params.set(k, v) })
       params.set('limit', LIMIT)
       params.set('offset', (p - 1) * LIMIT)
-      const res  = await fetch(`/api/listings?${params}`)
+      const res  = await fetch(`/api/listings/search?${params}`)
       const data = await res.json()
       setListings(normalize(data.listings ?? []))
       setTotalCount(data.totalCount ?? 0)
       setHasMore(data.hasMore ?? false)
+      setGated(Boolean(data.gated))
+      setHiddenCount(data.hiddenCount ?? 0)
+      setApproximate(Boolean(data.approximate))
     } catch {
       setListings([])
       setTotalCount(0)
@@ -358,6 +469,21 @@ export default function ModernTeamSearchClient({
       setLoading(false)
     }
   }, [])
+
+  // Signing in has to drop the wall on the results the visitor is already
+  // looking at. router.refresh() re-runs the server page, but this component's
+  // state was seeded from the *old* props, so refetch it directly.
+  const latest     = useRef({ filters, page })
+  const lastUserId = useRef(user?.id ?? null)
+
+  useEffect(() => { latest.current = { filters, page } }, [filters, page])
+
+  useEffect(() => {
+    const id = user?.id ?? null
+    if (id === lastUserId.current) return
+    lastUserId.current = id
+    fetchListings(latest.current.filters, latest.current.page)
+  }, [user, fetchListings])
 
   const syncUrl = useCallback((f, p) => {
     const params = new URLSearchParams()
@@ -553,7 +679,9 @@ export default function ModernTeamSearchClient({
           {/* Toolbar */}
           <div className="flex items-center justify-between px-6 py-4 border-b border-[#D5DBE9] bg-white">
             <p className="text-xs text-[#6B7280] font-sans">
-              {loading ? 'Loading…' : knownTotal
+              {loading ? 'Loading…' : gated
+              ? `Showing ${listings.length} of ${totalCount.toLocaleString()}${approximate ? '+' : ''} ${totalCount === 1 && !approximate ? 'property' : 'properties'}`
+              : knownTotal
               ? `${totalCount.toLocaleString()} ${totalCount === 1 ? 'property' : 'properties'}`
               : hasMore
                 ? `${estimatedMin.toLocaleString()}+ properties`
@@ -561,6 +689,12 @@ export default function ModernTeamSearchClient({
             }
             </p>
             <div className="flex items-center gap-2">
+              <SaveSearchButton
+                key={JSON.stringify(filters)}
+                filters={filters}
+                gated={gated}
+                onGatedClick={() => openAuth('save')}
+              />
               {/* Grid / List toggle */}
               <div className="flex items-center border border-[#D5DBE9] rounded-lg overflow-hidden">
                 <button
@@ -609,6 +743,10 @@ export default function ModernTeamSearchClient({
             ) : view === 'grid' ? (
               <div className={`grid gap-5 ${showMap ? 'grid-cols-1 sm:grid-cols-2' : 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3'}`}>
                 {listings.map(l => <ModernTeamPropertyCard key={l.id} {...l} />)}
+                {gated && hiddenCount > 0 &&
+                  Array.from({ length: Math.min(hiddenCount, showMap ? 2 : 3) }).map((_, i) => (
+                    <LockedCard key={`locked-${i}`} />
+                  ))}
               </div>
             ) : (
               <div className="flex flex-col gap-3">
@@ -616,8 +754,18 @@ export default function ModernTeamSearchClient({
               </div>
             )}
 
-            {/* Pagination */}
-            {listings.length > 0 && totalPages > 1 && !loading && (
+            {/* Registration wall */}
+            {gated && !loading && listings.length > 0 && (
+              <GateCTA
+                hiddenCount={hiddenCount}
+                totalCount={totalCount}
+                approximate={approximate}
+                onSignUp={() => openAuth('search')}
+              />
+            )}
+
+            {/* Pagination — off behind the wall; page 2 is what's being gated */}
+            {!gated && listings.length > 0 && totalPages > 1 && !loading && (
               <div className="flex items-center justify-center gap-1 mt-12">
                 <button onClick={() => handlePage(page - 1)} disabled={page <= 1} className="p-2 text-[#4B6090] hover:text-[#1A2D5A] transition-colors disabled:opacity-25">
                   <ChevronLeft size={16} />
