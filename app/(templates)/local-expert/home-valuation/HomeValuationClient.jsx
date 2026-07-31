@@ -58,6 +58,7 @@ export default function HomeValuationClient({ testimonial, soldListings }) {
   const [submitError, setSubmitError] = useState('')
   const addressBoxRef = useRef(null)
   const debounceRef = useRef(null)
+  const sessionTokenRef = useRef(null)
 
   function handleChange(e) {
     const { name, value, type, checked } = e.target
@@ -88,8 +89,17 @@ export default function HomeValuationClient({ testimonial, soldListings }) {
       return
     }
     debounceRef.current = setTimeout(async () => {
+      // Google bills autocomplete per request unless the keystrokes are grouped
+      // into a session. One token covers an entire address lookup and is
+      // discarded once a prediction is picked (see handlePredictionSelect).
+      if (!sessionTokenRef.current) {
+        sessionTokenRef.current = globalThis.crypto?.randomUUID?.()
+          ?? `${Date.now().toString(36)}${Math.random().toString(36).slice(2)}`
+      }
       try {
-        const res = await fetch(`/api/places/autocomplete?q=${encodeURIComponent(value)}`)
+        const res = await fetch(
+          `/api/places/autocomplete?q=${encodeURIComponent(value)}&st=${sessionTokenRef.current}`,
+        )
         const json = await res.json()
         setPredictions(json.predictions ?? [])
       } catch {
@@ -107,6 +117,9 @@ export default function HomeValuationClient({ testimonial, soldListings }) {
   }
 
   function handlePredictionSelect(prediction) {
+    // Picking a prediction ends the billing session; the next lookup starts a
+    // fresh token.
+    sessionTokenRef.current = null
     setData(prev => ({ ...prev, address: prediction.description }))
     setAddressValid(true)
     setPredictions([])

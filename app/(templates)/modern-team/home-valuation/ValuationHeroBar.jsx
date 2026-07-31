@@ -44,6 +44,10 @@ export default function ValuationHeroBar({ agentName = 'The Hargrove Group' }) {
     autocompleteRef.current = new window.google.maps.places.Autocomplete(inputRef.current, {
       types: ['address'],
       componentRestrictions: { country: 'us' },
+      // Without `fields`, picking a place fetches every available field and
+      // bills the Contact + Atmosphere data SKUs on top of Basic. These two
+      // are all we read, and both sit in the Basic tier.
+      fields: ['formatted_address', 'geometry'],
     })
     autocompleteRef.current.addListener('place_changed', () => {
       const place = autocompleteRef.current.getPlace()

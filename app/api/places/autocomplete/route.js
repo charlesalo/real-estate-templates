@@ -3,6 +3,7 @@ import { NextResponse } from 'next/server'
 export async function GET(request) {
   const { searchParams } = new URL(request.url)
   const input = searchParams.get('q')?.trim()
+  const sessionToken = searchParams.get('st')?.trim()
 
   if (!input || input.length < 2) {
     return NextResponse.json({ predictions: [] })
@@ -19,6 +20,10 @@ export async function GET(request) {
     components: 'country:us',
     key,
   })
+
+  // Groups every keystroke of one address lookup into a single billable
+  // session instead of charging per request.
+  if (sessionToken) params.set('sessiontoken', sessionToken)
 
   const res = await fetch(
     `https://maps.googleapis.com/maps/api/place/autocomplete/json?${params}`,
