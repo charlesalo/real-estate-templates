@@ -2,7 +2,7 @@
 
 import { useRef } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
-import HomeValuationWidget from '@/components/lead-tools/HomeValuationWidget'
+import HomeValuationWidget from '../_components/lead-tools/HomeValuationWidget'
 
 
 export default function HomeValuationClient({ googleMapsKey }) {

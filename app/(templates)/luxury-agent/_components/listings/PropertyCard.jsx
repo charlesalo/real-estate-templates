@@ -2,7 +2,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { Bed, Bath, Maximize2 } from 'lucide-react'
 import StatusBadge from './StatusBadge'
-import PriceTag from './PriceTag'
+import PriceTag from '@/components/real-estate/PriceTag'
 import { cn } from '@/lib/utils'
 
 export default function PropertyCard({

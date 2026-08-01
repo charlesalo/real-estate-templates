@@ -8,8 +8,8 @@ import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { Search, X, ChevronLeft, ChevronRight, Bed, Bath, Maximize2, SlidersHorizontal } from 'lucide-react'
 import { cn } from '@/lib/utils'
-import CTASection from '@/components/sections/CTASection'
-import ParallaxBanner from '@/components/sections/ParallaxBanner'
+import CTASection from '../sections/CTASection'
+import ParallaxBanner from '../sections/ParallaxBanner'
 
 const LIMIT = 12
 

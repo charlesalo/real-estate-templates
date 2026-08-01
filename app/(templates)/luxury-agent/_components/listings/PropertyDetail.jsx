@@ -8,11 +8,11 @@ import {
   Bed, Bath, Maximize2, X, ChevronLeft, ChevronRight,
   MapPin, Calendar, Tag, Phone, Mail, ExternalLink,
 } from 'lucide-react'
-import { formatPrice } from './PriceTag'
+import { formatPrice } from '@/components/real-estate/PriceTag'
 import StatusBadge from './StatusBadge'
 import MLSPropertyCard from './MLSPropertyCard'
 import PropertyMap from './PropertyMap'
-import ScheduleTourModal from '@/components/ui/ScheduleTourModal'
+import ScheduleTourModal from '../ui/ScheduleTourModal'
 import { cn } from '@/lib/utils'
 
 // Split a comma-separated feature string into a clean array

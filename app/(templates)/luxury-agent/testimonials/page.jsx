@@ -1,5 +1,5 @@
-import ParallaxBanner from '@/components/sections/ParallaxBanner'
-import CTASection from '@/components/sections/CTASection'
+import ParallaxBanner from '../_components/sections/ParallaxBanner'
+import CTASection from '../_components/sections/CTASection'
 
 export const metadata = {
   title: 'Client Testimonials & Success Stories',

@@ -13,7 +13,7 @@ import MLSPropertyCard from './MLSPropertyCard'
 import StatusBadge from './StatusBadge'
 import { cn } from '@/lib/utils'
 
-const MapView = dynamic(() => import('./MapView'), { ssr: false, loading: () => null })
+const MapView = dynamic(() => import('@/components/real-estate/MapView'), { ssr: false, loading: () => null })
 
 // ─── Constants ────────────────────────────────────────────────────────────────
 

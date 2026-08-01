@@ -1,4 +1,4 @@
-import PastTransactionsClient from '@/components/real-estate/PastTransactionsClient'
+import PastTransactionsClient from '../_components/listings/PastTransactionsClient'
 import { getListings } from '@/lib/simplyrets'
 
 export const metadata = {

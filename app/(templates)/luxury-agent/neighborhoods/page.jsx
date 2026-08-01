@@ -1,8 +1,8 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { ChevronRight } from 'lucide-react'
-import ParallaxBanner from '@/components/sections/ParallaxBanner'
-import CTASection from '@/components/sections/CTASection'
+import ParallaxBanner from '../_components/sections/ParallaxBanner'
+import CTASection from '../_components/sections/CTASection'
 
 export const metadata = {
   title: 'Explore California Neighborhoods',

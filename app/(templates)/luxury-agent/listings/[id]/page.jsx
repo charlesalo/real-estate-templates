@@ -1,5 +1,5 @@
 import { notFound } from 'next/navigation'
-import PropertyDetail from '@/components/real-estate/PropertyDetail'
+import PropertyDetail from '../../_components/listings/PropertyDetail'
 import { getListingById, getFeaturedListings } from '@/lib/simplyrets'
 
 // Curated luxury interior shots — cohesive neutral palette, same high-end aesthetic.

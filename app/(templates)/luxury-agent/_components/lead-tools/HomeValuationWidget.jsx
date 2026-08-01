@@ -126,6 +126,14 @@ export default function HomeValuationWidget({ agentName = 'Victoria Sinclair', g
         .pac-item-query { color: #111827; font-size: 13px; }
         .pac-matched { color: #1A2D5A; font-weight: 600; }
         .pac-icon { display: none; }
+        .hvw-field:-webkit-autofill,
+        .hvw-field:-webkit-autofill:hover,
+        .hvw-field:-webkit-autofill:focus {
+          -webkit-box-shadow: 0 0 0 1000px #fff inset;
+          -webkit-text-fill-color: #111827;
+          caret-color: #111827;
+          transition: background-color 9999s ease-in-out 0s;
+        }
       ` : `
         .pac-container {
           background: #0D0D0D;
@@ -150,6 +158,14 @@ export default function HomeValuationWidget({ agentName = 'Victoria Sinclair', g
         .pac-item-query { color: rgba(255,255,255,0.85); font-size: 13px; }
         .pac-matched { color: #C9A96E; }
         .pac-icon { display: none; }
+        .hvw-field:-webkit-autofill,
+        .hvw-field:-webkit-autofill:hover,
+        .hvw-field:-webkit-autofill:focus {
+          -webkit-box-shadow: 0 0 0 1000px #0D0D0D inset;
+          -webkit-text-fill-color: #fff;
+          caret-color: #fff;
+          transition: background-color 9999s ease-in-out 0s;
+        }
       `}</style>
 
       {googleMapsKey && (
@@ -295,8 +311,8 @@ export default function HomeValuationWidget({ agentName = 'Victoria Sinclair', g
                               type="text"
                               placeholder="Full Name"
                               className={isLight
-                                ? 'w-full bg-transparent border border-[#D5DBE9] text-[#111827] text-sm px-4 py-3 rounded-lg outline-none placeholder:text-[#9CA3AF] focus:border-[#1A2D5A] transition-colors font-sans'
-                                : 'w-full bg-transparent border-b border-white/10 focus:border-[#C9A96E] py-3 text-white text-sm placeholder:text-white/25 outline-none transition-colors font-sans'
+                                ? 'hvw-field w-full bg-transparent border border-[#D5DBE9] text-[#111827] text-sm px-4 py-3 rounded-lg outline-none placeholder:text-[#9CA3AF] focus:border-[#1A2D5A] transition-colors font-sans'
+                                : 'hvw-field w-full bg-transparent border-b border-white/10 focus:border-[#C9A96E] px-3.5 py-3 text-white text-sm placeholder:text-white/25 outline-none transition-colors font-sans'
                               }
                             />
                             {errors.fullName && (
@@ -309,8 +325,8 @@ export default function HomeValuationWidget({ agentName = 'Victoria Sinclair', g
                               type="email"
                               placeholder="Email Address"
                               className={isLight
-                                ? 'w-full bg-transparent border border-[#D5DBE9] text-[#111827] text-sm px-4 py-3 rounded-lg outline-none placeholder:text-[#9CA3AF] focus:border-[#1A2D5A] transition-colors font-sans'
-                                : 'w-full bg-transparent border-b border-white/10 focus:border-[#C9A96E] py-3 text-white text-sm placeholder:text-white/25 outline-none transition-colors font-sans'
+                                ? 'hvw-field w-full bg-transparent border border-[#D5DBE9] text-[#111827] text-sm px-4 py-3 rounded-lg outline-none placeholder:text-[#9CA3AF] focus:border-[#1A2D5A] transition-colors font-sans'
+                                : 'hvw-field w-full bg-transparent border-b border-white/10 focus:border-[#C9A96E] px-3.5 py-3 text-white text-sm placeholder:text-white/25 outline-none transition-colors font-sans'
                               }
                             />
                             {errors.email && (
@@ -323,8 +339,8 @@ export default function HomeValuationWidget({ agentName = 'Victoria Sinclair', g
                               type="tel"
                               placeholder="Phone Number"
                               className={isLight
-                                ? 'w-full bg-transparent border border-[#D5DBE9] text-[#111827] text-sm px-4 py-3 rounded-lg outline-none placeholder:text-[#9CA3AF] focus:border-[#1A2D5A] transition-colors font-sans'
-                                : 'w-full bg-transparent border-b border-white/10 focus:border-[#C9A96E] py-3 text-white text-sm placeholder:text-white/25 outline-none transition-colors font-sans'
+                                ? 'hvw-field w-full bg-transparent border border-[#D5DBE9] text-[#111827] text-sm px-4 py-3 rounded-lg outline-none placeholder:text-[#9CA3AF] focus:border-[#1A2D5A] transition-colors font-sans'
+                                : 'hvw-field w-full bg-transparent border-b border-white/10 focus:border-[#C9A96E] px-3.5 py-3 text-white text-sm placeholder:text-white/25 outline-none transition-colors font-sans'
                               }
                             />
                             {errors.phone && (

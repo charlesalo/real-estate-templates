@@ -1,8 +1,8 @@
 import Link from 'next/link'
 import HomeValuationClient from './HomeValuationClient'
-import TestimonialsSection from '@/components/sections/TestimonialsSection'
-import FeaturedListingCard from '@/components/real-estate/FeaturedListingCard'
-import CTASection from '@/components/sections/CTASection'
+import TestimonialsSection from '../_components/sections/TestimonialsSection'
+import FeaturedListingCard from '../_components/listings/FeaturedListingCard'
+import CTASection from '../_components/sections/CTASection'
 import { PAST_TRANSACTIONS } from '@/lib/featured-listings'
 
 export const metadata = {

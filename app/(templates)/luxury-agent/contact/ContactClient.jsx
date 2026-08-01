@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import Image from 'next/image'
-import ParallaxBanner from '@/components/sections/ParallaxBanner'
+import ParallaxBanner from '../_components/sections/ParallaxBanner'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { useForm } from 'react-hook-form'

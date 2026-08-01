@@ -1,8 +1,8 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import ParallaxBanner from '@/components/sections/ParallaxBanner'
-import CTASection from '@/components/sections/CTASection'
-import LeadCaptureSection from '@/components/sections/LeadCaptureSection'
+import ParallaxBanner from '../_components/sections/ParallaxBanner'
+import CTASection from '../_components/sections/CTASection'
+import LeadCaptureSection from '../_components/sections/LeadCaptureSection'
 
 export const metadata = {
   title: 'Los Angeles Real Estate & Community Blog',

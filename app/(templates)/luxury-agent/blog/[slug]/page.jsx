@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation'
 import Image from 'next/image'
 import Link from 'next/link'
-import CTASection from '@/components/sections/CTASection'
+import CTASection from '../../_components/sections/CTASection'
 
 // Demo blog posts — Phase 2 hardcoded per brief
 // Phase 3 upgrade: pull from Sanity CMS

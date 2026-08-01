@@ -1,10 +1,10 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import ParallaxBanner from '@/components/sections/ParallaxBanner'
+import ParallaxBanner from '../_components/sections/ParallaxBanner'
 import { Bed, Bath, Maximize2, ChevronRight } from 'lucide-react'
 import { FEATURED_LISTINGS } from '@/lib/featured-listings'
-import CTASection from '@/components/sections/CTASection'
-import ShowingTrigger from '@/components/real-estate/ShowingTrigger'
+import CTASection from '../_components/sections/CTASection'
+import ShowingTrigger from '../_components/listings/ShowingTrigger'
 
 export const metadata = {
   title: { absolute: 'Discover Properties for Sale in California Victoria Sinclair' },

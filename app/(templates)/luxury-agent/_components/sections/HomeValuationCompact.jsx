@@ -2,7 +2,7 @@
 
 import { useRef } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
-import HomeValuationWidget from '@/components/lead-tools/HomeValuationWidget'
+import HomeValuationWidget from '../lead-tools/HomeValuationWidget'
 
 export default function HomeValuationCompact({ googleMapsKey = '' }) {
   const containerRef = useRef(null)

@@ -1,8 +1,8 @@
 import { Playfair_Display, Inter } from 'next/font/google'
-import Navbar from '@/components/layout/Navbar'
-import Footer from '@/components/layout/Footer'
-import ContactModal from '@/components/layout/ContactModal'
-import LuxuryExitIntentPopup from '@/components/layout/LuxuryExitIntentPopup'
+import Navbar from './_components/layout/Navbar'
+import Footer from './_components/layout/Footer'
+import ContactModal from './_components/layout/ContactModal'
+import LuxuryExitIntentPopup from './_components/layout/ExitIntentPopup'
 import GoogleOneTap from '@/components/auth/GoogleOneTap'
 
 const playfair = Playfair_Display({

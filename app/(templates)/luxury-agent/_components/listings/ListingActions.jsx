@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import ScheduleTourModal from '@/components/ui/ScheduleTourModal'
+import ScheduleTourModal from '../ui/ScheduleTourModal'
 
 export default function ListingActions({ propertyImage, propertyAddress, propertyPrice, propertyBadge }) {
   const [tourOpen, setTourOpen] = useState(false)

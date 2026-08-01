@@ -1,4 +1,4 @@
-import MLSSearchClient from '@/components/real-estate/MLSSearchClient'
+import MLSSearchClient from '../_components/listings/MLSSearchClient'
 import { getListings } from '@/lib/simplyrets'
 
 export const metadata = {
