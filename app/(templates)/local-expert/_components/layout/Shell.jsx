@@ -1,9 +1,9 @@
 'use client'
 
 import { useState } from 'react'
-import LocalExpertNavbar from '@/components/layout/LocalExpertNavbar'
-import LocalExpertFooter from '@/components/layout/LocalExpertFooter'
-import LocalExpertContactModal from '@/components/layout/LocalExpertContactModal'
+import LocalExpertNavbar from './Navbar'
+import LocalExpertFooter from './Footer'
+import LocalExpertContactModal from './ContactModal'
 import GoogleOneTap from '@/components/auth/GoogleOneTap'
 
 export default function LocalExpertShell({ agent, children }) {

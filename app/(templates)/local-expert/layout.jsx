@@ -1,5 +1,5 @@
 import { Plus_Jakarta_Sans, Gelasio } from 'next/font/google'
-import LocalExpertShell from './LocalExpertShell'
+import LocalExpertShell from './_components/layout/Shell'
 import { getAgent, getSiteSettings } from '@/lib/sanity/queries'
 import { AGENT as AGENT_FALLBACK } from '@/lib/local-expert-data'
 import './page-transition.css'
