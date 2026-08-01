@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { Bed, Bath, Maximize2 } from 'lucide-react'
-import { formatPrice } from './PriceTag'
+import { formatPrice } from '@/components/real-estate/PriceTag'
 
 const STATUS_STYLES = {
   Active:  'bg-[#1A2D5A] text-white',

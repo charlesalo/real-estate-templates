@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import ModalTrigger from '@/components/ui/ModalTrigger'
-import ModernTeamNewsletterForm from '@/components/layout/ModernTeamNewsletterForm'
+import ModernTeamNewsletterForm from '../_components/layout/NewsletterForm'
 
 export const metadata = {
   title: { absolute: 'Houston Real Estate & Community Blog | The Hargrove Group' },

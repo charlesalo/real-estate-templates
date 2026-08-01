@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation'
-import ModernTeamPropertyDetail from '@/components/real-estate/ModernTeamPropertyDetail'
-import ModernTeamGatedListing from '@/components/real-estate/ModernTeamGatedListing'
+import ModernTeamPropertyDetail from '../../_components/listings/PropertyDetail'
+import ModernTeamGatedListing from '../../_components/listings/GatedListing'
 import { getListingById, getFeaturedListings } from '@/lib/simplyrets'
 import { previewListing, resolveGate } from '@/lib/gating'
 

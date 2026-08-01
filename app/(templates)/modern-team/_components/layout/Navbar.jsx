@@ -6,7 +6,7 @@ import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ChevronDown } from 'lucide-react'
-import ModernTeamSideMenu from './ModernTeamSideMenu'
+import ModernTeamSideMenu from './SideMenu'
 import AccountMenu from '@/components/auth/AccountMenu'
 import { cn } from '@/lib/utils'
 

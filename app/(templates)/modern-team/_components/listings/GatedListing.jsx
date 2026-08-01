@@ -4,7 +4,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowLeft, Bath, Bed, Camera, FileText, Lock, Maximize2, TrendingUp } from 'lucide-react'
 import { useAuth } from '@/components/auth/AuthProvider'
-import { formatPrice } from './PriceTag'
+import { formatPrice } from '@/components/real-estate/PriceTag'
 
 const WITHHELD = [
   { Icon: Camera,     label: 'Every photo in the gallery' },

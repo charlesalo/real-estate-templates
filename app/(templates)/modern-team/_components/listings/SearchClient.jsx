@@ -10,11 +10,11 @@ import {
   Map as MapIcon, ChevronLeft, ChevronRight,
   Bed, Bath, Maximize2, Lock, Heart, Check,
 } from 'lucide-react'
-import ModernTeamPropertyCard from './ModernTeamPropertyCard'
-import { formatPrice } from './PriceTag'
+import ModernTeamPropertyCard from './PropertyCard'
+import { formatPrice } from '@/components/real-estate/PriceTag'
 import { useAuth } from '@/components/auth/AuthProvider'
 
-const MapView = dynamic(() => import('./MapView'), { ssr: false, loading: () => null })
+const MapView = dynamic(() => import('@/components/real-estate/MapView'), { ssr: false, loading: () => null })
 
 // ─── Constants ────────────────────────────────────────────────────────────────
 

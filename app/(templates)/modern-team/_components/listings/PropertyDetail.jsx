@@ -8,9 +8,9 @@ import {
   Bed, Bath, Maximize2, X, ChevronLeft, ChevronRight,
   MapPin, ExternalLink,
 } from 'lucide-react'
-import { formatPrice } from './PriceTag'
-import PropertyMap from './ModernTeamPropertyMap'
-import ScheduleTourModal from '@/components/ui/ModernTeamScheduleTourModal'
+import { formatPrice } from '@/components/real-estate/PriceTag'
+import PropertyMap from './PropertyMap'
+import ScheduleTourModal from '../ui/ScheduleTourModal'
 
 function splitFeatures(str) {
   if (!str) return []

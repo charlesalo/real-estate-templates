@@ -1,4 +1,4 @@
-import ModernTeamSearchClient from '@/components/real-estate/ModernTeamSearchClient'
+import ModernTeamSearchClient from '../_components/listings/SearchClient'
 import { getListings } from '@/lib/simplyrets'
 import { COUNT_PROBE_LIMIT, gateSearchResults, resolveGate } from '@/lib/gating'
 

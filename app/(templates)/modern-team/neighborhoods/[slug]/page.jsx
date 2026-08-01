@@ -5,10 +5,10 @@ import { getListings } from '@/lib/simplyrets'
 import { getCensusData } from '@/lib/census'
 import { getWalkScore } from '@/lib/walkscore'
 import { getNearbyPlaces } from '@/lib/places'
-import NeighborhoodAmenities from '@/components/sections/NeighborhoodAmenities'
-import NeighborhoodSchools from '@/components/sections/NeighborhoodSchools'
+import NeighborhoodAmenities from '../../_components/sections/NeighborhoodAmenities'
+import NeighborhoodSchools from '../../_components/sections/NeighborhoodSchools'
 import { getSchools } from '@/lib/schooldigger'
-import ModernTeamPropertyCard from '@/components/real-estate/ModernTeamPropertyCard'
+import ModernTeamPropertyCard from '../../_components/listings/PropertyCard'
 import ModalTrigger from '@/components/ui/ModalTrigger'
 
 const NEIGHBORHOODS = {
