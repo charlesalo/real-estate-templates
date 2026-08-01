@@ -32,18 +32,9 @@ function CountUp({ target, prefix = '', suffix = '', duration = 1800 }) {
   )
 }
 
-export default function StatsBar({ stats = [], template = 'luxury-agent' }) {
-  const isLuxury = template === 'luxury-agent'
-
+export default function StatsBar({ stats = [] }) {
   return (
-    <section
-      className={cn(
-        'py-20 lg:py-28 border-y',
-        isLuxury
-          ? 'bg-[#0D0D0D] border-white/[0.07]'
-          : 'bg-template-surface border-template-border',
-      )}
-    >
+    <section className="py-20 lg:py-28 border-y bg-[#0D0D0D] border-white/[0.07]">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
           {stats.map((stat, i) => (
@@ -54,29 +45,18 @@ export default function StatsBar({ stats = [], template = 'luxury-agent' }) {
               viewport={{ once: true }}
               transition={{ duration: 0.7, delay: i * 0.1, ease: [0.22, 1, 0.36, 1] }}
               className={cn(
-                'text-center px-4 py-2',
+                'text-center px-4 py-2 border-white/[0.07]',
                 i > 0 && 'border-l',
-                isLuxury ? 'border-white/[0.07]' : 'border-template-border',
               )}
             >
-              <div
-                className={cn(
-                  'font-heading text-4xl lg:text-5xl font-normal mb-2 tabular-nums',
-                  isLuxury ? 'text-white' : 'text-template-fg',
-                )}
-              >
+              <div className="font-heading text-4xl lg:text-5xl font-normal mb-2 tabular-nums text-white">
                 <CountUp
                   target={stat.numericValue ?? (parseInt(String(stat.value).replace(/\D/g, '')) || 0)}
                   prefix={stat.prefix ?? ''}
                   suffix={stat.suffix ?? ''}
                 />
               </div>
-              <div
-                className={cn(
-                  'text-[12px] tracking-[0.3em] uppercase font-sans',
-                  isLuxury ? 'text-template-accent' : 'text-template-accent',
-                )}
-              >
+              <div className="text-[12px] tracking-[0.3em] uppercase font-sans text-template-accent">
                 {stat.label}
               </div>
             </motion.div>

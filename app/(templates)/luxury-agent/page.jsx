@@ -116,7 +116,6 @@ export default function LuxuryAgentHome() {
     <>
       {/* 1 — Hero */}
       <HeroFullscreen
-        template="luxury-agent"
         backgroundVideo="/images/luxury-agent/HOV.mp4"
         backgroundImage="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=1800&q=85"
         eyebrow="Beverly Hills · Bel Air · Holmby Hills · Pacific Palisades"
@@ -158,7 +157,6 @@ export default function LuxuryAgentHome() {
 
       {/* 3 — Agent Bio */}
       <AboutSection
-        template="luxury-agent"
         photo={DEMO_AGENT.photo}
         name={DEMO_AGENT.name}
         title={DEMO_AGENT.title}
@@ -167,12 +165,10 @@ export default function LuxuryAgentHome() {
       />
 
       {/* 4 — Market Stats */}
-      <StatsBar template="luxury-agent" stats={DEMO_STATS} />
+      <StatsBar stats={DEMO_STATS} />
 
       {/* 5 — Testimonials */}
       <TestimonialsSection
-        template="luxury-agent"
-        variant="single"
         testimonials={DEMO_TESTIMONIALS}
         backgroundImage="/images/luxury-agent/testimonials.jpg"
       />
@@ -435,7 +431,6 @@ export default function LuxuryAgentHome() {
 
       {/* 11 — Contact CTA */}
       <CTASection
-        template="luxury-agent"
         background={{ image: '/images/luxury-agent/work-with-me.jpg' }}
         headline="Ready to Work Together?"
         subheadline="Whether buying, selling, or simply exploring, Victoria is available to guide you."

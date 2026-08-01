@@ -128,7 +128,7 @@ export default async function FeaturedListingDetailPage({ params }) {
             {listing.badge !== 'Sold' && (
               <div className="pt-8 border-t border-white/[0.07]">
                 <h2 className="font-heading text-xl font-normal text-white mb-6">Mortgage Calculator</h2>
-                <MortgageCalculator template="luxury-agent" defaultPrice={listing.price} />
+                <MortgageCalculator defaultPrice={listing.price} />
               </div>
             )}
           </div>
@@ -205,7 +205,6 @@ export default async function FeaturedListingDetailPage({ params }) {
 
       {/* ── CTA ────────────────────────────────────────────────────── */}
       <CTASection
-        template="luxury-agent"
         background={{ image: '/images/luxury-agent/work-with-me.jpg' }}
         headline="Looking for Something Not Listed?"
         subheadline="Victoria has access to an extensive network of off-market properties. Reach out for a private consultation."

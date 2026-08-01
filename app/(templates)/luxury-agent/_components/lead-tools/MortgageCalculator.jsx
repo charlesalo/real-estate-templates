@@ -6,12 +6,7 @@ import { cn } from '@/lib/utils'
 
 const TERM_OPTIONS = [30, 15]
 
-export default function MortgageCalculator({
-  defaultPrice = 2500000,
-  template = 'luxury-agent',
-}) {
-  const isLuxury = template === 'luxury-agent'
-
+export default function MortgageCalculator({ defaultPrice = 2500000 }) {
   const [homePrice, setHomePrice] = useState(defaultPrice)
   const [downPct, setDownPct] = useState(20)
   const [downMode, setDownMode] = useState('pct') // pct | dollar
@@ -43,15 +38,13 @@ export default function MortgageCalculator({
 
   const inputClass = cn(
     'w-full text-sm px-3 py-2.5 outline-none border bg-transparent',
-    isLuxury
-      ? 'border-white/10 text-white placeholder:text-white/30 focus:border-template-accent'
-      : 'border-template-border text-template-fg placeholder:text-template-fg/40 rounded focus:border-template-accent',
+    'border-white/10 text-white placeholder:text-white/30 focus:border-template-accent',
   )
 
-  const labelClass = cn('text-[12px] tracking-[0.2em] uppercase font-sans block mb-1.5', isLuxury ? 'text-white/40' : 'text-template-fg/50')
+  const labelClass = cn('text-[12px] tracking-[0.2em] uppercase font-sans block mb-1.5', 'text-white/40')
 
   return (
-    <div className={cn('p-6 lg:p-8', isLuxury ? 'bg-[#0D0D0D] border border-white/10' : 'bg-template-surface border border-template-border rounded-xl')}>
+    <div className={cn('p-6 lg:p-8', 'bg-[#0D0D0D] border border-white/10')}>
       <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-start">
 
         {/* Inputs */}
@@ -59,7 +52,7 @@ export default function MortgageCalculator({
           <div>
             <label className={labelClass}>Home Price</label>
             <div className="relative">
-              <span className={cn('absolute left-3 top-1/2 -translate-y-1/2 text-sm', isLuxury ? 'text-white/30' : 'text-template-fg/40')}>$</span>
+              <span className={cn('absolute left-3 top-1/2 -translate-y-1/2 text-sm', 'text-white/30')}>$</span>
               <input
                 type="number"
                 value={homePrice}
@@ -94,15 +87,13 @@ export default function MortgageCalculator({
                 onClick={() => setDownMode(m => m === 'pct' ? 'dollar' : 'pct')}
                 className={cn(
                   'px-3 py-2.5 text-sm border transition-colors',
-                  isLuxury
-                    ? 'border-white/10 text-white/50 hover:text-template-accent hover:border-template-accent'
-                    : 'border-template-border text-template-fg/50 hover:text-template-accent rounded',
+                  'border-white/10 text-white/50 hover:text-template-accent hover:border-template-accent',
                 )}
               >
                 {downMode === 'pct' ? '%' : '$'}
               </button>
             </div>
-            <p className={cn('text-xs mt-1', isLuxury ? 'text-white/30' : 'text-template-fg/40')}>
+            <p className={cn('text-xs mt-1', 'text-white/30')}>
               = {downMode === 'pct' ? `$${downAmount.toLocaleString()}` : `${((downAmount / homePrice) * 100).toFixed(1)}%`}
             </p>
           </div>
@@ -119,12 +110,12 @@ export default function MortgageCalculator({
                   step={0.1}
                   min={0}
                 />
-                <span className={cn('absolute right-3 top-1/2 -translate-y-1/2 text-sm', isLuxury ? 'text-white/30' : 'text-template-fg/40')}>%</span>
+                <span className={cn('absolute right-3 top-1/2 -translate-y-1/2 text-sm', 'text-white/30')}>%</span>
               </div>
             </div>
             <div>
               <label className={labelClass}>Loan Term</label>
-              <div className={cn('flex border', isLuxury ? 'border-white/10' : 'border-template-border rounded overflow-hidden')}>
+              <div className={cn('flex border', 'border-white/10')}>
                 {TERM_OPTIONS.map(t => (
                   <button
                     key={t}
@@ -132,8 +123,8 @@ export default function MortgageCalculator({
                     className={cn(
                       'flex-1 py-2.5 text-sm transition-colors',
                       t === term
-                        ? isLuxury ? 'bg-template-accent text-[#0A0A0A] font-medium' : 'bg-template-accent text-template-accent-fg font-medium'
-                        : isLuxury ? 'text-white/50 hover:text-white' : 'text-template-fg/50 hover:text-template-fg',
+                        ? 'bg-template-accent text-[#0A0A0A] font-medium'
+                        : 'text-white/50 hover:text-white',
                     )}
                   >
                     {t}yr
@@ -147,14 +138,14 @@ export default function MortgageCalculator({
             <div>
               <label className={labelClass}>Property Tax /yr</label>
               <div className="relative">
-                <span className={cn('absolute left-3 top-1/2 -translate-y-1/2 text-sm', isLuxury ? 'text-white/30' : 'text-template-fg/40')}>$</span>
+                <span className={cn('absolute left-3 top-1/2 -translate-y-1/2 text-sm', 'text-white/30')}>$</span>
                 <input type="number" value={tax} onChange={e => setTax(Number(e.target.value))} className={cn(inputClass, 'pl-7')} min={0} />
               </div>
             </div>
             <div>
               <label className={labelClass}>HOA /mo</label>
               <div className="relative">
-                <span className={cn('absolute left-3 top-1/2 -translate-y-1/2 text-sm', isLuxury ? 'text-white/30' : 'text-template-fg/40')}>$</span>
+                <span className={cn('absolute left-3 top-1/2 -translate-y-1/2 text-sm', 'text-white/30')}>$</span>
                 <input type="number" value={hoa} onChange={e => setHoa(Number(e.target.value))} className={cn(inputClass, 'pl-7')} min={0} />
               </div>
             </div>
@@ -164,10 +155,10 @@ export default function MortgageCalculator({
         {/* Results */}
         <div className="space-y-6">
           <div className="text-center">
-            <p className={cn('text-[12px] tracking-[0.3em] uppercase mb-2 font-sans', isLuxury ? 'text-white/40' : 'text-template-fg/50')}>
+            <p className={cn('text-[12px] tracking-[0.3em] uppercase mb-2 font-sans', 'text-white/40')}>
               Estimated Monthly Payment
             </p>
-            <p className={cn('font-heading text-4xl lg:text-5xl font-normal', isLuxury ? 'text-white' : 'text-template-fg')}>
+            <p className={cn('font-heading text-4xl lg:text-5xl font-normal', 'text-white')}>
               ${Math.round(total).toLocaleString()}
             </p>
           </div>
@@ -185,14 +176,14 @@ export default function MortgageCalculator({
             </PieChart>
           </ResponsiveContainer>
 
-          <div className={cn('space-y-2 text-sm', isLuxury ? 'text-white/60' : 'text-template-fg/70')}>
+          <div className={cn('space-y-2 text-sm', 'text-white/60')}>
             {chartData.map((d, i) => (
               <div key={i} className="flex justify-between items-center">
                 <div className="flex items-center gap-2">
                   <span className="w-2.5 h-2.5 rounded-sm flex-shrink-0" style={{ background: d.color }} />
                   {d.name}
                 </div>
-                <span className={isLuxury ? 'text-white' : 'text-template-fg'}>${Math.round(d.value).toLocaleString()}</span>
+                <span className={'text-white'}>${Math.round(d.value).toLocaleString()}</span>
               </div>
             ))}
           </div>
@@ -202,7 +193,7 @@ export default function MortgageCalculator({
             onClick={() => window.dispatchEvent(new CustomEvent('contact:open'))}
             className={cn(
               'block w-full text-center py-3 text-[12px] tracking-[0.2em] uppercase font-medium transition-opacity hover:opacity-90',
-              isLuxury ? 'border border-template-accent text-template-accent' : 'bg-template-accent text-template-accent-fg rounded',
+              'border border-template-accent text-template-accent',
             )}
           >
             Get Pre-Approved →

@@ -91,7 +91,6 @@ export default function AboutPage() {
       {/* Bio + credentials */}
       <div className="pt-20 lg:pt-28 bg-[#0A0A0A]" />
       <AboutSection
-        template="luxury-agent"
         photo={AGENT.photo}
         name={AGENT.name}
         title={`${AGENT.title} · ${AGENT.dre}`}
@@ -184,8 +183,6 @@ export default function AboutPage() {
 
       {/* Testimonials */}
       <TestimonialsSection
-        template="luxury-agent"
-        variant="single"
         testimonials={TESTIMONIALS}
         backgroundImage="/images/luxury-agent/testimonials.jpg"
       />
@@ -251,7 +248,6 @@ export default function AboutPage() {
 
       {/* Contact CTA */}
       <CTASection
-        template="luxury-agent"
         background={{ image: '/images/luxury-agent/work-with-me.jpg' }}
         headline="Ready to Work Together?"
         subheadline="Whether buying, selling, or simply exploring, Victoria is available to guide you."
