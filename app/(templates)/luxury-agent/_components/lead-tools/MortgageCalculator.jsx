@@ -36,15 +36,12 @@ export default function MortgageCalculator({ defaultPrice = 2500000 }) {
     { name: 'Insurance', value: insurance, color: '#333333' },
   ].filter(d => d.value > 0)
 
-  const inputClass = cn(
-    'w-full text-sm px-3 py-2.5 outline-none border bg-transparent',
-    'border-white/10 text-white placeholder:text-white/30 focus:border-template-accent',
-  )
+  const inputClass = 'w-full text-sm px-3 py-2.5 outline-none border bg-transparent border-white/10 text-white placeholder:text-white/30 focus:border-template-accent'
 
-  const labelClass = cn('text-[12px] tracking-[0.2em] uppercase font-sans block mb-1.5', 'text-white/40')
+  const labelClass = 'text-[12px] tracking-[0.2em] uppercase font-sans block mb-1.5 text-white/40'
 
   return (
-    <div className={cn('p-6 lg:p-8', 'bg-[#0D0D0D] border border-white/10')}>
+    <div className="p-6 lg:p-8 bg-[#0D0D0D] border border-white/10">
       <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-start">
 
         {/* Inputs */}
@@ -52,7 +49,7 @@ export default function MortgageCalculator({ defaultPrice = 2500000 }) {
           <div>
             <label className={labelClass}>Home Price</label>
             <div className="relative">
-              <span className={cn('absolute left-3 top-1/2 -translate-y-1/2 text-sm', 'text-white/30')}>$</span>
+              <span className="absolute left-3 top-1/2 -translate-y-1/2 text-sm text-white/30">$</span>
               <input
                 type="number"
                 value={homePrice}
@@ -85,15 +82,12 @@ export default function MortgageCalculator({ defaultPrice = 2500000 }) {
               />
               <button
                 onClick={() => setDownMode(m => m === 'pct' ? 'dollar' : 'pct')}
-                className={cn(
-                  'px-3 py-2.5 text-sm border transition-colors',
-                  'border-white/10 text-white/50 hover:text-template-accent hover:border-template-accent',
-                )}
+                className="px-3 py-2.5 text-sm border transition-colors border-white/10 text-white/50 hover:text-template-accent hover:border-template-accent"
               >
                 {downMode === 'pct' ? '%' : '$'}
               </button>
             </div>
-            <p className={cn('text-xs mt-1', 'text-white/30')}>
+            <p className="text-xs mt-1 text-white/30">
               = {downMode === 'pct' ? `$${downAmount.toLocaleString()}` : `${((downAmount / homePrice) * 100).toFixed(1)}%`}
             </p>
           </div>
@@ -110,12 +104,12 @@ export default function MortgageCalculator({ defaultPrice = 2500000 }) {
                   step={0.1}
                   min={0}
                 />
-                <span className={cn('absolute right-3 top-1/2 -translate-y-1/2 text-sm', 'text-white/30')}>%</span>
+                <span className="absolute right-3 top-1/2 -translate-y-1/2 text-sm text-white/30">%</span>
               </div>
             </div>
             <div>
               <label className={labelClass}>Loan Term</label>
-              <div className={cn('flex border', 'border-white/10')}>
+              <div className="flex border border-white/10">
                 {TERM_OPTIONS.map(t => (
                   <button
                     key={t}
@@ -138,14 +132,14 @@ export default function MortgageCalculator({ defaultPrice = 2500000 }) {
             <div>
               <label className={labelClass}>Property Tax /yr</label>
               <div className="relative">
-                <span className={cn('absolute left-3 top-1/2 -translate-y-1/2 text-sm', 'text-white/30')}>$</span>
+                <span className="absolute left-3 top-1/2 -translate-y-1/2 text-sm text-white/30">$</span>
                 <input type="number" value={tax} onChange={e => setTax(Number(e.target.value))} className={cn(inputClass, 'pl-7')} min={0} />
               </div>
             </div>
             <div>
               <label className={labelClass}>HOA /mo</label>
               <div className="relative">
-                <span className={cn('absolute left-3 top-1/2 -translate-y-1/2 text-sm', 'text-white/30')}>$</span>
+                <span className="absolute left-3 top-1/2 -translate-y-1/2 text-sm text-white/30">$</span>
                 <input type="number" value={hoa} onChange={e => setHoa(Number(e.target.value))} className={cn(inputClass, 'pl-7')} min={0} />
               </div>
             </div>
@@ -155,10 +149,10 @@ export default function MortgageCalculator({ defaultPrice = 2500000 }) {
         {/* Results */}
         <div className="space-y-6">
           <div className="text-center">
-            <p className={cn('text-[12px] tracking-[0.3em] uppercase mb-2 font-sans', 'text-white/40')}>
+            <p className="text-[12px] tracking-[0.3em] uppercase mb-2 font-sans text-white/40">
               Estimated Monthly Payment
             </p>
-            <p className={cn('font-heading text-4xl lg:text-5xl font-normal', 'text-white')}>
+            <p className="font-heading text-4xl lg:text-5xl font-normal text-white">
               ${Math.round(total).toLocaleString()}
             </p>
           </div>
@@ -176,14 +170,14 @@ export default function MortgageCalculator({ defaultPrice = 2500000 }) {
             </PieChart>
           </ResponsiveContainer>
 
-          <div className={cn('space-y-2 text-sm', 'text-white/60')}>
+          <div className="space-y-2 text-sm text-white/60">
             {chartData.map((d, i) => (
               <div key={i} className="flex justify-between items-center">
                 <div className="flex items-center gap-2">
                   <span className="w-2.5 h-2.5 rounded-sm flex-shrink-0" style={{ background: d.color }} />
                   {d.name}
                 </div>
-                <span className={'text-white'}>${Math.round(d.value).toLocaleString()}</span>
+                <span className="text-white">${Math.round(d.value).toLocaleString()}</span>
               </div>
             ))}
           </div>
@@ -191,10 +185,7 @@ export default function MortgageCalculator({ defaultPrice = 2500000 }) {
           <button
             type="button"
             onClick={() => window.dispatchEvent(new CustomEvent('contact:open'))}
-            className={cn(
-              'block w-full text-center py-3 text-[12px] tracking-[0.2em] uppercase font-medium transition-opacity hover:opacity-90',
-              'border border-template-accent text-template-accent',
-            )}
+            className="block w-full text-center py-3 text-[12px] tracking-[0.2em] uppercase font-medium transition-opacity hover:opacity-90 border border-template-accent text-template-accent"
           >
             Get Pre-Approved →
           </button>
