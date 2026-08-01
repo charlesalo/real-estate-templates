@@ -21,7 +21,6 @@ export default function MLSPropertyCard({
   template = 'luxury-agent',
 }) {
   const href = `/${template}/listings/${mlsId ?? id}`
-  const isLuxury = template === 'luxury-agent'
 
   return (
     <Link href={href} className="group block">
@@ -37,7 +36,7 @@ export default function MLSPropertyCard({
             className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
           />
         ) : (
-          <div className={cn('absolute inset-0', isLuxury ? 'bg-[#1A1A1A]' : 'bg-template-surface')} />
+          <div className={cn('absolute inset-0', 'bg-[#1A1A1A]')} />
         )}
 
         {/* Gradient */}
@@ -57,13 +56,13 @@ export default function MLSPropertyCard({
       {/* Info bar */}
       <div className={cn(
         'pt-3 pb-3 border-b space-y-2',
-        isLuxury ? 'border-white/[0.07]' : 'border-template-border',
+        'border-white/[0.07]',
       )}>
 
         {/* Address */}
         <p className={cn(
           'text-sm font-sans transition-colors duration-200 leading-snug',
-          isLuxury ? 'text-white/70 group-hover:text-white' : 'text-template-fg/70 group-hover:text-template-fg',
+          'text-white/70 group-hover:text-white',
         )}>
           {address}{city ? `, ${city}` : ''}
         </p>
@@ -71,12 +70,12 @@ export default function MLSPropertyCard({
         {/* City/state/zip + MLS# */}
         <div className="flex items-center gap-3">
           {(state || zip) && (
-            <p className={cn('text-xs font-sans', isLuxury ? 'text-white/30' : 'text-template-fg/35')}>
+            <p className={cn('text-xs font-sans', 'text-white/30')}>
               {[city, state, zip].filter(Boolean).join(', ')}
             </p>
           )}
           {mlsId && (
-            <p className={cn('text-[12px] tracking-[0.15em] font-sans', isLuxury ? 'text-white/20' : 'text-template-fg/25')}>
+            <p className={cn('text-[12px] tracking-[0.15em] font-sans', 'text-white/20')}>
               MLS# {mlsId}
             </p>
           )}
@@ -85,7 +84,7 @@ export default function MLSPropertyCard({
         {/* Stats row */}
         <div className={cn(
           'flex items-center justify-between text-xs font-sans',
-          isLuxury ? 'text-white/35' : 'text-template-fg/45',
+          'text-white/35',
         )}>
           <div className="flex items-center gap-4">
             {beds != null && (
@@ -112,7 +111,7 @@ export default function MLSPropertyCard({
             strokeWidth={1.5}
             className={cn(
               'transition-all duration-200 -translate-x-1 opacity-0 group-hover:translate-x-0 group-hover:opacity-100',
-              isLuxury ? 'text-[#C9A96E]' : 'text-template-accent',
+              'text-[#C9A96E]',
             )}
           />
         </div>

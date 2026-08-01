@@ -136,7 +136,6 @@ export default function FeaturedListingsPage() {
 
       {/* ── CTA ──────────────────────────────────────────────────── */}
       <CTASection
-        template="luxury-agent"
         background={{ image: '/images/luxury-agent/work-with-me.jpg' }}
         headline="Can't Find the Right Home?"
         subheadline="Victoria has access to an extensive network of off-market properties. Reach out for a private consultation."

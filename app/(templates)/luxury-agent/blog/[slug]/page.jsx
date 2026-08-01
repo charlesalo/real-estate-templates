@@ -249,7 +249,6 @@ export default async function BlogPostPage({ params }) {
       </div>
 
       <CTASection
-        template="luxury-agent"
         background={{ image: '/images/luxury-agent/work-with-me.jpg' }}
         headline="Ready to Work Together?"
         subheadline="Whether buying, selling, or simply exploring, Victoria is available to guide you."

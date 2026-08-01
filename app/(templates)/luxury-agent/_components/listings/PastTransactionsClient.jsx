@@ -450,7 +450,6 @@ export default function PastTransactionsClient({
       </div>
 
       <CTASection
-        template={template}
         background={{ image: '/images/luxury-agent/work-with-me.jpg' }}
         headline="Ready to Work Together?"
         subheadline="Whether buying, selling, or simply exploring, Victoria is available to guide you."

@@ -114,7 +114,6 @@ export default function TestimonialsPage() {
 
       {/* CTA */}
       <CTASection
-        template="luxury-agent"
         background={{ image: '/images/luxury-agent/work-with-me.jpg' }}
         headline="Your Success Story Starts Here"
         subheadline="Join Victoria's growing family of clients who've experienced the difference that dedication, discretion, and expertise make."

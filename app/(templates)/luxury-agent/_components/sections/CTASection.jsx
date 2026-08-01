@@ -11,9 +11,7 @@ export default function CTASection({
   subheadline,
   cta,
   background,
-  template = 'luxury-agent',
 }) {
-  const isLuxury = template === 'luxury-agent'
   const ref = useRef(null)
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] })
   const bgY = useTransform(scrollYProgress, [0, 1], [-150, 150])
@@ -35,7 +33,7 @@ export default function CTASection({
         <div
           className={cn(
             'absolute inset-0',
-            background?.color ?? (isLuxury ? 'bg-[#0D0D0D]' : 'bg-template-accent'),
+            background?.color ?? 'bg-[#0D0D0D]',
           )}
         />
       )}
@@ -47,16 +45,12 @@ export default function CTASection({
           viewport={{ once: true }}
           transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
         >
-          {isLuxury && (
-            <div className="w-14 h-px bg-template-accent mx-auto mb-8" />
-          )}
+          <div className="w-14 h-px bg-template-accent mx-auto mb-8" />
 
           <h2
             className={cn(
               'font-normal leading-tight mb-6',
-              isLuxury
-                ? 'font-heading text-4xl lg:text-5xl text-white'
-                : 'text-3xl lg:text-4xl text-white',
+              'font-heading text-4xl lg:text-5xl text-white',
             )}
           >
             {headline}
@@ -75,9 +69,7 @@ export default function CTASection({
                 onClick={() => window.dispatchEvent(new CustomEvent('contact:open'))}
                 className={cn(
                   'block min-[480px]:inline-block w-full min-[480px]:w-auto text-center px-10 py-4 text-[12px] tracking-[0.2em] uppercase font-medium transition-all duration-200',
-                  isLuxury
-                    ? 'bg-template-accent text-[#0A0A0A] hover:opacity-90'
-                    : 'bg-white text-template-accent hover:bg-white/90 rounded-md',
+                  'bg-template-accent text-[#0A0A0A] hover:opacity-90',
                 )}
               >
                 {cta.label}
@@ -87,9 +79,7 @@ export default function CTASection({
                 href={cta.href}
                 className={cn(
                   'block min-[480px]:inline-block w-full min-[480px]:w-auto text-center px-10 py-4 text-[12px] tracking-[0.2em] uppercase font-medium transition-all duration-200',
-                  isLuxury
-                    ? 'bg-template-accent text-[#0A0A0A] hover:opacity-90'
-                    : 'bg-white text-template-accent hover:bg-white/90 rounded-md',
+                  'bg-template-accent text-[#0A0A0A] hover:opacity-90',
                 )}
               >
                 {cta.label}

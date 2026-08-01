@@ -33,7 +33,6 @@ function LinkedInIcon({ size = 17 }) {
 }
 
 export default function Footer({
-  template = 'luxury-agent',
   agentName,
   agentDre,
   tagline,
@@ -43,16 +42,13 @@ export default function Footer({
   socialLinks = {},
   links = [],
 }) {
-  const isLuxury = template === 'luxury-agent'
   const year = new Date().getFullYear()
 
   return (
     <footer
       className={cn(
         'border-t',
-        isLuxury
-          ? 'bg-[#0D0D0D] border-white/10 text-white'
-          : 'bg-template-bg border-template-border text-template-fg',
+        'bg-[#0D0D0D] border-white/10 text-white',
       )}
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-8 py-[64px] lg:py-[80px]">
@@ -61,17 +57,15 @@ export default function Footer({
           {/* Brand */}
           <div>
             <div className="mb-5">
-              <div className={cn('font-semibold leading-none', isLuxury ? 'font-heading text-2xl text-white' : 'text-xl text-template-fg')}>
+              <div className={cn('font-semibold leading-none', 'font-heading text-2xl text-white')}>
                 {agentName}
               </div>
-              {isLuxury && (
-                <div className="text-[12px] tracking-[0.35em] text-template-accent uppercase font-sans mt-1.5">
-                  Real Estate
-                </div>
-              )}
+              <div className="text-[12px] tracking-[0.35em] text-template-accent uppercase font-sans mt-1.5">
+                Real Estate
+              </div>
             </div>
             {tagline && (
-              <p className={cn('text-xs leading-relaxed', isLuxury ? 'text-white/40' : 'text-template-fg/50')}>
+              <p className={cn('text-xs leading-relaxed', 'text-white/40')}>
                 {tagline}
               </p>
             )}
@@ -101,7 +95,7 @@ export default function Footer({
               {links.map(link => {
                 const cls = cn(
                   'text-sm transition-colors text-left',
-                  isLuxury ? 'text-white/50 hover:text-white' : 'text-template-fg/60 hover:text-template-fg',
+                  'text-white/50 hover:text-white',
                 )
                 return link.modal ? (
                   <button
@@ -129,7 +123,7 @@ export default function Footer({
               {phone && (
                 <a
                   href={`tel:${phone.replace(/\D/g, '')}`}
-                  className={cn('flex items-center gap-3 text-sm transition-colors', isLuxury ? 'text-white/50 hover:text-white' : 'text-template-fg/60 hover:text-template-fg')}
+                  className={cn('flex items-center gap-3 text-sm transition-colors', 'text-white/50 hover:text-white')}
                 >
                   <Phone size={13} className="flex-shrink-0 text-template-accent" />
                   {phone}
@@ -138,14 +132,14 @@ export default function Footer({
               {email && (
                 <a
                   href={`mailto:${email}`}
-                  className={cn('flex items-center gap-3 text-sm transition-colors', isLuxury ? 'text-white/50 hover:text-white' : 'text-template-fg/60 hover:text-template-fg')}
+                  className={cn('flex items-center gap-3 text-sm transition-colors', 'text-white/50 hover:text-white')}
                 >
                   <Mail size={13} className="flex-shrink-0 text-template-accent" />
                   {email}
                 </a>
               )}
               {address && (
-                <div className={cn('flex items-start gap-3 text-sm', isLuxury ? 'text-white/50' : 'text-template-fg/60')}>
+                <div className={cn('flex items-start gap-3 text-sm', 'text-white/50')}>
                   <MapPin size={13} className="flex-shrink-0 mt-0.5 text-template-accent" />
                   <span>{address}</span>
                 </div>
@@ -155,7 +149,7 @@ export default function Footer({
         </div>
 
         {/* Bottom bar */}
-        <div className={cn('mt-14 pt-8 border-t flex items-center justify-between gap-6 text-xs', isLuxury ? 'border-white/10 text-white/45' : 'border-template-border text-template-fg/50')}>
+        <div className={cn('mt-14 pt-8 border-t flex items-center justify-between gap-6 text-xs', 'border-white/10 text-white/45')}>
           <p>© {year} {agentName}{agentDre ? ` | ${agentDre}` : ''}. All rights reserved.</p>
           <div className="flex gap-2 flex-shrink-0">
             {[
@@ -171,9 +165,7 @@ export default function Footer({
                 aria-label={key}
                 className={cn(
                   'w-8 h-8 border flex items-center justify-center transition-all duration-200',
-                  isLuxury
-                    ? 'border-white/20 text-white/35 hover:border-[#C9A96E] hover:text-[#C9A96E]'
-                    : 'border-template-border text-template-fg/40 hover:border-template-accent hover:text-template-accent',
+                  'border-white/20 text-white/35 hover:border-[#C9A96E] hover:text-[#C9A96E]',
                 )}
               >
                 <Icon size={15} />

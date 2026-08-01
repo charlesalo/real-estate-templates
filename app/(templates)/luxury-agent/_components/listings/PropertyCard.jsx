@@ -22,7 +22,6 @@ export default function PropertyCard({
   variant = 'default', // default | featured
 }) {
   const href = `/${template}/listings/${mlsId ?? id}`
-  const isLuxury = template === 'luxury-agent'
   const isFeatured = variant === 'featured'
 
   return (
@@ -43,7 +42,7 @@ export default function PropertyCard({
             className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
           />
         ) : (
-          <div className={cn('absolute inset-0', isLuxury ? 'bg-[#1A1A1A]' : 'bg-template-surface')} />
+          <div className={cn('absolute inset-0', 'bg-[#1A1A1A]')} />
         )}
 
         {/* Gradient overlay */}
@@ -67,7 +66,7 @@ export default function PropertyCard({
       <div
         className={cn(
           'pt-4 pb-2 flex items-center gap-5 text-xs font-sans',
-          isLuxury ? 'text-white/45' : 'text-template-fg/50',
+          'text-white/45',
         )}
       >
         {beds != null && (
@@ -91,9 +90,7 @@ export default function PropertyCard({
         <span
           className={cn(
             'ml-auto text-[12px] tracking-[0.15em] uppercase transition-colors duration-200',
-            isLuxury
-              ? 'text-template-accent/50 group-hover:text-template-accent'
-              : 'text-template-accent/60 group-hover:text-template-accent',
+            'text-template-accent/50 group-hover:text-template-accent',
           )}
         >
           View →

@@ -15,7 +15,6 @@ export default function HeroFullscreen({
   ctaPrimary,
   ctaSecondary,
   overlayOpacity = 0.45,
-  template = 'luxury-agent',
   agentName,
   agentDre,
 }) {
@@ -26,7 +25,6 @@ export default function HeroFullscreen({
   })
   const bgY = useTransform(scrollYProgress, [0, 1], ['0%', '25%'])
   const contentOpacity = useTransform(scrollYProgress, [0, 0.55], [1, 0])
-  const isLuxury = template === 'luxury-agent'
 
   return (
     <section ref={ref} className="relative h-screen overflow-hidden">
@@ -89,9 +87,7 @@ export default function HeroFullscreen({
                 transition={{ duration: 1, delay: 0.45, ease: [0.22, 1, 0.36, 1] }}
                 className={cn(
                   'font-normal text-white leading-[1.04] tracking-tight mb-8',
-                  isLuxury
-                    ? 'font-heading text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-[86px]'
-                    : 'text-3xl sm:text-4xl md:text-5xl lg:text-6xl',
+                  'font-heading text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-[86px]',
                 )}
               >
                 {headline}
@@ -117,12 +113,12 @@ export default function HeroFullscreen({
                 {ctaPrimary && (
                   ctaPrimary.modal ? (
                     <button type="button" onClick={() => window.dispatchEvent(new CustomEvent('contact:open'))}
-                      className={cn('w-full min-[480px]:w-auto text-center px-9 py-4 text-[12px] tracking-[0.2em] uppercase font-medium transition-opacity duration-200 hover:opacity-85', isLuxury ? 'bg-template-accent text-[#0A0A0A]' : 'bg-white text-black')}>
+                      className={cn('w-full min-[480px]:w-auto text-center px-9 py-4 text-[12px] tracking-[0.2em] uppercase font-medium transition-opacity duration-200 hover:opacity-85', 'bg-template-accent text-[#0A0A0A]')}>
                       {ctaPrimary.label}
                     </button>
                   ) : (
                     <Link href={ctaPrimary.href}
-                      className={cn('w-full min-[480px]:w-auto text-center px-9 py-4 text-[12px] tracking-[0.2em] uppercase font-medium transition-opacity duration-200 hover:opacity-85', isLuxury ? 'bg-template-accent text-[#0A0A0A]' : 'bg-white text-black')}>
+                      className={cn('w-full min-[480px]:w-auto text-center px-9 py-4 text-[12px] tracking-[0.2em] uppercase font-medium transition-opacity duration-200 hover:opacity-85', 'bg-template-accent text-[#0A0A0A]')}>
                       {ctaPrimary.label}
                     </Link>
                   )

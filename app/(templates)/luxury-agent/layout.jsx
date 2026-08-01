@@ -151,7 +151,6 @@ export default function LuxuryAgentLayout({ children }) {
         socialLinks={AGENT.socialLinks}
       />
       <Footer
-        template="luxury-agent"
         agentName={AGENT.name}
         agentDre={AGENT.dre}
         tagline={AGENT.tagline}
