@@ -67,20 +67,14 @@ export default function CTASection({
               <button
                 type="button"
                 onClick={() => window.dispatchEvent(new CustomEvent('contact:open'))}
-                className={cn(
-                  'block min-[480px]:inline-block w-full min-[480px]:w-auto text-center px-10 py-4 text-[12px] tracking-[0.2em] uppercase font-medium transition-all duration-200',
-                  'bg-template-accent text-[#0A0A0A] hover:opacity-90',
-                )}
+                className="block min-[480px]:inline-block w-full min-[480px]:w-auto text-center px-10 py-4 text-[12px] tracking-[0.2em] uppercase font-medium transition-all duration-200 bg-template-accent text-[#0A0A0A] hover:opacity-90"
               >
                 {cta.label}
               </button>
             ) : (
               <Link
                 href={cta.href}
-                className={cn(
-                  'block min-[480px]:inline-block w-full min-[480px]:w-auto text-center px-10 py-4 text-[12px] tracking-[0.2em] uppercase font-medium transition-all duration-200',
-                  'bg-template-accent text-[#0A0A0A] hover:opacity-90',
-                )}
+                className="block min-[480px]:inline-block w-full min-[480px]:w-auto text-center px-10 py-4 text-[12px] tracking-[0.2em] uppercase font-medium transition-all duration-200 bg-template-accent text-[#0A0A0A] hover:opacity-90"
               >
                 {cta.label}
               </Link>

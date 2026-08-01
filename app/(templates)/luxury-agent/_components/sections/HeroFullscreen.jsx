@@ -113,12 +113,12 @@ export default function HeroFullscreen({
                 {ctaPrimary && (
                   ctaPrimary.modal ? (
                     <button type="button" onClick={() => window.dispatchEvent(new CustomEvent('contact:open'))}
-                      className={cn('w-full min-[480px]:w-auto text-center px-9 py-4 text-[12px] tracking-[0.2em] uppercase font-medium transition-opacity duration-200 hover:opacity-85', 'bg-template-accent text-[#0A0A0A]')}>
+                      className="w-full min-[480px]:w-auto text-center px-9 py-4 text-[12px] tracking-[0.2em] uppercase font-medium transition-opacity duration-200 hover:opacity-85 bg-template-accent text-[#0A0A0A]">
                       {ctaPrimary.label}
                     </button>
                   ) : (
                     <Link href={ctaPrimary.href}
-                      className={cn('w-full min-[480px]:w-auto text-center px-9 py-4 text-[12px] tracking-[0.2em] uppercase font-medium transition-opacity duration-200 hover:opacity-85', 'bg-template-accent text-[#0A0A0A]')}>
+                      className="w-full min-[480px]:w-auto text-center px-9 py-4 text-[12px] tracking-[0.2em] uppercase font-medium transition-opacity duration-200 hover:opacity-85 bg-template-accent text-[#0A0A0A]">
                       {ctaPrimary.label}
                     </Link>
                   )

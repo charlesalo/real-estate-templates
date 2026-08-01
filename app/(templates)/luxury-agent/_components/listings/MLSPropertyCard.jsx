@@ -3,7 +3,6 @@ import Link from 'next/link'
 import { Bed, Bath, Maximize2, ArrowRight } from 'lucide-react'
 import StatusBadge from './StatusBadge'
 import PriceTag from '@/components/real-estate/PriceTag'
-import { cn } from '@/lib/utils'
 
 export default function MLSPropertyCard({
   id,
@@ -36,7 +35,7 @@ export default function MLSPropertyCard({
             className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
           />
         ) : (
-          <div className={cn('absolute inset-0', 'bg-[#1A1A1A]')} />
+          <div className="absolute inset-0 bg-[#1A1A1A]" />
         )}
 
         {/* Gradient */}
@@ -54,38 +53,29 @@ export default function MLSPropertyCard({
       </div>
 
       {/* Info bar */}
-      <div className={cn(
-        'pt-3 pb-3 border-b space-y-2',
-        'border-white/[0.07]',
-      )}>
+      <div className="pt-3 pb-3 border-b space-y-2 border-white/[0.07]">
 
         {/* Address */}
-        <p className={cn(
-          'text-sm font-sans transition-colors duration-200 leading-snug',
-          'text-white/70 group-hover:text-white',
-        )}>
+        <p className="text-sm font-sans transition-colors duration-200 leading-snug text-white/70 group-hover:text-white">
           {address}{city ? `, ${city}` : ''}
         </p>
 
         {/* City/state/zip + MLS# */}
         <div className="flex items-center gap-3">
           {(state || zip) && (
-            <p className={cn('text-xs font-sans', 'text-white/30')}>
+            <p className="text-xs font-sans text-white/30">
               {[city, state, zip].filter(Boolean).join(', ')}
             </p>
           )}
           {mlsId && (
-            <p className={cn('text-[12px] tracking-[0.15em] font-sans', 'text-white/20')}>
+            <p className="text-[12px] tracking-[0.15em] font-sans text-white/20">
               MLS# {mlsId}
             </p>
           )}
         </div>
 
         {/* Stats row */}
-        <div className={cn(
-          'flex items-center justify-between text-xs font-sans',
-          'text-white/35',
-        )}>
+        <div className="flex items-center justify-between text-xs font-sans text-white/35">
           <div className="flex items-center gap-4">
             {beds != null && (
               <span className="flex items-center gap-1.5">
@@ -109,10 +99,7 @@ export default function MLSPropertyCard({
           <ArrowRight
             size={13}
             strokeWidth={1.5}
-            className={cn(
-              'transition-all duration-200 -translate-x-1 opacity-0 group-hover:translate-x-0 group-hover:opacity-100',
-              'text-[#C9A96E]',
-            )}
+            className="transition-all duration-200 -translate-x-1 opacity-0 group-hover:translate-x-0 group-hover:opacity-100 text-[#C9A96E]"
           />
         </div>
       </div>

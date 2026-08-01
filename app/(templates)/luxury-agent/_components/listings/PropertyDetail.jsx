@@ -22,9 +22,8 @@ function splitFeatures(str) {
 }
 
 // ── Gallery ────────────────────────────────────────────────────────────────
-function Gallery({ photos = [], template }) {
+function Gallery({ photos = [] }) {
   const [lightbox, setLightbox] = useState(null)
-  const isLuxury = template === 'luxury-agent'
   const count = photos.length
   const gridLayout = count === 1 ? 'grid-cols-1' : count === 2 ? 'grid-cols-2' : 'grid-cols-4'
   const MAX_GRID = 7
@@ -37,7 +36,7 @@ function Gallery({ photos = [], template }) {
     return i === 0 ? 'col-span-2 row-span-2' : 'col-span-1 row-span-1'
   }
 
-  if (count === 0) return <div className={cn('h-[420px] lg:h-[500px]', isLuxury ? 'bg-[#1A1A1A]' : 'bg-template-surface')} />
+  if (count === 0) return <div className="h-[420px] lg:h-[500px] bg-[#1A1A1A]" />
 
   return (
     <>
@@ -60,7 +59,7 @@ function Gallery({ photos = [], template }) {
       </div>
       {count > 1 && (
         <div className="flex justify-end mt-2 px-1">
-          <button onClick={() => setLightbox(0)} className={cn('text-[12px] tracking-[0.2em] uppercase transition-colors font-sans', isLuxury ? 'text-white/30 hover:text-template-accent' : 'text-template-fg/40 hover:text-template-accent')}>
+          <button onClick={() => setLightbox(0)} className="text-[12px] tracking-[0.2em] uppercase transition-colors font-sans text-white/30 hover:text-template-accent">
             View all {count} photos →
           </button>
         </div>
@@ -83,61 +82,10 @@ function Gallery({ photos = [], template }) {
 }
 
 // ── Agent sidebar ──────────────────────────────────────────────────────────
-function ContactSidebar({ agentName, agentBrokerage, agentPhoto, agentPhone, agentEmail, template, propertyImage, propertyAddress, propertyPrice, propertyStatus }) {
+function ContactSidebar({ agentName, agentBrokerage, agentPhoto, agentPhone, agentEmail, propertyImage, propertyAddress, propertyPrice, propertyStatus }) {
   const [tourOpen, setTourOpen] = useState(false)
-  const isLuxury = template === 'luxury-agent'
   const isSoldOrClosed = ['Sold', 'Closed'].includes(propertyStatus)
 
-  if (!isLuxury) {
-    return (
-      <>
-        <div className="sticky top-24 bg-white border border-[#E5E7EB] rounded-2xl p-6 shadow-sm">
-          {/* Team logo + name */}
-          <div className="flex items-center gap-4 mb-6">
-            {agentPhoto && (
-              <div className="relative w-16 h-16 rounded-full overflow-hidden flex-shrink-0 border border-[#E5E7EB]">
-                <Image src={agentPhoto} alt={agentName ?? 'Team'} fill className="object-cover" />
-              </div>
-            )}
-            <div>
-              <p className="text-[#111827] text-[18px] font-bold leading-snug">{agentName ?? 'Contact Agent'}</p>
-              {agentBrokerage && <p className="text-[#9CA3AF] text-sm mt-0.5">{agentBrokerage}</p>}
-            </div>
-          </div>
-
-          {/* Actions */}
-          <div className="space-y-3">
-            {!isSoldOrClosed && (
-              <button
-                onClick={() => setTourOpen(true)}
-                className="w-full py-4 bg-[#1A2D5A] text-white text-xs font-semibold tracking-[0.2em] uppercase rounded-lg hover:bg-[#243870] transition-colors duration-200 cursor-pointer"
-              >
-                Request a Tour
-              </button>
-            )}
-            <button
-              type="button"
-              onClick={() => window.dispatchEvent(new CustomEvent('contact:open'))}
-              className="w-full py-4 border border-[#1A2D5A] text-[#1A2D5A] text-xs font-semibold tracking-[0.2em] uppercase rounded-lg hover:bg-[#1A2D5A] hover:text-white transition-colors duration-200 cursor-pointer"
-            >
-              Contact Us
-            </button>
-          </div>
-        </div>
-
-        <ScheduleTourModal
-          open={tourOpen}
-          onClose={() => setTourOpen(false)}
-          propertyImage={propertyImage}
-          propertyAddress={propertyAddress}
-          propertyPrice={propertyPrice}
-          propertyStatus={propertyStatus}
-        />
-      </>
-    )
-  }
-
-  // Luxury Agent layout
   return (
     <>
       <div className="sticky top-24 border p-6 bg-[#0D0D0D] border-white/[0.08]">
@@ -244,7 +192,6 @@ function FeaturePills({ items }) {
 
 // ── Main component ─────────────────────────────────────────────────────────
 export default function PropertyDetail({ listing, similarListings = [], template = 'luxury-agent', agentName, agentBrokerage, agentPhoto, agentPhone, agentEmail }) {
-  const isLuxury = template === 'luxury-agent'
   if (!listing) return null
 
   const { photos = [], listPrice, originalListPrice, address, property, mls, geo, school, association, tax, agent, office, sales, remarks, listDate, modified, mlsId, terms, agreement, virtualTourUrl, showingInstructions } = listing
@@ -286,8 +233,8 @@ export default function PropertyDetail({ listing, similarListings = [], template
   const isSold = ['Sold', 'Closed'].includes(status)
 
   return (
-    <div className={cn('min-h-screen', isLuxury ? 'bg-[#0A0A0A]' : 'bg-template-bg')}>
-      <Gallery photos={photos} template={template} />
+    <div className="min-h-screen bg-[#0A0A0A]">
+      <Gallery photos={photos} />
 
       <div className="max-w-7xl mx-auto px-6 lg:px-8 py-12">
         <div className="grid lg:grid-cols-3 gap-12">
@@ -298,7 +245,7 @@ export default function PropertyDetail({ listing, similarListings = [], template
             {/* Header */}
             <div className="pb-8">
               <div className="flex items-start justify-between gap-4 flex-wrap mb-3">
-                <h1 className={cn('font-heading text-3xl lg:text-4xl font-normal', isLuxury ? 'text-white' : 'text-template-fg')}>
+                <h1 className="font-heading text-3xl lg:text-4xl font-normal text-white">
                   {formatPrice(listPrice)}
                 </h1>
                 <StatusBadge status={status} />
@@ -308,7 +255,7 @@ export default function PropertyDetail({ listing, similarListings = [], template
                   Original list price: {formatPrice(originalListPrice)}
                 </p>
               )}
-              <div className={cn('flex items-center gap-1.5 text-sm', isLuxury ? 'text-white/50' : 'text-template-fg/60')}>
+              <div className="flex items-center gap-1.5 text-sm text-white/50">
                 <MapPin size={13} className="text-template-accent flex-shrink-0" />
                 {fullAddress}{address?.city ? `, ${address.city}` : ''}{address?.state ? `, ${address.state}` : ''} {address?.postalCode}
               </div>
@@ -320,7 +267,7 @@ export default function PropertyDetail({ listing, similarListings = [], template
             </div>
 
             {/* Key stats */}
-            <div className={cn('grid grid-cols-3 lg:grid-cols-5 gap-4 py-6 border-y', isLuxury ? 'border-white/10' : 'border-template-border')}>
+            <div className="grid grid-cols-3 lg:grid-cols-5 gap-4 py-6 border-y border-white/10">
               {[
                 { label: 'Bedrooms',   value: beds },
                 { label: 'Full Baths', value: bathsFull },
@@ -334,8 +281,8 @@ export default function PropertyDetail({ listing, similarListings = [], template
                 { label: 'Days on MLS', value: mls?.daysOnMarket },
               ].filter(s => s.value != null && s.label).map((stat, i) => (
                 <div key={i} className="text-center">
-                  <div className={cn('font-heading text-xl font-normal', isLuxury ? 'text-white' : 'text-template-fg')}>{stat.value}</div>
-                  <div className={cn('text-[12px] tracking-widest uppercase mt-1 font-sans', isLuxury ? 'text-white/35' : 'text-template-fg/50')}>{stat.label}</div>
+                  <div className="font-heading text-xl font-normal text-white">{stat.value}</div>
+                  <div className="text-[12px] tracking-widest uppercase mt-1 font-sans text-white/35">{stat.label}</div>
                 </div>
               ))}
             </div>
@@ -343,7 +290,7 @@ export default function PropertyDetail({ listing, similarListings = [], template
             {/* Description */}
             {remarks && (
               <Section title="About This Property">
-                <p className={cn('text-sm leading-relaxed', isLuxury ? 'text-white/60' : 'text-template-fg/70')}>{remarks}</p>
+                <p className="text-sm leading-relaxed text-white/60">{remarks}</p>
               </Section>
             )}
 
@@ -496,7 +443,6 @@ export default function PropertyDetail({ listing, similarListings = [], template
           {/* ── Sidebar ── */}
           <div>
             <ContactSidebar
-              template={template}
               agentName={agentName}
               agentBrokerage={agentBrokerage}
               agentPhoto={agentPhoto}
@@ -512,8 +458,8 @@ export default function PropertyDetail({ listing, similarListings = [], template
 
         {/* Similar listings */}
         {similarListings.length > 0 && (
-          <div className={cn('mt-20 pt-12 border-t', isLuxury ? 'border-white/10' : 'border-template-border')}>
-            <h2 className={cn('font-heading text-3xl font-normal mb-10', isLuxury ? 'text-white' : 'text-template-fg')}>
+          <div className="mt-20 pt-12 border-t border-white/10">
+            <h2 className="font-heading text-3xl font-normal mb-10 text-white">
               Similar Properties
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-6">

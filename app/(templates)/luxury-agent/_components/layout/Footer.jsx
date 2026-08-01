@@ -46,10 +46,7 @@ export default function Footer({
 
   return (
     <footer
-      className={cn(
-        'border-t',
-        'bg-[#0D0D0D] border-white/10 text-white',
-      )}
+      className="border-t bg-[#0D0D0D] border-white/10 text-white"
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-8 py-[64px] lg:py-[80px]">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 lg:gap-20">
@@ -65,7 +62,7 @@ export default function Footer({
               </div>
             </div>
             {tagline && (
-              <p className={cn('text-xs leading-relaxed', 'text-white/40')}>
+              <p className="text-xs leading-relaxed text-white/40">
                 {tagline}
               </p>
             )}
@@ -88,15 +85,12 @@ export default function Footer({
 
           {/* Quick links */}
           <div>
-            <h3 className={cn('text-[12px] tracking-[0.3em] uppercase font-medium mb-6', 'text-template-accent')}>
+            <h3 className="text-[12px] tracking-[0.3em] uppercase font-medium mb-6 text-template-accent">
               Quick Links
             </h3>
             <nav className="flex flex-col gap-3">
               {links.map(link => {
-                const cls = cn(
-                  'text-sm transition-colors text-left',
-                  'text-white/50 hover:text-white',
-                )
+                const cls = 'text-sm transition-colors text-left text-white/50 hover:text-white'
                 return link.modal ? (
                   <button
                     key={link.label}
@@ -123,7 +117,7 @@ export default function Footer({
               {phone && (
                 <a
                   href={`tel:${phone.replace(/\D/g, '')}`}
-                  className={cn('flex items-center gap-3 text-sm transition-colors', 'text-white/50 hover:text-white')}
+                  className="flex items-center gap-3 text-sm transition-colors text-white/50 hover:text-white"
                 >
                   <Phone size={13} className="flex-shrink-0 text-template-accent" />
                   {phone}
@@ -132,14 +126,14 @@ export default function Footer({
               {email && (
                 <a
                   href={`mailto:${email}`}
-                  className={cn('flex items-center gap-3 text-sm transition-colors', 'text-white/50 hover:text-white')}
+                  className="flex items-center gap-3 text-sm transition-colors text-white/50 hover:text-white"
                 >
                   <Mail size={13} className="flex-shrink-0 text-template-accent" />
                   {email}
                 </a>
               )}
               {address && (
-                <div className={cn('flex items-start gap-3 text-sm', 'text-white/50')}>
+                <div className="flex items-start gap-3 text-sm text-white/50">
                   <MapPin size={13} className="flex-shrink-0 mt-0.5 text-template-accent" />
                   <span>{address}</span>
                 </div>
@@ -149,7 +143,7 @@ export default function Footer({
         </div>
 
         {/* Bottom bar */}
-        <div className={cn('mt-14 pt-8 border-t flex items-center justify-between gap-6 text-xs', 'border-white/10 text-white/45')}>
+        <div className="mt-14 pt-8 border-t flex items-center justify-between gap-6 text-xs border-white/10 text-white/45">
           <p>© {year} {agentName}{agentDre ? ` | ${agentDre}` : ''}. All rights reserved.</p>
           <div className="flex gap-2 flex-shrink-0">
             {[
@@ -163,10 +157,7 @@ export default function Footer({
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={key}
-                className={cn(
-                  'w-8 h-8 border flex items-center justify-center transition-all duration-200',
-                  'border-white/20 text-white/35 hover:border-[#C9A96E] hover:text-[#C9A96E]',
-                )}
+                className="w-8 h-8 border flex items-center justify-center transition-all duration-200 border-white/20 text-white/35 hover:border-[#C9A96E] hover:text-[#C9A96E]"
               >
                 <Icon size={15} />
               </a>

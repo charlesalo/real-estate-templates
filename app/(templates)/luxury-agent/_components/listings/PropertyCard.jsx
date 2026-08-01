@@ -42,7 +42,7 @@ export default function PropertyCard({
             className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
           />
         ) : (
-          <div className={cn('absolute inset-0', 'bg-[#1A1A1A]')} />
+          <div className="absolute inset-0 bg-[#1A1A1A]" />
         )}
 
         {/* Gradient overlay */}
@@ -64,10 +64,7 @@ export default function PropertyCard({
 
       {/* Details bar */}
       <div
-        className={cn(
-          'pt-4 pb-2 flex items-center gap-5 text-xs font-sans',
-          'text-white/45',
-        )}
+        className="pt-4 pb-2 flex items-center gap-5 text-xs font-sans text-white/45"
       >
         {beds != null && (
           <span className="flex items-center gap-1.5">
@@ -88,10 +85,7 @@ export default function PropertyCard({
           </span>
         )}
         <span
-          className={cn(
-            'ml-auto text-[12px] tracking-[0.15em] uppercase transition-colors duration-200',
-            'text-template-accent/50 group-hover:text-template-accent',
-          )}
+          className="ml-auto text-[12px] tracking-[0.15em] uppercase transition-colors duration-200 text-template-accent/50 group-hover:text-template-accent"
         >
           View →
         </span>

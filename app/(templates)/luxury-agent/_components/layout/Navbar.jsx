@@ -7,7 +7,7 @@ import { ChevronDown } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import SideMenu from './SideMenu'
 
-function DropdownNavItem({ link, isLuxury }) {
+function DropdownNavItem({ link }) {
   const [open, setOpen] = useState(false)
   const ref = useRef(null)
 
@@ -17,12 +17,7 @@ function DropdownNavItem({ link, isLuxury }) {
     return () => document.removeEventListener('mousedown', handler)
   }, [])
 
-  const linkCls = cn(
-    'transition-colors duration-200',
-    isLuxury
-      ? 'text-[12px] tracking-[0.25em] uppercase text-white/60 hover:text-white font-sans'
-      : 'text-sm text-template-fg/70 hover:text-template-fg font-medium',
-  )
+  const linkCls = 'transition-colors duration-200 text-[12px] tracking-[0.25em] uppercase text-white/60 hover:text-white font-sans'
 
   return (
     <div ref={ref} className="relative">
@@ -74,7 +69,6 @@ export default function Navbar({
 }) {
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
-  const isLuxury = template === 'luxury-agent'
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 80)
@@ -82,12 +76,7 @@ export default function Navbar({
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
-  const linkCls = cn(
-    'transition-colors duration-200',
-    isLuxury
-      ? 'text-[12px] tracking-[0.25em] uppercase text-white/60 hover:text-white font-sans'
-      : 'text-sm text-template-fg/70 hover:text-template-fg font-medium',
-  )
+  const linkCls = 'transition-colors duration-200 text-[12px] tracking-[0.25em] uppercase text-white/60 hover:text-white font-sans'
 
   return (
     <>
@@ -95,9 +84,7 @@ export default function Navbar({
         className={cn(
           'fixed top-0 left-0 right-0 z-50 transition-all duration-500',
           scrolled
-            ? isLuxury
-              ? 'bg-[#0A0A0A]/95 backdrop-blur-md shadow-lg'
-              : 'bg-template-bg/95 backdrop-blur-md shadow-sm border-b border-template-border'
+            ? 'bg-[#0A0A0A]/95 backdrop-blur-md shadow-lg'
             : 'bg-transparent',
         )}
       >
@@ -110,19 +97,12 @@ export default function Navbar({
                 <img src={logo.src} alt={logo.alt ?? 'Logo'} className="h-8 w-auto" />
               ) : (
                 <div className="leading-none">
-                  <div className={cn(
-                    'font-semibold tracking-wide transition-colors',
-                    isLuxury
-                      ? 'font-heading text-xl text-white group-hover:text-[#C9A96E]'
-                      : 'text-lg text-template-fg group-hover:text-template-accent',
-                  )}>
+                  <div className="font-semibold tracking-wide transition-colors font-heading text-xl text-white group-hover:text-[#C9A96E]">
                     {logo?.text ?? 'Agent Name'}
                   </div>
-                  {isLuxury && (
-                    <div className="text-[12px] tracking-[0.35em] text-[#C9A96E] uppercase font-sans mt-0.5">
-                      Real Estate
-                    </div>
-                  )}
+                  <div className="text-[12px] tracking-[0.35em] text-[#C9A96E] uppercase font-sans mt-0.5">
+                    Real Estate
+                  </div>
                 </div>
               )}
             </Link>
@@ -131,7 +111,7 @@ export default function Navbar({
             <nav className="hidden lg:flex items-center gap-7 ml-auto mr-6">
               {links.map((link, i) => {
                 if (link.children?.length) {
-                  return <DropdownNavItem key={i} link={link} isLuxury={isLuxury} />
+                  return <DropdownNavItem key={i} link={link} />
                 }
                 if (link.modal) {
                   return (
@@ -149,12 +129,7 @@ export default function Navbar({
                     <a
                       key={i}
                       href={`tel:${link.phone.replace(/\D/g, '')}`}
-                      className={cn(
-                        'transition-colors duration-200 font-sans',
-                        isLuxury
-                          ? 'text-[12px] tracking-[0.25em] text-white/60 hover:text-white'
-                          : 'text-sm text-template-fg/70 hover:text-template-fg',
-                      )}
+                      className="transition-colors duration-200 font-sans text-[12px] tracking-[0.25em] text-white/60 hover:text-white"
                     >
                       {link.phone}
                     </a>
@@ -172,10 +147,7 @@ export default function Navbar({
             <button
               onClick={() => setMenuOpen(true)}
               aria-label="Open menu"
-              className={cn(
-                'group flex flex-col items-end justify-center gap-[5px] p-1',
-                isLuxury ? 'text-white/50 hover:text-white' : 'text-template-fg/60 hover:text-template-fg',
-              )}
+              className="group flex flex-col items-end justify-center gap-[5px] p-1 text-white/50 hover:text-white"
             >
               <span className="block h-[1.5px] w-7 transition-all duration-300 bg-current group-hover:w-5" />
               <span className="block h-[1.5px] w-7 transition-all duration-300 bg-current" />
