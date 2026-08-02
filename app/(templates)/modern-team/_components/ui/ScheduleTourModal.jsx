@@ -42,6 +42,8 @@ export default function ModernTeamScheduleTourModal({
   const [selectedTime, setTime]   = useState(null)
   const [form, setForm]           = useState({ name: '', email: '', phone: '' })
   const [submitted, setSubmitted] = useState(false)
+  const [submitting, setSubmitting] = useState(false)
+  const [submitError, setSubmitError] = useState('')
 
   const dates = getUpcomingDates(14)
 
@@ -52,24 +54,42 @@ export default function ModernTeamScheduleTourModal({
       setDate(null); setTime(null)
       setForm({ name: '', email: '', phone: '' })
       setSubmitted(false)
+      setSubmitting(false)
+      setSubmitError('')
     }, 350)
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    setSubmitting(true)
+    setSubmitError('')
+    const dateLabel = selectedDate
+      ? `${DAY_ABBR[selectedDate.getDay()]}, ${MONTH_ABBR[selectedDate.getMonth()]} ${selectedDate.getDate()}`
+      : ''
     try {
-      await fetch('/api/tour', {
+      const res = await fetch('/api/leads/capture', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          ...form, tourType,
-          date: selectedDate?.toDateString(),
-          time: selectedTime,
-          property: propertyAddress,
+          name:       form.name,
+          email:      form.email,
+          phone:      form.phone,
+          message:    `Tour Type: ${tourType === 'in-person' ? 'In Person' : 'Virtual'} | Date: ${dateLabel} | Time: ${selectedTime} | Property: ${propertyAddress}`,
+          leadSource: 'Modern Team - Schedule a Tour',
+          formType:   'showing',
         }),
       })
-    } catch {}
-    setSubmitted(true)
+      const json = await res.json()
+      if (json.success) {
+        setSubmitted(true)
+      } else {
+        setSubmitError(json.error ?? 'Something went wrong. Please try again.')
+      }
+    } catch {
+      setSubmitError('Something went wrong. Please try again.')
+    } finally {
+      setSubmitting(false)
+    }
   }
 
   const inputCls = 'w-full border border-[#D5DBE9] rounded-lg px-4 py-3 text-sm text-[#111827] placeholder:text-[#9CA3AF] outline-none focus:border-[#1A2D5A] focus:ring-2 focus:ring-[#1A2D5A]/10 transition-all font-sans bg-white'
@@ -321,6 +341,12 @@ export default function ModernTeamScheduleTourModal({
                           />
                         </div>
 
+                        {submitError && (
+                          <p className="text-sm text-[#B91C1C] font-sans" role="alert">
+                            {submitError}
+                          </p>
+                        )}
+
                         <div className="flex items-center justify-between pt-3">
                           <button
                             type="button"
@@ -331,10 +357,10 @@ export default function ModernTeamScheduleTourModal({
                           </button>
                           <button
                             type="submit"
-                            disabled={!form.name || !form.email}
+                            disabled={!form.name || !form.email || submitting}
                             className="px-8 py-3 bg-[#1A2D5A] text-white text-xs font-semibold tracking-[0.15em] uppercase rounded-lg hover:bg-[#243870] transition-colors disabled:opacity-30 disabled:cursor-not-allowed font-sans cursor-pointer"
                           >
-                            Confirm Tour
+                            {submitting ? 'Sending…' : 'Confirm Tour'}
                           </button>
                         </div>
                       </form>
