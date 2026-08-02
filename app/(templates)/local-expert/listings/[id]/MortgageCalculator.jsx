@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { monthlyPayment, principalFromDownPct } from '@/lib/mortgage'
 
 const COLORS = {
   pi: '#BA5B3E',   // Principal & Interest — terracotta
@@ -16,16 +17,11 @@ export default function MortgageCalculator({ listPrice }) {
   const [tax, setTax] = useState(Math.round((listPrice * 0.011) / 12)) // ~1.1%/yr, monthly
   const [hoa, setHoa] = useState(0)
 
-  const principal = price * (1 - down / 100)
-  const monthlyPI = rate === 0
-    ? principal / (term * 12)
-    : (() => {
-        const r = rate / 100 / 12
-        const n = term * 12
-        return (principal * r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1)
-      })()
-
-  const pi = Number.isFinite(monthlyPI) ? monthlyPI : 0
+  const pi = monthlyPayment({
+    principal: principalFromDownPct(price, down),
+    annualRate: rate,
+    termYears: term,
+  })
   const total = pi + tax + hoa
 
   const fmt = (n) =>

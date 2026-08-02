@@ -6,6 +6,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { MapPin, Bed, Bath, Square, Calendar, Home, Phone, Mail, Check, X, CheckCircle } from 'lucide-react'
 import ModalTrigger from '@/components/ui/ModalTrigger'
+import { monthlyPayment, principalFromDownPct } from '@/lib/mortgage'
 import { FEATURED_LISTINGS } from '../data'
 
 const NEIGHBORHOOD_PREVIEWS = {
@@ -161,14 +162,8 @@ function MortgageCalculator({ listPrice }) {
   const [term,     setTerm]     = useState(30)
   const [showPreApproval, setShowPreApproval] = useState(false)
 
-  const principal = price * (1 - down / 100)
-  const monthly   = rate === 0
-    ? principal / (term * 12)
-    : (() => {
-        const r = rate / 100 / 12
-        const n = term * 12
-        return (principal * r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1)
-      })()
+  const principal = principalFromDownPct(price, down)
+  const monthly   = monthlyPayment({ principal, annualRate: rate, termYears: term })
 
   const fmt = (n) => new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(n)
 

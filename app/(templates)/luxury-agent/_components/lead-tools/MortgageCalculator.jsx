@@ -3,6 +3,7 @@
 import { useState, useMemo } from 'react'
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from 'recharts'
 import { cn } from '@/lib/utils'
+import { monthlyPayment } from '@/lib/mortgage'
 
 const TERM_OPTIONS = [30, 15]
 
@@ -19,12 +20,10 @@ export default function MortgageCalculator({ defaultPrice = 2500000 }) {
   const downAmount = downMode === 'pct' ? (homePrice * downPct) / 100 : downPct
   const loanAmount = homePrice - downAmount
 
-  const monthly = useMemo(() => {
-    if (loanAmount <= 0 || rate <= 0) return 0
-    const r = rate / 100 / 12
-    const n = term * 12
-    return (loanAmount * r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1)
-  }, [loanAmount, rate, term])
+  const monthly = useMemo(
+    () => monthlyPayment({ principal: loanAmount, annualRate: rate, termYears: term }),
+    [loanAmount, rate, term],
+  )
 
   const monthlyTax = tax / 12
   const total = monthly + monthlyTax + hoa + insurance
