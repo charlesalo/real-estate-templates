@@ -26,8 +26,12 @@ export function useAuth() {
  * the UI can react to a sign-in without a full reload, and so any component can
  * pop the wall with `openAuth()` (or a `window.dispatchEvent(new CustomEvent(
  * 'auth:open'))`, matching the existing `contact:open` idiom).
+ *
+ * `template` is attribution data, not styling — it becomes the HubSpot lead
+ * source for registrations. No default: this file is shared and must not name a
+ * specific template.
  */
-export default function AuthProvider({ children, initialUser = null }) {
+export default function AuthProvider({ children, initialUser = null, template }) {
   const supabase = getSupabaseBrowserClient()
   const router   = useRouter()
 
@@ -44,8 +48,12 @@ export default function AuthProvider({ children, initialUser = null }) {
   const syncLead = useCallback((sessionUser) => {
     if (!sessionUser || syncedRef.current.has(sessionUser.id)) return
     syncedRef.current.add(sessionUser.id)
-    fetch('/api/auth/sync-lead', { method: 'POST' }).catch(() => {})
-  }, [])
+    fetch('/api/auth/sync-lead', {
+      method:  'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body:    JSON.stringify({ template }),
+    }).catch(() => {})
+  }, [template])
 
   useEffect(() => {
     if (!supabase) return
