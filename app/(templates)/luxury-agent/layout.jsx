@@ -4,6 +4,8 @@ import Footer from './_components/layout/Footer'
 import ContactModal from './_components/layout/ContactModal'
 import ExitIntentPopup from './_components/layout/ExitIntentPopup'
 import GoogleOneTap from '@/components/auth/GoogleOneTap'
+import AuthProvider from '@/components/auth/AuthProvider'
+import AuthModal from '@/components/auth/AuthModal'
 
 const playfair = Playfair_Display({
   subsets: ['latin'],
@@ -129,19 +131,27 @@ export default function LuxuryAgentLayout({ children }) {
         minHeight: '100vh',
       }}
     >
-      <Navbar
-        template="luxury-agent"
-        logo={{ text: AGENT.name }}
-        links={NAV_LINKS}
-        menuLinks={MENU_LINKS}
-        cta={{ label: 'Schedule a Showing', href: '/luxury-agent/contact' }}
-        agentPhone={AGENT.phone}
-        agentEmail={AGENT.email}
-        socialLinks={AGENT.socialLinks}
-      />
-      <GoogleOneTap clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID} />
-      <main>{children}</main>
-      <ExitIntentPopup agentName={AGENT.name} />
+      <AuthProvider template="luxury-agent">
+        <Navbar
+          template="luxury-agent"
+          logo={{ text: AGENT.name }}
+          links={NAV_LINKS}
+          menuLinks={MENU_LINKS}
+          cta={{ label: 'Schedule a Showing', href: '/luxury-agent/contact' }}
+          agentPhone={AGENT.phone}
+          agentEmail={AGENT.email}
+          socialLinks={AGENT.socialLinks}
+        />
+        {/* supabaseAuth: Home Search is behind the registration wall here, so a
+            One Tap credential has to become a real session — otherwise the
+            visitor signs in with Google and stays gated. */}
+        <GoogleOneTap clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID} supabaseAuth />
+        <main>{children}</main>
+        <AuthModal teamName={AGENT.name} template="luxury-agent" />
+        {/* Inside the provider so it can hold its fire while the auth modal
+            is open — see the `intent` gate in ExitIntentPopup. */}
+        <ExitIntentPopup agentName={AGENT.name} />
+      </AuthProvider>
       <ContactModal
         agentName={AGENT.name}
         agentDre={AGENT.dre}

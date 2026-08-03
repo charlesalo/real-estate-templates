@@ -1,8 +1,9 @@
 # Gated MLS Search — Setup
 
-The Home Search on **modern-team** is behind a registration wall: signed-out visitors get
-6 results and a teaser listing page, signed-up visitors get everything. Sign-ups land in
-HubSpot and get a Resend auto-reply, same as every other lead source on the site.
+The Home Search on **modern-team** and **luxury-agent** is behind a registration wall:
+signed-out visitors get 6 results and a teaser listing page, signed-up visitors get
+everything. Sign-ups land in HubSpot and get a Resend auto-reply, same as every other lead
+source on the site. **local-expert** is not ported yet.
 
 Auth is Supabase, one project per client deployment — the same "you own your data" model
 already used for Sanity.
@@ -81,8 +82,9 @@ With the vars set and the dev server running:
    gate. The full description, gallery, and agent details aren't in the payload.
 3. Sign up. The wall should drop without a page reload.
 4. Check HubSpot for a new contact with lead source
-   **"Modern Team - Gated Search Signup (Email)"** (or `(Google)`), and check both
-   inboxes for the agent notification and the `gated-search-signup` auto-reply.
+   **"Modern Team - Gated Search Signup (Email)"** (or `(Google)`, or
+   **"Luxury Agent - …"** if you tested there), and check both inboxes for the agent
+   notification and the `gated-search-signup` auto-reply.
 5. Set some filters, hit **Save Search**, then open **Saved Searches** from the account
    menu. Deleting should work; **View** should restore the filters.
 6. Sign in a second time — no duplicate HubSpot contact, no second auto-reply. That's
@@ -99,8 +101,8 @@ There are two, and they need different things configured:
 | "Continue with Google" button in the auth modal | `AuthModal` | `signInWithOAuth` (redirect) | Google provider enabled **and** Supabase's callback in the Google client's Authorized redirect URIs |
 | Google One Tap prompt | `GoogleOneTap` with `supabaseAuth` | `signInWithIdToken` (ID token + nonce) | Google provider enabled with the matching Client ID. No redirect URI involved |
 
-`GoogleOneTap` only talks to Supabase when passed `supabaseAuth` — modern-team does,
-the landing page and the two un-ported templates don't, and they keep the original
+`GoogleOneTap` only talks to Supabase when passed `supabaseAuth` — modern-team and
+luxury-agent do; the landing page and local-expert don't, and they keep the original
 verify-then-web3forms behaviour. That prop is the switch to flip when porting.
 
 Don't enable both notification paths for one template. In Supabase mode the web3forms
@@ -115,8 +117,12 @@ decides what a request may see, and it's called from three places:
 | Where | What it does |
 | --- | --- |
 | `app/api/listings/search/route.js` | Truncates the result set and pins `limit`/`offset` so a signed-out caller can't page past the preview |
-| `app/(templates)/modern-team/listings/page.jsx` | Applies the same gate to the server-rendered first paint |
-| `app/(templates)/modern-team/listings/[id]/page.jsx` | Swaps the full detail component for `previewListing()` output |
+| `app/(templates)/<template>/listings/page.jsx` | Applies the same gate to the server-rendered first paint |
+| `app/(templates)/<template>/listings/[id]/page.jsx` | Swaps the full detail component for `previewListing()` output |
+
+The two ported templates each hold their own copy of those two pages and of the
+`GatedListing` / `GateCTA` / `LockedCard` presentation, because they are meant to look
+nothing alike. Only the decisions in `lib/gating.js` are shared.
 
 The `gated` flag the search client holds is presentation only — it decides whether to
 draw the CTA. Flipping it in devtools gets you nothing, because the withheld listings
@@ -126,34 +132,38 @@ Session identity comes from `lib/auth/session.js`, which uses `supabase.auth.get
 (revalidates the JWT against Supabase) rather than `getSession()` (decodes the cookie,
 forgeable). It's wrapped in React `cache()` so one render pass costs one round trip.
 
-`proxy.js` refreshes the session cookie on `/modern-team/*`. It does **not** enforce
-anything — Server Components can't write cookies, so without it a signed-in visitor
-would silently drop back behind the wall when their access token expired.
+`proxy.js` refreshes the session cookie on `/modern-team/*` and `/luxury-agent/*`. It does
+**not** enforce anything — Server Components can't write cookies, so without it a
+signed-in visitor would silently drop back behind the wall when their access token
+expired.
 
 ## Known gap during rollout
 
-`/api/listings` is still open and ungated. It has to be — luxury-agent, local-expert and
-Past Transactions all read from it, and none of them have the wall yet. Someone who opens
-devtools on modern-team can call it directly and get untruncated results.
+`/api/listings` is still open and ungated. It has to be — local-expert's search and
+luxury-agent's Past Transactions both read from it, and neither is behind the wall.
+Someone who opens devtools on a gated template can call it directly and get untruncated
+results.
 
-Closing this is step 3 of the rollout: port the auth + gating pattern to the other two
-templates (point their search clients at `/api/listings/search`, mount `AuthProvider` +
-`AuthModal` in their layouts), move Past Transactions onto a dedicated sold-comps
-endpoint, and then delete `/api/listings`.
+Closing this is the last step of the rollout: port the pattern to local-expert, move Past
+Transactions onto a dedicated sold-comps endpoint, and then delete `/api/listings`.
 
 ## Porting to another template
 
 1. Wrap the template's layout in `AuthProvider` and mount `AuthModal` inside it, passing
-   that template's `teamName` and `template` slug.
-2. Restyle `AuthModal`, `AccountMenu`, `GateCTA`, `LockedCard` and the gated detail view
-   for that template's palette — the gating logic itself is template-agnostic.
+   that template's `teamName` and `template` slug. Pass `supabaseAuth` to `GoogleOneTap`
+   in the same layout.
+2. Drop `AccountMenu` into the template's navbar with a `savedSearchesHref`, and give it
+   a `saved-searches` route to point at. `AuthModal` and `AccountMenu` theme themselves
+   off the `--template-*` tokens, so neither needs restyling — but `GateCTA`,
+   `LockedCard` and the gated detail view are that template's own markup and do.
 3. Point the template's search client at `/api/listings/search` and have it read `gated`,
-   `hiddenCount` and `approximate` off the response.
+   `hiddenCount` and `approximate` off the response. Wire the refetch-on-sign-in effect
+   too, or the wall stays up until the visitor reloads.
 4. Apply `resolveGate()` + `gateSearchResults()` in its listings page, and
    `previewListing()` in its detail page.
 5. Add the template slug to the `TEMPLATES` allowlist in
    `app/api/saved-searches/route.js`. `saved_searches.template` already scopes each
-   user's list per site, so no migration is needed.
+   user's list per site, so no migration is needed. All three slugs are already listed.
 6. Add the template's paths to the `matcher` in `proxy.js`.
 
 ## Email alerts (not built)

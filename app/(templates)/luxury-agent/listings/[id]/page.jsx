@@ -1,6 +1,8 @@
 import { notFound } from 'next/navigation'
 import PropertyDetail from '../../_components/listings/PropertyDetail'
+import GatedListing from '../../_components/listings/GatedListing'
 import { getListingById, getFeaturedListings } from '@/lib/simplyrets'
+import { previewListing, resolveGate } from '@/lib/gating'
 
 // Curated luxury interior shots — cohesive neutral palette, same high-end aesthetic.
 // Ordered as a logical room walkthrough: living → dining → kitchen → primary bed →
@@ -54,6 +56,18 @@ export default async function PropertyDetailPage({ params }) {
     listing = await getListingById(id)
   } catch {
     notFound()
+  }
+
+  // Signed-out visitors get the teaser only. generateMetadata above still runs
+  // on the full listing, so the page keeps its title/description for search
+  // engines and link previews — only the page body is withheld.
+  const { gated } = await resolveGate()
+  if (gated) {
+    return (
+      <div className="pt-20">
+        <GatedListing listing={previewListing(listing)} agentName={AGENT.name} />
+      </div>
+    )
   }
 
   let similar = []
