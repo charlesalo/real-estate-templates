@@ -294,6 +294,7 @@ export async function generateMetadata({ params }) {
   const post = POSTS[slug]
   if (!post) return {}
   return {
+    alternates: { canonical: `/modern-team/blog/${slug}` },
     title: post.title,
     description: post.excerpt,
   }

@@ -80,9 +80,11 @@ export const metadata = {
     template: '%s | The Hargrove Group',
   },
   description: MODERN_TEAM_DESCRIPTION,
-  alternates: {
-    canonical: '/modern-team',
-  },
+  // No `alternates.canonical` here: metadata fields set on a layout are
+  // inherited by every descendant page that doesn't override them, so a
+  // canonical declared at this level made all ~44 modern-team URLs point at
+  // /modern-team and told Google they were duplicates. Each page declares its
+  // own self-referencing canonical instead.
   icons: {
     icon: '/images/modern-team/favicon-modern-team.png',
     apple: '/images/modern-team/favicon-modern-team.png',

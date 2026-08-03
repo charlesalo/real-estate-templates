@@ -23,7 +23,11 @@ export async function generateMetadata({ params }) {
   const { slug } = await params
   const post = await findPost(slug)
   if (!post) return {}
-  return { title: post.title, description: post.excerpt }
+  return {
+    alternates: { canonical: `/local-expert/blog/${slug}` },
+    title: post.title,
+    description: post.excerpt,
+  }
 }
 
 function formatDate(iso) {

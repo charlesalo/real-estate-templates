@@ -5,6 +5,7 @@ import ModalTrigger from '@/components/ui/ModalTrigger'
 import { SOLD_PROPERTIES } from './data'
 
 export const metadata = {
+  alternates: { canonical: '/modern-team/past-transactions' },
   title: { absolute: 'Past Transactions | Homes Sold by The Hargrove Group' },
   description: 'Browse the Hargrove Group\'s track record of homes sold across Greater Houston, from the Heights to River Oaks to The Woodlands.',
 }

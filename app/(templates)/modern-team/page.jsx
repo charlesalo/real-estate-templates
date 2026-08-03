@@ -9,6 +9,12 @@ import TestimonialsSlider from './home-valuation/TestimonialsSlider'
 import ValuationHeroBar from './home-valuation/ValuationHeroBar'
 import { FEATURED_LISTINGS } from './featured-listings/data'
 
+// Title and description come from the template layout; this page only needs to
+// claim its own canonical so it isn't left without one.
+export const metadata = {
+  alternates: { canonical: '/modern-team' },
+}
+
 const FEATURED_NEIGHBORHOODS = [
   { slug: 'the-heights',   name: 'The Heights',   tagline: 'Historic bungalows, walkable streets, and a vibrant local dining scene.',        image: 'https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=800&q=80', medianPrice: '$585K', activeListings: 38 },
   { slug: 'river-oaks',    name: 'River Oaks',    tagline: "Houston's most prestigious address, framed by mature oaks and grand estates.",     image: 'https://images.unsplash.com/photo-1613977257363-707ba9348227?w=800&q=80', medianPrice: '$2.4M', activeListings: 22 },

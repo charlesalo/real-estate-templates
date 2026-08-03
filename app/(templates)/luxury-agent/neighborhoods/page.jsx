@@ -5,6 +5,7 @@ import ParallaxBanner from '../_components/sections/ParallaxBanner'
 import CTASection from '../_components/sections/CTASection'
 
 export const metadata = {
+  alternates: { canonical: '/luxury-agent/neighborhoods' },
   title: 'Explore California Neighborhoods',
   description: "Explore Beverly Hills, Bel Air, Holmby Hills, and the Pacific Palisades with Victoria Sinclair — your insider's guide to LA's most coveted neighborhoods.",
 }

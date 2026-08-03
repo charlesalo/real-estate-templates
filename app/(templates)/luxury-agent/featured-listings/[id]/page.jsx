@@ -18,6 +18,7 @@ export async function generateMetadata({ params }) {
   const listing = ALL_AGENT_LISTINGS.find(l => l.id === id)
   if (!listing) return {}
   return {
+    alternates: { canonical: `/luxury-agent/featured-listings/${id}` },
     title: listing.address,
     description: listing.description,
   }

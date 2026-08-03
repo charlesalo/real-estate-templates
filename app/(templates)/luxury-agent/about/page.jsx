@@ -9,6 +9,7 @@ import { PAST_TRANSACTIONS } from '@/lib/featured-listings'
 import { Phone, Mail, MapPin } from 'lucide-react'
 
 export const metadata = {
+  alternates: { canonical: '/luxury-agent/about' },
   title: { absolute: 'Victoria Sinclair | Real Estate Agent Serving Los Angeles' },
   description: 'Meet Victoria Sinclair, a Beverly Hills luxury real estate specialist with 22+ years of experience and $1.2B+ in closed sales across Los Angeles.',
 }

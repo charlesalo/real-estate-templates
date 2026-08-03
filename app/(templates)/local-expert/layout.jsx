@@ -48,7 +48,9 @@ export async function generateMetadata() {
   return {
     title: { default: title, template: `%s | ${name}` },
     description,
-    alternates: { canonical: '/local-expert' },
+    // No `alternates.canonical` here — a layout canonical is inherited by every
+    // descendant page, which pointed all ~26 local-expert URLs at /local-expert
+    // and marked them duplicates. Each page sets its own canonical.
     icons: {
       icon: '/images/local-expert/nadia-favicon.png',
       apple: '/images/local-expert/nadia-favicon.png',

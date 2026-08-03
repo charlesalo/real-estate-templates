@@ -263,6 +263,7 @@ export async function generateMetadata({ params }) {
   const hood = NEIGHBORHOODS[slug]
   if (!hood) return {}
   return {
+    alternates: { canonical: `/modern-team/neighborhoods/${slug}` },
     title: `${hood.name} Real Estate`,
     description: hood.tagline,
   }

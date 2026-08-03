@@ -5,6 +5,7 @@ import CTASection from '../_components/sections/CTASection'
 import LeadCaptureSection from '../_components/sections/LeadCaptureSection'
 
 export const metadata = {
+  alternates: { canonical: '/luxury-agent/blog' },
   title: 'Los Angeles Real Estate & Community Blog',
   description: 'Market reports, buying guides, and neighborhood news from Victoria Sinclair — your source for Los Angeles luxury real estate insights and trends.',
 }

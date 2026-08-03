@@ -33,6 +33,7 @@ export async function generateMetadata({ params }) {
     const listing = await getListingById(id)
     const addr = listing.address?.full ?? 'Property'
     return {
+      alternates: { canonical: `/luxury-agent/listings/${id}` },
       title: addr,
       description: `${addr} — $${listing.listPrice?.toLocaleString()}`,
     }

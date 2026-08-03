@@ -29,6 +29,7 @@ export async function generateMetadata({ params }) {
     const listing = await getListingById(id)
     const addr    = listing.address?.full ?? 'Property'
     return {
+      alternates: { canonical: `/modern-team/listings/${id}` },
       title: addr,
       description: `${addr} — $${listing.listPrice?.toLocaleString()} · The Hargrove Group`,
     }

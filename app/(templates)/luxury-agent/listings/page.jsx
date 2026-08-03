@@ -3,6 +3,7 @@ import { getListings } from '@/lib/simplyrets'
 import { COUNT_PROBE_LIMIT, gateSearchResults, resolveGate } from '@/lib/gating'
 
 export const metadata = {
+  alternates: { canonical: '/luxury-agent/listings' },
   title: 'Listings',
   description: 'Browse luxury homes for sale in Beverly Hills, Bel Air, and Holmby Hills. Find exclusive and off-market properties with Victoria Sinclair.',
 }

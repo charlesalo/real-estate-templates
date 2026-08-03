@@ -7,6 +7,7 @@ import ModalTrigger from '@/components/ui/ModalTrigger'
 import { SOLD_PROPERTIES } from '../past-transactions/data'
 
 export const metadata = {
+  alternates: { canonical: '/modern-team/home-valuation' },
   title: { absolute: 'Personalized Texas Home Valuation | The Hargrove Group' },
   description: "Find out what your Houston home is worth. Get a free, data-driven valuation from the Hargrove Group — no obligation, no pressure.",
 }

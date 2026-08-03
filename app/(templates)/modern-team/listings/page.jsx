@@ -3,6 +3,7 @@ import { getListings } from '@/lib/simplyrets'
 import { COUNT_PROBE_LIMIT, gateSearchResults, resolveGate } from '@/lib/gating'
 
 export const metadata = {
+  alternates: { canonical: '/modern-team/listings' },
   title: { absolute: 'Search Houston Homes for Sale | The Hargrove Group' },
   description: 'Search homes for sale across Greater Houston — The Heights, River Oaks, Memorial, Sugar Land & The Woodlands — updated with live MLS listings.',
 }

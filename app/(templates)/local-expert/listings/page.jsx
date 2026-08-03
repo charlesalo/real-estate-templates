@@ -13,6 +13,7 @@ function formatSoldDate(value) {
 }
 
 export const metadata = {
+  alternates: { canonical: '/local-expert/listings' },
   title: { absolute: 'New York Homes for Sale & Real Estate Listings | Nadia Osei' },
   description: 'Browse curated homes for sale across Manhattan and Brooklyn. Find co-ops, condos, and townhouses in West Village, Tribeca, Brooklyn Heights, and more.',
 }

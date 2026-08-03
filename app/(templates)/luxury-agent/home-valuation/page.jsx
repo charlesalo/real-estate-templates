@@ -6,6 +6,7 @@ import CTASection from '../_components/sections/CTASection'
 import { PAST_TRANSACTIONS } from '@/lib/featured-listings'
 
 export const metadata = {
+  alternates: { canonical: '/luxury-agent/home-valuation' },
   title: 'Personalized California Home Valuation',
   description: 'Find out what your home is worth. Get a free, no-obligation home valuation from Victoria Sinclair — Beverly Hills luxury real estate specialist.',
 }
