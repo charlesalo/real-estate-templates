@@ -61,6 +61,7 @@ export async function generateMetadata({ params }) {
   const property = SOLD_PROPERTIES.find(p => p.slug === slug)
   if (!property) return {}
   return {
+    alternates: { canonical: `/modern-team/past-transactions/${slug}` },
     title: `${property.address} — Sold ${property.soldDate}`,
     description: `${property.beds} bed · ${property.baths} bath · ${property.sqft} sf in ${property.neighborhood}. Sold ${property.soldDate}.`,
   }

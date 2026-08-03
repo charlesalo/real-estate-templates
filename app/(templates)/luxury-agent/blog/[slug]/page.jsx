@@ -163,6 +163,7 @@ export async function generateMetadata({ params }) {
   const post = POSTS[slug]
   if (!post) return {}
   return {
+    alternates: { canonical: `/luxury-agent/blog/${slug}` },
     title: post.title,
     description: post.excerpt,
   }

@@ -42,6 +42,7 @@ export async function generateMetadata({ params }) {
   const n = neighborhoods.find((n) => n.slug === slug)
   if (!n) return {}
   return {
+    alternates: { canonical: `/local-expert/neighborhoods/${slug}` },
     title: `${n.name} — NYC Neighborhood Guide`,
     description: n.tagline,
   }

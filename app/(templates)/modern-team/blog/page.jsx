@@ -4,6 +4,7 @@ import ModalTrigger from '@/components/ui/ModalTrigger'
 import NewsletterForm from '../_components/layout/NewsletterForm'
 
 export const metadata = {
+  alternates: { canonical: '/modern-team/blog' },
   title: { absolute: 'Houston Real Estate & Community Blog | The Hargrove Group' },
   description: "Houston real estate market reports, neighborhood guides, and buyer/seller tips from the Hargrove Group's team of local agents.",
 }

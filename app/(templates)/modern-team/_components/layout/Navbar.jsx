@@ -161,25 +161,32 @@ export default function Navbar({
                   </Link>
                 )
               })}
+            </nav>
 
+            {/* ── Account + hamburger ────────────────────────────────
+                Grouped so the account control sits outside the desktop-only
+                nav: the wall applies on phones too, and a visitor who can't
+                reach sign-in there can't get past it. The group carries the
+                auto margin so the hamburger still lands right when the
+                account control isn't rendered. */}
+            <div className="ml-auto lg:ml-6 flex items-center gap-6">
               {onListingsPage && (
                 <AccountMenu solid={solid} savedSearchesHref="/modern-team/saved-searches" />
               )}
-            </nav>
 
-            {/* ── Hamburger ──────────────────────────────────────── */}
-            <button
-              onClick={() => setMenuOpen(true)}
-              aria-label="Open menu"
-              className={cn(
-                'ml-auto lg:ml-6 flex flex-col items-center justify-center gap-[5px] hover:gap-[2px] w-9 h-9 transition-all duration-200',
-                solid ? 'text-[#1A2D5A]' : 'text-white',
-              )}
-            >
-              <span className="block h-[2px] w-6 bg-current rounded-full" />
-              <span className="block h-[2px] w-6 bg-current rounded-full" />
-              <span className="block h-[2px] w-6 bg-current rounded-full" />
-            </button>
+              <button
+                onClick={() => setMenuOpen(true)}
+                aria-label="Open menu"
+                className={cn(
+                  'flex flex-col items-center justify-center gap-[5px] hover:gap-[2px] w-9 h-9 transition-all duration-200',
+                  solid ? 'text-[#1A2D5A]' : 'text-white',
+                )}
+              >
+                <span className="block h-[2px] w-6 bg-current rounded-full" />
+                <span className="block h-[2px] w-6 bg-current rounded-full" />
+                <span className="block h-[2px] w-6 bg-current rounded-full" />
+              </button>
+            </div>
 
           </div>
         </div>

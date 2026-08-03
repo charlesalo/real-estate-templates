@@ -21,6 +21,7 @@ export async function generateMetadata({ params }) {
   )
   if (!member) return {}
   return {
+    alternates: { canonical: `/modern-team/agents/${slug}` },
     title: `About ${member.name}`,
     description: member.bio[0],
   }

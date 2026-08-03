@@ -2,6 +2,7 @@ import PastTransactionsClient from '../_components/listings/PastTransactionsClie
 import { getListings } from '@/lib/simplyrets'
 
 export const metadata = {
+  alternates: { canonical: '/luxury-agent/past-transactions' },
   title: 'Recently Sold Properties in California',
   description: 'Browse Victoria Sinclair\'s closed sales — a proven record of exceptional results across Beverly Hills, Bel Air, and Holmby Hills.',
 }

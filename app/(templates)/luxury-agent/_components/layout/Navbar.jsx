@@ -2,9 +2,11 @@
 
 import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ChevronDown } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import AccountMenu from '@/components/auth/AccountMenu'
 import SideMenu from './SideMenu'
 
 function DropdownNavItem({ link }) {
@@ -69,6 +71,14 @@ export default function Navbar({
 }) {
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
+  const pathname = usePathname()
+
+  // Sign-in is only relevant where the registration wall actually applies —
+  // the search page and individual listing pages. Keep it off the rest of the
+  // site so the navbar doesn't advertise an account system on pages that have
+  // nothing gated.
+  const listingsRoot   = `/${template}/listings`
+  const onListingsPage = pathname === listingsRoot || pathname.startsWith(`${listingsRoot}/`)
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 80)
@@ -142,6 +152,15 @@ export default function Navbar({
                 )
               })}
             </nav>
+
+            {/* Account — renders nothing until Supabase is configured and the
+                session resolves. The header always sits on dark here, so it
+                keeps its non-solid (light-on-dark) treatment. */}
+            {onListingsPage && (
+              <div className="ml-auto mr-5 lg:ml-0">
+                <AccountMenu savedSearchesHref={`/${template}/saved-searches`} />
+              </div>
+            )}
 
             {/* Hamburger */}
             <button

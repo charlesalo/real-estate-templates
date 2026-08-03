@@ -8,6 +8,7 @@ export async function generateMetadata() {
   const settings = await getSiteSettings()
   const name = settings?.businessName ?? 'Nadia Osei'
   return {
+    alternates: { canonical: '/local-expert/field-notes' },
     title: { absolute: `New York Local Favorites | ${name} Real Estate Agent` },
     description: `Discover ${name}'s favorite NYC spots: coffee shops, bookstores, parks, and local gems across Manhattan and Brooklyn curated for residents.`,
   }

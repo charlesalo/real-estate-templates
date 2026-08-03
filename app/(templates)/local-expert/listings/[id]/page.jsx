@@ -15,6 +15,7 @@ export async function generateMetadata({ params }) {
   const listing = LISTINGS.find((l) => l.id === id)
   if (!listing) return {}
   return {
+    alternates: { canonical: `/local-expert/listings/${id}` },
     title: `${listing.address} — ${listing.neighborhood}`,
     description: `${listing.beds}BR/${listing.baths}BA ${listing.type} in ${listing.neighborhood}. Asking $${listing.price.toLocaleString()}.`,
   }

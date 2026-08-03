@@ -2,6 +2,7 @@ import ParallaxBanner from '../_components/sections/ParallaxBanner'
 import CTASection from '../_components/sections/CTASection'
 
 export const metadata = {
+  alternates: { canonical: '/luxury-agent/testimonials' },
   title: 'Client Testimonials & Success Stories',
   description: 'What clients say about working with Victoria Sinclair — trusted luxury real estate advisor in Beverly Hills, Bel Air, and Holmby Hills.',
 }

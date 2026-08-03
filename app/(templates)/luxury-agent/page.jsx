@@ -9,6 +9,12 @@ import LeadCaptureSection from './_components/sections/LeadCaptureSection'
 import FeaturedListingCard from './_components/listings/FeaturedListingCard'
 import { HOMEPAGE_FEATURED } from '@/lib/featured-listings'
 
+// Title and description come from the template layout; this page only needs to
+// claim its own canonical so it isn't left without one.
+export const metadata = {
+  alternates: { canonical: '/luxury-agent' },
+}
+
 // ─── Demo content ─────────────────────────────────────────────────────────────
 // Replace with Sanity CMS data per client deployment
 

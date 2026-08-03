@@ -1,11 +1,11 @@
 import { NextResponse } from 'next/server'
 import { getListings } from '@/lib/simplyrets'
 
-// Ungated MLS feed. Still used by the luxury-agent / local-expert search
-// clients and by Past Transactions (sold comps, not part of the wall).
-// Templates behind the registration wall call /api/listings/search instead —
-// see docs/gated-search-setup.md for what closes this route down once the gate
-// is ported to the remaining templates.
+// Ungated MLS feed. Still used by the local-expert search client and by Past
+// Transactions (sold comps, not part of the wall). Templates behind the
+// registration wall call /api/listings/search instead — see
+// docs/gated-search-setup.md for what closes this route down once the gate is
+// ported to local-expert.
 export async function GET(request) {
   const { searchParams } = new URL(request.url)
 

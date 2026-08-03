@@ -71,7 +71,7 @@ export default function AccountMenu({ solid, savedSearchesHref }) {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -8, scale: 0.97 }}
             transition={{ duration: 0.18, ease: [0.22, 1, 0.36, 1] }}
-            className="absolute top-full right-0 mt-3 min-w-[230px] bg-template-panel border border-template-border rounded-xl shadow-xl shadow-template-accent/8 py-2 z-10"
+            className="absolute top-full right-0 mt-3 min-w-[230px] bg-template-panel border border-template-border rounded-template-md shadow-xl shadow-template-accent/8 py-2 z-10"
           >
             <div className="px-4 py-2 border-b border-template-surface mb-1">
               {name && <p className="text-sm font-semibold text-template-fg truncate">{name}</p>}
@@ -81,7 +81,7 @@ export default function AccountMenu({ solid, savedSearchesHref }) {
             <Link
               href={savedSearchesHref}
               onClick={() => setOpen(false)}
-              className="flex items-center gap-2.5 px-4 py-2.5 text-sm text-template-text-body hover:text-template-accent hover:bg-template-surface transition-colors"
+              className="flex items-center gap-2.5 px-4 py-2.5 text-sm text-template-menu-fg hover:text-template-menu-fg-hover hover:bg-template-menu-hover-bg transition-colors"
             >
               <Heart size={14} strokeWidth={1.75} />
               Saved Searches
@@ -89,7 +89,7 @@ export default function AccountMenu({ solid, savedSearchesHref }) {
 
             <button
               onClick={() => { setOpen(false); signOut() }}
-              className="w-full flex items-center gap-2.5 px-4 py-2.5 text-sm text-template-text-body hover:text-template-accent hover:bg-template-surface transition-colors"
+              className="w-full flex items-center gap-2.5 px-4 py-2.5 text-sm text-template-menu-fg hover:text-template-menu-fg-hover hover:bg-template-menu-hover-bg transition-colors"
             >
               <LogOut size={14} strokeWidth={1.75} />
               Sign Out

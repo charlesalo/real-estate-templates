@@ -9,6 +9,7 @@ export async function generateMetadata() {
   const settings = await getSiteSettings()
   const name = settings?.businessName ?? 'Nadia Osei'
   return {
+    alternates: { canonical: '/local-expert/blog' },
     title: { absolute: `Manhattan & Brooklyn Real Estate Blog | ${name}` },
     description: `Manhattan and Brooklyn real estate insights: market reports, buyer guides, and neighborhood stories from ${name}, your trusted NYC real estate agent.`,
   }

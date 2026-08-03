@@ -1,17 +1,25 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
 import { X, CheckCircle } from 'lucide-react'
+import { useAuth } from '@/components/auth/AuthProvider'
 
 const SESSION_KEY = 'modern_team_exit_popup_dismissed'
 
 export default function ExitIntentPopup({ teamName = 'The Hargrove Group' }) {
+  const { intent } = useAuth()
   const [open, setOpen]     = useState(false)
   const [email, setEmail]   = useState('')
   const [agreed, setAgreed] = useState(false)
   const [status, setStatus] = useState('idle') // idle | sending | sent | error
+
+  // Read through a ref at fire time rather than as an effect dependency:
+  // re-subscribing every time the auth modal opens would restart the 30s
+  // mobile timer and the 2s arming delay.
+  const authIntent = useRef(intent)
+  useEffect(() => { authIntent.current = intent }, [intent])
 
   useEffect(() => {
     if (sessionStorage.getItem(SESSION_KEY)) return
@@ -19,15 +27,20 @@ export default function ExitIntentPopup({ teamName = 'The Hargrove Group' }) {
     let ready = false
     const readyTimer = setTimeout(() => { ready = true }, 2000)
 
+    // The auth modal covers the page and locks body scroll. Firing over it
+    // buries it, and dismissing this popup would hand scrolling back while the
+    // modal is still up — so exit intent stays quiet until the wall is closed.
+    const blocked = () => authIntent.current !== null || sessionStorage.getItem(SESSION_KEY)
+
     const onMouseMove = (e) => {
       if (!ready) return
       if (e.clientY > 8) return
-      if (sessionStorage.getItem(SESSION_KEY)) return
+      if (blocked()) return
       setOpen(true)
     }
 
     const mobileTimer = setTimeout(() => {
-      if (!sessionStorage.getItem(SESSION_KEY)) setOpen(true)
+      if (!blocked()) setOpen(true)
     }, 30000)
 
     document.addEventListener('mousemove', onMouseMove)

@@ -26,6 +26,12 @@ import {
   BLOG_POSTS as BLOG_POSTS_FALLBACK,
 } from '@/lib/local-expert-data'
 
+// Title and description come from the template layout; this page only needs to
+// claim its own canonical so it isn't left without one.
+export const metadata = {
+  alternates: { canonical: '/local-expert' },
+}
+
 // ── Helpers ───────────────────────────────────────────────────────────────────
 
 function formatPrice(n) {

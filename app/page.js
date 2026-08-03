@@ -7,6 +7,13 @@ import OpenContactButton from '@/components/landing/OpenContactButton'
 import HowItWorksSteps from '@/components/landing/HowItWorksSteps'
 import GoogleOneTap from '@/components/auth/GoogleOneTap'
 
+// Title and description come from the root layout. The canonical belongs here
+// rather than in that layout, because a canonical set on a layout is inherited
+// by every descendant page.
+export const metadata = {
+  alternates: { canonical: '/' },
+}
+
 // ─── Data ────────────────────────────────────────────────────────────────────
 
 const TEMPLATES = [

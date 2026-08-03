@@ -38,7 +38,7 @@ export async function proxy(request) {
 }
 
 export const config = {
-  // Only the template that's behind the wall. Route Handlers refresh their own
-  // cookies, and the other templates have no session to maintain yet.
-  matcher: ['/modern-team/:path*'],
+  // Only the templates that are behind the wall. Route Handlers refresh their
+  // own cookies, and local-expert has no session to maintain yet.
+  matcher: ['/modern-team/:path*', '/luxury-agent/:path*'],
 }

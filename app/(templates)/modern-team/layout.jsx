@@ -80,9 +80,11 @@ export const metadata = {
     template: '%s | The Hargrove Group',
   },
   description: MODERN_TEAM_DESCRIPTION,
-  alternates: {
-    canonical: '/modern-team',
-  },
+  // No `alternates.canonical` here: metadata fields set on a layout are
+  // inherited by every descendant page that doesn't override them, so a
+  // canonical declared at this level made all ~44 modern-team URLs point at
+  // /modern-team and told Google they were duplicates. Each page declares its
+  // own self-referencing canonical instead.
   icons: {
     icon: '/images/modern-team/favicon-modern-team.png',
     apple: '/images/modern-team/favicon-modern-team.png',
@@ -144,7 +146,7 @@ export default function ModernTeamLayout({ children }) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(JSON_LD) }}
       />
-      <AuthProvider>
+      <AuthProvider template="modern-team">
         <Navbar
           logo={{ text: TEAM.name }}
           links={NAV_LINKS}
@@ -158,8 +160,10 @@ export default function ModernTeamLayout({ children }) {
         <GoogleOneTap clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID} supabaseAuth />
         <main>{children}</main>
         <AuthModal teamName={TEAM.name} template="modern-team" />
+        {/* Inside the provider so it can hold its fire while the auth modal
+            is open — see the `intent` gate in ExitIntentPopup. */}
+        <ExitIntentPopup teamName={TEAM.name} />
       </AuthProvider>
-      <ExitIntentPopup teamName={TEAM.name} />
       <ContactModal
         agentName={TEAM.name}
         agentDre={TEAM.license}

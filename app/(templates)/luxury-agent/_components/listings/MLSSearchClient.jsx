@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useCallback, useRef } from 'react'
+import { useState, useCallback, useEffect, useRef } from 'react'
 import { useRouter } from 'next/navigation'
 import dynamic from 'next/dynamic'
 import Image from 'next/image'
@@ -8,9 +8,11 @@ import Link from 'next/link'
 import {
   Search, SlidersHorizontal, X, LayoutGrid, List,
   Map as MapIcon, ChevronLeft, ChevronRight, Bed, Bath, Maximize2,
+  Lock, Heart, Check,
 } from 'lucide-react'
 import MLSPropertyCard from './MLSPropertyCard'
 import StatusBadge from './StatusBadge'
+import { useAuth } from '@/components/auth/AuthProvider'
 import { cn } from '@/lib/utils'
 
 const MapView = dynamic(() => import('@/components/real-estate/MapView'), { ssr: false, loading: () => null })
@@ -168,6 +170,105 @@ function ListRow({ listing, template }) {
   )
 }
 
+// ─── Registration wall ────────────────────────────────────────────────────────
+
+// Decorative stand-ins for the withheld results. The real listings never reach
+// the browser — these are empty shells, not blurred data.
+function LockedCard() {
+  return (
+    <div aria-hidden="true" className="relative select-none">
+      <div className="relative aspect-[16/9] bg-[#141414]">
+        <div className="absolute inset-0 flex items-center justify-center">
+          <div className="w-11 h-11 flex items-center justify-center border border-[#C9A96E]/25">
+            <Lock size={15} className="text-[#C9A96E]/70" strokeWidth={1.5} />
+          </div>
+        </div>
+      </div>
+      <div className="pt-3 pb-3 border-b space-y-2.5 border-white/[0.07]">
+        <div className="h-3.5 w-3/5 bg-white/[0.06]" />
+        <div className="h-2.5 w-2/5 bg-white/[0.04]" />
+        <div className="flex gap-4 pt-1">
+          <div className="h-2.5 w-12 bg-white/[0.04]" />
+          <div className="h-2.5 w-12 bg-white/[0.04]" />
+          <div className="h-2.5 w-16 bg-white/[0.04]" />
+        </div>
+      </div>
+    </div>
+  )
+}
+
+function GateCTA({ hiddenCount, totalCount, approximate, onSignUp }) {
+  // "+" whenever the MLS feed only gave us a floor rather than an exact count.
+  const plus  = approximate ? '+' : ''
+  const total = `${totalCount.toLocaleString()}${plus}`
+
+  const headline = hiddenCount > 0
+    ? `${hiddenCount.toLocaleString()}${plus} more ${hiddenCount === 1 && !approximate ? 'residence matches' : 'residences match'} your search`
+    : 'View every residence that matches your search'
+
+  return (
+    <div className="mt-10 border border-[#C9A96E]/25 bg-[#0D0D0D] px-8 py-12 sm:px-14 sm:py-14 text-center">
+      <div className="w-12 h-12 flex items-center justify-center border border-[#C9A96E]/30 mx-auto mb-7">
+        <Lock size={17} className="text-[#C9A96E]" strokeWidth={1.5} />
+      </div>
+      <p className="text-[12px] tracking-[0.35em] uppercase text-[#C9A96E] font-sans mb-4">
+        Private Client Access
+      </p>
+      <h2 className="font-heading text-3xl sm:text-4xl font-normal text-white leading-tight max-w-xl mx-auto">
+        {headline}
+      </h2>
+      <p className="text-sm text-white/40 font-sans mt-5 max-w-md mx-auto leading-relaxed">
+        Register to unlock all {total} results, open full property details, and save this
+        search to your account.
+      </p>
+      <button
+        onClick={onSignUp}
+        className="mt-9 px-10 py-3.5 text-[12px] tracking-[0.25em] uppercase font-medium bg-[#C9A96E] text-[#0A0A0A] hover:opacity-90 transition-opacity"
+      >
+        Unlock All {total} Results
+      </button>
+      <p className="text-[12px] text-white/25 font-sans mt-5">
+        Complimentary · Takes about 20 seconds
+      </p>
+    </div>
+  )
+}
+
+// ─── Save search ──────────────────────────────────────────────────────────────
+
+// Remounted by the parent whenever the filters change (via `key`), which resets
+// "Saved" back to "Save Search" — a new set of filters is a new search.
+function SaveSearchButton({ filters, gated, onGatedClick }) {
+  const [state, setState] = useState('idle') // idle | saving | saved | error
+
+  const save = async () => {
+    if (gated) { onGatedClick(); return }
+    setState('saving')
+    try {
+      const res = await fetch('/api/saved-searches', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ template: 'luxury-agent', criteria: filters }),
+      })
+      setState(res.ok ? 'saved' : 'error')
+    } catch {
+      setState('error')
+    }
+  }
+
+  return (
+    <button
+      onClick={save}
+      disabled={state === 'saving' || state === 'saved'}
+      className="flex items-center gap-1.5 px-3 py-1.5 text-[12px] tracking-[0.1em] uppercase border transition-all font-sans cursor-pointer border-white/20 text-white/40 hover:border-[#C9A96E]/50 hover:text-[#C9A96E] disabled:cursor-default disabled:opacity-60"
+    >
+      {state === 'saved'
+        ? <><Check size={13} strokeWidth={2} /> Saved</>
+        : <><Heart size={13} strokeWidth={1.5} /> {state === 'saving' ? 'Saving…' : state === 'error' ? 'Try again' : 'Save Search'}</>}
+    </button>
+  )
+}
+
 // ─── Filter drawer ────────────────────────────────────────────────────────────
 
 function FilterDrawer({ filters, onApply, onClose }) {
@@ -295,10 +396,15 @@ function FilterDrawer({ filters, onApply, onClose }) {
 export default function MLSSearchClient({
   initialListings = [],
   initialTotal = 0,
+  initialHasMore = false,
   initialFilters = {},
+  initialGated = false,
+  initialHidden = 0,
+  initialApproximate = false,
   template = 'luxury-agent',
 }) {
   const router = useRouter()
+  const { user, openAuth } = useAuth()
 
   const [filters, setFilters] = useState({
     q:        initialFilters.q        ?? '',
@@ -314,13 +420,23 @@ export default function MLSSearchClient({
 
   const [listings,   setListings]   = useState(normalize(initialListings))
   const [totalCount, setTotalCount] = useState(initialTotal)
+  const [hasMore,    setHasMore]    = useState(initialHasMore)
   const [loading,    setLoading]    = useState(false)
   const [page,       setPage]       = useState(parseInt(initialFilters.page ?? '1'))
   const [view,       setView]       = useState('grid')
   const [showMap,    setShowMap]    = useState(true)
   const [showDrawer, setShowDrawer] = useState(false)
+  // Mirrors the server's decision. The API re-derives it on every request, so
+  // this only drives what the UI shows — it is not what enforces the wall.
+  const [gated,       setGated]       = useState(initialGated)
+  const [hiddenCount, setHiddenCount] = useState(initialHidden)
+  const [approximate, setApproximate] = useState(initialApproximate)
 
-  const totalPages = Math.ceil(totalCount / LIMIT)
+  // When X-Total-Count is available use it for pagination. For demo accounts
+  // that omit it, estimate from the current page plus hasMore.
+  const knownTotal   = totalCount > listings.length || !hasMore
+  const estimatedMin = hasMore ? page * LIMIT : (page - 1) * LIMIT + listings.length
+  const totalPages   = knownTotal ? Math.ceil(totalCount / LIMIT) : page + (hasMore ? 1 : 0)
 
   const fetchListings = useCallback(async (f, p = 1) => {
     setLoading(true)
@@ -329,17 +445,37 @@ export default function MLSSearchClient({
       Object.entries(f).forEach(([k, v]) => { if (v) params.set(k, v) })
       params.set('limit', LIMIT)
       params.set('offset', (p - 1) * LIMIT)
-      const res  = await fetch(`/api/listings?${params}`)
+      const res  = await fetch(`/api/listings/search?${params}`)
       const data = await res.json()
       setListings(normalize(data.listings ?? []))
       setTotalCount(data.totalCount ?? 0)
+      setHasMore(data.hasMore ?? false)
+      setGated(Boolean(data.gated))
+      setHiddenCount(data.hiddenCount ?? 0)
+      setApproximate(Boolean(data.approximate))
     } catch {
       setListings([])
       setTotalCount(0)
+      setHasMore(false)
     } finally {
       setLoading(false)
     }
   }, [])
+
+  // Signing in has to drop the wall on the results the visitor is already
+  // looking at. router.refresh() re-runs the server page, but this component's
+  // state was seeded from the *old* props, so refetch it directly.
+  const latest     = useRef({ filters, page })
+  const lastUserId = useRef(user?.id ?? null)
+
+  useEffect(() => { latest.current = { filters, page } }, [filters, page])
+
+  useEffect(() => {
+    const id = user?.id ?? null
+    if (id === lastUserId.current) return
+    lastUserId.current = id
+    fetchListings(latest.current.filters, latest.current.page)
+  }, [user, fetchListings])
 
   const syncUrl = useCallback((f, p) => {
     const params = new URLSearchParams()
@@ -515,9 +651,20 @@ export default function MLSSearchClient({
           {/* Toolbar */}
           <div className="flex items-center justify-between px-6 py-5 border-b border-white/[0.06]">
             <p className="text-xs font-sans text-white/40">
-              {loading ? 'Loading…' : `${totalCount.toLocaleString()} ${totalCount === 1 ? 'property' : 'properties'}`}
+              {loading ? 'Loading…' : gated
+                ? `Showing ${listings.length} of ${totalCount.toLocaleString()}${approximate ? '+' : ''} ${totalCount === 1 && !approximate ? 'property' : 'properties'}`
+                : knownTotal
+                ? `${totalCount.toLocaleString()} ${totalCount === 1 ? 'property' : 'properties'}`
+                : `${estimatedMin.toLocaleString()}${hasMore ? '+' : ''} properties`
+              }
             </p>
             <div className="flex items-center gap-2">
+              <SaveSearchButton
+                key={JSON.stringify(filters)}
+                filters={filters}
+                gated={gated}
+                onGatedClick={() => openAuth('save')}
+              />
               {/* Grid / List toggle */}
               <div className="flex items-center border border-white/10">
                 <button onClick={() => setView('grid')} className={cn('p-2 transition-colors cursor-pointer', view === 'grid' ? 'text-[#C9A96E] bg-white/5' : 'text-white/30 hover:text-white')}>
@@ -560,6 +707,10 @@ export default function MLSSearchClient({
             ) : view === 'grid' ? (
               <div className={cn('grid gap-x-4 gap-y-6', showMap ? 'grid-cols-1 sm:grid-cols-2' : 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3')}>
                 {listings.map(l => <MLSPropertyCard key={l.id} {...l} template={template} />)}
+                {gated && hiddenCount > 0 &&
+                  Array.from({ length: Math.min(hiddenCount, showMap ? 2 : 3) }).map((_, i) => (
+                    <LockedCard key={`locked-${i}`} />
+                  ))}
               </div>
             ) : (
               <div className="flex flex-col gap-3">
@@ -567,8 +718,18 @@ export default function MLSSearchClient({
               </div>
             )}
 
-            {/* Pagination */}
-            {totalPages > 1 && !loading && (
+            {/* Registration wall */}
+            {gated && !loading && listings.length > 0 && (
+              <GateCTA
+                hiddenCount={hiddenCount}
+                totalCount={totalCount}
+                approximate={approximate}
+                onSignUp={() => openAuth('search')}
+              />
+            )}
+
+            {/* Pagination — off behind the wall; page 2 is what's being gated */}
+            {!gated && totalPages > 1 && !loading && (
               <div className="flex items-center justify-center gap-1 mt-12">
                 <button onClick={() => handlePage(page - 1)} disabled={page <= 1} className="p-2 transition-colors disabled:opacity-25 text-white/50 hover:text-white">
                   <ChevronLeft size={16} />

@@ -1,8 +1,11 @@
-import { FEATURED_LISTINGS } from '@/lib/featured-listings'
+import { ALL_AGENT_LISTINGS } from '@/lib/featured-listings'
 
 const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://re-templates.chavbuilds.com'
 
 const STATIC_ROUTES = [
+  // The marketing landing page — the entry point that links to all three
+  // template demos, and the strongest internal-linking hub on the site.
+  { path: '',                                changeFrequency: 'weekly',  priority: 1.0 },
   { path: '/luxury-agent',                   changeFrequency: 'weekly',  priority: 1.0 },
   { path: '/luxury-agent/about',             changeFrequency: 'monthly', priority: 0.8 },
   { path: '/luxury-agent/featured-listings', changeFrequency: 'weekly',  priority: 0.9 },
@@ -122,26 +125,14 @@ const LOCAL_EXPERT_LISTING_IDS = [
   'le-6',
 ]
 
-const LOCAL_EXPERT_SOLD_LISTING_IDS = [
-  'sl-1',
-  'sl-2',
-  'sl-3',
-  'sl-4',
-]
+// No /local-expert/sold/[id] or /local-expert/field-notes/[id] route exists —
+// those ten URLs were advertised here and returned 404 to every crawler that
+// followed them. Re-add them here when the routes are built.
 
 const LOCAL_EXPERT_BLOG_SLUGS = [
   'brooklyn-heights-market-update-2024',
   'what-1-8m-buys-in-nyc-2024',
   'co-op-vs-condo-nyc-explained',
-]
-
-const LOCAL_EXPERT_FIELD_NOTE_IDS = [
-  'fn-1',
-  'fn-2',
-  'fn-3',
-  'fn-4',
-  'fn-5',
-  'fn-6',
 ]
 
 export default function sitemap() {
@@ -168,7 +159,10 @@ export default function sitemap() {
     priority: 0.6,
   }))
 
-  const listingEntries = FEATURED_LISTINGS.map(listing => ({
+  // ALL_AGENT_LISTINGS, not FEATURED_LISTINGS: the [id] route also renders the
+  // three past-transaction listings (pt-1…pt-3), which were being built and
+  // served but left out of the sitemap.
+  const listingEntries = ALL_AGENT_LISTINGS.map(listing => ({
     url: `${BASE_URL}/luxury-agent/featured-listings/${listing.id}`,
     lastModified: now,
     changeFrequency: 'weekly',
@@ -238,22 +232,8 @@ export default function sitemap() {
     priority: 0.8,
   }))
 
-  const localExpertSoldListingEntries = LOCAL_EXPERT_SOLD_LISTING_IDS.map(id => ({
-    url: `${BASE_URL}/local-expert/sold/${id}`,
-    lastModified: now,
-    changeFrequency: 'monthly',
-    priority: 0.6,
-  }))
-
   const localExpertBlogEntries = LOCAL_EXPERT_BLOG_SLUGS.map(slug => ({
     url: `${BASE_URL}/local-expert/blog/${slug}`,
-    lastModified: now,
-    changeFrequency: 'monthly',
-    priority: 0.6,
-  }))
-
-  const localExpertFieldNoteEntries = LOCAL_EXPERT_FIELD_NOTE_IDS.map(id => ({
-    url: `${BASE_URL}/local-expert/field-notes/${id}`,
     lastModified: now,
     changeFrequency: 'monthly',
     priority: 0.6,
@@ -273,8 +253,6 @@ export default function sitemap() {
     ...localExpertStaticEntries,
     ...localExpertNeighborhoodEntries,
     ...localExpertListingEntries,
-    ...localExpertSoldListingEntries,
     ...localExpertBlogEntries,
-    ...localExpertFieldNoteEntries,
   ]
 }

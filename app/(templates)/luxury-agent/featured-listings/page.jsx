@@ -7,6 +7,7 @@ import CTASection from '../_components/sections/CTASection'
 import ShowingTrigger from '../_components/listings/ShowingTrigger'
 
 export const metadata = {
+  alternates: { canonical: '/luxury-agent/featured-listings' },
   title: { absolute: 'Discover Properties for Sale in California Victoria Sinclair' },
   description:
     'Exclusive and off-market properties represented by Victoria Sinclair — a curated portfolio of the finest homes in Beverly Hills, Bel Air, and Holmby Hills.',

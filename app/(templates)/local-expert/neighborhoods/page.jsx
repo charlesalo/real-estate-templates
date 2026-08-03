@@ -12,6 +12,7 @@ export async function generateMetadata() {
   const settings = await getSiteSettings()
   const name = settings?.businessName ?? 'Nadia Osei'
   return {
+    alternates: { canonical: '/local-expert/neighborhoods' },
     title: { absolute: `Comprehensive Guide to New York Neighborhoods | ${name}` },
     description: 'Explore Manhattan and Brooklyn neighborhoods: West Village, Tribeca, Upper East Side, Brooklyn Heights, DUMBO, Park Slope, SoHo, Chelsea, and beyond.',
   }

@@ -15,6 +15,7 @@ export async function generateMetadata() {
   const agentDoc = await getAgent()
   const name = agentDoc?.name ?? AGENT_FALLBACK.name
   return {
+    alternates: { canonical: '/local-expert/about' },
     title: { absolute: `${name} | Real Estate Agent Serving Manhattan & Brooklyn` },
     description: `Meet ${name}, a licensed NYC real estate agent helping buyers and sellers navigate Manhattan and Brooklyn neighborhoods.`,
   }
