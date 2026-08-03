@@ -167,7 +167,7 @@ export default function AuthModal({
   }
 
   const inputCls =
-    'w-full bg-transparent border border-template-border text-template-fg text-sm px-4 py-3 rounded-lg outline-none placeholder:text-template-text-subtle focus:border-template-accent transition-colors'
+    'w-full bg-transparent border border-template-border text-template-fg text-sm px-4 py-3 rounded-template-sm outline-none placeholder:text-template-text-subtle focus:border-template-accent transition-colors'
   const labelCls = 'block text-[12px] tracking-[0.2em] uppercase text-template-text-muted mb-1.5 font-sans'
   const errorCls = 'text-red-500 text-xs mt-1 font-sans'
 
@@ -191,7 +191,7 @@ export default function AuthModal({
             role="dialog"
             aria-modal="true"
             aria-label={copy.heading}
-            className="relative w-full max-w-4xl max-h-[92vh] overflow-y-auto rounded-2xl shadow-2xl [&::-webkit-scrollbar]:hidden [scrollbar-width:none] grid lg:grid-cols-[1.1fr_0.9fr]"
+            className="relative w-full max-w-4xl max-h-[92vh] overflow-y-auto rounded-template-lg shadow-2xl [&::-webkit-scrollbar]:hidden [scrollbar-width:none] grid lg:grid-cols-[1.1fr_0.9fr]"
           >
 
             {/* ── Left — Form ─────────────────────────────────── */}
@@ -201,7 +201,7 @@ export default function AuthModal({
                 <p className="text-[12px] tracking-[0.3em] uppercase text-template-accent-muted font-sans mb-2">
                   {copy.eyebrow}
                 </p>
-                <h2 className="text-3xl font-bold text-template-accent tracking-tight leading-tight">
+                <h2 className="text-3xl font-bold text-template-panel-heading tracking-tight leading-tight">
                   {mode === 'signup' ? copy.heading : 'Welcome back'}
                 </h2>
                 <p className="text-sm text-template-text-muted font-sans mt-3 leading-relaxed">
@@ -218,7 +218,7 @@ export default function AuthModal({
               ) : checkEmail ? (
                 <div className="py-14 text-center">
                   <MailCheck size={44} className="text-template-accent mx-auto mb-5" strokeWidth={1.25} />
-                  <h3 className="text-xl font-semibold text-template-accent mb-2">Check your inbox</h3>
+                  <h3 className="text-xl font-semibold text-template-panel-heading mb-2">Check your inbox</h3>
                   <p className="text-template-text-muted text-sm font-sans leading-relaxed">
                     We sent you a confirmation link. Click it and you&apos;ll land right back on your search.
                   </p>
@@ -236,7 +236,7 @@ export default function AuthModal({
                     type="button"
                     onClick={signInWithGoogle}
                     disabled={googleBusy}
-                    className="w-full flex items-center justify-center gap-3 py-3 border border-template-border rounded-lg text-sm font-medium text-template-text-body hover:border-template-accent/40 hover:bg-template-bg transition-all font-sans disabled:opacity-50"
+                    className="w-full flex items-center justify-center gap-3 py-3 border border-template-ghost-border rounded-template-sm text-sm font-medium text-template-ghost-fg hover:border-template-ghost-border-hover hover:text-template-ghost-fg-hover hover:bg-template-bg transition-all font-sans disabled:opacity-50"
                   >
                     <GoogleMark />
                     {googleBusy ? 'Redirecting…' : 'Continue with Google'}
@@ -296,7 +296,7 @@ export default function AuthModal({
                     <button
                       type="submit"
                       disabled={isSubmitting}
-                      className="w-full py-3.5 bg-template-accent text-template-accent-fg text-[12px] tracking-[0.25em] uppercase font-semibold rounded-lg hover:bg-template-accent-hover transition-colors disabled:opacity-50"
+                      className="w-full py-3.5 bg-template-accent text-template-accent-fg text-[12px] tracking-[0.25em] uppercase font-semibold rounded-template-sm hover:bg-template-accent-hover transition-colors disabled:opacity-50"
                     >
                       {isSubmitting
                         ? 'Just a moment…'
@@ -318,13 +318,17 @@ export default function AuthModal({
               )}
             </div>
 
-            {/* ── Right — Why register (navy) ─────────────────── */}
-            <div className="relative bg-template-accent px-8 py-10 lg:px-12 lg:py-12 flex flex-col">
+            {/* ── Right — Why register ────────────────────────────
+                Its own surface token rather than `accent`: a template whose
+                accent is a filled brand slab (modern-team's navy) wants that
+                slab here, but one that only uses its accent for buttons and
+                small text (luxury-agent's gold) does not. */}
+            <div className="relative bg-template-panel-invert px-8 py-10 lg:px-12 lg:py-12 flex flex-col">
 
               <button
                 onClick={close}
                 aria-label="Close"
-                className="absolute top-5 right-5 w-8 h-8 flex items-center justify-center rounded-full bg-template-accent-fg/10 hover:bg-template-accent-fg/20 text-template-accent-fg/60 hover:text-template-accent-fg transition-all"
+                className="absolute top-5 right-5 w-8 h-8 flex items-center justify-center rounded-full bg-template-panel-invert-fg/10 hover:bg-template-panel-invert-fg/20 text-template-panel-invert-fg/60 hover:text-template-panel-invert-fg transition-all"
               >
                 <X size={16} strokeWidth={2} />
               </button>
@@ -333,7 +337,7 @@ export default function AuthModal({
                 <p className="text-[12px] tracking-[0.3em] uppercase text-template-accent-soft font-sans mb-2">
                   Free Account
                 </p>
-                <h3 className="text-xl font-semibold text-template-accent-fg leading-snug">
+                <h3 className="text-xl font-semibold text-template-panel-invert-fg leading-snug">
                   {teamName}
                 </h3>
               </div>
@@ -341,20 +345,20 @@ export default function AuthModal({
               <div className="space-y-6 flex-1">
                 {BENEFITS.map(({ Icon, title, body }) => (
                   <div key={title} className="flex items-start gap-4">
-                    <div className="w-8 h-8 rounded-lg bg-template-accent-fg/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <div className="w-8 h-8 rounded-template-sm bg-template-panel-invert-fg/10 flex items-center justify-center flex-shrink-0 mt-0.5">
                       <Icon size={13} className="text-template-accent-soft" strokeWidth={1.75} />
                     </div>
                     <div>
-                      <p className="text-sm text-template-accent-fg font-medium">{title}</p>
-                      <p className="text-[13px] text-template-accent-fg/50 font-sans mt-0.5 leading-relaxed">{body}</p>
+                      <p className="text-sm text-template-panel-invert-fg font-medium">{title}</p>
+                      <p className="text-[13px] text-template-panel-invert-fg/50 font-sans mt-0.5 leading-relaxed">{body}</p>
                     </div>
                   </div>
                 ))}
               </div>
 
-              <div className="mt-10 pt-8 border-t border-template-accent-fg/10 flex items-start gap-2.5">
+              <div className="mt-10 pt-8 border-t border-template-panel-invert-fg/10 flex items-start gap-2.5">
                 <CheckCircle size={14} className="text-template-accent-soft flex-shrink-0 mt-0.5" strokeWidth={1.75} />
-                <p className="text-[12px] text-template-accent-fg/35 font-sans leading-relaxed">
+                <p className="text-[12px] text-template-panel-invert-fg/35 font-sans leading-relaxed">
                   Always free. No obligation, and you can unsubscribe at any time.
                 </p>
               </div>

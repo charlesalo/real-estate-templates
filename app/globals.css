@@ -146,13 +146,42 @@
   --template-font-heading: 'Playfair Display', Georgia, serif;
   --template-font-body: 'Inter', system-ui, sans-serif;
   --template-accent-hover: #B8935A;
-  --template-accent-muted: #8A7548;
+  /* Lighter than the base accent, not darker: "muted" has to stay legible on
+     this template's dark panels. */
+  --template-accent-muted: #A88C55;
   --template-accent-soft: #E0C88F;
   --template-overlay: #0A0A0A;
-  --template-panel: #FFFFFF;
-  --template-text-body: #374151;
-  --template-text-muted: #6B7280;
-  --template-text-subtle: #9CA3AF;
+  /* This template has no light surfaces. Panels are the near-black cards used
+     throughout it, and gold is reserved for buttons, hairlines and small text
+     — never a filled background. */
+  --template-panel: #0D0D0D;
+  --template-panel-invert: #141414;
+  --template-panel-invert-fg: #FFFFFF;
+  /* Headings on a panel are white here. Templates whose accent is a heading
+     colour (modern-team's navy) point this at their accent instead. */
+  --template-panel-heading: #FFFFFF;
+  /* Secondary "ghost" button: transparent, hairline border, brightening on
+     hover. Matches the CTA used on about / neighborhoods / featured-listings
+     / past-transactions. */
+  --template-ghost-border: rgb(255 255 255 / 0.25);
+  --template-ghost-fg: rgb(255 255 255 / 0.7);
+  --template-ghost-border-hover: #FFFFFF;
+  --template-ghost-fg-hover: #FFFFFF;
+  /* Corners are square in this template. Circles (avatars, dots, icon
+     buttons) are drawn with rounded-full and are unaffected. */
+  --template-radius-lg: 0;
+  --template-radius-md: 0;
+  --template-radius-sm: 0;
+  /* Menu rows read as white links, matching the Properties dropdown in the
+     navbar — the accent is not a hover colour for navigation here. */
+  --template-menu-fg: rgb(255 255 255 / 0.5);
+  --template-menu-fg-hover: #FFFFFF;
+  --template-menu-hover-bg: rgb(255 255 255 / 0.03);
+  /* Greys off the dark panel, not off white. Kept at or above 4.5:1 against
+     --template-panel — the consent line and field placeholders use `subtle`. */
+  --template-text-body: #D4D4D4;
+  --template-text-muted: #9A9A9A;
+  --template-text-subtle: #808080;
 }
 
 /* Template: Luxury Agent — Light variant */
@@ -170,6 +199,24 @@
   --template-accent-soft: #E0C88F;
   --template-overlay: #1A1A1A;
   --template-panel: #FFFFFF;
+  /* Charcoal, not gold — same rule as the dark variant. */
+  --template-panel-invert: #1A1A1A;
+  --template-panel-invert-fg: #FFFFFF;
+  /* Near-black rather than white: this variant's panel is white. */
+  --template-panel-heading: #1A1A1A;
+  /* Same ghost treatment inverted for a light panel. */
+  --template-ghost-border: rgb(26 26 26 / 0.25);
+  --template-ghost-fg: rgb(26 26 26 / 0.7);
+  --template-ghost-border-hover: #1A1A1A;
+  --template-ghost-fg-hover: #1A1A1A;
+  /* Square, same as the dark variant. */
+  --template-radius-lg: 0;
+  --template-radius-md: 0;
+  --template-radius-sm: 0;
+  /* Same treatment inverted for a light panel. */
+  --template-menu-fg: rgb(26 26 26 / 0.5);
+  --template-menu-fg-hover: #1A1A1A;
+  --template-menu-hover-bg: rgb(26 26 26 / 0.03);
   --template-text-body: #374151;
   --template-text-muted: #6B7280;
   --template-text-subtle: #9CA3AF;
@@ -192,9 +239,22 @@
   --template-accent-soft: #7B93C5;
   --template-overlay: #0F1E3E;
   --template-panel: #FFFFFF;
+  --template-panel-invert: #1A2D5A;
+  --template-panel-invert-fg: #FFFFFF;
+  --template-panel-heading: #1A2D5A;
+  --template-ghost-border: #D5DBE9;
+  --template-ghost-fg: #374151;
+  --template-ghost-border-hover: rgb(26 45 90 / 0.4);
+  --template-ghost-fg-hover: #374151;
   --template-text-body: #374151;
   --template-text-muted: #6B7280;
   --template-text-subtle: #9CA3AF;
+  --template-radius-lg: 1rem;
+  --template-radius-md: 0.75rem;
+  --template-radius-sm: 0.5rem;
+  --template-menu-fg: #374151;
+  --template-menu-fg-hover: #1A2D5A;
+  --template-menu-hover-bg: #EEF1F7;
 }
 
 /* Template: Modern Team — Warm accent variant (terracotta) */
@@ -212,9 +272,22 @@
   --template-accent-soft: #E8A98A;
   --template-overlay: #1C1917;
   --template-panel: #FFFFFF;
+  --template-panel-invert: #C2410C;
+  --template-panel-invert-fg: #FFFFFF;
+  --template-panel-heading: #C2410C;
+  --template-ghost-border: #E7E5E4;
+  --template-ghost-fg: #374151;
+  --template-ghost-border-hover: rgb(194 65 12 / 0.4);
+  --template-ghost-fg-hover: #374151;
   --template-text-body: #374151;
   --template-text-muted: #6B7280;
   --template-text-subtle: #9CA3AF;
+  --template-radius-lg: 1rem;
+  --template-radius-md: 0.75rem;
+  --template-radius-sm: 0.5rem;
+  --template-menu-fg: #374151;
+  --template-menu-fg-hover: #C2410C;
+  --template-menu-hover-bg: #FEF9F5;
 }
 
 /* Template: Local Expert — Warm variant (default) */
@@ -232,9 +305,22 @@
   --template-accent-soft: #D8B98A;
   --template-overlay: #1C1917;
   --template-panel: #FFFFFF;
+  --template-panel-invert: #854D0E;
+  --template-panel-invert-fg: #FFFFFF;
+  --template-panel-heading: #854D0E;
+  --template-ghost-border: #E7E5E4;
+  --template-ghost-fg: #374151;
+  --template-ghost-border-hover: rgb(133 77 14 / 0.4);
+  --template-ghost-fg-hover: #374151;
   --template-text-body: #374151;
   --template-text-muted: #6B7280;
   --template-text-subtle: #9CA3AF;
+  --template-radius-lg: 1rem;
+  --template-radius-md: 0.75rem;
+  --template-radius-sm: 0.5rem;
+  --template-menu-fg: #374151;
+  --template-menu-fg-hover: #854D0E;
+  --template-menu-hover-bg: #FEFDF0;
 }
 
 /* Template: Local Expert — Fresh variant */
@@ -252,9 +338,22 @@
   --template-accent-soft: #9BD6AF;
   --template-overlay: #14532D;
   --template-panel: #FFFFFF;
+  --template-panel-invert: #16A34A;
+  --template-panel-invert-fg: #FFFFFF;
+  --template-panel-heading: #16A34A;
+  --template-ghost-border: #D1FAE5;
+  --template-ghost-fg: #374151;
+  --template-ghost-border-hover: rgb(22 163 74 / 0.4);
+  --template-ghost-fg-hover: #374151;
   --template-text-body: #374151;
   --template-text-muted: #6B7280;
   --template-text-subtle: #9CA3AF;
+  --template-radius-lg: 1rem;
+  --template-radius-md: 0.75rem;
+  --template-radius-sm: 0.5rem;
+  --template-menu-fg: #374151;
+  --template-menu-fg-hover: #16A34A;
+  --template-menu-hover-bg: #F7FFF9;
 }
 
 /* Expose template tokens as Tailwind utilities */
@@ -270,6 +369,19 @@
   --color-template-accent-soft: var(--template-accent-soft);
   --color-template-overlay: var(--template-overlay);
   --color-template-panel: var(--template-panel);
+  --color-template-panel-invert: var(--template-panel-invert);
+  --color-template-panel-invert-fg: var(--template-panel-invert-fg);
+  --color-template-panel-heading: var(--template-panel-heading);
+  --color-template-ghost-border: var(--template-ghost-border);
+  --color-template-ghost-fg: var(--template-ghost-fg);
+  --color-template-ghost-border-hover: var(--template-ghost-border-hover);
+  --color-template-ghost-fg-hover: var(--template-ghost-fg-hover);
+  --color-template-menu-fg: var(--template-menu-fg);
+  --color-template-menu-fg-hover: var(--template-menu-fg-hover);
+  --color-template-menu-hover-bg: var(--template-menu-hover-bg);
+  --radius-template-lg: var(--template-radius-lg);
+  --radius-template-md: var(--template-radius-md);
+  --radius-template-sm: var(--template-radius-sm);
   --color-template-text-body: var(--template-text-body);
   --color-template-text-muted: var(--template-text-muted);
   --color-template-text-subtle: var(--template-text-subtle);
