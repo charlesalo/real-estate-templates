@@ -40,7 +40,7 @@ function TypeBadge({ isPrivate, isCharter, isMagnet }) {
 
 const INITIAL_LIMIT = 10
 
-export default function LuxuryNeighborhoodSchools({ neighborhoodName, schools }) {
+export default function NeighborhoodSchools({ neighborhoodName, schools }) {
   const grouped = {
     elementary: schools.filter(s => s.level === 'elementary'),
     middle:     schools.filter(s => s.level === 'middle'),

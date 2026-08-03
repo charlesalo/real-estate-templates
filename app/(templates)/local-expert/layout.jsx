@@ -1,5 +1,5 @@
 import { Plus_Jakarta_Sans, Gelasio } from 'next/font/google'
-import LocalExpertShell from './_components/layout/Shell'
+import Shell from './_components/layout/Shell'
 import { getAgent, getSiteSettings } from '@/lib/sanity/queries'
 import { AGENT as AGENT_FALLBACK } from '@/lib/local-expert-data'
 import './page-transition.css'
@@ -19,7 +19,7 @@ const gelasio = Gelasio({
 })
 
 // Combines the `agent` (personal profile) and `siteSettings` (business/legal
-// identity) Sanity documents into the single `agent` shape LocalExpertShell
+// identity) Sanity documents into the single `agent` shape Shell
 // and its children already expect, falling back to the demo data file when
 // Sanity hasn't been populated for this deployment yet.
 async function getResolvedAgent() {
@@ -115,9 +115,9 @@ export default async function LocalExpertLayout({ children }) {
         minHeight: '100vh',
       }}
     >
-      <LocalExpertShell agent={agent}>
+      <Shell agent={agent}>
         {children}
-      </LocalExpertShell>
+      </Shell>
       </div>
     </>
   )

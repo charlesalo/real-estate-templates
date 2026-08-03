@@ -33,7 +33,7 @@ function ChartCard({ title, children }) {
   )
 }
 
-export default function LuxuryNeighborhoodDemographics({ neighborhoodName, demo }) {
+export default function NeighborhoodDemographics({ neighborhoodName, demo }) {
   if (!demo) return null
 
   return (

@@ -28,7 +28,7 @@ const STATUS_STYLES = {
   Closed:  'bg-[#6B7280] text-white',
 }
 
-export default function ModernTeamScheduleTourModal({
+export default function ScheduleTourModal({
   open,
   onClose,
   propertyImage,

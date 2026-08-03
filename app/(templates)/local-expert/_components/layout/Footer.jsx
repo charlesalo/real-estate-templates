@@ -39,7 +39,7 @@ const SOCIAL_LINKS = [
   { label: 'LinkedIn', href: '#', Icon: LinkedinIcon },
 ]
 
-export default function LocalExpertFooter({ agent }) {
+export default function Footer({ agent }) {
   const year = new Date().getFullYear()
   const brokerage = agent?.brokerage ?? 'Nadia Osei Real Estate LLC'
   const address = agent?.brokerageAddress ?? '90 5th Avenue, New York, NY 10011'

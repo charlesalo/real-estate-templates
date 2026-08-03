@@ -72,7 +72,7 @@ function PlaceAvatar({ name }) {
 
 const INITIAL_LIMIT = 10
 
-export default function LuxuryNeighborhoodAmenities({ neighborhoodName, walkData, placesData }) {
+export default function NeighborhoodAmenities({ neighborhoodName, walkData, placesData }) {
   const [activeTab, setActiveTab] = useState('all')
   const [showAll, setShowAll]     = useState(false)
 

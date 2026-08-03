@@ -10,7 +10,7 @@ const STATUS_STYLES = {
   Closed:  'bg-[#6B7280] text-white',
 }
 
-export default function ModernTeamPropertyCard({
+export default function PropertyCard({
   id,
   mlsId,
   image,

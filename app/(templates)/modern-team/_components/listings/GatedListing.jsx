@@ -18,7 +18,7 @@ const WITHHELD = [
  * Only the teaser fields from previewListing() are passed in — the rest of the
  * SimplyRETS payload stays on the server, so "view source" gets nothing extra.
  */
-export default function ModernTeamGatedListing({ listing, teamName = 'The Hargrove Group' }) {
+export default function GatedListing({ listing, teamName = 'The Hargrove Group' }) {
   const { openAuth } = useAuth()
 
   const address = listing.address?.full ?? 'This property'

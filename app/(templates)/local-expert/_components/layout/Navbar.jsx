@@ -10,7 +10,7 @@ import { cn } from '@/lib/utils'
 
 const BASE = '/local-expert'
 
-export default function LocalExpertNavbar({ agentName, phone, onContactOpen }) {
+export default function Navbar({ agentName, phone, onContactOpen }) {
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
   const pathname = usePathname()

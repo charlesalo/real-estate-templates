@@ -7,7 +7,7 @@ import { X, CheckCircle } from 'lucide-react'
 
 const SESSION_KEY = 'luxury_exit_popup_dismissed'
 
-export default function LuxuryExitIntentPopup({ agentName = 'Victoria Sinclair' }) {
+export default function ExitIntentPopup({ agentName = 'Victoria Sinclair' }) {
   const [open, setOpen]   = useState(false)
   const [email, setEmail] = useState('')
   const [agreed, setAgreed] = useState(false)

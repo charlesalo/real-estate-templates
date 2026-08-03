@@ -98,7 +98,7 @@ function MenuItem({ link, onClose, pathname }) {
   )
 }
 
-export default function ModernTeamSideMenu({
+export default function SideMenu({
   open,
   onClose,
   teamName = 'The Hargrove Group',

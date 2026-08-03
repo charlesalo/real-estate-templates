@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import HeroSearchFocused from './_components/sections/HeroSearchFocused'
-import ModernTeamNewsletterForm from './_components/layout/NewsletterForm'
+import NewsletterForm from './_components/layout/NewsletterForm'
 import StatsCounter from './_components/StatsCounter'
 import { MapPin, Bed, Bath, Square } from 'lucide-react'
 import ModalTrigger from '@/components/ui/ModalTrigger'
@@ -460,7 +460,7 @@ export default function ModernTeamHome() {
                 Join thousands of Houston buyers and sellers who rely on our monthly market reports, neighborhood price trends, and new listing alerts to make smarter real estate decisions.
               </p>
 
-              <ModernTeamNewsletterForm consentId="newsletter-consent" />
+              <NewsletterForm consentId="newsletter-consent" />
             </div>
 
             {/* Right — image */}

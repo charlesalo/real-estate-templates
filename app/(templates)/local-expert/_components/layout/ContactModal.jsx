@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { X, Phone, Mail, CheckSquare } from 'lucide-react'
 
-export default function LocalExpertContactModal({ agent, open, onClose }) {
+export default function ContactModal({ agent, open, onClose }) {
   const [form, setForm] = useState({ name: '', email: '', phone: '', message: '', disclosure: false })
   const [sent, setSent] = useState(false)
   const [submitting, setSubmitting] = useState(false)

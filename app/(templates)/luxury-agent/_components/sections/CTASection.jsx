@@ -49,8 +49,7 @@ export default function CTASection({
 
           <h2
             className={cn(
-              'font-normal leading-tight mb-6',
-              'font-heading text-4xl lg:text-5xl text-white',
+              'font-normal mb-6 font-heading text-4xl lg:text-5xl text-white',
             )}
           >
             {headline}

@@ -5,7 +5,7 @@ import { MapPin } from 'lucide-react'
 
 let mapboxgl = null
 
-export default function ModernTeamPropertyMap({ lat, lng, address, label }) {
+export default function PropertyMap({ lat, lng, address, label }) {
   const containerRef = useRef(null)
   const mapRef       = useRef(null)
   const token        = process.env.NEXT_PUBLIC_MAPBOX_TOKEN

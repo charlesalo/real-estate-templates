@@ -8,7 +8,7 @@ import { getNearbyPlaces } from '@/lib/places'
 import NeighborhoodAmenities from '../../_components/sections/NeighborhoodAmenities'
 import NeighborhoodSchools from '../../_components/sections/NeighborhoodSchools'
 import { getSchools } from '@/lib/schooldigger'
-import ModernTeamPropertyCard from '../../_components/listings/PropertyCard'
+import PropertyCard from '../../_components/listings/PropertyCard'
 import ModalTrigger from '@/components/ui/ModalTrigger'
 
 const NEIGHBORHOODS = {
@@ -371,7 +371,7 @@ export default async function NeighborhoodPage({ params }) {
                 </h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                   {listings.map(l => (
-                    <ModernTeamPropertyCard key={l.id} {...l} />
+                    <PropertyCard key={l.id} {...l} />
                   ))}
                 </div>
               </div>

@@ -4,9 +4,9 @@ import Link from 'next/link'
 import PropertyCard from '../../_components/listings/PropertyCard'
 import CTASection from '../../_components/sections/CTASection'
 import ModalTrigger from '@/components/ui/ModalTrigger'
-import LuxuryNeighborhoodAmenities from '../../_components/sections/NeighborhoodAmenities'
-import LuxuryNeighborhoodDemographics from '../../_components/sections/NeighborhoodDemographics'
-import LuxuryNeighborhoodSchools from '../../_components/sections/NeighborhoodSchools'
+import NeighborhoodAmenities from '../../_components/sections/NeighborhoodAmenities'
+import NeighborhoodDemographics from '../../_components/sections/NeighborhoodDemographics'
+import NeighborhoodSchools from '../../_components/sections/NeighborhoodSchools'
 import { getListings } from '@/lib/simplyrets'
 import { getWalkScore } from '@/lib/walkscore'
 import { getNearbyPlaces } from '@/lib/places'
@@ -267,19 +267,19 @@ export default async function NeighborhoodPage({ params }) {
         </section>
       )}
 
-      <LuxuryNeighborhoodAmenities
+      <NeighborhoodAmenities
         neighborhoodName={hood.name}
         walkData={walkData}
         placesData={placesData}
       />
 
-      <LuxuryNeighborhoodDemographics
+      <NeighborhoodDemographics
         neighborhoodName={hood.name}
         demo={demo}
       />
 
       {schools.length > 0 && (
-        <LuxuryNeighborhoodSchools
+        <NeighborhoodSchools
           neighborhoodName={hood.name}
           schools={schools}
         />

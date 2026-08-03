@@ -38,7 +38,7 @@ const QUICK_LINKS = [
   { label: 'Contact Us',        modal: true },
 ]
 
-export default function ModernTeamFooter({
+export default function Footer({
   teamName    = 'The Hargrove Group',
   license     = 'TX Lic# 0624531',
   tagline,

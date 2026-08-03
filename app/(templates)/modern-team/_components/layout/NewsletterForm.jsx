@@ -24,7 +24,7 @@ const PhoneIcon = () => (
 const fieldCls = 'flex items-center gap-3 px-4 py-3 rounded-lg bg-white border border-[#D5DBE9] focus-within:border-[#1A2D5A] transition-colors'
 const inputCls = 'flex-1 text-sm text-[#111827] placeholder:text-[#9CA3AF] outline-none bg-transparent'
 
-export default function ModernTeamNewsletterForm({ consentId = 'newsletter-consent' }) {
+export default function NewsletterForm({ consentId = 'newsletter-consent' }) {
   const [fields, setFields] = useState({ name: '', email: '', phone: '' })
   const [sent, setSent] = useState(false)
   const [loading, setLoading] = useState(false)

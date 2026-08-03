@@ -10,7 +10,7 @@ import {
   Map as MapIcon, ChevronLeft, ChevronRight,
   Bed, Bath, Maximize2, Lock, Heart, Check,
 } from 'lucide-react'
-import ModernTeamPropertyCard from './PropertyCard'
+import PropertyCard from './PropertyCard'
 import { formatPrice } from '@/components/real-estate/PriceTag'
 import { useAuth } from '@/components/auth/AuthProvider'
 
@@ -401,7 +401,7 @@ function FilterDrawer({ filters, onApply, onClose }) {
 
 // ─── Main component ───────────────────────────────────────────────────────────
 
-export default function ModernTeamSearchClient({
+export default function SearchClient({
   initialListings = [],
   initialTotal    = 0,
   initialHasMore  = false,
@@ -743,7 +743,7 @@ export default function ModernTeamSearchClient({
               </div>
             ) : view === 'grid' ? (
               <div className={`grid gap-5 ${showMap ? 'grid-cols-1 sm:grid-cols-2' : 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3'}`}>
-                {listings.map(l => <ModernTeamPropertyCard key={l.id} {...l} />)}
+                {listings.map(l => <PropertyCard key={l.id} {...l} />)}
                 {gated && hiddenCount > 0 &&
                   Array.from({ length: Math.min(hiddenCount, showMap ? 2 : 3) }).map((_, i) => (
                     <LockedCard key={`locked-${i}`} />

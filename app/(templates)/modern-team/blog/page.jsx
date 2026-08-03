@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import ModalTrigger from '@/components/ui/ModalTrigger'
-import ModernTeamNewsletterForm from '../_components/layout/NewsletterForm'
+import NewsletterForm from '../_components/layout/NewsletterForm'
 
 export const metadata = {
   title: { absolute: 'Houston Real Estate & Community Blog | The Hargrove Group' },
@@ -202,7 +202,7 @@ export default function BlogPage() {
               Join thousands of Houston buyers and sellers who rely on our monthly market reports, neighborhood price trends, and new listing alerts to make smarter real estate decisions.
             </p>
 
-            <ModernTeamNewsletterForm consentId="blog-consent" />
+            <NewsletterForm consentId="blog-consent" />
           </div>
 
           {/* Right — image */}

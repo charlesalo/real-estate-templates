@@ -7,7 +7,7 @@ import { X, CheckCircle } from 'lucide-react'
 
 const SESSION_KEY = 'modern_team_exit_popup_dismissed'
 
-export default function ModernTeamExitIntentPopup({ teamName = 'The Hargrove Group' }) {
+export default function ExitIntentPopup({ teamName = 'The Hargrove Group' }) {
   const [open, setOpen]     = useState(false)
   const [email, setEmail]   = useState('')
   const [agreed, setAgreed] = useState(false)

@@ -6,7 +6,7 @@ import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ChevronDown } from 'lucide-react'
-import ModernTeamSideMenu from './SideMenu'
+import SideMenu from './SideMenu'
 import AccountMenu from '@/components/auth/AccountMenu'
 import { cn } from '@/lib/utils'
 
@@ -66,7 +66,7 @@ function Dropdown({ link, scrolled }) {
 
 // ── Main Navbar ───────────────────────────────────────────────────────────────
 
-export default function ModernTeamNavbar({
+export default function Navbar({
   logo,
   links     = [],
   menuLinks = [],
@@ -185,7 +185,7 @@ export default function ModernTeamNavbar({
         </div>
       </header>
 
-      <ModernTeamSideMenu
+      <SideMenu
         open={menuOpen}
         onClose={() => setMenuOpen(false)}
         teamName={logo?.text ?? 'The Hargrove Group'}

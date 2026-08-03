@@ -54,7 +54,7 @@ export default function Footer({
           {/* Brand */}
           <div>
             <div className="mb-5">
-              <div className={cn('font-semibold leading-none', 'font-heading text-2xl text-white')}>
+              <div className="font-semibold font-heading text-2xl text-white">
                 {agentName}
               </div>
               <div className="text-[12px] tracking-[0.35em] text-template-accent uppercase font-sans mt-1.5">

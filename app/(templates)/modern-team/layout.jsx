@@ -1,8 +1,8 @@
 import { Inter, DM_Sans } from 'next/font/google'
-import ModernTeamNavbar from './_components/layout/Navbar'
-import ModernTeamFooter from './_components/layout/Footer'
+import Navbar from './_components/layout/Navbar'
+import Footer from './_components/layout/Footer'
 import ContactModal from './_components/layout/ContactModal'
-import ModernTeamExitIntentPopup from './_components/layout/ExitIntentPopup'
+import ExitIntentPopup from './_components/layout/ExitIntentPopup'
 import GoogleOneTap from '@/components/auth/GoogleOneTap'
 import AuthProvider from '@/components/auth/AuthProvider'
 import AuthModal from '@/components/auth/AuthModal'
@@ -145,7 +145,7 @@ export default function ModernTeamLayout({ children }) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(JSON_LD) }}
       />
       <AuthProvider>
-        <ModernTeamNavbar
+        <Navbar
           logo={{ text: TEAM.name }}
           links={NAV_LINKS}
           menuLinks={MENU_LINKS}
@@ -159,7 +159,7 @@ export default function ModernTeamLayout({ children }) {
         <main>{children}</main>
         <AuthModal teamName={TEAM.name} template="modern-team" />
       </AuthProvider>
-      <ModernTeamExitIntentPopup teamName={TEAM.name} />
+      <ExitIntentPopup teamName={TEAM.name} />
       <ContactModal
         agentName={TEAM.name}
         agentDre={TEAM.license}
@@ -168,7 +168,7 @@ export default function ModernTeamLayout({ children }) {
         address={TEAM.address}
         socialLinks={TEAM.socialLinks}
       />
-      <ModernTeamFooter
+      <Footer
         teamName={TEAM.name}
         license={TEAM.license}
         brokerage={TEAM.brokerage}

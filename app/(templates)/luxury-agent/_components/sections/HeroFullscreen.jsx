@@ -86,8 +86,7 @@ export default function HeroFullscreen({
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1, delay: 0.45, ease: [0.22, 1, 0.36, 1] }}
                 className={cn(
-                  'font-normal text-white leading-[1.04] tracking-tight mb-8',
-                  'font-heading text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-[86px]',
+                  'font-normal text-white tracking-tight mb-8 font-heading text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-[86px]',
                 )}
               >
                 {headline}

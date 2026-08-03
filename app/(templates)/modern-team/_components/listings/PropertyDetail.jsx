@@ -206,7 +206,7 @@ function StatusChip({ status }) {
 }
 
 // ── Main component ─────────────────────────────────────────────────────────
-export default function ModernTeamPropertyDetail({
+export default function PropertyDetail({
   listing,
   similarListings = [],
   agentName,

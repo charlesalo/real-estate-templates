@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation'
-import ModernTeamPropertyDetail from '../../_components/listings/PropertyDetail'
-import ModernTeamGatedListing from '../../_components/listings/GatedListing'
+import PropertyDetail from '../../_components/listings/PropertyDetail'
+import GatedListing from '../../_components/listings/GatedListing'
 import { getListingById, getFeaturedListings } from '@/lib/simplyrets'
 import { previewListing, resolveGate } from '@/lib/gating'
 
@@ -62,7 +62,7 @@ export default async function PropertyDetailPage({ params }) {
   if (gated) {
     return (
       <div className="pt-20">
-        <ModernTeamGatedListing listing={previewListing(listing)} teamName={AGENT.name} />
+        <GatedListing listing={previewListing(listing)} teamName={AGENT.name} />
       </div>
     )
   }
@@ -95,7 +95,7 @@ export default async function PropertyDetailPage({ params }) {
 
   return (
     <div className="pt-20">
-      <ModernTeamPropertyDetail
+      <PropertyDetail
         listing={listing}
         similarListings={similar}
         agentName={AGENT.name}

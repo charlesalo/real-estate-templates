@@ -1,4 +1,4 @@
-import ModernTeamSearchClient from '../_components/listings/SearchClient'
+import SearchClient from '../_components/listings/SearchClient'
 import { getListings } from '@/lib/simplyrets'
 import { COUNT_PROBE_LIMIT, gateSearchResults, resolveGate } from '@/lib/gating'
 
@@ -56,7 +56,7 @@ export default async function ListingsPage({ searchParams }) {
       <div className="h-20 bg-[#1A2D5A]" aria-hidden="true" />
       <h1 className="sr-only">Search Houston Homes</h1>
 
-      <ModernTeamSearchClient
+      <SearchClient
         initialListings={initialListings}
         initialTotal={initialTotal}
         initialHasMore={initialHasMore}
