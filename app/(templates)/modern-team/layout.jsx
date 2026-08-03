@@ -144,7 +144,7 @@ export default function ModernTeamLayout({ children }) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(JSON_LD) }}
       />
-      <AuthProvider>
+      <AuthProvider template="modern-team">
         <Navbar
           logo={{ text: TEAM.name }}
           links={NAV_LINKS}
@@ -158,8 +158,10 @@ export default function ModernTeamLayout({ children }) {
         <GoogleOneTap clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID} supabaseAuth />
         <main>{children}</main>
         <AuthModal teamName={TEAM.name} template="modern-team" />
+        {/* Inside the provider so it can hold its fire while the auth modal
+            is open — see the `intent` gate in ExitIntentPopup. */}
+        <ExitIntentPopup teamName={TEAM.name} />
       </AuthProvider>
-      <ExitIntentPopup teamName={TEAM.name} />
       <ContactModal
         agentName={TEAM.name}
         agentDre={TEAM.license}
