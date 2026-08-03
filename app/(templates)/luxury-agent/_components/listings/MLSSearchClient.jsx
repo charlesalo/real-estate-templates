@@ -14,6 +14,7 @@ import StatusBadge from './StatusBadge'
 import { cn } from '@/lib/utils'
 
 const MapView = dynamic(() => import('@/components/real-estate/MapView'), { ssr: false, loading: () => null })
+import { MAP_THEME } from './mapTheme'
 
 // ─── Constants ────────────────────────────────────────────────────────────────
 
@@ -602,7 +603,7 @@ export default function MLSSearchClient({
         {showMap && (
           <div className="hidden lg:block">
             <div className="sticky top-[160px]" style={{ height: 'calc(100vh - 160px)' }}>
-              <MapView listings={listings} template={template} className="w-full h-full" />
+              <MapView listings={listings} template={template} theme={MAP_THEME} className="w-full h-full" />
             </div>
           </div>
         )}

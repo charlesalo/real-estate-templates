@@ -15,6 +15,7 @@ import { formatPrice } from '@/components/real-estate/PriceTag'
 import { useAuth } from '@/components/auth/AuthProvider'
 
 const MapView = dynamic(() => import('@/components/real-estate/MapView'), { ssr: false, loading: () => null })
+import { MAP_THEME } from './mapTheme'
 
 // ─── Constants ────────────────────────────────────────────────────────────────
 
@@ -810,7 +811,7 @@ export default function ModernTeamSearchClient({
         {showMap && (
           <div className="hidden lg:block">
             <div className="sticky top-[160px]" style={{ height: 'calc(100vh - 160px)' }}>
-              <MapView listings={listings} template="modern-team" className="w-full h-full" />
+              <MapView listings={listings} template="modern-team" theme={MAP_THEME} className="w-full h-full" />
             </div>
           </div>
         )}

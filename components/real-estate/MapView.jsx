@@ -8,11 +8,28 @@ import 'mapbox-gl/dist/mapbox-gl.css'
 // Dynamically import mapbox-gl only on client to avoid SSR errors
 let mapboxgl = null
 
+/**
+ * Neutral fallback so the map renders standalone. Templates pass their own
+ * palette via `theme` — see each template's _components/listings/mapTheme.js.
+ * Deliberately brand-free: this file is shared, so it must not know what any
+ * particular template looks like.
+ */
+const DEFAULT_THEME = {
+  mapStyle:         'mapbox://styles/mapbox/light-v11',
+  markerBg:         '#374151',
+  markerText:       '#FFFFFF',
+  popupBg:          '#111827',
+  popupText:        '#FFFFFF',
+  popupMuted:       'rgba(255,255,255,0.65)',
+  placeholderClass: 'bg-neutral-100 text-neutral-500',
+}
+
 export default function MapView({
   listings = [],
   center,
   zoom = 11,
-  template = 'luxury-agent',
+  template,
+  theme,
   className,
 }) {
   const containerRef = useRef(null)
@@ -20,7 +37,12 @@ export default function MapView({
   const markersRef = useRef([])
   const [ready, setReady] = useState(false)
   const [noToken, setNoToken] = useState(false)
-  const isLuxury = template === 'luxury-agent'
+
+  // Destructured to primitives: the marker effect depends on these, and a
+  // merged object would be a new reference every render.
+  const {
+    mapStyle, markerBg, markerText, popupBg, popupText, popupMuted, placeholderClass,
+  } = { ...DEFAULT_THEME, ...theme }
 
   useEffect(() => {
     const token = process.env.NEXT_PUBLIC_MAPBOX_TOKEN
@@ -36,7 +58,7 @@ export default function MapView({
 
       const map = new mapboxgl.Map({
         container: containerRef.current,
-        style: isLuxury ? 'mapbox://styles/mapbox/dark-v11' : 'mapbox://styles/mapbox/light-v11',
+        style: mapStyle,
         center: defaultCenter,
         zoom,
       })
@@ -65,12 +87,6 @@ export default function MapView({
     listings.forEach(listing => {
       const { lat, lng } = listing.geo ?? {}
       if (!lat || !lng) return
-
-      const markerBg   = isLuxury ? '#C9A96E' : '#1A2D5A'
-      const markerText = isLuxury ? '#0A0A0A' : '#FFFFFF'
-      const popupBg    = isLuxury ? '#0D0D0D' : '#1A2D5A'
-      const popupText  = isLuxury ? '#FFFFFF' : '#FFFFFF'
-      const popupMuted = isLuxury ? 'rgba(255,255,255,0.5)' : 'rgba(255,255,255,0.65)'
 
       const el = document.createElement('div')
       el.className = 'mapbox-marker'
@@ -104,18 +120,22 @@ export default function MapView({
         .addTo(mapRef.current)
 
       el.addEventListener('click', () => {
-        if (listing.mlsId) window.location.href = `/${template}/listings/${listing.mlsId}`
+        // `template` names the route segment to link into; the owning template
+        // passes it. No default — this file must not name a specific template.
+        if (listing.mlsId && template) {
+          window.location.href = `/${template}/listings/${listing.mlsId}`
+        }
       })
 
       markersRef.current.push(marker)
     })
-  }, [ready, listings, template])
+  }, [ready, listings, template, markerBg, markerText, popupBg, popupText, popupMuted])
 
   if (noToken) {
     return (
       <div className={cn(
         'flex flex-col items-center justify-center gap-3 rounded',
-        isLuxury ? 'bg-[#1A1A1A] text-white/40' : 'bg-template-surface text-template-fg/40',
+        placeholderClass,
         className ?? 'h-full min-h-[400px]',
       )}>
         <MapPin size={32} strokeWidth={1} />
