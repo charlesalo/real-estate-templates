@@ -145,6 +145,14 @@
   --template-border: #2A2A2A;
   --template-font-heading: 'Playfair Display', Georgia, serif;
   --template-font-body: 'Inter', system-ui, sans-serif;
+  --template-accent-hover: #B8935A;
+  --template-accent-muted: #8A7548;
+  --template-accent-soft: #E0C88F;
+  --template-overlay: #0A0A0A;
+  --template-panel: #FFFFFF;
+  --template-text-body: #374151;
+  --template-text-muted: #6B7280;
+  --template-text-subtle: #9CA3AF;
 }
 
 /* Template: Luxury Agent — Light variant */
@@ -157,6 +165,14 @@
   --template-border: #E5E5E3;
   --template-font-heading: 'Playfair Display', Georgia, serif;
   --template-font-body: 'Inter', system-ui, sans-serif;
+  --template-accent-hover: #B8935A;
+  --template-accent-muted: #8A7548;
+  --template-accent-soft: #E0C88F;
+  --template-overlay: #1A1A1A;
+  --template-panel: #FFFFFF;
+  --template-text-body: #374151;
+  --template-text-muted: #6B7280;
+  --template-text-subtle: #9CA3AF;
 }
 
 /* Template: Modern Team — Navy Dream light/warm variant */
@@ -171,6 +187,14 @@
   --template-navy-light: #E8ECF6;
   --template-font-heading: 'Inter', system-ui, sans-serif;
   --template-font-body: 'DM Sans', system-ui, sans-serif;
+  --template-accent-hover: #243870;
+  --template-accent-muted: #4B6090;
+  --template-accent-soft: #7B93C5;
+  --template-overlay: #0F1E3E;
+  --template-panel: #FFFFFF;
+  --template-text-body: #374151;
+  --template-text-muted: #6B7280;
+  --template-text-subtle: #9CA3AF;
 }
 
 /* Template: Modern Team — Warm accent variant (terracotta) */
@@ -183,6 +207,14 @@
   --template-border: #E7E5E4;
   --template-font-heading: 'Inter', system-ui, sans-serif;
   --template-font-body: 'DM Sans', system-ui, sans-serif;
+  --template-accent-hover: #9A340A;
+  --template-accent-muted: #D2704A;
+  --template-accent-soft: #E8A98A;
+  --template-overlay: #1C1917;
+  --template-panel: #FFFFFF;
+  --template-text-body: #374151;
+  --template-text-muted: #6B7280;
+  --template-text-subtle: #9CA3AF;
 }
 
 /* Template: Local Expert — Warm variant (default) */
@@ -195,6 +227,14 @@
   --template-border: #E7E5E4;
   --template-font-heading: 'Nunito', system-ui, sans-serif;
   --template-font-body: 'Plus Jakarta Sans', system-ui, sans-serif;
+  --template-accent-hover: #6B3E0B;
+  --template-accent-muted: #A97C3A;
+  --template-accent-soft: #D8B98A;
+  --template-overlay: #1C1917;
+  --template-panel: #FFFFFF;
+  --template-text-body: #374151;
+  --template-text-muted: #6B7280;
+  --template-text-subtle: #9CA3AF;
 }
 
 /* Template: Local Expert — Fresh variant */
@@ -207,6 +247,14 @@
   --template-border: #D1FAE5;
   --template-font-heading: 'Nunito', system-ui, sans-serif;
   --template-font-body: 'Plus Jakarta Sans', system-ui, sans-serif;
+  --template-accent-hover: #12813B;
+  --template-accent-muted: #4FA96F;
+  --template-accent-soft: #9BD6AF;
+  --template-overlay: #14532D;
+  --template-panel: #FFFFFF;
+  --template-text-body: #374151;
+  --template-text-muted: #6B7280;
+  --template-text-subtle: #9CA3AF;
 }
 
 /* Expose template tokens as Tailwind utilities */
@@ -217,6 +265,14 @@
   --color-template-accent-fg: var(--template-accent-fg);
   --color-template-surface: var(--template-surface);
   --color-template-border: var(--template-border);
+  --color-template-accent-hover: var(--template-accent-hover);
+  --color-template-accent-muted: var(--template-accent-muted);
+  --color-template-accent-soft: var(--template-accent-soft);
+  --color-template-overlay: var(--template-overlay);
+  --color-template-panel: var(--template-panel);
+  --color-template-text-body: var(--template-text-body);
+  --color-template-text-muted: var(--template-text-muted);
+  --color-template-text-subtle: var(--template-text-subtle);
   --font-heading: var(--template-font-heading, var(--font-sans));
 }
 

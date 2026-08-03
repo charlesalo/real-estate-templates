@@ -38,7 +38,7 @@ export default function AccountMenu({ solid, savedSearchesHref }) {
         onClick={() => openAuth('search')}
         className={cn(
           'flex items-center gap-1.5 text-sm font-medium transition-colors duration-200',
-          solid ? 'text-[#374151] hover:text-[#1A2D5A]' : 'text-white/90 hover:text-white',
+          solid ? 'text-template-text-body hover:text-template-accent' : 'text-white/90 hover:text-white',
         )}
       >
         <User size={14} strokeWidth={2} />
@@ -57,7 +57,7 @@ export default function AccountMenu({ solid, savedSearchesHref }) {
         className={cn(
           'w-9 h-9 rounded-full flex items-center justify-center text-[12px] font-semibold tracking-wide transition-all duration-200',
           solid
-            ? 'bg-[#1A2D5A] text-white hover:bg-[#243870]'
+            ? 'bg-template-accent text-template-accent-fg hover:bg-template-accent-hover'
             : 'bg-white/15 text-white border border-white/30 hover:bg-white/25',
         )}
       >
@@ -71,17 +71,17 @@ export default function AccountMenu({ solid, savedSearchesHref }) {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -8, scale: 0.97 }}
             transition={{ duration: 0.18, ease: [0.22, 1, 0.36, 1] }}
-            className="absolute top-full right-0 mt-3 min-w-[230px] bg-white border border-[#E5E7EB] rounded-xl shadow-xl shadow-[#1A2D5A]/8 py-2 z-10"
+            className="absolute top-full right-0 mt-3 min-w-[230px] bg-template-panel border border-template-border rounded-xl shadow-xl shadow-template-accent/8 py-2 z-10"
           >
-            <div className="px-4 py-2 border-b border-[#EEF1F7] mb-1">
-              {name && <p className="text-sm font-semibold text-[#111827] truncate">{name}</p>}
-              <p className="text-[12px] text-[#9CA3AF] font-sans truncate">{user.email}</p>
+            <div className="px-4 py-2 border-b border-template-surface mb-1">
+              {name && <p className="text-sm font-semibold text-template-fg truncate">{name}</p>}
+              <p className="text-[12px] text-template-text-subtle font-sans truncate">{user.email}</p>
             </div>
 
             <Link
               href={savedSearchesHref}
               onClick={() => setOpen(false)}
-              className="flex items-center gap-2.5 px-4 py-2.5 text-sm text-[#374151] hover:text-[#1A2D5A] hover:bg-[#EEF1F7] transition-colors"
+              className="flex items-center gap-2.5 px-4 py-2.5 text-sm text-template-text-body hover:text-template-accent hover:bg-template-surface transition-colors"
             >
               <Heart size={14} strokeWidth={1.75} />
               Saved Searches
@@ -89,7 +89,7 @@ export default function AccountMenu({ solid, savedSearchesHref }) {
 
             <button
               onClick={() => { setOpen(false); signOut() }}
-              className="w-full flex items-center gap-2.5 px-4 py-2.5 text-sm text-[#374151] hover:text-[#1A2D5A] hover:bg-[#EEF1F7] transition-colors"
+              className="w-full flex items-center gap-2.5 px-4 py-2.5 text-sm text-template-text-body hover:text-template-accent hover:bg-template-surface transition-colors"
             >
               <LogOut size={14} strokeWidth={1.75} />
               Sign Out

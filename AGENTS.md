@@ -30,11 +30,21 @@ The root `components/` directory is **only** for code two or more templates genu
 
 ## The rule that keeps it that way
 
-> **`components/` may not contain a color, a font, or a template name.**
+> **`components/` may not contain a brand color, a font, or a template name.**
 
 Anything with `#C9A96E` in it belongs to `luxury-agent`. If you are reaching for a `template` prop so one component can serve two designs, stop and write the second component instead — that pattern is how this codebase previously accumulated hundreds of lines of unreachable styling branches.
 
 Shared *logic* is a different thing and is welcome: `lib/mortgage.js` backs three visually distinct calculators. Extract behaviour, not markup.
+
+### How a genuinely shared component gets themed
+
+Two mechanisms, and which one you need depends on where the value ends up:
+
+**CSS — use the `--template-*` tokens.** Each template layout wraps its subtree in a scope class (`luxury-agent`, `modern-team`, `local-expert`) that defines the whole palette in `app/globals.css`. A shared component just writes `bg-template-accent`, `text-template-text-muted`, `border-template-border` and adapts automatically, with no props. `components/auth/AuthModal` and `AccountMenu` work this way — that is why they can be shared by templates that look nothing alike. Available: `bg`, `fg`, `accent`, `accent-fg`, `accent-hover`, `accent-muted`, `accent-soft`, `surface`, `border`, `overlay`, `panel`, `text-body`, `text-muted`, `text-subtle`.
+
+**JavaScript values — pass a theme prop.** Colors that never become CSS classes can't read the tokens. `components/real-estate/MapView` takes a `theme` prop because Mapbox basemap URLs and canvas-drawn marker colors are JS strings; each template owns its palette in `_components/listings/mapTheme.js`. Such a component may keep a brand-*neutral* documented fallback so it renders standalone — that is the one exception to the rule above.
+
+A `template` prop is still fine when it carries *data* rather than styling — `MapView` uses it for the listing route segment, `AuthModal` records it as `signup_template`. Neither may default to a specific template name.
 
 ## Imports
 

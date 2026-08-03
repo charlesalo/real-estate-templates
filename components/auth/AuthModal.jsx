@@ -59,7 +59,10 @@ function GoogleMark() {
 
 export default function AuthModal({
   teamName = 'The Hargrove Group',
-  template = 'modern-team',
+  // Recorded as `signup_template` in Supabase user metadata so leads can be
+  // attributed to the template that converted them. No default — this file is
+  // shared and must not name a specific template.
+  template,
 }) {
   const { intent, closeAuth, configured } = useAuth()
   const supabase = getSupabaseBrowserClient()
@@ -164,8 +167,8 @@ export default function AuthModal({
   }
 
   const inputCls =
-    'w-full bg-transparent border border-[#D5DBE9] text-[#111827] text-sm px-4 py-3 rounded-lg outline-none placeholder:text-[#9CA3AF] focus:border-[#1A2D5A] transition-colors'
-  const labelCls = 'block text-[12px] tracking-[0.2em] uppercase text-[#6B7280] mb-1.5 font-sans'
+    'w-full bg-transparent border border-template-border text-template-fg text-sm px-4 py-3 rounded-lg outline-none placeholder:text-template-text-subtle focus:border-template-accent transition-colors'
+  const labelCls = 'block text-[12px] tracking-[0.2em] uppercase text-template-text-muted mb-1.5 font-sans'
   const errorCls = 'text-red-500 text-xs mt-1 font-sans'
 
   return (
@@ -177,7 +180,7 @@ export default function AuthModal({
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.25 }}
-          className="fixed inset-0 z-[70] flex items-center justify-center bg-[#0F1E3E]/60 backdrop-blur-sm px-4"
+          className="fixed inset-0 z-[70] flex items-center justify-center bg-template-overlay/60 backdrop-blur-sm px-4"
           onClick={(e) => { if (e.target === e.currentTarget) close() }}
         >
           <motion.div
@@ -192,36 +195,36 @@ export default function AuthModal({
           >
 
             {/* ── Left — Form ─────────────────────────────────── */}
-            <div className="bg-white px-8 py-10 lg:px-12 lg:py-12">
+            <div className="bg-template-panel px-8 py-10 lg:px-12 lg:py-12">
 
               <div className="mb-7">
-                <p className="text-[12px] tracking-[0.3em] uppercase text-[#4B6090] font-sans mb-2">
+                <p className="text-[12px] tracking-[0.3em] uppercase text-template-accent-muted font-sans mb-2">
                   {copy.eyebrow}
                 </p>
-                <h2 className="text-3xl font-bold text-[#1A2D5A] tracking-tight leading-tight">
+                <h2 className="text-3xl font-bold text-template-accent tracking-tight leading-tight">
                   {mode === 'signup' ? copy.heading : 'Welcome back'}
                 </h2>
-                <p className="text-sm text-[#6B7280] font-sans mt-3 leading-relaxed">
+                <p className="text-sm text-template-text-muted font-sans mt-3 leading-relaxed">
                   {mode === 'signup' ? copy.blurb : 'Sign in to pick up your search where you left off.'}
                 </p>
               </div>
 
               {!configured ? (
                 <div className="py-12 text-center">
-                  <p className="text-sm text-[#6B7280] font-sans">
+                  <p className="text-sm text-template-text-muted font-sans">
                     Accounts aren&apos;t configured on this deployment yet.
                   </p>
                 </div>
               ) : checkEmail ? (
                 <div className="py-14 text-center">
-                  <MailCheck size={44} className="text-[#1A2D5A] mx-auto mb-5" strokeWidth={1.25} />
-                  <h3 className="text-xl font-semibold text-[#1A2D5A] mb-2">Check your inbox</h3>
-                  <p className="text-[#6B7280] text-sm font-sans leading-relaxed">
+                  <MailCheck size={44} className="text-template-accent mx-auto mb-5" strokeWidth={1.25} />
+                  <h3 className="text-xl font-semibold text-template-accent mb-2">Check your inbox</h3>
+                  <p className="text-template-text-muted text-sm font-sans leading-relaxed">
                     We sent you a confirmation link. Click it and you&apos;ll land right back on your search.
                   </p>
                   <button
                     onClick={close}
-                    className="mt-8 text-[12px] tracking-[0.2em] uppercase text-[#9CA3AF] hover:text-[#1A2D5A] font-sans transition-colors"
+                    className="mt-8 text-[12px] tracking-[0.2em] uppercase text-template-text-subtle hover:text-template-accent font-sans transition-colors"
                   >
                     Close
                   </button>
@@ -233,16 +236,16 @@ export default function AuthModal({
                     type="button"
                     onClick={signInWithGoogle}
                     disabled={googleBusy}
-                    className="w-full flex items-center justify-center gap-3 py-3 border border-[#D5DBE9] rounded-lg text-sm font-medium text-[#374151] hover:border-[#1A2D5A]/40 hover:bg-[#FAFAF8] transition-all font-sans disabled:opacity-50"
+                    className="w-full flex items-center justify-center gap-3 py-3 border border-template-border rounded-lg text-sm font-medium text-template-text-body hover:border-template-accent/40 hover:bg-template-bg transition-all font-sans disabled:opacity-50"
                   >
                     <GoogleMark />
                     {googleBusy ? 'Redirecting…' : 'Continue with Google'}
                   </button>
 
                   <div className="flex items-center gap-4 my-6">
-                    <span className="flex-1 h-px bg-[#D5DBE9]" />
-                    <span className="text-[12px] tracking-[0.2em] uppercase text-[#9CA3AF] font-sans">or</span>
-                    <span className="flex-1 h-px bg-[#D5DBE9]" />
+                    <span className="flex-1 h-px bg-template-border" />
+                    <span className="text-[12px] tracking-[0.2em] uppercase text-template-text-subtle font-sans">or</span>
+                    <span className="flex-1 h-px bg-template-border" />
                   </div>
 
                   <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
@@ -278,9 +281,9 @@ export default function AuthModal({
                           type="checkbox"
                           required
                           id="mt-auth-consent"
-                          className="mt-0.5 w-4 h-4 rounded border-[#D5DBE9] accent-[#1A2D5A] flex-shrink-0"
+                          className="mt-0.5 w-4 h-4 rounded border-template-border accent-template-accent flex-shrink-0"
                         />
-                        <label htmlFor="mt-auth-consent" className="text-[12px] text-[#9CA3AF] font-sans leading-relaxed">
+                        <label htmlFor="mt-auth-consent" className="text-[12px] text-template-text-subtle font-sans leading-relaxed">
                           I agree to be contacted by {teamName} via call, email, and text about listings and real estate services. Message and data rates may apply.
                         </label>
                       </div>
@@ -293,7 +296,7 @@ export default function AuthModal({
                     <button
                       type="submit"
                       disabled={isSubmitting}
-                      className="w-full py-3.5 bg-[#1A2D5A] text-white text-[12px] tracking-[0.25em] uppercase font-semibold rounded-lg hover:bg-[#243870] transition-colors disabled:opacity-50"
+                      className="w-full py-3.5 bg-template-accent text-template-accent-fg text-[12px] tracking-[0.25em] uppercase font-semibold rounded-lg hover:bg-template-accent-hover transition-colors disabled:opacity-50"
                     >
                       {isSubmitting
                         ? 'Just a moment…'
@@ -301,12 +304,12 @@ export default function AuthModal({
                     </button>
                   </form>
 
-                  <p className="text-center text-sm text-[#6B7280] font-sans mt-6">
+                  <p className="text-center text-sm text-template-text-muted font-sans mt-6">
                     {mode === 'signup' ? 'Already have an account?' : 'New here?'}{' '}
                     <button
                       type="button"
                       onClick={switchMode}
-                      className="text-[#1A2D5A] font-semibold hover:underline"
+                      className="text-template-accent font-semibold hover:underline"
                     >
                       {mode === 'signup' ? 'Sign in' : 'Create a free account'}
                     </button>
@@ -316,21 +319,21 @@ export default function AuthModal({
             </div>
 
             {/* ── Right — Why register (navy) ─────────────────── */}
-            <div className="relative bg-[#1A2D5A] px-8 py-10 lg:px-12 lg:py-12 flex flex-col">
+            <div className="relative bg-template-accent px-8 py-10 lg:px-12 lg:py-12 flex flex-col">
 
               <button
                 onClick={close}
                 aria-label="Close"
-                className="absolute top-5 right-5 w-8 h-8 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 text-white/60 hover:text-white transition-all"
+                className="absolute top-5 right-5 w-8 h-8 flex items-center justify-center rounded-full bg-template-accent-fg/10 hover:bg-template-accent-fg/20 text-template-accent-fg/60 hover:text-template-accent-fg transition-all"
               >
                 <X size={16} strokeWidth={2} />
               </button>
 
               <div className="mb-10 mt-2">
-                <p className="text-[12px] tracking-[0.3em] uppercase text-[#7B93C5] font-sans mb-2">
+                <p className="text-[12px] tracking-[0.3em] uppercase text-template-accent-soft font-sans mb-2">
                   Free Account
                 </p>
-                <h3 className="text-xl font-semibold text-white leading-snug">
+                <h3 className="text-xl font-semibold text-template-accent-fg leading-snug">
                   {teamName}
                 </h3>
               </div>
@@ -338,20 +341,20 @@ export default function AuthModal({
               <div className="space-y-6 flex-1">
                 {BENEFITS.map(({ Icon, title, body }) => (
                   <div key={title} className="flex items-start gap-4">
-                    <div className="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center flex-shrink-0 mt-0.5">
-                      <Icon size={13} className="text-[#7B93C5]" strokeWidth={1.75} />
+                    <div className="w-8 h-8 rounded-lg bg-template-accent-fg/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <Icon size={13} className="text-template-accent-soft" strokeWidth={1.75} />
                     </div>
                     <div>
-                      <p className="text-sm text-white font-medium">{title}</p>
-                      <p className="text-[13px] text-white/50 font-sans mt-0.5 leading-relaxed">{body}</p>
+                      <p className="text-sm text-template-accent-fg font-medium">{title}</p>
+                      <p className="text-[13px] text-template-accent-fg/50 font-sans mt-0.5 leading-relaxed">{body}</p>
                     </div>
                   </div>
                 ))}
               </div>
 
-              <div className="mt-10 pt-8 border-t border-white/10 flex items-start gap-2.5">
-                <CheckCircle size={14} className="text-[#7B93C5] flex-shrink-0 mt-0.5" strokeWidth={1.75} />
-                <p className="text-[12px] text-white/35 font-sans leading-relaxed">
+              <div className="mt-10 pt-8 border-t border-template-accent-fg/10 flex items-start gap-2.5">
+                <CheckCircle size={14} className="text-template-accent-soft flex-shrink-0 mt-0.5" strokeWidth={1.75} />
+                <p className="text-[12px] text-template-accent-fg/35 font-sans leading-relaxed">
                   Always free. No obligation, and you can unsubscribe at any time.
                 </p>
               </div>
