@@ -71,14 +71,14 @@ export default function NeighborhoodMap({ neighborhoods }) {
         id: 'neighborhood-fills',
         type: 'fill',
         source: 'neighborhoods',
-        paint: { 'fill-color': '#1B3B2B', 'fill-opacity': 0.07 },
+        paint: { 'fill-color': '#24180F', 'fill-opacity': 0.07 },
       })
 
       map.addLayer({
         id: 'neighborhood-borders',
         type: 'line',
         source: 'neighborhoods',
-        paint: { 'line-color': '#1B3B2B', 'line-width': 1.5, 'line-opacity': 0.45 },
+        paint: { 'line-color': '#24180F', 'line-width': 1.5, 'line-opacity': 0.45 },
       })
 
       map.on('click', 'neighborhood-fills', (e) => {

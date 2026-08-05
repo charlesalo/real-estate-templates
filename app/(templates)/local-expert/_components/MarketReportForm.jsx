@@ -68,12 +68,12 @@ export default function MarketReportForm() {
           <div>
             <p className="text-[12px] tracking-[0.4em] uppercase text-[#8B9E8B] mb-4">{copy.eyebrow}</p>
             <h2
-              className="text-[38px] lg:text-[56px] font-normal text-[#F8F3EB] leading-tight mb-6"
+              className="text-[38px] lg:text-[56px] font-normal text-[#F8F3EB] leading-tight mb-6 text-balance"
               style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}
             >
               Get the real local<br />market report.
             </h2>
-            <p className="text-[16px] text-[#F8F3EB]/55 mb-6 leading-relaxed max-w-lg">{copy.description}</p>
+            <p className="text-[16px] text-[#F8F3EB]/55 mb-6 leading-relaxed max-w-lg text-pretty">{copy.description}</p>
             <ul className="space-y-2.5">
               {copy.bullets.map((b) => (
                 <li key={b} className="flex items-center gap-2.5 text-[14px] text-[#F8F3EB]/55">
@@ -155,7 +155,7 @@ function StepOne({ neighborhood, setNeighborhood, onNext }) {
   return (
     <div className="flex-1 flex flex-col rounded-2xl p-7 lg:p-8" style={{ backgroundColor: '#FDFAF6' }}>
       <StepHeader step={1} total={3} theme="light" />
-      <h3 className="text-[24px] font-normal text-[#24180F] mb-5 leading-snug" style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}>
+      <h3 className="text-[24px] font-normal text-[#24180F] mb-5 leading-snug text-balance" style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}>
         Which neighborhood would you like the report on?
       </h3>
       <div className="grid grid-cols-3 gap-2">
@@ -193,7 +193,7 @@ function StepTwo({ neighborhood, form, setForm, onBack, onSubmit, submitting, su
     <div className="flex-1 flex flex-col rounded-2xl p-7 lg:p-8" style={{ backgroundColor: '#FDFAF6' }}>
       <StepHeader step={2} total={3} theme="light" />
       <h3
-        className="text-[24px] font-normal text-[#24180F] mb-6"
+        className="text-[24px] font-normal text-[#24180F] mb-6 text-balance"
         style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}
       >
         A little about you.
@@ -270,12 +270,12 @@ function StepThree({ neighborhood }) {
         <Check size={22} strokeWidth={2.5} className="text-[#F8F3EB]" />
       </div>
       <h3
-        className="text-[24px] lg:text-[24px] font-normal text-[#24180F] mb-3 leading-snug"
+        className="text-[24px] lg:text-[24px] font-normal text-[#24180F] mb-3 leading-snug text-balance"
         style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}
       >
         Your {neighborhood} briefing is on the way.
       </h3>
-      <p className="text-[14px] text-[#2C1E11]/50 leading-relaxed max-w-[280px]">
+      <p className="text-[14px] text-[#2C1E11]/50 leading-relaxed max-w-[280px] text-pretty">
         Check your inbox in the next few minutes. Nadia will follow up personally within 24 hours.
       </p>
     </div>

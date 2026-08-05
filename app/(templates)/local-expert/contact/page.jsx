@@ -56,14 +56,22 @@ export default function ContactPage() {
 
             {/* Left: info */}
             <div>
-              <p className="text-[12px] tracking-[0.4em] uppercase text-[#BA5B3E] mb-4">Contact</p>
+              {/* Eyebrow with rule */}
+              <div className="flex items-center gap-4 mb-6">
+                <span className="text-[12px] tracking-[0.4em] uppercase text-[#BA5B3E] whitespace-nowrap">
+                  Contact
+                </span>
+                <div className="h-px flex-1 bg-[#BEB7A9]" />
+              </div>
+
               <h1
-                className="text-[43px] lg:text-[58px] font-normal text-[#24180F] leading-[1.05] mb-6"
+                className="text-[43px] lg:text-[58px] font-normal text-[#24180F] leading-[1.05] mb-6 text-balance"
                 style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}
               >
-                Let&apos;s start<br />the conversation.
+                Let&apos;s start<br />
+                <em className="text-[#1B3B2B]">the conversation.</em>
               </h1>
-              <p className="text-[18px] text-[#2C1E11]/55 leading-relaxed max-w-md mb-10">
+              <p className="text-[18px] text-[#2C1E11]/55 leading-relaxed max-w-md mb-10 text-pretty">
                 Tell me what you&apos;re thinking. I respond within a few hours — usually sooner.
               </p>
 
@@ -114,7 +122,7 @@ export default function ContactPage() {
                   <CheckCircle size={40} className="text-[#8B9E8B]" />
                   <div>
                     <h3
-                      className="text-xl font-normal text-[#24180F]"
+                      className="text-xl font-normal text-[#24180F] text-balance"
                       style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}
                     >
                       Message received.
@@ -128,7 +136,7 @@ export default function ContactPage() {
                 <form onSubmit={handleSubmit} className="space-y-5">
                   <div>
                     <h2
-                      className="text-[19px] font-normal text-[#24180F] mb-1"
+                      className="text-[19px] font-normal text-[#24180F] mb-1 text-balance"
                       style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}
                     >
                       Send a message

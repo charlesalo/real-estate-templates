@@ -39,7 +39,7 @@ export default function NeighborhoodNearby({ categories, places }) {
             <div key={cat.key}>
               <div className="flex items-center gap-2.5 pb-3 mb-4 border-b border-[#BEB7A9]/60">
                 {Icon && <Icon size={15} style={{ color: cat.color }} />}
-                <h3 className="text-[12px] tracking-[0.22em] uppercase text-[#24180F]/70">{cat.label}</h3>
+                <h3 className="text-[12px] tracking-[0.22em] uppercase text-[#24180F]/70 text-balance">{cat.label}</h3>
               </div>
               <ul className="space-y-4">
                 {list.slice(0, limit).map((p) => (

@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowLeft, ArrowRight, Bed, Bath, Square } from 'lucide-react'
+import ContactTeaser from '../_components/sections/ContactTeaser'
 import { LISTINGS, SOLD_LISTINGS as SOLD_LISTINGS_FALLBACK } from '@/lib/local-expert-data'
 import { resolveImageSrc } from '@/lib/sanity/image'
 import { withFallback } from '@/lib/sanity/utils'
@@ -76,25 +77,36 @@ export default async function ListingsPage({ searchParams }) {
 
   return (
     <>
+      {/* ─── Header ─── */}
       <section className="pt-[112px] pb-[96px] lg:pt-[144px] lg:pb-[128px]" style={{ backgroundColor: '#F8F3EB' }}>
         <div className="max-w-7xl mx-auto px-5 lg:px-8">
-
-          {/* Header */}
-          <div className="mb-10">
-            <p className="text-[12px] tracking-[0.4em] uppercase text-[#BA5B3E] mb-3">Chapter Three</p>
-            <h1
-              className="text-[43px] lg:text-[58px] font-normal text-[#24180F] leading-[1.05] mb-4"
-              style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}
-            >
-              Curated Local Homes
-            </h1>
-            <p className="text-[16px] text-[#2C1E11]/50 max-w-xl">
-              {filtered.length} active listing{filtered.length !== 1 ? 's' : ''} in neighborhoods I know block by block.
-              {q && ` Showing results for "${rawQ}".`}
-            </p>
+          {/* Eyebrow with rule */}
+          <div className="flex items-center gap-4 mb-6">
+            <span className="text-[12px] tracking-[0.4em] uppercase text-[#BA5B3E] whitespace-nowrap">
+              Chapter Three · Curated Local Homes
+            </span>
+            <div className="h-px flex-1 bg-[#BEB7A9]" />
           </div>
 
-          {/* Listings — alternating image/details rows */}
+          <h1
+            className="text-[43px] lg:text-[58px] font-normal text-[#24180F] leading-[1.05] mb-5 text-balance"
+            style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}
+          >
+            Not thirty listings.<br />
+            <em className="text-[#1B3B2B]">Just the ones worth seeing.</em>
+          </h1>
+          <p className="text-[16px] text-[#2C1E11]/50 max-w-xl leading-relaxed text-pretty">
+            {filtered.length} active listing{filtered.length !== 1 ? 's' : ''} in neighborhoods I know block by block.
+            {q && ` Showing results for "${rawQ}".`}
+          </p>
+        </div>
+      </section>
+
+      {/* ─── Active listings — alternating image/details rows ─── */}
+      {/* No top padding: this shares the header's background, so the header's
+          bottom padding already supplies the gap between the two. */}
+      <section className="pb-[96px] lg:pb-[128px]" style={{ backgroundColor: '#F8F3EB' }}>
+        <div className="max-w-7xl mx-auto px-5 lg:px-8">
           {filtered.length === 0 ? (
             <div className="py-20 text-center">
               <p className="text-[#2C1E11]/40">No listings match your search. <Link href="/local-expert/listings" className="underline">Clear filters</Link></p>
@@ -119,12 +131,12 @@ export default async function ListingsPage({ searchParams }) {
           <div className="mb-10">
             <p className="text-[12px] tracking-[0.4em] uppercase text-[#BA5B3E] mb-3">Proven Track Record</p>
             <h2
-              className="text-[34px] lg:text-[45px] font-normal text-[#24180F] leading-tight mb-4"
+              className="text-[34px] lg:text-[45px] font-normal text-[#24180F] leading-tight mb-4 text-balance"
               style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}
             >
               Recent Sales
             </h2>
-            <p className="text-[16px] text-[#2C1E11]/50 max-w-xl">
+            <p className="text-[16px] text-[#2C1E11]/50 max-w-xl text-pretty">
               Fourteen years and 240 closings in these blocks — the same comps I&apos;d point to if a
               buyer asked why the price made sense.
             </p>
@@ -140,6 +152,8 @@ export default async function ListingsPage({ searchParams }) {
           </div>
         </div>
       </section>
+
+      <ContactTeaser />
     </>
   )
 }

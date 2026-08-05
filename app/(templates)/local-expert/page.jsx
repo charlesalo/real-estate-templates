@@ -1,10 +1,12 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { ArrowRight, Bed, Bath, Square } from 'lucide-react'
+import { ArrowRight } from 'lucide-react'
 import DualSearchWidget from './_components/DualSearchWidget'
 import HeroStats from './_components/HeroStats'
 import NeighborhoodMapClient from './_components/maps/NeighborhoodMapClient'
 import MarketReportForm from './_components/MarketReportForm'
+import { HeroListingCard, SideListingCard } from './_components/listings/ListingCards'
+import ContactTeaser from './_components/sections/ContactTeaser'
 import PortableText from '@/components/sanity/PortableText'
 import marquee from './press-marquee.module.css'
 import { resolveImageSrc } from '@/lib/sanity/image'
@@ -33,11 +35,6 @@ export const metadata = {
 }
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
-
-function formatPrice(n) {
-  if (n >= 1_000_000) return `$${(n / 1_000_000).toFixed(n % 1_000_000 === 0 ? 0 : 2)}M`
-  return `$${n.toLocaleString()}`
-}
 
 const PRESS = [
   'The New York Times',
@@ -104,7 +101,7 @@ export default async function LocalExpertHome() {
 
               {/* Headline */}
               <h1
-                className="text-[56px] lg:text-[70px] font-normal leading-[1.06] tracking-tight text-[#24180F] mb-6"
+                className="text-[56px] lg:text-[70px] font-normal leading-[1.06] tracking-tight text-[#24180F] mb-6 text-balance"
                 style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}
               >
                 Living in,<br />
@@ -155,7 +152,7 @@ export default async function LocalExpertHome() {
 
 
                 {/* Quote overlay — bottom */}
-                <div className="absolute bottom-0 left-0 right-0 px-6 py-6 bg-gradient-to-t from-[#1F3A29]/90 via-[#1F3A29]/40 to-transparent">
+                <div className="absolute bottom-0 left-0 right-0 px-6 py-6 bg-gradient-to-t from-[#24180F]/90 via-[#24180F]/40 to-transparent">
                   <p
                     className="text-[16px] italic text-white/90 leading-snug mb-2"
                     style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}
@@ -208,13 +205,13 @@ export default async function LocalExpertHome() {
           <div className="flex items-end justify-between gap-4 mb-10">
             <div>
               <h2
-                className="text-[34px] lg:text-[45px] font-normal text-[#24180F] leading-tight mb-3"
+                className="text-[34px] lg:text-[45px] font-normal text-[#24180F] leading-tight mb-3 text-balance"
                 style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}
               >
                 The blocks, walked<br />
                 <em className="text-[#1B3B2B]">one street at a time.</em>
               </h2>
-              <p className="text-[16px] text-[#2C1E11]/50 max-w-2xl">
+              <p className="text-[16px] text-[#2C1E11]/50 max-w-2xl text-pretty">
                 Not just pins on a map — neighborhoods I&apos;ve walked and sold in for fourteen years.
                 Tap any one to see the market, the culture, and the corners worth knowing.
               </p>
@@ -248,7 +245,7 @@ export default async function LocalExpertHome() {
             <div className="lg:pt-1">
               <span className="text-[12px] tracking-[0.4em] uppercase text-[#BA5B3E]">Chapter Two</span>
               <h2
-                className="text-[34px] lg:text-[45px] font-normal text-[#24180F] leading-tight mt-2"
+                className="text-[34px] lg:text-[45px] font-normal text-[#24180F] leading-tight mt-2 text-balance"
                 style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}
               >
                 Nadia&apos;s Field Notes
@@ -301,12 +298,12 @@ export default async function LocalExpertHome() {
             <div>
               <span className="text-[12px] tracking-[0.4em] uppercase text-[#BA5B3E]">Chapter Three</span>
               <h2
-                className="text-[34px] lg:text-[45px] font-normal text-[#24180F] leading-tight mt-2 mb-3"
+                className="text-[34px] lg:text-[45px] font-normal text-[#24180F] leading-tight mt-2 mb-3 text-balance"
                 style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}
               >
                 Curated Local Homes
               </h2>
-              <p className="text-[15px] text-[#2C1E11]/40 max-w-lg">
+              <p className="text-[15px] text-[#2C1E11]/40 max-w-lg text-pretty">
                 Homes in neighborhoods I know — not just listed here, but actually considered.
               </p>
             </div>
@@ -364,7 +361,7 @@ export default async function LocalExpertHome() {
               <p className="text-[12px] tracking-[0.4em] uppercase text-[#BA5B3E] mb-5">A Note from the Broker</p>
 
               <h2
-                className="text-[34px] lg:text-[45px] font-normal text-[#24180F] leading-tight mb-8"
+                className="text-[34px] lg:text-[45px] font-normal text-[#24180F] leading-tight mb-8 text-balance"
                 style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}
               >
                 I don&apos;t sell apartments.<br />
@@ -420,12 +417,12 @@ export default async function LocalExpertHome() {
             <div>
               <span className="text-[12px] tracking-[0.4em] uppercase text-[#BA5B3E]">From the Journal</span>
               <h2
-                className="text-[34px] lg:text-[45px] font-normal text-[#24180F] mt-1 mb-3"
+                className="text-[34px] lg:text-[45px] font-normal text-[#24180F] mt-1 mb-3 text-balance"
                 style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}
               >
                 Recent Writing
               </h2>
-              <p className="text-[16px] text-[#2C1E11]/50 max-w-xl">
+              <p className="text-[16px] text-[#2C1E11]/50 max-w-xl text-pretty">
                 No fluff, no sponsorships — market shifts, neighborhood deep-dives, and the honest
                 takes I&apos;d give a friend buying or selling in New York.
               </p>
@@ -452,7 +449,7 @@ export default async function LocalExpertHome() {
                   </div>
                   <p className="text-[12px] tracking-[0.3em] uppercase text-[#BA5B3E] mb-1">{post.category}</p>
                   <h3
-                    className="text-[19px] font-normal text-[#24180F] leading-snug group-hover:text-[#BA5B3E] transition-colors"
+                    className="text-[19px] font-normal text-[#24180F] leading-snug group-hover:text-[#BA5B3E] transition-colors text-balance"
                     style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}
                   >
                     {post.title}
@@ -474,39 +471,7 @@ export default async function LocalExpertHome() {
         </div>
       </section>
 
-      {/* ─── CONTACT TEASER ───────────────────────────────────────────── */}
-      <section className="relative py-[120px] lg:py-[168px] overflow-hidden">
-        {/* Full-bleed background */}
-        <Image
-          src="https://images.unsplash.com/photo-1440613905118-99b921706b5c?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-          alt="Dumbo Manhattan Bridge"
-          fill
-          className="object-cover object-center"
-        />
-        {/* Dark green overlay */}
-        <div className="absolute inset-0" style={{ backgroundColor: 'rgba(0,0,0,0.38)' }} />
-
-        {/* Content */}
-        <div className="relative max-w-3xl mx-auto px-5 lg:px-8 text-center">
-          <p className="text-[12px] tracking-[0.4em] uppercase text-white mb-4">Let&apos;s Work Together</p>
-          <h2
-            className="text-[34px] lg:text-[45px] font-normal text-[#F8F3EB] leading-tight mb-5"
-            style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}
-          >
-            The right home<br className="sm:hidden" /> is a feeling.<br />I know how to find it.
-          </h2>
-          <p className="text-[16px] text-white/80 mb-8 max-w-md mx-auto leading-relaxed">
-            Not sure where to start? Tell me what you&apos;re looking for — or what you&apos;re running from.
-            I know this city. I&apos;ll help.
-          </p>
-          <Link
-            href="/local-expert/contact"
-            className="inline-flex items-center px-8 py-3.5 text-[14px] font-bold rounded-full bg-[#F8F3EB] text-[#1B3B2B] hover:bg-white transition-colors"
-          >
-            Start the conversation
-          </Link>
-        </div>
-      </section>
+      <ContactTeaser />
     </>
   )
 }
@@ -525,7 +490,7 @@ function NoteCard({ note, aspectRatio, className = '' }) {
         fill
         className="object-cover transition-transform duration-500 group-hover:scale-105"
       />
-      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-t from-[#24180F]/70 via-[#24180F]/20 to-transparent" />
       <div className="absolute bottom-0 left-0 right-0 p-4">
         <div className="text-[9px] tracking-[0.3em] uppercase text-white/50 mb-1">{note.category}</div>
         <p className="text-[14px] font-bold text-white leading-snug" style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}>
@@ -534,135 +499,5 @@ function NoteCard({ note, aspectRatio, className = '' }) {
         <p className="text-[12px] text-white/60 mt-0.5">{note.location}</p>
       </div>
     </article>
-  )
-}
-
-// ── Listing Card ──────────────────────────────────────────────────────────────
-
-function HeroListingCard({ listing }) {
-  return (
-    <Link href={`/local-expert/listings/${listing.id}`} className="group block h-full">
-      <article className="relative rounded-2xl overflow-hidden h-full min-h-[420px] lg:min-h-0">
-        <Image
-          src={listing.images[0]}
-          alt={listing.address}
-          fill
-          className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
-        />
-        <div className="absolute top-4 left-4">
-          <span className="text-[11px] font-semibold uppercase tracking-wider px-3 py-1.5 rounded-full bg-white/90 text-[#2C1E11]">
-            {listing.status}
-          </span>
-        </div>
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/25 to-transparent" />
-        <div className="absolute bottom-0 left-0 right-0 px-6 py-6 lg:px-8 lg:py-7">
-          <div
-            className="text-[36px] lg:text-[44px] font-normal text-white leading-none mb-1.5"
-            style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}
-          >
-            {formatPrice(listing.price)}
-          </div>
-          <p className="text-[13px] text-white/65">{listing.address}</p>
-          <div className="flex items-center justify-between gap-3 mt-1.5">
-            <p className="text-[10px] text-white/45 flex-1">
-              Listing Provided Courtesy of {listing.listingBrokerage} · {listing.mlsId}
-            </p>
-            <div className="bg-white rounded px-1.5 py-1 flex-shrink-0 inline-flex items-center">
-              <Image
-                src="/images/RLS at REBNY.png"
-                alt="RLS at REBNY"
-                width={40}
-                height={24}
-                className="h-4 w-auto"
-              />
-            </div>
-          </div>
-          {/* Details — collapsed by default, slide up to reveal on hover */}
-          <div className="grid grid-rows-[0fr] opacity-0 transition-all duration-500 ease-out group-hover:grid-rows-[1fr] group-hover:opacity-100">
-            <div className="overflow-hidden">
-              <div className="h-px w-full bg-white/25 my-3" />
-              <div className="flex items-center justify-between gap-4">
-                <div className="flex items-center gap-4">
-                  <span className="flex items-center gap-1 text-[12px] text-white/55">
-                    <Bed size={12} /> {listing.beds} bd
-                  </span>
-                  <span className="flex items-center gap-1 text-[12px] text-white/55">
-                    <Bath size={12} /> {listing.baths} ba
-                  </span>
-                  <span className="flex items-center gap-1 text-[12px] text-white/55">
-                    <Square size={12} /> {listing.sqft.toLocaleString()} sf
-                  </span>
-                </div>
-                <span className="text-[12px] uppercase tracking-wider text-white/55">{listing.type}</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </article>
-    </Link>
-  )
-}
-
-function SideListingCard({ listing }) {
-  return (
-    <Link href={`/local-expert/listings/${listing.id}`} className="group block flex-1 min-h-[200px] lg:min-h-0">
-      <article className="relative rounded-xl overflow-hidden h-full">
-        <Image
-          src={listing.images[0]}
-          alt={listing.address}
-          fill
-          className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
-        />
-        <div className="absolute top-3 left-3">
-          <span className="text-[11px] font-semibold uppercase tracking-wider px-2.5 py-1 rounded-full bg-white/90 text-[#2C1E11]">
-            {listing.status}
-          </span>
-        </div>
-        <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/15 to-transparent" />
-        <div className="absolute bottom-0 left-0 right-0 px-4 py-4">
-          <div
-            className="text-[22px] font-normal text-white leading-none"
-            style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}
-          >
-            {formatPrice(listing.price)}
-          </div>
-          <p className="text-[12px] text-white/65 mt-1 truncate">{listing.address}</p>
-          <div className="flex items-center justify-between gap-2 mt-1">
-            <p className="text-[10px] text-white/45 truncate min-w-0 flex-1">
-              Listing Provided Courtesy of {listing.listingBrokerage} · {listing.mlsId}
-            </p>
-            <div className="bg-white rounded px-1.5 py-0.5 flex-shrink-0 inline-flex items-center">
-              <Image
-                src="/images/RLS at REBNY.png"
-                alt="RLS at REBNY"
-                width={40}
-                height={24}
-                className="h-3.5 w-auto"
-              />
-            </div>
-          </div>
-          {/* Details — collapsed by default, slide up to reveal on hover */}
-          <div className="grid grid-rows-[0fr] opacity-0 transition-all duration-500 ease-out group-hover:grid-rows-[1fr] group-hover:opacity-100">
-            <div className="overflow-hidden">
-              <div className="h-px w-full bg-white/25 my-2" />
-              <div className="flex items-center justify-between gap-3">
-                <div className="flex items-center gap-3">
-                  <span className="flex items-center gap-1 text-[11px] text-white/55">
-                    <Bed size={11} /> {listing.beds} bd
-                  </span>
-                  <span className="flex items-center gap-1 text-[11px] text-white/55">
-                    <Bath size={11} /> {listing.baths} ba
-                  </span>
-                  <span className="flex items-center gap-1 text-[11px] text-white/55">
-                    <Square size={11} /> {listing.sqft.toLocaleString()} sf
-                  </span>
-                </div>
-                <span className="text-[11px] uppercase tracking-wider text-white/55">{listing.type}</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </article>
-    </Link>
   )
 }

@@ -9,10 +9,12 @@ import { getSchools } from '@/lib/schooldigger'
 import { notFound } from 'next/navigation'
 import NeighborhoodNearby from './NeighborhoodNearby'
 import NeighborhoodDetailMapClient from '../../_components/maps/NeighborhoodDetailMapClient'
+import ContactTeaser from '../../_components/sections/ContactTeaser'
 import PortableText from '@/components/sanity/PortableText'
 import { resolveImageSrc } from '@/lib/sanity/image'
 import { withFallback, isPortableText } from '@/lib/sanity/utils'
 import { getNeighborhoods } from '@/lib/sanity/queries'
+import { fitWithin } from '@/lib/seo'
 
 // Normalizes a Sanity `neighborhood` doc (or fallback demo data) to the
 // plain shape this page's presentational helpers already render.
@@ -43,8 +45,28 @@ export async function generateMetadata({ params }) {
   if (!n) return {}
   return {
     alternates: { canonical: `/local-expert/neighborhoods/${slug}` },
-    title: `${n.name} — NYC Neighborhood Guide`,
-    description: n.tagline,
+    // `absolute` because the layout's " | Nadia Osei" suffix pushed these past
+    // the ~60 characters a search result will show.
+    title: {
+      absolute: fitWithin(
+        [
+          `${n.name} Neighborhood Guide: Homes, Prices & Local Life`,
+          `${n.name} Neighborhood Guide: Homes & Prices`,
+          `${n.name} Neighborhood Guide`,
+        ],
+        60,
+      ),
+    },
+    // The tagline alone ran 71–97 characters, well under the ~120 a search
+    // result will show, so it gets extended with what the page actually covers.
+    description: fitWithin(
+      [
+        `${n.tagline} A local broker's guide to ${n.name}, ${n.borough} — homes for sale, median prices, walk scores and where to eat.`,
+        `${n.tagline} A local broker's guide to ${n.name}: homes, prices and walk scores.`,
+        `${n.tagline} Homes for sale and prices in ${n.name}.`,
+      ],
+      155,
+    ),
   }
 }
 
@@ -92,7 +114,7 @@ export default async function NeighborhoodDetailPage({ params }) {
       <section className="relative" style={{ backgroundColor: '#F8F3EB' }}>
         <div className="relative h-[55vh] min-h-[400px]">
           <Image src={neighborhood.image} alt={neighborhood.name} fill className="object-cover" priority />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#1B3B2B]/85 via-[#1B3B2B]/25 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#24180F]/85 via-[#24180F]/25 to-transparent" />
           <div className="absolute bottom-0 left-0 right-0">
             <div className="max-w-7xl mx-auto px-5 lg:px-8 pb-9 lg:pb-12">
               <Link href="/local-expert/neighborhoods" className="inline-flex items-center gap-1.5 text-[12px] text-white/55 hover:text-white transition-colors mb-5">
@@ -101,7 +123,7 @@ export default async function NeighborhoodDetailPage({ params }) {
               <p className="text-[12px] tracking-[0.4em] uppercase text-white/50 mb-2">
                 {[neighborhood.borough, ...neighborhood.vibes].join(' · ')}
               </p>
-              <h1 className="text-[52px] lg:text-[68px] font-normal text-white leading-[1.0]" style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}>
+              <h1 className="text-[52px] lg:text-[68px] font-normal text-white leading-[1.0] text-balance" style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}>
                 {neighborhood.name}
               </h1>
             </div>
@@ -165,7 +187,7 @@ export default async function NeighborhoodDetailPage({ params }) {
           </div>
 
           <div className="mt-12">
-            <h2 className="text-[20px] font-normal text-[#24180F] mb-5" style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}>
+            <h2 className="text-[20px] font-normal text-[#24180F] mb-5 text-balance" style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}>
               What to know
             </h2>
             <ul className="grid sm:grid-cols-2 gap-x-10 gap-y-3">
@@ -258,7 +280,7 @@ export default async function NeighborhoodDetailPage({ params }) {
                   >
                     <div>
                       <div className="flex flex-wrap items-center gap-2 mb-1.5">
-                        <h3 className="text-[19px] font-normal text-[#24180F]" style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}>
+                        <h3 className="text-[19px] font-normal text-[#24180F] text-balance" style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}>
                           {s.url ? (
                             <a href={s.url} target="_blank" rel="noopener noreferrer" className="hover:text-[#BA5B3E] transition-colors">
                               {s.name}
@@ -320,14 +342,14 @@ export default async function NeighborhoodDetailPage({ params }) {
                   fill
                   className="object-cover transition-transform duration-700 group-hover:scale-[1.04]"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#1B3B2B]/90 via-[#1B3B2B]/20 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#24180F]/90 via-[#24180F]/20 to-transparent" />
                 <div className="absolute inset-x-0 bottom-0 p-6 lg:p-8">
                   <p className="text-[11px] tracking-[0.28em] uppercase text-white/55 mb-2">
                     {[n.borough, ...n.vibes].join(' · ')}
                   </p>
                   <div className="flex items-end justify-between gap-4">
                     <h3
-                      className="text-[30px] lg:text-[34px] font-normal text-white leading-none"
+                      className="text-[30px] lg:text-[34px] font-normal text-white leading-none text-balance"
                       style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}
                     >
                       {n.name}
@@ -349,39 +371,7 @@ export default async function NeighborhoodDetailPage({ params }) {
         </div>
       </section>
 
-      {/* ─── CONTACT TEASER ───────────────────────────────────────────── */}
-      <section className="relative py-[120px] lg:py-[168px] overflow-hidden">
-        {/* Full-bleed background */}
-        <Image
-          src="https://images.unsplash.com/photo-1440613905118-99b921706b5c?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-          alt="Dumbo Manhattan Bridge"
-          fill
-          className="object-cover object-center"
-        />
-        {/* Dark green overlay */}
-        <div className="absolute inset-0" style={{ backgroundColor: 'rgba(0,0,0,0.38)' }} />
-
-        {/* Content */}
-        <div className="relative max-w-3xl mx-auto px-5 lg:px-8 text-center">
-          <p className="text-[12px] tracking-[0.4em] uppercase text-white mb-4">Let&apos;s Work Together</p>
-          <h2
-            className="text-[34px] lg:text-[45px] font-normal text-[#F8F3EB] leading-tight mb-5"
-            style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}
-          >
-            The right home<br className="sm:hidden" /> is a feeling.<br />I know how to find it.
-          </h2>
-          <p className="text-[16px] text-white/80 mb-8 max-w-md mx-auto leading-relaxed">
-            Not sure where to start? Tell me what you&apos;re looking for — or what you&apos;re running from.
-            I know this city. I&apos;ll help.
-          </p>
-          <Link
-            href="/local-expert/contact"
-            className="inline-flex items-center px-8 py-3.5 text-[14px] font-bold rounded-full bg-[#F8F3EB] text-[#1B3B2B] hover:bg-white transition-colors"
-          >
-            Start the conversation
-          </Link>
-        </div>
-      </section>
+      <ContactTeaser />
 
     </>
   )
@@ -393,7 +383,7 @@ function SectionHeader({ eyebrow, title }) {
   return (
     <div>
       <p className="text-[12px] tracking-[0.4em] uppercase text-[#BA5B3E] mb-3">{eyebrow}</p>
-      <h2 className="text-[34px] lg:text-[45px] font-normal text-[#24180F] leading-tight" style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}>
+      <h2 className="text-[34px] lg:text-[45px] font-normal text-[#24180F] leading-tight text-balance" style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}>
         {title}
       </h2>
     </div>
@@ -431,7 +421,7 @@ function ScoreCard({ icon: Icon, score, label, description }) {
 function BarList({ title, rows }) {
   return (
     <div>
-      <h3 className="text-[20px] font-normal text-[#24180F] mb-6" style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}>{title}</h3>
+      <h3 className="text-[20px] font-normal text-[#24180F] mb-6 text-balance" style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}>{title}</h3>
       <div className="space-y-4">
         {rows.map((r) => (
           <div key={r.label}>

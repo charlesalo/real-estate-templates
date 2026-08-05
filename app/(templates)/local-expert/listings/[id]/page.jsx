@@ -3,8 +3,10 @@ import Link from 'next/link'
 import { ArrowLeft, ArrowRight, Bed, Bath, Square, MapPin, CheckCircle, Footprints } from 'lucide-react'
 import { LISTINGS, AGENT, NEIGHBORHOODS } from '@/lib/local-expert-data'
 import { notFound } from 'next/navigation'
+import ContactTeaser from '../../_components/sections/ContactTeaser'
 import PropertyContactForm from './PropertyContactForm'
 import MortgageCalculator from './MortgageCalculator'
+import { fitWithin } from '@/lib/seo'
 
 export async function generateStaticParams() {
   return LISTINGS.map((l) => ({ id: l.id }))
@@ -16,8 +18,27 @@ export async function generateMetadata({ params }) {
   if (!listing) return {}
   return {
     alternates: { canonical: `/local-expert/listings/${id}` },
-    title: `${listing.address} — ${listing.neighborhood}`,
-    description: `${listing.beds}BR/${listing.baths}BA ${listing.type} in ${listing.neighborhood}. Asking $${listing.price.toLocaleString()}.`,
+    // `absolute` because the layout's " | Nadia Osei" suffix pushed these past
+    // the ~60 characters a search result will show.
+    title: {
+      absolute: fitWithin(
+        [
+          `${listing.address}, ${listing.neighborhood} — ${listing.beds}BR ${listing.type} for Sale in NYC`,
+          `${listing.address} — ${listing.neighborhood} ${listing.type} for Sale`,
+          `${listing.address} — ${listing.neighborhood} Home for Sale`,
+          `${listing.address} — ${listing.neighborhood}`,
+        ],
+        60,
+      ),
+    },
+    // Was 42–53 characters — too thin for a search result to render usefully.
+    description: fitWithin(
+      [
+        `${listing.beds}BR/${listing.baths}BA ${listing.type} in ${listing.neighborhood}, ${listing.city}. ${listing.sqft.toLocaleString()} sq ft, asking $${listing.price.toLocaleString()}. See photos, floor plans and full neighborhood details.`,
+        `${listing.beds}BR/${listing.baths}BA ${listing.type} in ${listing.neighborhood}, ${listing.city}. ${listing.sqft.toLocaleString()} sq ft, asking $${listing.price.toLocaleString()}. See photos and neighborhood details.`,
+      ],
+      155,
+    ),
   }
 }
 
@@ -95,10 +116,10 @@ export default async function PropertyDetailPage({ params }) {
               />
             </div>
 
-            <h2 className="text-[19px] font-bold text-[#24180F] mb-3" style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}>About this home</h2>
+            <h2 className="text-[19px] font-bold text-[#24180F] mb-3 text-balance" style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}>About this home</h2>
             <p className="text-[16px] text-[#24180F]/65 leading-relaxed mb-8">{listing.description}</p>
 
-            <h3 className="text-[19px] font-normal text-[#24180F] mb-4" style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}>Highlights</h3>
+            <h3 className="text-[19px] font-normal text-[#24180F] mb-4 text-balance" style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}>Highlights</h3>
             <div className="grid grid-cols-2 gap-2.5 mb-10">
               {listing.features.map((f) => (
                 <div key={f} className="flex items-center gap-2 text-[14px] text-[#24180F]/65">
@@ -107,7 +128,7 @@ export default async function PropertyDetailPage({ params }) {
               ))}
             </div>
 
-            <h3 className="text-[19px] font-normal text-[#24180F] mb-4" style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}>Location</h3>
+            <h3 className="text-[19px] font-normal text-[#24180F] mb-4 text-balance" style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}>Location</h3>
             <div className="rounded-xl overflow-hidden border border-[#E5E0D8] aspect-[16/9] mb-10">
               <iframe
                 title="Property location"
@@ -123,7 +144,7 @@ export default async function PropertyDetailPage({ params }) {
             {hood && (
               <div className="mb-10 mt-12 pt-10 border-t border-[#E5E0D8]">
                 <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#BA5B3E] mb-3">The Neighborhood</p>
-                <h3 className="text-[30px] lg:text-[34px] font-normal text-[#24180F] leading-tight mb-1" style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}>
+                <h3 className="text-[30px] lg:text-[34px] font-normal text-[#24180F] leading-tight mb-1 text-balance" style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}>
                   {hood.name}
                 </h3>
                 <p className="text-[13px] uppercase tracking-wider text-[#2C1E11]/40 mb-6">{hood.borough}</p>
@@ -193,7 +214,7 @@ export default async function PropertyDetailPage({ params }) {
 
         {similar.length > 0 && (
           <div className="mt-20 pt-10 border-t border-[#E5E0D8]">
-            <h2 className="text-[24px] font-normal text-[#24180F] mb-6" style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}>
+            <h2 className="text-[24px] font-normal text-[#24180F] mb-6 text-balance" style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}>
               More in {listing.neighborhood}
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
@@ -220,12 +241,12 @@ export default async function PropertyDetailPage({ params }) {
             <div className="flex items-end justify-between gap-4 mb-8">
               <div>
                 <h2
-                  className="text-[34px] lg:text-[40px] font-normal text-[#24180F] leading-tight mb-2"
+                  className="text-[34px] lg:text-[40px] font-normal text-[#24180F] leading-tight mb-2 text-balance"
                   style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}
                 >
                   Featured Properties
                 </h2>
-                <p className="text-[15px] text-[#2C1E11]/40 max-w-lg">
+                <p className="text-[15px] text-[#2C1E11]/40 max-w-lg text-pretty">
                   Homes in neighborhoods I know — not just listed here, but actually considered.
                 </p>
               </div>
@@ -256,39 +277,7 @@ export default async function PropertyDetailPage({ params }) {
       </section>
     )}
 
-    {/* ─── CONTACT TEASER ───────────────────────────────────────────── */}
-    <section className="relative py-[120px] lg:py-[168px] overflow-hidden">
-      {/* Full-bleed background */}
-      <Image
-        src="https://images.unsplash.com/photo-1440613905118-99b921706b5c?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-        alt="Dumbo Manhattan Bridge"
-        fill
-        className="object-cover object-center"
-      />
-      {/* Dark green overlay */}
-      <div className="absolute inset-0" style={{ backgroundColor: 'rgba(0,0,0,0.38)' }} />
-
-      {/* Content */}
-      <div className="relative max-w-3xl mx-auto px-5 lg:px-8 text-center">
-        <p className="text-[12px] tracking-[0.4em] uppercase text-white mb-4">Let&apos;s Work Together</p>
-        <h2
-          className="text-[34px] lg:text-[45px] font-normal text-[#F8F3EB] leading-tight mb-5"
-          style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}
-        >
-          The right home<br className="sm:hidden" /> is a feeling.<br />I know how to find it.
-        </h2>
-        <p className="text-[16px] text-white/80 mb-8 max-w-md mx-auto leading-relaxed">
-          Not sure where to start? Tell me what you&apos;re looking for — or what you&apos;re running from.
-          I know this city. I&apos;ll help.
-        </p>
-        <Link
-          href="/local-expert/contact"
-          className="inline-flex items-center px-8 py-3.5 text-[14px] font-bold rounded-full bg-[#F8F3EB] text-[#1B3B2B] hover:bg-white transition-colors"
-        >
-          Start the conversation
-        </Link>
-      </div>
-    </section>
+    <ContactTeaser />
     </>
   )
 }
@@ -308,7 +297,7 @@ function HeroListingCard({ listing }) {
             {listing.status}
           </span>
         </div>
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/25 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#24180F]/80 via-[#24180F]/25 to-transparent" />
         <div className="absolute bottom-0 left-0 right-0 px-6 py-6 lg:px-8 lg:py-7">
           <div
             className="text-[36px] lg:text-[44px] font-normal text-white leading-none mb-1.5"
@@ -361,7 +350,7 @@ function SideListingCard({ listing }) {
             {listing.status}
           </span>
         </div>
-        <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/15 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#24180F]/75 via-[#24180F]/15 to-transparent" />
         <div className="absolute bottom-0 left-0 right-0 px-4 py-4">
           <div
             className="text-[22px] font-normal text-white leading-none"

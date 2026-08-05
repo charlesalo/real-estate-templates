@@ -183,7 +183,7 @@ export default function Footer({ agent }) {
       {/* ── Bottom bar ───────────────────────────────────────────────────── */}
       <div className="border-t border-[#F8F3EB]/8">
         <div className="max-w-7xl mx-auto px-6 lg:px-8 py-5 flex flex-col md:flex-row items-start md:items-center justify-between gap-3">
-          <p className="text-[12px] text-[#F8F3EB]/30 leading-relaxed max-w-2xl">
+          <p className="text-[12px] text-[#F8F3EB]/30 leading-relaxed max-w-2xl text-pretty">
             © {year} {brokerage}.
             <span className="mx-2 text-[#F8F3EB]/20">|</span>
             <Link href={`${BASE}/privacy`} className="text-[#F8F3EB]/35 hover:text-[#F8F3EB]/70 transition-colors">Privacy Policy</Link>

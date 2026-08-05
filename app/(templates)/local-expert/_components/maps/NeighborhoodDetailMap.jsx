@@ -45,13 +45,13 @@ export default function NeighborhoodDetailMap({ neighborhood }) {
           id: 'boundary-fill',
           type: 'fill',
           source: 'boundary',
-          paint: { 'fill-color': '#1B3B2B', 'fill-opacity': 0.12 },
+          paint: { 'fill-color': '#24180F', 'fill-opacity': 0.12 },
         })
         map.addLayer({
           id: 'boundary-line',
           type: 'line',
           source: 'boundary',
-          paint: { 'line-color': '#1B3B2B', 'line-width': 2.5, 'line-opacity': 0.9 },
+          paint: { 'line-color': '#24180F', 'line-width': 2.5, 'line-opacity': 0.9 },
         })
 
         const bounds = new mapboxgl.LngLatBounds()
@@ -75,7 +75,7 @@ export default function NeighborhoodDetailMap({ neighborhood }) {
     return (
       <div className="relative rounded-2xl overflow-hidden border border-[#E5E0D8] shadow-sm h-[340px] lg:h-[460px] bg-[#E5E0D8] flex flex-col items-center justify-center gap-3">
         <MapPin size={28} className="text-[#2C1E11]/30" />
-        <p className="text-[13px] text-[#2C1E11]/40 text-center px-8 max-w-sm">
+        <p className="text-[13px] text-[#2C1E11]/40 text-center px-8 max-w-sm text-pretty">
           Add <code className="font-mono">NEXT_PUBLIC_MAPBOX_TOKEN</code> to .env.local to enable the interactive {neighborhood.name} map.
         </p>
       </div>

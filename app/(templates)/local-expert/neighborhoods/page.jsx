@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
+import ContactTeaser from '../_components/sections/ContactTeaser'
 import { cn } from '@/lib/utils'
 import { resolveImageSrc } from '@/lib/sanity/image'
 import { withFallback, formatCompactPrice } from '@/lib/sanity/utils'
@@ -38,19 +39,19 @@ export default async function NeighborhoodsPage() {
           {/* Eyebrow with rule */}
           <div className="flex items-center gap-4 mb-6">
             <span className="text-[12px] tracking-[0.4em] uppercase text-[#BA5B3E] whitespace-nowrap">
-              Neighborhood Guides
+              Chapter One · Neighborhood Guides
             </span>
             <div className="h-px flex-1 bg-[#BEB7A9]" />
           </div>
 
           <h1
-            className="text-[43px] lg:text-[58px] font-normal text-[#24180F] leading-[1.05] mb-5"
+            className="text-[43px] lg:text-[58px] font-normal text-[#24180F] leading-[1.05] mb-5 text-balance"
             style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}
           >
             The blocks, walked<br />
             <em className="text-[#1B3B2B]">one street at a time.</em>
           </h1>
-          <p className="text-[16px] text-[#2C1E11]/50 max-w-xl leading-relaxed">
+          <p className="text-[16px] text-[#2C1E11]/50 max-w-xl leading-relaxed text-pretty">
             Neighborhood guides across Manhattan and Brooklyn — each one researched,
             photographed and written in the field. The kind of intel Zillow won&apos;t give you.
           </p>
@@ -112,7 +113,7 @@ export default async function NeighborhoodsPage() {
               </p>
 
               <h2
-                className="text-[40px] lg:text-[52px] font-normal text-[#24180F] leading-[1.05] mb-3"
+                className="text-[40px] lg:text-[52px] font-normal text-[#24180F] leading-[1.05] mb-3 text-balance"
                 style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}
               >
                 {lead.name}
@@ -130,7 +131,7 @@ export default async function NeighborhoodsPage() {
                 </p>
               </blockquote>
 
-              <p className="text-[15px] text-[#2C1E11]/60 leading-relaxed max-w-md mb-8">{lead.tagline}</p>
+              <p className="text-[15px] text-[#2C1E11]/60 leading-relaxed max-w-md mb-8 text-pretty">{lead.tagline}</p>
 
               <div className="grid grid-cols-3 gap-6 max-w-md border-y border-[#BEB7A9]/60 py-5">
                 <div>
@@ -170,7 +171,7 @@ export default async function NeighborhoodsPage() {
           <div className="mb-12 lg:mb-16">
             <p className="text-[12px] tracking-[0.4em] uppercase text-[#BA5B3E] mb-3">Continued Coverage</p>
             <h2
-              className="text-[34px] lg:text-[45px] font-normal text-[#24180F] leading-tight"
+              className="text-[34px] lg:text-[45px] font-normal text-[#24180F] leading-tight text-balance"
               style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}
             >
               Also in this issue
@@ -203,7 +204,7 @@ export default async function NeighborhoodsPage() {
                         N&deg; 0{i + 2} &middot; {i === 0 ? 'The downtown dispatch' : 'The uptown dispatch'}
                       </p>
                       <h2
-                        className="text-[26px] lg:text-[30px] font-normal text-[#24180F] mb-2"
+                        className="text-[26px] lg:text-[30px] font-normal text-[#24180F] mb-2 text-balance"
                         style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}
                       >
                         {n.name}
@@ -241,7 +242,7 @@ export default async function NeighborhoodsPage() {
           <div>
             <p className="text-[12px] tracking-[0.4em] uppercase text-[#BA5B3E] mb-3">The Dossier</p>
             <h2
-              className="text-[34px] lg:text-[45px] font-normal text-[#24180F] leading-tight"
+              className="text-[34px] lg:text-[45px] font-normal text-[#24180F] leading-tight text-balance"
               style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}
             >
               The rest of the issue
@@ -271,12 +272,12 @@ export default async function NeighborhoodsPage() {
                     {[n.borough, ...n.vibes].join(' · ')}
                   </p>
                   <h3
-                    className="text-[26px] lg:text-[30px] font-normal text-[#24180F] mb-2 transition-colors group-hover:text-[#BA5B3E]"
+                    className="text-[26px] lg:text-[30px] font-normal text-[#24180F] mb-2 transition-colors group-hover:text-[#BA5B3E] text-balance"
                     style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}
                   >
                     {n.name}
                   </h3>
-                  <p className="text-[14px] text-[#2C1E11]/60 leading-relaxed max-w-md">{n.tagline}</p>
+                  <p className="text-[14px] text-[#2C1E11]/60 leading-relaxed max-w-md text-pretty">{n.tagline}</p>
                 </div>
                 <div className="lg:text-right">
                   <p className="text-[24px] text-[#1B3B2B]" style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}>
@@ -292,39 +293,7 @@ export default async function NeighborhoodsPage() {
         </div>
       </section>
 
-      {/* ─── CONTACT TEASER ───────────────────────────────────────────── */}
-      <section className="relative py-[120px] lg:py-[168px] overflow-hidden">
-        {/* Full-bleed background */}
-        <Image
-          src="https://images.unsplash.com/photo-1440613905118-99b921706b5c?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-          alt="Dumbo Manhattan Bridge"
-          fill
-          className="object-cover object-center"
-        />
-        {/* Dark green overlay */}
-        <div className="absolute inset-0" style={{ backgroundColor: 'rgba(0,0,0,0.38)' }} />
-
-        {/* Content */}
-        <div className="relative max-w-3xl mx-auto px-5 lg:px-8 text-center">
-          <p className="text-[12px] tracking-[0.4em] uppercase text-white mb-4">Let&apos;s Work Together</p>
-          <h2
-            className="text-[34px] lg:text-[45px] font-normal text-[#F8F3EB] leading-tight mb-5"
-            style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}
-          >
-            The right home<br className="sm:hidden" /> is a feeling.<br />I know how to find it.
-          </h2>
-          <p className="text-[16px] text-white/80 mb-8 max-w-md mx-auto leading-relaxed">
-            Not sure where to start? Tell me what you&apos;re looking for — or what you&apos;re running from.
-            I know this city. I&apos;ll help.
-          </p>
-          <Link
-            href="/local-expert/contact"
-            className="inline-flex items-center px-8 py-3.5 text-[14px] font-bold rounded-full bg-[#F8F3EB] text-[#1B3B2B] hover:bg-white transition-colors"
-          >
-            Start the conversation
-          </Link>
-        </div>
-      </section>
+      <ContactTeaser />
     </>
   )
 }

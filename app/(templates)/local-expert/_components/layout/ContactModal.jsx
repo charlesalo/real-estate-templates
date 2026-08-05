@@ -82,9 +82,9 @@ export default function ContactModal({ agent, open, onClose }) {
                 >
                   <X size={18} />
                 </button>
-                <p className="text-[12px] tracking-[0.3em] uppercase text-[#8B9E8B] mb-1">Get in Touch</p>
+                <p className="text-[12px] tracking-[0.4em] uppercase text-[#BA5B3E] mb-1">Get in Touch</p>
                 <h2
-                  className="text-xl font-bold text-[#24180F]"
+                  className="text-xl font-bold text-[#24180F] text-balance"
                   style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}
                 >
                   Let&apos;s Talk Neighborhoods
@@ -102,7 +102,7 @@ export default function ContactModal({ agent, open, onClose }) {
                       <CheckSquare size={22} className="text-[#2C1E11]" />
                     </div>
                     <h3
-                      className="text-lg font-bold text-[#24180F] mb-2"
+                      className="text-lg font-bold text-[#24180F] mb-2 text-balance"
                       style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}
                     >
                       Message sent
@@ -197,12 +197,12 @@ export default function ContactModal({ agent, open, onClose }) {
                 {/* Direct contact */}
                 <div className="flex items-center gap-6 mt-6 pt-5 border-t border-[#1B3B2B]/10">
                   {agent?.phone && (
-                    <a href={`tel:${agent.phone}`} className="flex items-center gap-1.5 text-xs text-[#2C1E11]/45 hover:text-[#2C1E11] transition-colors">
+                    <a href={`tel:${agent.phone}`} className="flex items-center gap-1.5 text-xs text-[#2C1E11]/60 hover:text-[#BA5B3E] transition-colors">
                       <Phone size={11} /> {agent.phone}
                     </a>
                   )}
                   {agent?.email && (
-                    <a href={`mailto:${agent.email}`} className="flex items-center gap-1.5 text-xs text-[#2C1E11]/45 hover:text-[#2C1E11] transition-colors">
+                    <a href={`mailto:${agent.email}`} className="flex items-center gap-1.5 text-xs text-[#2C1E11]/60 hover:text-[#BA5B3E] transition-colors">
                       <Mail size={11} /> {agent.email}
                     </a>
                   )}

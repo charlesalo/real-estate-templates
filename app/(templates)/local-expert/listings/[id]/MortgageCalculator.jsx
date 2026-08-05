@@ -58,7 +58,7 @@ export default function MortgageCalculator({ listPrice }) {
 
   return (
     <div className="rounded-xl border border-[#E5E0D8] bg-white p-6 lg:p-7 mb-10">
-      <h3 className="text-[19px] font-normal text-[#24180F] mb-1" style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}>
+      <h3 className="text-[19px] font-normal text-[#24180F] mb-1 text-balance" style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}>
         Mortgage Calculator
       </h3>
       <p className="text-[12px] text-[#2C1E11]/45 mb-6">

@@ -4,6 +4,7 @@ import { useState, useRef, useEffect, useCallback } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { CheckCircle, ArrowRight, ArrowLeft, MapPin, X, Bed, Bath, Square } from 'lucide-react'
+import ContactTeaser from '../_components/sections/ContactTeaser'
 
 function formatPrice(n) {
   if (n >= 1_000_000) return `$${(n / 1_000_000).toFixed(n % 1_000_000 === 0 ? 0 : 2)}M`
@@ -184,7 +185,7 @@ export default function HomeValuationClient({ testimonial, soldListings }) {
           <CheckCircle size={40} className="text-[#8B9E8B]" />
           <div>
             <h2
-              className="text-[24px] font-normal text-[#24180F]"
+              className="text-[24px] font-normal text-[#24180F] text-balance"
               style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}
             >
               Your estimate is being prepared.
@@ -358,12 +359,12 @@ export default function HomeValuationClient({ testimonial, soldListings }) {
           <div>
             <p className="text-[12px] tracking-[0.4em] uppercase text-[#BA5B3E] mb-4">Market Intelligence</p>
             <h1
-              className="text-[43px] lg:text-[58px] font-normal text-[#24180F] leading-[1.05] mb-5"
+              className="text-[43px] lg:text-[58px] font-normal text-[#24180F] leading-[1.05] mb-5 text-balance"
               style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}
             >
               What is your home actually worth?
             </h1>
-            <p className="text-[18px] text-[#2C1E11]/55 leading-relaxed mb-8 max-w-md">
+            <p className="text-[18px] text-[#2C1E11]/55 leading-relaxed mb-8 max-w-md text-pretty">
               Not a Zillow estimate. A real, hand-annotated analysis from a broker who sold 240 homes
               in these exact neighborhoods. Takes 60 seconds to request. Free.
             </p>
@@ -397,7 +398,7 @@ export default function HomeValuationClient({ testimonial, soldListings }) {
         <div className="max-w-2xl mb-12 lg:mb-16">
           <p className="text-[12px] tracking-[0.4em] uppercase text-[#BA5B3E] mb-4">Behind The Number</p>
           <h2
-            className="text-[34px] lg:text-[45px] font-normal text-[#24180F] leading-tight mb-5"
+            className="text-[34px] lg:text-[45px] font-normal text-[#24180F] leading-tight mb-5 text-balance"
             style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}
           >
             What a valuation actually <br className="hidden lg:block" />tells you
@@ -413,7 +414,7 @@ export default function HomeValuationClient({ testimonial, soldListings }) {
           {VALUATION_FAQS.map((item, i) => (
             <div key={item.q} className="rounded-2xl border border-[#E5E0D8] bg-[#FDFAF6] p-7">
               <span className="text-[12px] font-bold text-[#BA5B3E]">{`0${i + 1}`}</span>
-              <h3 className="text-[16px] font-bold text-[#24180F] mt-3 mb-2">{item.q}</h3>
+              <h3 className="text-[16px] font-bold text-[#24180F] mt-3 mb-2 text-balance">{item.q}</h3>
               <p className="text-[14px] text-[#2C1E11]/55 leading-relaxed">{item.a}</p>
             </div>
           ))}
@@ -447,12 +448,12 @@ export default function HomeValuationClient({ testimonial, soldListings }) {
           <div>
             <span className="text-[12px] tracking-[0.4em] uppercase text-[#BA5B3E]">Proven Track Record</span>
             <h2
-              className="text-[34px] lg:text-[45px] font-normal text-[#24180F] leading-tight mt-2 mb-3"
+              className="text-[34px] lg:text-[45px] font-normal text-[#24180F] leading-tight mt-2 mb-3 text-balance"
               style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}
             >
               Recent Sales
             </h2>
-            <p className="text-[15px] text-[#2C1E11]/40 max-w-lg">
+            <p className="text-[15px] text-[#2C1E11]/40 max-w-lg text-pretty">
               Fourteen years and 240 closings in these blocks — these are the comps I&apos;d actually
               point to, not the ones a script would pick.
             </p>
@@ -515,39 +516,7 @@ export default function HomeValuationClient({ testimonial, soldListings }) {
       </div>
     )}
 
-    {/* ─── CONTACT TEASER ───────────────────────────────────────────── */}
-    <section className="relative py-[120px] lg:py-[168px] overflow-hidden">
-      {/* Full-bleed background */}
-      <Image
-        src="https://images.unsplash.com/photo-1440613905118-99b921706b5c?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-        alt="Dumbo Manhattan Bridge"
-        fill
-        className="object-cover object-center"
-      />
-      {/* Dark green overlay */}
-      <div className="absolute inset-0" style={{ backgroundColor: 'rgba(0,0,0,0.38)' }} />
-
-      {/* Content */}
-      <div className="relative max-w-3xl mx-auto px-5 lg:px-8 text-center">
-        <p className="text-[12px] tracking-[0.4em] uppercase text-white mb-4">Let&apos;s Work Together</p>
-        <h2
-          className="text-[34px] lg:text-[45px] font-normal text-[#F8F3EB] leading-tight mb-5"
-          style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}
-        >
-          The right home<br className="sm:hidden" /> is a feeling.<br />I know how to find it.
-        </h2>
-        <p className="text-[16px] text-white/80 mb-8 max-w-md mx-auto leading-relaxed">
-          Not sure where to start? Tell me what you&apos;re looking for — or what you&apos;re running from.
-          I know this city. I&apos;ll help.
-        </p>
-        <Link
-          href="/local-expert/contact"
-          className="inline-flex items-center px-8 py-3.5 text-[14px] font-bold rounded-full bg-[#F8F3EB] text-[#1B3B2B] hover:bg-white transition-colors"
-        >
-          Start the conversation
-        </Link>
-      </div>
-    </section>
+    <ContactTeaser />
     </>
   )
 }
@@ -566,7 +535,7 @@ function SoldHeroCard({ sale }) {
           Sold
         </span>
       </div>
-      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/25 to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-t from-[#24180F]/80 via-[#24180F]/25 to-transparent" />
       <div className="absolute bottom-0 left-0 right-0 px-6 py-6 lg:px-8 lg:py-7">
         <div
           className="text-[36px] lg:text-[44px] font-normal text-white leading-none mb-1.5"
@@ -631,7 +600,7 @@ function SoldSideCard({ sale }) {
           Sold
         </span>
       </div>
-      <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/15 to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-t from-[#24180F]/75 via-[#24180F]/15 to-transparent" />
       <div className="absolute bottom-0 left-0 right-0 px-4 py-4">
         <div
           className="text-[22px] font-normal text-white leading-none"

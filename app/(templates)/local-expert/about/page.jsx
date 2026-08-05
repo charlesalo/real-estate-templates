@@ -1,13 +1,17 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
+import HeroStats from '../_components/HeroStats'
+import { HeroListingCard, SideListingCard } from '../_components/listings/ListingCards'
+import ContactTeaser from '../_components/sections/ContactTeaser'
 import PortableText from '@/components/sanity/PortableText'
 import { resolveImageSrc } from '@/lib/sanity/image'
 import { withFallback, isPortableText } from '@/lib/sanity/utils'
 import { getAgent, getTestimonials } from '@/lib/sanity/queries'
 import {
   AGENT as AGENT_FALLBACK,
-  AGENT_STATS,
+  HERO_STATS,
+  HOMEPAGE_LISTINGS,
   TESTIMONIAL as TESTIMONIAL_FALLBACK,
 } from '@/lib/local-expert-data'
 
@@ -33,115 +37,139 @@ const TIMELINE = [
 export default async function AboutPage() {
   const [agentDoc, testimonials] = await Promise.all([getAgent(), getTestimonials()])
   const agent = agentDoc ? { ...AGENT_FALLBACK, ...agentDoc } : AGENT_FALLBACK
-  const stats = withFallback(agent.stats, AGENT_STATS)
+  const heroStats = withFallback(agent.heroStats, HERO_STATS)
   const TESTIMONIAL = withFallback(testimonials, [TESTIMONIAL_FALLBACK])[0]
 
   return (
     <>
-      {/* Hero */}
-      <section className="pt-[112px] pb-[64px] lg:pt-[144px] lg:pb-[80px]" style={{ backgroundColor: '#F8F3EB' }}>
+      {/* ─── Header ─── */}
+      <section className="pt-[112px] pb-[96px] lg:pt-[144px] lg:pb-[128px]" style={{ backgroundColor: '#F8F3EB' }}>
         <div className="max-w-7xl mx-auto px-5 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-[1fr_420px] gap-12 lg:gap-20 items-start">
+          {/* Eyebrow with rule */}
+          <div className="flex items-center gap-4 mb-6">
+            <span className="text-[12px] tracking-[0.4em] uppercase text-[#BA5B3E] whitespace-nowrap">
+              The Broker
+            </span>
+            <div className="h-px flex-1 bg-[#BEB7A9]" />
+          </div>
+
+          <h1
+            className="text-[43px] lg:text-[58px] font-normal text-[#24180F] leading-[1.05] text-balance"
+            style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}
+          >
+            I don&apos;t sell apartments.<br />
+            <em className="text-[#1B3B2B]">I introduce people to blocks.</em>
+          </h1>
+        </div>
+      </section>
+
+      {/* ─── Portrait, bio and figures ─── */}
+      {/* No top padding by design: this shares the header's background, so the
+          header's bottom padding already supplies the gap between the two. */}
+      <section className="pb-[96px] lg:pb-[128px]" style={{ backgroundColor: '#F8F3EB' }}>
+        <div className="max-w-7xl mx-auto px-5 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-[480px_1fr] gap-12 lg:gap-20 items-start">
+
+            {/* Portrait + credentials caption */}
             <div>
-              <p className="text-[12px] tracking-[0.4em] uppercase text-[#BA5B3E] mb-4">About</p>
-              <h1
-                className="text-[43px] lg:text-[58px] font-normal text-[#24180F] leading-[1.05] mb-6"
+              <div className="relative aspect-[3/4] rounded-2xl overflow-hidden">
+                <Image
+                  src={resolveImageSrc(agent.photo)}
+                  alt={agent.name}
+                  fill
+                  sizes="(min-width: 1024px) 480px, 100vw"
+                  className="object-cover"
+                  priority
+                />
+              </div>
+              <p className="text-[12px] tracking-[0.28em] uppercase text-[#2C1E11]/50 mt-4 leading-relaxed">
+                {agent.name} · {agent.title} · NY DOS #{agent.license?.replace('NY Lic# ', '')}
+              </p>
+              <p className="text-[12px] text-[#2C1E11]/35 mt-2 leading-relaxed">
+                {agent.brokerage} · {agent.brokerageLicense}
+                <br />
+                {agent.brokerageAddress}
+              </p>
+            </div>
+
+            {/* Lead, bio, figures, CTA */}
+            <div>
+              <p
+                className="text-[26px] lg:text-[30px] font-normal text-[#24180F] leading-snug mb-8"
                 style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}
               >
-                Fourteen years<br />in New York.
-              </h1>
-              <p className="text-[18px] text-[#2C1E11]/60 leading-relaxed max-w-lg">
                 I moved here for a job that didn&apos;t pan out. I stayed because no city on earth
                 has this particular pull. Now I help other people figure out their version of New York —
                 which block, which building, which life.
               </p>
-            </div>
-            <div className="relative aspect-[3/4] rounded-2xl overflow-hidden">
-              <Image
-                src={resolveImageSrc(agent.photo)}
-                alt={agent.name}
-                fill
-                className="object-cover"
-                priority
-              />
-            </div>
-          </div>
-        </div>
-      </section>
 
-      {/* Stats bar */}
-      <section className="py-[24px] border-y border-[#E5E0D8]" style={{ backgroundColor: '#F4F0EA' }}>
-        <div className="max-w-7xl mx-auto px-5 lg:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-            {stats.map((stat) => (
-              <div key={stat.label}>
-                <div
-                  className="text-[34px] font-normal text-[#24180F] leading-none"
-                  style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}
-                >
-                  {stat.value ?? `${stat.prefix ?? ''}${stat.numericValue}${stat.suffix ?? ''}`}
-                </div>
-                <div className="text-[12px] uppercase tracking-wider text-[#2C1E11]/40 mt-1">{stat.label}</div>
+              <div className="space-y-5 [&_p]:text-[16px] [&_p]:text-[#2C1E11]/60 [&_p]:leading-relaxed">
+                {isPortableText(agent.bio) ? (
+                  <PortableText value={agent.bio} />
+                ) : (
+                  agent.bio.map((para, i) => <p key={i}>{para}</p>)
+                )}
+                <p>
+                  The areas I focus on — {(agent.areas ?? []).join(', ')} — are neighborhoods I know the way
+                  you know a friend&apos;s face. I know which buildings have good boards and which ones stall
+                  on approvals. I know where the light is in the afternoon. I know which crosstown blocks
+                  actually feel different.
+                </p>
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
-      {/* Full bio */}
-      <section className="py-[96px] lg:py-[128px]" style={{ backgroundColor: '#F8F3EB' }}>
-        <div className="max-w-3xl mx-auto px-5 lg:px-8">
-          <div className="space-y-6 [&_p]:text-[16px] [&_p]:text-[#2C1E11]/65 [&_p]:leading-relaxed">
-            {isPortableText(agent.bio) ? (
-              <PortableText value={agent.bio} />
-            ) : (
-              agent.bio.map((para, i) => <p key={i}>{para}</p>)
-            )}
-            <p>
-              The areas I focus on — {(agent.areas ?? []).join(', ')} — are neighborhoods I know the way
-              you know a friend&apos;s face. I know which buildings have good boards and which ones stall
-              on approvals. I know where the light is in the afternoon. I know which crosstown blocks
-              actually feel different.
-            </p>
-          </div>
+              {/* Figures — same data and treatment as the homepage hero, so the
+                  numbers a visitor meets on the front page carry over here. */}
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-x-8 gap-y-8 mt-10 pt-8 border-t border-[#1B3B2B]/10">
+                <HeroStats stats={heroStats} />
+              </div>
 
-          {/* Credentials */}
-          <div className="mt-12 p-6 rounded-2xl border border-[#E5E0D8]">
-            <p className="text-[12px] uppercase tracking-wider text-[#2C1E11]/30 mb-4">Credentials</p>
-            <div className="space-y-2">
-              <p className="text-[15px] text-[#2C1E11]">{agent.title}</p>
-              <p className="text-[14px] text-[#2C1E11]/50">{agent.license}</p>
-              <p className="text-[14px] text-[#2C1E11]/50">{agent.brokerage} · {agent.brokerageLicense}</p>
-              <p className="text-[14px] text-[#2C1E11]/40">{agent.brokerageAddress}</p>
+              <Link
+                href="/local-expert/contact"
+                className="inline-flex items-center mt-10 px-6 py-3 text-[14px] font-bold rounded-full bg-[#1B3B2B] text-[#F8F3EB] hover:bg-[#2a5540] transition-colors"
+              >
+                Book a 20-minute call
+              </Link>
             </div>
           </div>
         </div>
       </section>
 
       {/* Timeline */}
-      <section className="py-[96px] lg:py-[128px]" style={{ backgroundColor: '#F4F0EA' }}>
+      {/* Shares the bio section's background and takes no top padding — the two
+          read as one continuous stretch of the broker's story. */}
+      <section className="pb-[96px] lg:pb-[128px]" style={{ backgroundColor: '#F8F3EB' }}>
         <div className="max-w-3xl mx-auto px-5 lg:px-8">
+          <p className="text-[12px] tracking-[0.4em] uppercase text-[#BA5B3E] mb-3">The Long Version</p>
           <h2
-            className="text-[34px] font-normal text-[#24180F] mb-12"
+            className="text-[34px] font-normal text-[#24180F] mb-10 text-balance"
             style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}
           >
             The story so far.
           </h2>
-          <div className="space-y-0">
-            {TIMELINE.map((item, i) => (
-              <div key={item.year} className="flex gap-8 pb-10 relative">
-                <div className="flex flex-col items-center">
-                  <div className="w-2 h-2 rounded-full bg-[#1B3B2B] mt-1.5 flex-shrink-0" />
-                  {i < TIMELINE.length - 1 && (
-                    <div className="w-px flex-1 bg-[#1B3B2B]/10 mt-2" />
-                  )}
+          <div>
+            {TIMELINE.map((item, i) => {
+              const isLast = i === TIMELINE.length - 1
+              return (
+                <div key={item.year} className="flex gap-5">
+                  <div className="flex flex-col items-center">
+                    <div className="w-[7px] h-[7px] rounded-full bg-[#BA5B3E] mt-[7px] flex-shrink-0" />
+                    {/* The spacing below lives on the text column, not the row, so
+                        this connector stretches the full gap to the next marker
+                        instead of stopping short of it. */}
+                    {!isLast && <div className="w-px flex-1 bg-[#BEB7A9]/70 mt-2" />}
+                  </div>
+                  <div className={isLast ? undefined : 'pb-7'}>
+                    <p
+                      className="text-[19px] text-[#BA5B3E] leading-none mb-1.5"
+                      style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}
+                    >
+                      {item.year}
+                    </p>
+                    <p className="text-[15px] text-[#2C1E11]/60 leading-relaxed">{item.event}</p>
+                  </div>
                 </div>
-                <div className="pb-2">
-                  <p className="text-[12px] font-bold tracking-wider text-[#8B9E8B] mb-1">{item.year}</p>
-                  <p className="text-[16px] text-[#2C1E11]/65 leading-relaxed">{item.event}</p>
-                </div>
-              </div>
-            ))}
+              )
+            })}
           </div>
         </div>
       </section>
@@ -164,26 +192,52 @@ export default async function AboutPage() {
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="py-[64px] lg:py-[80px]" style={{ backgroundColor: '#F8F3EB' }}>
-        <div className="max-w-3xl mx-auto px-5 lg:px-8 text-center">
-          <h2
-            className="text-[34px] font-normal text-[#24180F] mb-4"
-            style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}
-          >
-            Let&apos;s talk about your next block.
-          </h2>
-          <p className="text-[16px] text-[#2C1E11]/50 mb-8">
-            No pressure. Just a conversation about what you&apos;re looking for.
-          </p>
+      {/* ─── Featured properties ─────────────────────────────────────── */}
+      <section className="py-[96px] lg:py-[128px]" style={{ backgroundColor: '#F8F3EB' }}>
+        <div className="max-w-7xl mx-auto px-5 lg:px-8">
+
+          <div className="flex items-end justify-between gap-4 mb-10">
+            <div>
+              <span className="text-[12px] tracking-[0.4em] uppercase text-[#BA5B3E]">Currently Representing</span>
+              <h2
+                className="text-[34px] lg:text-[45px] font-normal text-[#24180F] leading-tight mt-2 mb-3 text-balance"
+                style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}
+              >
+                Homes on my desk right now.
+              </h2>
+              {/* text-pretty keeps the last line from stranding a single word,
+                  which this blurb did at the lg breakpoint. */}
+              <p className="text-[15px] text-[#2C1E11]/40 max-w-lg text-pretty">
+                Every one of these I have walked, measured against the block, and would show you myself.
+              </p>
+            </div>
+            <Link
+              href="/local-expert/listings"
+              className="hidden md:flex items-center gap-1.5 text-[13px] font-semibold text-[#2C1E11] hover:text-[#BA5B3E] transition-colors whitespace-nowrap"
+            >
+              View all active listings <ArrowRight size={13} />
+            </Link>
+          </div>
+
+          {/* Asymmetric feature layout: hero left, two sidebar cards right */}
+          <div className="grid grid-cols-1 lg:grid-cols-[3fr_2fr] gap-3 lg:h-[560px]">
+            <HeroListingCard listing={HOMEPAGE_LISTINGS[0]} />
+            <div className="flex flex-col gap-3 h-full">
+              <SideListingCard listing={HOMEPAGE_LISTINGS[1]} />
+              <SideListingCard listing={HOMEPAGE_LISTINGS[2]} />
+            </div>
+          </div>
+
           <Link
-            href="/local-expert/contact"
-            className="inline-flex items-center gap-2 px-8 py-3.5 text-[14px] font-bold rounded-full bg-[#1B3B2B] text-[#F8F3EB] hover:bg-[#2a5540] transition-colors"
+            href="/local-expert/listings"
+            className="flex md:hidden items-center gap-1.5 text-[13px] font-semibold text-[#2C1E11] hover:text-[#BA5B3E] transition-colors mt-6"
           >
-            Get in touch <ArrowRight size={14} />
+            View all active listings <ArrowRight size={13} />
           </Link>
         </div>
       </section>
+
+      <ContactTeaser />
     </>
   )
 }

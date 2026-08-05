@@ -25,7 +25,9 @@ export async function generateMetadata({ params }) {
   if (!post) return {}
   return {
     alternates: { canonical: `/local-expert/blog/${slug}` },
-    title: post.title,
+    // `absolute` so the layout's " | Nadia Osei" suffix isn't appended — post
+    // titles are already near the character limit on their own.
+    title: { absolute: post.title },
     description: post.excerpt,
   }
 }
@@ -52,7 +54,7 @@ export default async function BlogPostPage({ params }) {
           </Link>
 
           <p className="text-[12px] tracking-[0.3em] uppercase text-[#BA5B3E] mb-4">{post.category}</p>
-          <h1 className="text-[34px] lg:text-[45px] font-normal text-[#24180F] leading-tight mb-5" style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}>
+          <h1 className="text-[34px] lg:text-[45px] font-normal text-[#24180F] leading-tight mb-5 text-balance" style={{ fontFamily: 'var(--font-gelasio, Georgia, serif)' }}>
             {post.title}
           </h1>
           <div className="flex items-center gap-4 text-[12px] text-[#24180F]/35 mb-8">

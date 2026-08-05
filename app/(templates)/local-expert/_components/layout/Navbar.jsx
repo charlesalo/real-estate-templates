@@ -10,7 +10,7 @@ import { cn } from '@/lib/utils'
 
 const BASE = '/local-expert'
 
-export default function Navbar({ agentName, phone, onContactOpen }) {
+export default function Navbar({ agentName, phone }) {
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
   const pathname = usePathname()
@@ -110,12 +110,12 @@ export default function Navbar({ agentName, phone, onContactOpen }) {
                 </a>
               )}
 
-              <button
-                onClick={onContactOpen}
+              <Link
+                href={`${BASE}/contact`}
                 className="hidden lg:block text-[13px] font-semibold px-4 py-2 rounded-full bg-[#1B3B2B] text-[#F8F3EB] hover:bg-[#2a5540] transition-colors duration-200"
               >
                 Talk to Nadia
-              </button>
+              </Link>
 
               {/* Mobile hamburger */}
               <button
@@ -191,12 +191,13 @@ export default function Navbar({ agentName, phone, onContactOpen }) {
               </nav>
 
               <div className="px-6 pb-8 pt-4 border-t border-[#1B3B2B]/10">
-                <button
-                  onClick={() => { setMenuOpen(false); onContactOpen?.() }}
-                  className="w-full py-3.5 text-[14px] font-semibold bg-[#1B3B2B] text-[#F8F3EB] rounded-full hover:bg-[#2a5540] transition-colors"
+                <Link
+                  href={`${BASE}/contact`}
+                  onClick={() => setMenuOpen(false)}
+                  className="block w-full py-3.5 text-center text-[14px] font-semibold bg-[#1B3B2B] text-[#F8F3EB] rounded-full hover:bg-[#2a5540] transition-colors"
                 >
                   Talk to Nadia
-                </button>
+                </Link>
                 {phone && (
                   <a
                     href={`tel:${phone}`}
