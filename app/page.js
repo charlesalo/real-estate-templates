@@ -47,7 +47,7 @@ const TEMPLATES = [
     description:
       'An editorial-style site built for agents whose biggest competitive edge is deep local knowledge. Inspired by city guides and print journalism, this template positions you as the definitive authority on your market — with neighborhood maps, field notes, curated listings, and a blog that actually gets read. Less property search portal, more trusted local voice.',
     features: ['Editorial Neighborhood Guides', 'MLS Home Search', 'Field Notes / Blog', 'Home Valuation Widget', 'Market Reports', '10-Page Build'],
-    preview: '/images/landing-page/local-expert-full-page-preview.png',
+    preview: '/images/landing-page/local-expert-full-page-preview.webp',
     accent: '#1B3B2B',
   },
 ]
