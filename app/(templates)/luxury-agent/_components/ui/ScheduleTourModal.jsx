@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { createPortal } from 'react-dom'
 import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
 import { X, CheckCircle } from 'lucide-react'
@@ -85,7 +86,7 @@ export default function ScheduleTourModal({
 
   const inputCls = 'w-full bg-transparent border-b border-white/10 focus:border-[#C9A96E] py-3 text-white text-sm placeholder:text-white/25 outline-none transition-colors font-sans'
 
-  return (
+  const content = (
     <AnimatePresence>
       {open && (
         <>
@@ -310,4 +311,10 @@ export default function ScheduleTourModal({
       )}
     </AnimatePresence>
   )
+
+  // Portalled to the body so the modal is not trapped in the stacking context
+  // of whichever column renders it.
+  if (typeof document === 'undefined') return null
+
+  return createPortal(content, document.body)
 }

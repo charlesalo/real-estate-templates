@@ -131,12 +131,10 @@ export default function PropertyMap({ lat, lng, address, label }) {
       <style>{`
         .property-map-popup .mapboxgl-popup-content { background: transparent; padding: 0; box-shadow: none; }
         .property-map-popup .mapboxgl-popup-tip { display: none; }
-        .property-map-container .mapboxgl-ctrl-group,
-        .property-map-container .mapboxgl-ctrl-attrib { z-index: 1 !important; }
       `}</style>
       <div
         ref={containerRef}
-        className="property-map-container h-[320px] lg:h-[380px] border border-white/[0.07]"
+        className="property-map-container isolate h-[320px] lg:h-[380px] border border-white/[0.07]"
       />
     </>
   )

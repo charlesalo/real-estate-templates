@@ -184,7 +184,7 @@ export default function MortgageCalculator({ defaultPrice = 2500000 }) {
           <button
             type="button"
             onClick={() => window.dispatchEvent(new CustomEvent('contact:open'))}
-            className="block w-full text-center py-3 text-[12px] tracking-[0.2em] uppercase font-medium transition-opacity hover:opacity-90 border border-template-accent text-template-accent"
+            className="block w-full text-center py-4 text-[12px] tracking-[0.2em] uppercase font-semibold font-sans transition-colors bg-template-accent text-template-accent-fg hover:bg-template-accent-hover"
           >
             Get Pre-Approved →
           </button>
