@@ -70,6 +70,7 @@ const MENU_LINKS = [
   { label: 'Contact Us', href: '/modern-team/contact' },
 ]
 
+const OG_IMAGE = '/images/landing-page/modern-team-og.jpg'
 const MODERN_TEAM_TITLE = 'The Hargrove Group | Top Houston Real Estate Agents'
 const MODERN_TEAM_DESCRIPTION =
   'The Hargrove Group — Houston\'s trusted real estate team, helping buyers & sellers in River Oaks, The Heights, Memorial & The Woodlands.'
@@ -94,7 +95,7 @@ export const metadata = {
     description: MODERN_TEAM_DESCRIPTION,
     url: '/modern-team',
     siteName: TEAM.name,
-    images: ['/images/landing-page/modern-team-full-page-preview.png'],
+    images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: `${TEAM.name} — Houston real estate` }],
     locale: 'en_US',
     type: 'website',
   },
@@ -102,7 +103,7 @@ export const metadata = {
     card: 'summary_large_image',
     title: MODERN_TEAM_TITLE,
     description: MODERN_TEAM_DESCRIPTION,
-    images: ['/images/landing-page/modern-team-full-page-preview.png'],
+    images: [OG_IMAGE],
   },
 }
 
@@ -114,7 +115,7 @@ const JSON_LD = {
   telephone: TEAM.phone,
   email: TEAM.email,
   url: 'https://re-templates.chavbuilds.com/modern-team',
-  image: 'https://re-templates.chavbuilds.com/images/landing-page/modern-team-full-page-preview.png',
+  image: `https://re-templates.chavbuilds.com${OG_IMAGE}`,
   address: {
     '@type': 'PostalAddress',
     streetAddress: '1700 Post Oak Blvd Ste 600',

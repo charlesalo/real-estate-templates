@@ -37,6 +37,8 @@ async function getResolvedAgent() {
   }
 }
 
+const OG_IMAGE = '/images/landing-page/local-expert-og.jpg'
+
 export async function generateMetadata() {
   const settings = await getSiteSettings()
   const name = settings?.businessName ?? AGENT_FALLBACK.name
@@ -60,7 +62,7 @@ export async function generateMetadata() {
       description,
       url: '/local-expert',
       siteName: `${name} Real Estate`,
-      images: ['/images/landing-page/local-expert-full-page-preview.png'],
+      images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: `${name} — New York real estate` }],
       locale: 'en_US',
       type: 'website',
     },
@@ -68,7 +70,7 @@ export async function generateMetadata() {
       card: 'summary_large_image',
       title,
       description,
-      images: ['/images/landing-page/local-expert-full-page-preview.png'],
+      images: [OG_IMAGE],
     },
   }
 }
@@ -85,7 +87,7 @@ export default async function LocalExpertLayout({ children }) {
     telephone: agent.phone,
     email: agent.email,
     url: 'https://re-templates.chavbuilds.com/local-expert',
-    image: 'https://re-templates.chavbuilds.com/images/landing-page/local-expert-full-page-preview.png',
+    image: `https://re-templates.chavbuilds.com${OG_IMAGE}`,
     address: {
       '@type': 'PostalAddress',
       streetAddress: agent.brokerageAddress,
