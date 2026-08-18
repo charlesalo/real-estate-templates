@@ -8,6 +8,8 @@ import { cn } from '@/lib/utils'
 
 export default function HeroFullscreen({
   backgroundVideo,
+  backgroundVideoWebm,
+  backgroundPoster,
   backgroundImage,
   eyebrow,
   headline,
@@ -37,9 +39,11 @@ export default function HeroFullscreen({
             muted
             loop
             playsInline
+            poster={backgroundPoster}
             className="absolute inset-0 w-full h-full object-cover"
           >
-            <source src={backgroundVideo} type={backgroundVideo.endsWith('.mov') ? 'video/quicktime' : 'video/mp4'} />
+            {backgroundVideoWebm && <source src={backgroundVideoWebm} type="video/webm" />}
+            <source src={backgroundVideo} type="video/mp4" />
           </video>
         ) : backgroundImage ? (
           // eslint-disable-next-line @next/next/no-img-element

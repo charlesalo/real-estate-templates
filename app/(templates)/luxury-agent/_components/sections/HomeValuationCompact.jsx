@@ -24,10 +24,10 @@ export default function HomeValuationCompact({ googleMapsKey = '' }) {
             loop
             playsInline
             className="w-full h-full object-cover"
-            poster="/images/luxury-agent/xtra1.jpg"
+            poster="/images/luxury-agent/home-val-poster.jpg"
           >
-            <source src="/images/luxury-agent/home-val-video.mov" type="video/quicktime" />
-            <source src="/images/luxury-agent/home-val-video.mov" type="video/mp4" />
+            <source src="/images/luxury-agent/home-val-video.webm" type="video/webm" />
+            <source src="/images/luxury-agent/home-val-video.mp4" type="video/mp4" />
           </video>
         </motion.div>
         <div className="absolute inset-0 bg-[#0A0A0A]/72" />

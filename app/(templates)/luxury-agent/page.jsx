@@ -123,6 +123,8 @@ export default function LuxuryAgentHome() {
       {/* 1 — Hero */}
       <HeroFullscreen
         backgroundVideo="/images/luxury-agent/HOV.mp4"
+        backgroundVideoWebm="/images/luxury-agent/HOV.webm"
+        backgroundPoster="/images/luxury-agent/HOV-poster.jpg"
         backgroundImage="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=1800&q=85"
         eyebrow="Beverly Hills · Bel Air · Holmby Hills · Pacific Palisades"
         headline="Extraordinary Homes for Extraordinary Lives"
