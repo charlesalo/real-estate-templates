@@ -14,6 +14,8 @@ export default function HeroSearchFocused({
   eyebrow,
   backgroundImage,
   backgroundVideo,
+  backgroundVideoWebm,
+  backgroundPoster,
   listingsHref  = '/listings',
   stats         = [],
   popularAreas  = [],
@@ -117,8 +119,10 @@ export default function HeroSearchFocused({
             )}
             {backgroundVideo && (
               <video autoPlay muted loop playsInline
+                poster={backgroundPoster}
                 className="hidden md:block absolute inset-0 w-full h-full object-cover"
               >
+                {backgroundVideoWebm && <source src={backgroundVideoWebm} type="video/webm" />}
                 <source src={backgroundVideo} type="video/mp4" />
               </video>
             )}

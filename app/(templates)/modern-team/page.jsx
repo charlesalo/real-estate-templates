@@ -37,6 +37,8 @@ export default function ModernTeamHome() {
         subheadline="The Hargrove Group helps families buy and sell across Greater Houston — trusted, local, and relentlessly results-driven."
         backgroundImage="https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=1800&q=85"
         backgroundVideo="/images/modern-team/HOV.mp4"
+        backgroundVideoWebm="/images/modern-team/HOV.webm"
+        backgroundPoster="/images/modern-team/HOV-poster.jpg"
         listingsHref="/modern-team/listings"
         popularAreas={[
           { name: 'The Heights',      href: '/modern-team/listings?q=The+Heights' },
