@@ -278,7 +278,7 @@ export default function HomePage() {
 
               {/* ── Hoverable image ── */}
               <div className="w-full lg:w-1/2 shrink-0">
-                <Link href={`/${t.slug}`} className="block">
+                <Link href={`/${t.slug}`} target="_blank" rel="noopener noreferrer" className="block">
                   <div className="template-preview-container">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img src={t.preview} alt={`${t.name} template preview`} loading="lazy" decoding="async" />
@@ -307,6 +307,8 @@ export default function HomePage() {
                 <div className="flex flex-wrap items-center gap-4">
                   <Link
                     href={`/${t.slug}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="w-full min-[480px]:w-auto px-6 py-3 rounded-md bg-[#c4a882] text-[#111111] text-sm font-semibold hover:bg-[#b8976e] transition-colors duration-200 text-center"
                   >
                     View Live Template
@@ -462,8 +464,9 @@ export default function HomePage() {
               <div>
                 <p className="text-xs text-[#8a8a8a] uppercase tracking-widest mb-3">Templates</p>
                 <div className="flex flex-col gap-2">
-                  <Link href="/modern-team" className="text-[#8a8a8a] hover:text-[#e2e2e2] transition-colors">Modern Team</Link>
-                  <Link href="/luxury-agent" className="text-[#8a8a8a] hover:text-[#e2e2e2] transition-colors">Luxury Agent</Link>
+                  <Link href="/modern-team" target="_blank" rel="noopener noreferrer" className="text-[#8a8a8a] hover:text-[#e2e2e2] transition-colors">Modern Team</Link>
+                  <Link href="/luxury-agent" target="_blank" rel="noopener noreferrer" className="text-[#8a8a8a] hover:text-[#e2e2e2] transition-colors">Luxury Agent</Link>
+                  <Link href="/local-expert" target="_blank" rel="noopener noreferrer" className="text-[#8a8a8a] hover:text-[#e2e2e2] transition-colors">Local Expert</Link>
                 </div>
               </div>
               <div>
