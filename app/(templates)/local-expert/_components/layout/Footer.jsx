@@ -187,6 +187,16 @@ export default function Footer({ agent }) {
             © {year} {brokerage}.
             <span className="mx-2 text-[#F8F3EB]/20">|</span>
             <Link href={`${BASE}/privacy`} className="text-[#F8F3EB]/35 hover:text-[#F8F3EB]/70 transition-colors">Privacy Policy</Link>
+            <span className="mx-2 text-[#F8F3EB]/20">|</span>
+            Website designed and developed by{' '}
+            <a
+              href="/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[#F8F3EB]/35 hover:text-[#F8F3EB]/70 transition-colors"
+            >
+              Chavbuilds
+            </a>
           </p>
           <div className="flex items-center gap-3 flex-shrink-0">
             {SOCIAL_LINKS.map(({ label, href, Icon }) => (

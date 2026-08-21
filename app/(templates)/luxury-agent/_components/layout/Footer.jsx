@@ -144,7 +144,19 @@ export default function Footer({
 
         {/* Bottom bar */}
         <div className="mt-14 pt-8 border-t flex items-center justify-between gap-6 text-xs border-white/10 text-white/45">
-          <p>© {year} {agentName}{agentDre ? ` | ${agentDre}` : ''}. All rights reserved.</p>
+          <p>
+            © {year} {agentName}{agentDre ? ` | ${agentDre}` : ''}. All rights reserved.
+            <span className="mx-2 text-white/20">|</span>
+            Website designed and developed by{' '}
+            <a
+              href="/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="transition-colors hover:text-[#C9A96E]"
+            >
+              Chavbuilds
+            </a>
+          </p>
           <div className="flex gap-2 flex-shrink-0">
             {[
               { key: 'facebook',  href: socialLinks.facebook,  Icon: FacebookIcon },

@@ -214,6 +214,16 @@ export default function Footer({
         <div className="max-w-7xl mx-auto px-6 lg:px-8 py-[24px] lg:py-[32px] flex flex-col sm:flex-row items-center justify-between gap-3">
           <p className="text-xs text-white/25 font-sans">
             © {year} {teamName}. All rights reserved.
+            <span className="mx-2 text-white/15">|</span>
+            Website designed and developed by{' '}
+            <a
+              href="/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-white/60 transition-colors"
+            >
+              Chavbuilds
+            </a>
           </p>
           {socials.length > 0 && (
             <div className="flex items-center gap-2">
